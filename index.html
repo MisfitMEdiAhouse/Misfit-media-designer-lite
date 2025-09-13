@@ -11,41 +11,43 @@
     *{box-sizing:border-box} html,body{margin:0;height:100%}
     body{display:flex;align-items:center;justify-content:center;background:#000;color:#fff;font-family:Inter,system-ui,Arial,sans-serif}
     .wrap{max-width:920px;padding:28px;text-align:center}
-    h1{font-size:3rem;margin:12px 0 8px;color:var(--accent);letter-spacing:.5px}
+    h1{font-size:3rem;margin:16px 0 8px;color:var(--accent);letter-spacing:.5px}
     p{opacity:.85;font-size:1.125rem;margin:0 0 28px}
     a.btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700}
     a.btn:hover{filter:brightness(.95)}
     footer{position:fixed;bottom:16px;left:0;right:0;text-align:center;opacity:.6;font-size:.9rem}
-    svg{width:200px;height:auto;display:block;margin:0 auto 10px}
+    svg{width:220px;height:auto;display:block;margin:0 auto 10px}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Skull biting rose, stem shortened -->
-    <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Rose bloom -->
-      <circle cx="150" cy="110" r="22" fill="var(--accent)"/>
-      <!-- Petal detail lines -->
-      <path d="M138 100c8 6 16 6 24 0" stroke="#fff" stroke-width="3" fill="none"/>
-      <path d="M138 120c8 -6 16 -6 24 0" stroke="#fff" stroke-width="3" fill="none"/>
-      <path d="M150 88v44" stroke="#fff" stroke-width="2" fill="none"/>
+    <!-- Skull biting rose: jagged petals, centered stem -->
+    <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Rose bloom (left of skull) -->
+      <g>
+        <circle cx="150" cy="115" r="24" fill="var(--accent)"/>
+        <!-- jagged petal highlights (negative space look via white strokes) -->
+        <path d="M134 105c9 7 18 7 26 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <path d="M134 125c9 -7 18 -7 26 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <path d="M150 92v46" stroke="#fff" stroke-width="2" fill="none"/>
+      </g>
 
-      <!-- Stem (shortened, centered in mouth) -->
-      <path d="M120 110 H280" fill="none" stroke="var(--green)" stroke-width="6" stroke-linecap="round"/>
+      <!-- Stem (centered through mouth, slightly shorter) -->
+      <path d="M125 115 H270" fill="none" stroke="var(--green)" stroke-width="7" stroke-linecap="round"/>
       <!-- Leaves -->
-      <path d="M160 110 l-14 -10 l6 16 z" fill="var(--green)"/>
-      <path d="M240 110 l14 10 l-6 -16 z" fill="var(--green)"/>
+      <path d="M165 114 l-16 -10 l6 18 z" fill="var(--green)"/>
+      <path d="M230 114 l16 10 l-6 -18 z" fill="var(--green)"/>
 
       <!-- Skull -->
       <g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M210 40c36 0 66 26 66 66 0 30-18 44-34 54v18h-18v-14h-18v14h-18v-18c-16-10-34-24-34-54 0-40 30-66 66-66Z" fill="#111"/>
+        <path d="M235 45c38 0 70 28 70 70 0 32-19 47-36 57v18h-18v-14h-18v14h-18v-18c-17-10-36-25-36-57 0-42 32-70 70-70Z" fill="#111"/>
         <!-- Eyes -->
-        <circle cx="194" cy="96" r="14" fill="#fff"/>
-        <circle cx="226" cy="96" r="14" fill="#fff"/>
-        <!-- Teeth bar (with gap at stem y=110) -->
-        <rect x="204" y="122" width="24" height="8" fill="#fff"/>
-        <path d="M188 110 h24" stroke="#fff" stroke-width="8"/>
-        <path d="M232 110 h24" stroke="#fff" stroke-width="8"/>
+        <circle cx="217" cy="104" r="14" fill="#fff"/>
+        <circle cx="251" cy="104" r="14" fill="#fff"/>
+        <!-- Teeth bar (with bite around the stem y=115) -->
+        <rect x="228" y="130" width="24" height="8" fill="#fff"/>
+        <path d="M210 115 h26" stroke="#fff" stroke-width="8"/>
+        <path d="M252 115 h26" stroke="#fff" stroke-width="8"/>
       </g>
     </svg>
 
