@@ -1,55 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Misfit Media House — Design • Proofs • Print Tools</title>
-  <meta name="description" content="Punk-powered design, instant proofs, and print-shop tools." />
-  <link rel="icon" href="https://fav.farm/💀" />
-  <style>
-    :root{--accent:#E63946; --green:#3FBF57}
-    *{box-sizing:border-box} html,body{margin:0;height:100%}
-    body{display:flex;align-items:center;justify-content:center;background:#000;color:#fff;font-family:Inter,system-ui,Arial,sans-serif}
-    .wrap{max-width:920px;padding:28px;text-align:center}
-    h1{font-size:3rem;margin:16px 0 8px;color:var(--accent);letter-spacing:.5px}
-    p{opacity:.85;font-size:1.125rem;margin:0 0 28px}
-    a.btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:700}
-    a.btn:hover{filter:brightness(.95)}
-    footer{position:fixed;bottom:16px;left:0;right:0;text-align:center;opacity:.6;font-size:.9rem}
-    svg{width:220px;height:auto;display:block;margin:0 auto 10px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Misfit Media House — Neon</title>
+<meta name="description" content="Punk-powered design tools for brands, print shops, and creators." />
+<link rel="icon" href="https://fav.farm/💀" />
+<style>
+  :root{
+    --bg:#060606;
+    --red:#ff355e;      /* neon rose */
+    --green:#39ff14;    /* neon stem/leaves */
+    --white:#f8f8ff;    /* neon tube white */
+    --gold:#ffd54a;     /* gold tooth */
+    --accent:#E63946;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    display:flex;align-items:center;justify-content:center;gap:18px;
+    background:radial-gradient(60% 60% at 50% 45%, #0d0d0d 0%, var(--bg) 70%);
+    color:#fff;font-family:Inter,system-ui,Arial,sans-serif;
+  }
+  .wrap{max-width:980px;padding:32px;text-align:center}
+  h1{font-size:3.2rem;margin:10px 0 8px;color:var(--accent);letter-spacing:.6px}
+  p{opacity:.9;margin:0 0 26px;font-size:1.12rem}
+  a.btn{
+    display:inline-block;background:var(--accent);color:#fff;
+    padding:14px 22px;border-radius:12px;text-decoration:none;font-weight:800;
+    box-shadow:0 8px 26px rgba(230,57,70,.35);
+  }
+  a.btn:hover{transform:translateY(-1px)}
+  footer{position:fixed;bottom:14px;left:0;right:0;text-align:center;opacity:.65;font-size:.9rem}
+  svg{width:320px;max-width:70vw;height:auto;display:block;margin:0 auto 8px}
+</style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Skull biting rose: jagged petals, centered stem -->
-    <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Rose bloom (left of skull) -->
-      <g>
-        <circle cx="150" cy="115" r="24" fill="var(--accent)"/>
-        <!-- jagged petal highlights (negative space look via white strokes) -->
-        <path d="M134 105c9 7 18 7 26 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <path d="M134 125c9 -7 18 -7 26 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <path d="M150 92v46" stroke="#fff" stroke-width="2" fill="none"/>
+    <!-- ================= NEON SKULL + ROSE (SVG) ================= -->
+    <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <!-- soft neon glow -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="blur1"/>
+          <feGaussianBlur in="blur1" stdDeviation="10" result="blur2"/>
+          <feMerge>
+            <feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="glow-strong" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="9" result="b1"/>
+          <feGaussianBlur in="b1" stdDeviation="14" result="b2"/>
+          <feMerge>
+            <feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- stem (over skull → it crosses the mouth) -->
+      <g filter="url(#glow-strong)">
+        <path d="M80 208 C 180 200, 300 200, 400 202" fill="none"
+              stroke="var(--green)" stroke-width="10" stroke-linecap="round"/>
+        <path d="M230 205 l-26 -18 l10 30 z" fill="var(--green)"/>
+        <path d="M320 205 l26 18 l-10 -30 z" fill="var(--green)"/>
       </g>
 
-      <!-- Stem (centered through mouth, slightly shorter) -->
-      <path d="M125 115 H270" fill="none" stroke="var(--green)" stroke-width="7" stroke-linecap="round"/>
-      <!-- Leaves -->
-      <path d="M165 114 l-16 -10 l6 18 z" fill="var(--green)"/>
-      <path d="M230 114 l16 10 l-6 -18 z" fill="var(--green)"/>
+      <!-- ROSE bloom (left) -->
+      <g filter="url(#glow)">
+        <circle cx="118" cy="200" r="30" fill="none" stroke="var(--red)" stroke-width="12"/>
+        <!-- petal contours (black negative space look) -->
+        <path d="M100 190c14 10 28 10 40 0M100 210c14 -10 28 -10 40 0M118 176v48"
+              stroke="#000" stroke-width="4" fill="none"/>
+      </g>
 
-      <!-- Skull -->
-      <g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M235 45c38 0 70 28 70 70 0 32-19 47-36 57v18h-18v-14h-18v14h-18v-18c-17-10-36-25-36-57 0-42 32-70 70-70Z" fill="#111"/>
-        <!-- Eyes -->
-        <circle cx="217" cy="104" r="14" fill="#fff"/>
-        <circle cx="251" cy="104" r="14" fill="#fff"/>
-        <!-- Teeth bar (with bite around the stem y=115) -->
-        <rect x="228" y="130" width="24" height="8" fill="#fff"/>
-        <path d="M210 115 h26" stroke="#fff" stroke-width="8"/>
-        <path d="M252 115 h26" stroke="#fff" stroke-width="8"/>
+      <!-- SKULL -->
+      <g filter="url(#glow)">
+        <!-- cranium + jaw -->
+        <path d="M260 90c62 0 112 46 112 110 0 43-24 64-46 78v26h-28v-18h-28v18h-28v-26c-22-14-46-35-46-78 0-64 50-110 112-110Z"
+              fill="none" stroke="var(--white)" stroke-width="12" stroke-linejoin="round"/>
+        <!-- *** subtle crack (added, nothing else changed) *** -->
+        <path d="M252 108 l-12 16 18 10 -14 16 16 8"
+              fill="none" stroke="var(--white)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
+        <!-- eyes -->
+        <ellipse cx="232" cy="160" rx="22" ry="26" fill="none" stroke="var(--white)" stroke-width="12"/>
+        <ellipse cx="292" cy="160" rx="22" ry="26" fill="none" stroke="var(--white)" stroke-width="12"/>
+        <!-- nose -->
+        <path d="M262 182l-14 -22a12 12 0 0 1 28 0l-14 22z" fill="none" stroke="var(--white)" stroke-width="12" stroke-linejoin="round"/>
+        <!-- teeth bar -->
+        <rect x="246" y="208" width="28" height="14" rx="3"
+              fill="none" stroke="var(--white)" stroke-width="10"/>
+        <!-- bite notches to clamp stem -->
+        <path d="M222 202h28M300 202h28" stroke="var(--white)" stroke-width="12" stroke-linecap="round"/>
+        <!-- gold tooth (neon) -->
+        <rect x="278" y="224" width="18" height="16" rx="3" fill="none" stroke="var(--gold)" stroke-width="10" filter="url(#glow-strong)"/>
       </g>
     </svg>
+    <!-- ============================================================ -->
 
     <h1>MISFIT MEDIA HOUSE</h1>
     <p>Punk-powered design tools for brands, print shops, and creators.</p>
