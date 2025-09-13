@@ -102,7 +102,7 @@
 
   art.addEventListener('mousedown', ()=> play('hiss'));
 
-  // Export SVG (production clean)
+  // Export SVG
   document.getElementById('btn-svg').onclick = ()=>{
     const data = new XMLSerializer().serializeToString(art);
     const a = document.createElement('a');
@@ -111,13 +111,13 @@
     a.click();
   };
 
-  // Export PNG (production clean)
+  // Export PNG
   document.getElementById('btn-png').onclick = ()=>{
     exportPNG(false);
     play('whoosh');
   };
 
-  // Export Proof PNG (adds diagonal PROOF + watermark)
+  // Export Proof PNG
   document.getElementById('btn-proof').onclick = ()=>{
     exportPNG(true);
     play('whoosh');
@@ -127,7 +127,7 @@
     const data = new XMLSerializer().serializeToString(art);
     const img = new Image();
     const url = URL.createObjectURL(new Blob([data], {type:'image/svg+xml;charset=utf-8'}));
-    const scale = parseInt(dpiSel.value,10) / 100; // 100 px/in baseline
+    const scale = parseInt(dpiSel.value,10) / 100;
     img.onload = async ()=>{
       const canvas = document.createElement('canvas');
       canvas.width = Math.round(1800*scale);
@@ -136,7 +136,6 @@
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
       if(isProof){
-        // Diagonal PROOF
         ctx.save();
         ctx.translate(canvas.width/2, canvas.height/2);
         ctx.rotate(-Math.atan(canvas.height/canvas.width));
@@ -152,7 +151,6 @@
         ctx.restore();
         ctx.globalAlpha = 1;
 
-        // Watermark bottom-left @ 15% width
         const wm = new Image();
         wm.onload = ()=>{
           const pad = Math.round(canvas.width*0.02);
@@ -160,7 +158,7 @@
           const ratio = (wm.height||80)/(wm.width||320);
           const wmH = Math.round(wmW*ratio);
           ctx.globalAlpha = 0.95;
-          ctx.drawImage(wm, pad, canvas.height - wmH - pad, wmW, wmh = wmH);
+          ctx.drawImage(wm, pad, canvas.height - wmH - pad, wmW, wmH);
           finish();
         };
         wm.src = svgToURL(WATERMARK_SVG);
