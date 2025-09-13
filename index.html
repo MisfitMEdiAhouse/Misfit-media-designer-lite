@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Misfit Media House — Neon</title>
+<title>Misfit Media House — Neon (No Crack)</title>
 <meta name="description" content="Punk-powered design tools for brands, print shops, and creators." />
 <link rel="icon" href="https://fav.farm/💀" />
 <style>
   :root{
     --bg:#060606;
-    --red:#ff355e;      /* neon rose */
-    --green:#39ff14;    /* neon stem/leaves */
-    --white:#f8f8ff;    /* neon tube white */
-    --gold:#ffd54a;     /* gold tooth */
+    --red:#ff355e;
+    --green:#39ff14;
+    --white:#f8f8ff;
+    --gold:#ffd54a;
     --accent:#E63946;
   }
   *{box-sizing:border-box}
@@ -37,27 +37,22 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- ================= NEON SKULL + ROSE (SVG) ================= -->
+    <!-- NEON SKULL + ROSE (No crack) -->
     <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
-        <!-- soft neon glow -->
         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="6" result="blur1"/>
           <feGaussianBlur in="blur1" stdDeviation="10" result="blur2"/>
-          <feMerge>
-            <feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/>
-          </feMerge>
+          <feMerge><feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
         <filter id="glow-strong" x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="9" result="b1"/>
           <feGaussianBlur in="b1" stdDeviation="14" result="b2"/>
-          <feMerge>
-            <feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/>
-          </feMerge>
+          <feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
 
-      <!-- stem (over skull → it crosses the mouth) -->
+      <!-- stem -->
       <g filter="url(#glow-strong)">
         <path d="M80 208 C 180 200, 300 200, 400 202" fill="none"
               stroke="var(--green)" stroke-width="10" stroke-linecap="round"/>
@@ -65,22 +60,17 @@
         <path d="M320 205 l26 18 l-10 -30 z" fill="var(--green)"/>
       </g>
 
-      <!-- ROSE bloom (left) -->
+      <!-- ROSE bloom -->
       <g filter="url(#glow)">
         <circle cx="118" cy="200" r="30" fill="none" stroke="var(--red)" stroke-width="12"/>
-        <!-- petal contours (black negative space look) -->
         <path d="M100 190c14 10 28 10 40 0M100 210c14 -10 28 -10 40 0M118 176v48"
               stroke="#000" stroke-width="4" fill="none"/>
       </g>
 
       <!-- SKULL -->
       <g filter="url(#glow)">
-        <!-- cranium + jaw -->
         <path d="M260 90c62 0 112 46 112 110 0 43-24 64-46 78v26h-28v-18h-28v18h-28v-26c-22-14-46-35-46-78 0-64 50-110 112-110Z"
               fill="none" stroke="var(--white)" stroke-width="12" stroke-linejoin="round"/>
-        <!-- *** subtle crack (added, nothing else changed) *** -->
-        <path d="M252 108 l-12 16 18 10 -14 16 16 8"
-              fill="none" stroke="var(--white)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
         <!-- eyes -->
         <ellipse cx="232" cy="160" rx="22" ry="26" fill="none" stroke="var(--white)" stroke-width="12"/>
         <ellipse cx="292" cy="160" rx="22" ry="26" fill="none" stroke="var(--white)" stroke-width="12"/>
@@ -89,13 +79,13 @@
         <!-- teeth bar -->
         <rect x="246" y="208" width="28" height="14" rx="3"
               fill="none" stroke="var(--white)" stroke-width="10"/>
-        <!-- bite notches to clamp stem -->
+        <!-- bite notches -->
         <path d="M222 202h28M300 202h28" stroke="var(--white)" stroke-width="12" stroke-linecap="round"/>
-        <!-- gold tooth (neon) -->
-        <rect x="278" y="224" width="18" height="16" rx="3" fill="none" stroke="var(--gold)" stroke-width="10" filter="url(#glow-strong)"/>
+        <!-- gold tooth -->
+        <rect x="278" y="224" width="18" height="16" rx="3"
+              fill="none" stroke="var(--gold)" stroke-width="10" filter="url(#glow-strong)"/>
       </g>
     </svg>
-    <!-- ============================================================ -->
 
     <h1>MISFIT MEDIA HOUSE</h1>
     <p>Punk-powered design tools for brands, print shops, and creators.</p>
