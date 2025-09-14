@@ -1,181 +1,204 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Misfit Media Designer — Lite v7.5</title>
-  <style>
-    :root { --primary:#111111; --accent:#E63946; --font: Inter, Arial, sans-serif; }
-    html,body{margin:0;padding:0;background:#f6f6f6;font-family:var(--font)}
-    .topbar{display:flex;gap:.5rem;align-items:center;padding:12px 14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:5}
-    .grow{flex:1}
-    button,select{font:inherit;padding:6px 10px;border-radius:10px;border:1px solid #ddd;background:#fff}
-    .btn{color:#fff;border:none}
-    .btn-primary{background:var(--primary)}
-    .btn-accent{background:var(--accent)}
-    .wrap{padding:16px}
-    .board{background:#fff;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.12);overflow:hidden}
-    .footer-wm{position:fixed;right:12px;bottom:10px;opacity:.8;user-select:none}
-    .hint{font-size:12px;color:#666}
-    .home{margin-left:8px}
-    .home a{color:#111;text-decoration:none;border:1px solid #ddd;border-radius:10px;padding:6px 10px}
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Misfit Designer — Upload & AI Prompt</title>
+<style>
+  :root{ --bg:#0b0b0b; --panel:#151515; --line:#2a2a2a; --accent:#E63946; }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#eaeaea}
+  .bar{display:flex;gap:10px;align-items:center;padding:12px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
+  .bar h1{font-size:16px;margin:0 12px 0 0;opacity:.8}
+  .btn{background:#222;border:1px solid var(--line);color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer}
+  .btn.primary{background:var(--accent);border-color:transparent}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
+  .grow{flex:1}
+  .prompt{display:flex;gap:8px;align-items:center}
+  .prompt input{flex:1;background:#101010;border:1px solid var(--line);color:#fff;padding:10px 12px;border-radius:10px}
+  .wrap{display:grid;grid-template-columns:1fr 320px;gap:14px;height:calc(100% - 58px);padding:12px}
+  .stage{position:relative;background:radial-gradient(50% 50% at 50% 45%, #101010 0%, #0c0c0c 70%);border:1px dashed #2f2f2f;border-radius:14px;overflow:hidden}
+  canvas{display:block;width:100%;height:100%}
+  .side{background:#111;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:auto}
+  .hint{font-size:12px;opacity:.7;margin-top:8px}
+  .drop-mask{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(230,57,70,.08);border:2px dashed var(--accent);color:#fff;font-weight:700}
+  .handle{position:absolute;width:16px;height:16px;border:2px solid #fff;border-radius:50%;background:#0008}
+  .handle.br{right:8px;bottom:8px;cursor:nwse-resize}
+</style>
 </head>
 <body>
-  <div class="topbar">
-    <strong>Misfit Media Designer — <span id="mode">Pro Mode</span> (Lite v7.5)</strong>
-    <span class="home"><a href="/">← Home</a></span>
-    <span class="grow"></span>
-    <label>DPI
-      <select id="dpi">
-        <option>150</option><option selected>300</option><option>600</option>
-      </select>
-    </label>
-    <button id="btn-svg" class="btn btn-primary">Export SVG</button>
-    <button id="btn-png" class="btn btn-primary">Export PNG</button>
-    <button id="btn-proof" class="btn btn-accent">Export Proof (PNG)</button>
-    <button id="btn-misfit">Enable Misfit Mode</button>
+  <div class="bar">
+    <h1>Misfit Designer</h1>
+    <input id="file" type="file" accept="image/*" hidden>
+    <button class="btn" id="pick">Upload Image</button>
+    <div class="prompt grow">
+      <input id="prompt" placeholder="Type art prompt (e.g., 'neon skull with rose, punk zine vibes')"/>
+      <button class="btn primary" id="generate">Generate</button>
+    </div>
+    <button class="btn" id="exportPNG">Export PNG</button>
+    <button class="btn" id="exportSVG">Export SVG</button>
   </div>
 
   <div class="wrap">
-    <div class="hint">18×24 in demo artboard • Proof adds diagonal “PROOF” + Misfit watermark (bottom-left)</div>
-    <svg id="art" class="board" viewBox="0 0 1800 2400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" y="0" width="1800" height="2400" fill="#ffffff"/>
-      <text x="80" y="200" font-size="96" font-weight="800" fill="var(--accent)">MISFIT MEDIA</text>
-      <text x="80" y="300" font-size="36" font-weight="700" fill="#111">App • CRM • Design for Brands & Print Shops</text>
-      <!-- Demo area -->
-      <rect x="80" y="380" width="1640" height="920" rx="24" ry="24" fill="#f1f1f1" stroke="#ddd"/>
-      <text x="120" y="520" font-size="54" font-weight="800" fill="#111">Your art goes here</text>
-    </svg>
-  </div>
-
-  <!-- UI watermark -->
-  <div class="footer-wm" title="Powered by Misfit Media">
-    <img id="wm-ui" alt="Powered by Misfit Media" height="34"/>
+    <div class="stage" id="stage">
+      <canvas id="canvas" width="1800" height="1200" aria-label="Design canvas"></canvas>
+      <div class="drop-mask" id="dropMask">Drop image to place</div>
+      <div class="handle br" id="handleBR" title="Resize"></div>
+    </div>
+    <div class="side">
+      <b>How to use</b>
+      <ul>
+        <li>Click <i>Upload Image</i> or just <b>drag & drop</b> / <b>paste</b> (Ctrl/Cmd-V).</li>
+        <li>Enter a prompt and hit <b>Generate</b> to use AI (OpenAI Images API).</li>
+        <li>Drag image to move. Use the bottom-right dot to <b>resize</b>.</li>
+        <li>Export PNG/SVG for print or decals.</li>
+      </ul>
+      <div class="hint">Tip: transparent PNGs work great for mockups.</div>
+    </div>
   </div>
 
 <script>
-  const svgToURL = (s)=>'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
-  const WATERMARK_SVG = `<?xml version="1.0" encoding="UTF-8"?>
-  <svg xmlns="http://www.w3.org/2000/svg" width="320" height="80" viewBox="0 0 320 80">
-    <g fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M36 10c14 0 26 10 26 26 0 12-7 18-14 22v16h-16v-12h-16v12H64v-16C46 125 30 112 30 86 30 52 56 30 86 30Z" fill="#111"/>
-      <circle cx="70" cy="78" r="12" fill="#fff"/><circle cx="102" cy="78" r="12" fill="#fff"/>
-      <rect x="74" y="102" width="24" height="8" fill="#fff"/>
-      <path d="M126 86 H210" />
-      <circle cx="226" cy="86" r="20" fill="#E63946" stroke="#E63946"/>
-      <path d="M206 70c12-12 32-16 36 0M206 102c12 12 32 16 36 0" stroke="#E63946"/>
-      <path d="M182 86 c16 -28 16 -28 0 0"/>
-    </g>
-    <g font-family="Inter, Arial, sans-serif" font-weight="800" font-size="22" fill="#111">
-      <text x="140" y="36">Powered by</text>
-      <text x="140" y="62" fill="#e11">MISFIT MEDIA</text>
-    </g>
-  </svg>`;
+const fileInput = document.getElementById('file');
+const pickBtn   = document.getElementById('pick');
+const genBtn    = document.getElementById('generate');
+const promptEl  = document.getElementById('prompt');
+const stage     = document.getElementById('stage');
+const mask      = document.getElementById('dropMask');
+const canvas    = document.getElementById('canvas');
+const ctx       = canvas.getContext('2d');
+const hBR       = document.getElementById('handleBR');
 
-  // Tiny embedded SFX placeholders
-  const SFX = {
-    riff: "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYAaWQAAACcAAAA",
-    hiss: "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYAaWQAAACcAAAA",
-    whoosh: "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYAaWQAAACcAAAA"
-  };
-  const play = k => { try { new Audio(SFX[k]).play(); } catch(e){} };
+let imgObj = null; // {img, x, y, w, h}
+let dragging = false, resizing = false, dragDX=0, dragDY=0;
 
-  // Watermark
-  document.getElementById('wm-ui').src = svgToURL(WATERMARK_SVG);
+// ------- helpers
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.save();
+  ctx.strokeStyle = '#1a1a1a';
+  ctx.lineWidth = 1;
+  for(let x=0;x<canvas.width;x+=100){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+  for(let y=0;y<canvas.height;y+=100){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+  ctx.restore();
 
-  const art = document.getElementById('art');
-  const dpiSel = document.getElementById('dpi');
-  const modeEl = document.getElementById('mode');
-  const misfitBtn = document.getElementById('btn-misfit');
-
-  let misfitMode = false;
-
-  misfitBtn.onclick = () => {
-    misfitMode = !misfitMode;
-    modeEl.textContent = misfitMode ? 'PUNK MODE' : 'Pro Mode';
-    misfitBtn.textContent = misfitMode ? 'Disable Misfit Mode' : 'Enable Misfit Mode';
-    play('riff');
-    document.body.style.cursor = misfitMode
-      ? `url("data:image/svg+xml,${encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>💀</text></svg>")}") 0 24, auto`
-      : 'default';
-  };
-
-  art.addEventListener('mousedown', ()=> play('hiss'));
-
-  // Export SVG
-  document.getElementById('btn-svg').onclick = ()=>{
-    const data = new XMLSerializer().serializeToString(art);
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([data], {type:'image/svg+xml;charset=utf-8'}));
-    a.download = 'misfit-18x24.svg';
-    a.click();
-  };
-
-  // Export PNG
-  document.getElementById('btn-png').onclick = ()=>{
-    exportPNG(false);
-    play('whoosh');
-  };
-
-  // Export Proof PNG
-  document.getElementById('btn-proof').onclick = ()=>{
-    exportPNG(true);
-    play('whoosh');
-  };
-
-  function exportPNG(isProof){
-    const data = new XMLSerializer().serializeToString(art);
-    const img = new Image();
-    const url = URL.createObjectURL(new Blob([data], {type:'image/svg+xml;charset=utf-8'}));
-    const scale = parseInt(dpiSel.value,10) / 100;
-    img.onload = async ()=>{
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.round(1800*scale);
-      canvas.height = Math.round(2400*scale);
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      if(isProof){
-        ctx.save();
-        ctx.translate(canvas.width/2, canvas.height/2);
-        ctx.rotate(-Math.atan(canvas.height/canvas.width));
-        ctx.globalAlpha = 0.16;
-        const fontSize = Math.round(canvas.width*0.14);
-        ctx.font = `800 ${fontSize}px Inter, Arial, sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.lineWidth = Math.max(4, Math.round(fontSize*0.06));
-        ctx.strokeStyle = '#FFF';
-        ctx.strokeText('PROOF', 0, fontSize/3);
-        ctx.fillStyle = '#000';
-        ctx.fillText('PROOF', 0, fontSize/3);
-        ctx.restore();
-        ctx.globalAlpha = 1;
-
-        const wm = new Image();
-        wm.onload = ()=>{
-          const pad = Math.round(canvas.width*0.02);
-          const wmW = Math.round(canvas.width*0.15);
-          const ratio = (wm.height||80)/(wm.width||320);
-          const wmH = Math.round(wmW*ratio);
-          ctx.globalAlpha = 0.95;
-          ctx.drawImage(wm, pad, canvas.height - wmH - pad, wmW, wmH);
-          finish();
-        };
-        wm.src = svgToURL(WATERMARK_SVG);
-      } else {
-        finish();
-      }
-
-      function finish(){
-        const a = document.createElement('a');
-        a.href = canvas.toDataURL('image/png');
-        a.download = `${isProof?'proof':'misfit'}-18x24-${dpiSel.value}dpi.png`;
-        a.click();
-      }
-    };
-    img.src = url;
+  if(imgObj){
+    ctx.drawImage(imgObj.img, imgObj.x, imgObj.y, imgObj.w, imgObj.h);
+    const rect = stage.getBoundingClientRect();
+    const scaleX = rect.width / canvas.width;
+    const scaleY = rect.height / canvas.height;
+    hBR.style.transform =
+      `translate(${(imgObj.x+imgObj.w)*scaleX - 8}px, ${(imgObj.y+imgObj.h)*scaleY - 8}px)`;
   }
+}
+
+function placeImage(src){
+  const im = new Image();
+  im.onload = ()=>{
+    const maxW = canvas.width * 0.6;
+    const scale = Math.min(1, maxW / im.width);
+    const w = im.width * scale, h = im.height * scale;
+    imgObj = { img: im, x: (canvas.width - w)/2, y: (canvas.height - h)/2, w, h };
+    hBR.style.display = 'block';
+    draw();
+  };
+  im.src = src;
+}
+
+// ------- upload (picker)
+pickBtn.onclick = ()=> fileInput.click();
+fileInput.onchange = (e)=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ev => placeImage(ev.target.result);
+  r.readAsDataURL(f);
+};
+
+// ------- drag & drop
+['dragenter','dragover'].forEach(ev=>stage.addEventListener(ev,(e)=>{e.preventDefault();mask.style.display='flex';}));
+['dragleave','drop'].forEach(ev=>stage.addEventListener(ev,(e)=>{e.preventDefault(); if(ev==='drop') handleDrop(e); mask.style.display='none';}));
+function handleDrop(e){
+  const f = e.dataTransfer.files[0]; if(!f) return;
+  const r = new FileReader(); r.onload = ev => placeImage(ev.target.result); r.readAsDataURL(f);
+}
+
+// ------- paste from clipboard
+window.addEventListener('paste',(e)=>{
+  if(!e.clipboardData) return;
+  for(const item of e.clipboardData.items){
+    if(item.type.indexOf('image')===0){
+      const f = item.getAsFile();
+      const r = new FileReader(); r.onload = ev => placeImage(ev.target.result); r.readAsDataURL(f);
+      break;
+    }
+  }
+});
+
+// ------- move & resize
+stage.addEventListener('mousedown',(e)=>{
+  if(!imgObj) return;
+  const rect = stage.getBoundingClientRect();
+  const sx = (e.clientX - rect.left) * (canvas.width/rect.width);
+  const sy = (e.clientY - rect.top)  * (canvas.height/rect.height);
+  if(sx>imgObj.x && sx<imgObj.x+imgObj.w && sy>imgObj.y && sy<imgObj.y+imgObj.h){
+    dragging = true; dragDX = sx - imgObj.x; dragDY = sy - imgObj.y;
+  }
+});
+window.addEventListener('mousemove',(e)=>{
+  if(!imgObj) return;
+  const rect = stage.getBoundingClientRect();
+  const sx = (e.clientX - rect.left) * (canvas.width/rect.width);
+  const sy = (e.clientY - rect.top)  * (canvas.height/rect.height);
+  if(dragging){ imgObj.x = sx - dragDX; imgObj.y = sy - dragDY; draw(); }
+  if(resizing){
+    imgObj.w = Math.max(40, sx - imgObj.x);
+    imgObj.h = Math.max(40, sy - imgObj.y);
+    draw();
+  }
+});
+window.addEventListener('mouseup',()=>{ dragging=false; resizing=false; });
+hBR.addEventListener('mousedown', (e)=>{ e.stopPropagation(); resizing=true; });
+
+// ------- export
+document.getElementById('exportPNG').onclick = ()=>{
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = 'misfit-design.png';
+  a.click();
+};
+document.getElementById('exportSVG').onclick = ()=>{
+  if(!imgObj){ alert('Place an image first.'); return; }
+  const svg =
+   `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
+      <image href="${canvas.toDataURL('image/png')}" x="0" y="0" width="${canvas.width}" height="${canvas.height}"/>
+    </svg>`;
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='misfit-design.svg'; a.click();
+  URL.revokeObjectURL(url);
+};
+
+// ------- AI prompt (real API)
+window.MISFIT_GENERATE = async function(prompt) {
+  const r = await fetch('/api/generate-image', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ prompt })
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.error || 'Generation failed');
+  return j.dataUrl;
+};
+
+genBtn.onclick = async ()=>{
+  const prompt = promptEl.value.trim();
+  if(!prompt){ alert('Type a prompt first.'); return; }
+  genBtn.disabled = true; genBtn.textContent = 'Generating…';
+  try{
+    const src = await window.MISFIT_GENERATE(prompt);
+    placeImage(src);
+  }catch(err){ alert('Generation failed.'); console.error(err); }
+  genBtn.disabled = false; genBtn.textContent = 'Generate';
+};
 </script>
 </body>
 </html>
