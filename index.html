@@ -8,69 +8,58 @@
     body {
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #fff;
+      background: black;
+      color: white;
       font-family: 'Arial Black', sans-serif;
       text-align: center;
     }
-
     .logo {
-      margin-top: 60px;
+      max-width: 300px;
+      margin-top: 50px;
     }
-
-    .logo img {
-      width: 200px;
-      filter: drop-shadow(0 0 8px red) drop-shadow(0 0 12px green) drop-shadow(0 0 18px white);
-    }
-
     h1 {
-      font-size: 3rem;
-      color: red;
-      text-shadow: 0 0 8px red, 0 0 16px darkred;
-      margin-top: 20px;
+      font-size: 3em;
+      color: #ff2a2a;
+      margin: 20px 0;
     }
-
     p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-bottom: 40px;
+      font-size: 1.2em;
+      margin-bottom: 30px;
     }
-
     .btn {
-      background: red;
-      border: none;
-      padding: 14px 28px;
-      font-size: 1.2rem;
+      background: #ff2a2a;
       color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 0 8px red, 0 0 16px darkred;
-      transition: transform 0.2s ease-in-out;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+      box-shadow: 0px 0px 12px rgba(255,0,0,0.8);
     }
-
     .btn:hover {
-      transform: scale(1.1);
+      background: #ff4444;
     }
-
     footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #666;
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <div class="logo">
-    <!-- Replace 'skull.png' with your actual uploaded filename -->
-    <img src="skull.png" alt="Misfit Skull Logo">
-  </div>
+  <!-- Skull + Rose Logo -->
+  <img src="neon-skull-rose.png.png" alt="Misfit Skull Logo" class="logo">
 
+  <!-- Title -->
   <h1>MISFIT MEDIA HOUSE</h1>
   <p>Punk-powered design tools for brands, print shops, and creators.</p>
-  <button class="btn" onclick="window.location.href='/app'">🚀 Launch Designer</button>
 
+  <!-- Launch Button -->
+  <a href="/app/" class="btn">🚀 Launch Designer</a>
+
+  <!-- Footer -->
   <footer>
-    © 2025 Misfit Media House · Powered by Misfit Media
+    © 2025 Misfit Media House • Powered by Misfit Media
   </footer>
 </body>
 </html>
