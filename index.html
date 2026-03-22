@@ -2,122 +2,262 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Misfit AI</title>
 
   <style>
-    body {
+    :root {
+      --bg: #000000;
+      --fg: #ffffff;
+      --muted: #c9c9c9;
+      --muted-2: #8b8b8b;
+      --red: #ff2a2a;
+      --red-dark: #d91f1f;
+      --card: #141414;
+      --border: #2a2a2a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
       text-align: center;
-      padding: 40px 20px;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 72px;
     }
 
     .logo {
-      max-width: 220px;
-      margin-top: 40px;
+      width: 100%;
+      max-width: 250px;
+      margin: 24px auto 12px;
+      display: block;
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.1;
     }
 
     h1 {
-      font-size: 2.8em;
-      color: #ff2a2a;
-      margin-top: 20px;
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      color: var(--red);
+      margin-top: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      margin-bottom: 22px;
     }
 
     p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: 20px auto;
-      line-height: 1.5;
-      color: #ccc;
+      margin: 0 auto 18px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.2rem;
+      line-height: 1.65;
     }
 
-    .cta {
-      margin-top: 40px;
+    .sub {
+      margin-top: 24px;
+    }
+
+    .hero {
+      margin-bottom: 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      margin: 34px 0 10px;
     }
 
     .button {
-      background: #ff2a2a;
-      color: #fff;
-      padding: 16px 28px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
+      width: min(100%, 380px);
       display: inline-block;
-      margin: 10px;
-      cursor: pointer;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 18px 24px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease;
+      border: 1px solid transparent;
     }
 
-    .button.secondary {
-      background: #222;
-      border: 1px solid #444;
+    .button:hover,
+    .button:active {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .button-primary {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 0 22px rgba(255, 42, 42, 0.28);
+    }
+
+    .button-primary:hover,
+    .button-primary:active {
+      background: var(--red-dark);
+    }
+
+    .button-secondary {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: var(--border);
     }
 
     .section {
-      margin-top: 80px;
+      margin-top: 82px;
     }
 
-    .feature {
-      margin: 20px auto;
-      max-width: 500px;
+    .section-card {
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 20px;
+      margin-top: 26px;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 620px;
+      text-align: left;
+    }
+
+    .features li {
+      color: var(--fg);
+      font-size: 1.14rem;
+      line-height: 1.5;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .features li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing {
+      font-size: 2rem;
+      color: #fff;
+      margin: 8px 0 8px;
+      font-weight: 800;
+    }
+
+    .pricing-note {
+      color: var(--muted-2);
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    .footer {
+      margin-top: 76px;
+      color: var(--muted-2);
+      font-size: 0.95rem;
+    }
+
+    .small {
+      font-size: 0.98rem;
+      color: var(--muted-2);
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        padding-top: 28px;
+      }
+
+      p {
+        font-size: 1.08rem;
+      }
+
+      .features li {
+        font-size: 1.05rem;
+      }
+
+      .button {
+        font-size: 1.08rem;
+      }
     }
   </style>
 </head>
-
 <body>
+  <main class="wrap">
+    <img src="neon-skull-rose.png" alt="Misfit AI logo" class="logo" />
 
-  <img src="neon-skull-rose.png" class="logo"/>
+    <section class="hero">
+      <h1>MISFIT AI</h1>
 
-  <h1>MISFIT AI</h1>
+      <p class="sub">
+        Turn leads into booked appointments, automate follow-ups, and close deals while you sleep.
+      </p>
 
-  <p>
-    Turn leads into booked appointments, automate follow-ups,
-    and close deals while you sleep.
-  </p>
+      <p>
+        Built for real operators — solar, home services, agencies, and anyone who wants leverage without hiring a team.
+      </p>
 
-  <p>
-    Built for real operators — solar, home services, agencies,
-    and anyone who wants leverage without hiring a team.
-  </p>
+      <div class="cta-row">
+        <a href="/app" class="button button-primary">🚀 Start Free Trial</a>
+        <a href="mailto:support@misfitmediahouse.com?subject=Misfit%20AI%20Demo" class="button button-secondary">📞 Book Demo</a>
+      </div>
 
-  <div class="cta">
-    <a href="#" class="button">🚀 Start Free Trial</a>
-    <a href="#" class="button secondary">📞 Book Demo</a>
-  </div>
+      <p class="small">
+        Start with the app or email us directly for a guided setup.
+      </p>
+    </section>
 
-  <div class="section">
-    <h2>What It Does</h2>
+    <section class="section">
+      <h2>What It Does</h2>
 
-    <div class="feature">✔ AI follow-up via SMS + email</div>
-    <div class="feature">✔ Lead revival engine (old leads = new cash)</div>
-    <div class="feature">✔ Booking automation</div>
-    <div class="feature">✔ Pipeline + deal tracking</div>
-    <div class="feature">✔ Affiliate + referral system</div>
-  </div>
+      <div class="section-card">
+        <ul class="features">
+          <li>✔ AI follow-up via SMS + email</li>
+          <li>✔ Lead revival engine (old leads = new cash)</li>
+          <li>✔ Booking automation</li>
+          <li>✔ Pipeline + deal tracking</li>
+          <li>✔ Affiliate + referral system</li>
+        </ul>
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>Why Misfit</h2>
+    <section class="section">
+      <h2>Why Misfit</h2>
 
-    <p>
-      Most CRMs are bloated and slow.
-      Misfit is built to close deals — not just store data.
-    </p>
-  </div>
+      <div class="section-card">
+        <p>
+          Most CRMs are bloated and slow. Misfit is built to close deals — not just store data.
+        </p>
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>Pricing</h2>
+    <section class="section">
+      <h2>Pricing</h2>
 
-    <p>$297/month — cancel anytime</p>
-  </div>
+      <div class="section-card">
+        <div class="pricing">$297/month</div>
+        <p class="pricing-note">Cancel anytime.</p>
+      </div>
+    </section>
 
-  <div class="section">
-    <p style="font-size: 0.9em; color: #666;">
+    <footer class="footer">
       © Misfit Mediahouse
-    </p>
-  </div>
-
+    </footer>
+  </main>
 </body>
 </html>
