@@ -1,65 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Misfit Media House</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Misfit AI</title>
+
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: black;
-      color: white;
-      font-family: 'Arial Black', sans-serif;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 40px 20px;
     }
+
     .logo {
-      max-width: 300px;
-      margin-top: 50px;
+      max-width: 220px;
+      margin-top: 40px;
     }
+
     h1 {
-      font-size: 3em;
+      font-size: 2.8em;
       color: #ff2a2a;
-      margin: 20px 0;
+      margin-top: 20px;
     }
+
     p {
       font-size: 1.2em;
-      margin-bottom: 30px;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.5;
+      color: #ccc;
     }
-    .btn {
+
+    .cta {
+      margin-top: 40px;
+    }
+
+    .button {
       background: #ff2a2a;
-      color: white;
-      padding: 15px 30px;
+      color: #fff;
+      padding: 16px 28px;
       font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 8px;
       display: inline-block;
-      box-shadow: 0px 0px 12px rgba(255,0,0,0.8);
+      margin: 10px;
+      cursor: pointer;
     }
-    .btn:hover {
-      background: #ff4444;
+
+    .button.secondary {
+      background: #222;
+      border: 1px solid #444;
     }
-    footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #aaa;
+
+    .section {
+      margin-top: 80px;
+    }
+
+    .feature {
+      margin: 20px auto;
+      max-width: 500px;
     }
   </style>
 </head>
+
 <body>
-  <!-- Skull + Rose Logo -->
-  <img src="neon-skull-rose.png" alt="Misfit Skull Logo" class="logo">
 
-  <!-- Title -->
-  <h1>MISFIT MEDIA HOUSE</h1>
-  <p>Punk-powered design tools for brands, print shops, and creators.</p>
+  <img src="neon-skull-rose.png" class="logo"/>
 
-  <!-- Launch Button -->
-  <a href="/app/" class="btn">🚀 Launch Designer</a>
+  <h1>MISFIT AI</h1>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Misfit Media House • Powered by Misfit Media
-  </footer>
+  <p>
+    Turn leads into booked appointments, automate follow-ups,
+    and close deals while you sleep.
+  </p>
+
+  <p>
+    Built for real operators — solar, home services, agencies,
+    and anyone who wants leverage without hiring a team.
+  </p>
+
+  <div class="cta">
+    <a href="#" class="button">🚀 Start Free Trial</a>
+    <a href="#" class="button secondary">📞 Book Demo</a>
+  </div>
+
+  <div class="section">
+    <h2>What It Does</h2>
+
+    <div class="feature">✔ AI follow-up via SMS + email</div>
+    <div class="feature">✔ Lead revival engine (old leads = new cash)</div>
+    <div class="feature">✔ Booking automation</div>
+    <div class="feature">✔ Pipeline + deal tracking</div>
+    <div class="feature">✔ Affiliate + referral system</div>
+  </div>
+
+  <div class="section">
+    <h2>Why Misfit</h2>
+
+    <p>
+      Most CRMs are bloated and slow.
+      Misfit is built to close deals — not just store data.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Pricing</h2>
+
+    <p>$297/month — cancel anytime</p>
+  </div>
+
+  <div class="section">
+    <p style="font-size: 0.9em; color: #666;">
+      © Misfit Mediahouse
+    </p>
+  </div>
+
 </body>
 </html>
