@@ -1,197 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Misfit AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misfit AI</title>
+  <meta
+    name="description"
+    content="Misfit AI is an autonomous revenue engine that runs follow-up, books appointments, and keeps revenue moving."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0c0c0c;
+      --text: #f4f4f4;
+      --muted: #a3a3a3;
+      --accent: #27d7cf;
+      --accent-2: #47d4f0;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
 
-<style>
-:root {
-  --bg: #050505;
-  --text: #f5f5f5;
-  --muted: #9c9c9c;
-  --accent: #22d7c8;
-  --accent2: #39d7e2;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    html, body {
+      min-height: 100%;
+      background: #000;
+    }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", sans-serif;
-  display: flex;
-  justify-content: center;
-  padding: 20px 14px;
-}
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(39,215,207,0.08), transparent 35%),
+        linear-gradient(180deg, #040404 0%, #000000 100%);
+      display: flex;
+      justify-content: center;
+      padding: 20px 14px;
+    }
 
-.page {
-  width: 100%;
-  max-width: 420px;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.brand {
-  text-align: center;
-  font-weight: 900;
-  font-size: 1.9rem;
-  letter-spacing: -0.06em;
-  margin-bottom: 20px;
-  text-transform: lowercase;
-}
+    .shell {
+      width: 100%;
+      max-width: 430px;
+      min-height: calc(100dvh - 40px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+    .panel {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(12,12,12,0.96) 0%, rgba(7,7,7,0.98) 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px 22px 24px;
+      text-align: center;
+    }
 
-/* CLEAN LOGO (NO GLOW, NO BLEND HACKS) */
-.logo-wrap {
-  width: min(60vw, 200px);
-  aspect-ratio: 1/1;
-  margin-bottom: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .brand {
+      font-size: clamp(2rem, 8vw, 2.7rem);
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      text-transform: lowercase;
+      margin-bottom: 22px;
+    }
 
-/* this lets you swap transparent logo later instantly */
-.logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+    .logo-wrap {
+      width: min(54vw, 190px);
+      margin: 0 auto 22px;
+    }
 
-/* HEADLINE */
-h1 {
-  font-size: clamp(2.6rem, 9vw, 3.8rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.08em;
-  margin-bottom: 14px;
-}
+    .logo {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
 
-.line {
-  display: block;
-}
+    .headline {
+      margin-bottom: 16px;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      line-height: 0.92;
+      font-size: clamp(2.6rem, 11vw, 4.3rem);
+    }
 
-.accent {
-  color: var(--accent);
-}
+    .headline .line {
+      display: block;
+    }
 
-/* SUBHEAD */
-.subhead {
-  max-width: 330px;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
+    .headline .accent {
+      color: var(--accent);
+    }
 
-/* ENGINE LINE */
-.engine-line {
-  font-size: 0.9rem;
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: 28px;
-}
+    .subhead {
+      max-width: 330px;
+      margin: 0 auto 18px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.65;
+      font-weight: 500;
+    }
 
-/* CTA */
-.cta {
-  width: 100%;
-  max-width: 360px;
-  padding: 18px;
-  border-radius: 16px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  color: #041010;
-  font-weight: 900;
-  font-size: 1.05rem;
-  text-align: center;
-  text-decoration: none;
-}
+    .engines {
+      margin: 0 auto 26px;
+      color: var(--accent);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
 
-/* SIGN IN */
-.signin {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 20px 18px;
+      border-radius: 18px;
+      border: none;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #041313;
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      box-shadow: 0 14px 40px rgba(39,215,207,0.26);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
 
-.signin a {
-  color: var(--text);
-  font-weight: 700;
-  text-decoration: none;
-}
+    .cta:hover,
+    .cta:active {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 46px rgba(39,215,207,0.30);
+      opacity: 0.98;
+    }
 
-/* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.35);
-  margin-top: 20px;
-}
+    .signin {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
 
-</style>
+    .signin a {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: rgba(255,255,255,0.32);
+      font-size: 0.8rem;
+      line-height: 1.2;
+    }
+
+    @media (max-height: 760px) {
+      .panel {
+        padding-top: 22px;
+        padding-bottom: 20px;
+      }
+
+      .brand {
+        margin-bottom: 18px;
+      }
+
+      .logo-wrap {
+        width: min(48vw, 168px);
+        margin-bottom: 18px;
+      }
+
+      .headline {
+        font-size: clamp(2.3rem, 10vw, 3.6rem);
+        margin-bottom: 14px;
+      }
+
+      .subhead {
+        font-size: 0.98rem;
+        margin-bottom: 16px;
+      }
+
+      .engines {
+        font-size: 0.9rem;
+        margin-bottom: 22px;
+      }
+
+      .cta {
+        padding: 18px 16px;
+      }
+
+      .footer {
+        margin-top: 18px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<main class="page">
+  <main class="shell">
+    <section class="panel">
+      <div class="brand">misfit ai</div>
 
-  <div class="brand">misfit ai</div>
+      <div class="logo-wrap">
+        <img src="neon-skull-rose.png" alt="Misfit AI logo" class="logo" />
+      </div>
 
-  <section class="hero">
+      <h1 class="headline">
+        <span class="line">Autonomous</span>
+        <span class="line accent">Revenue Engine</span>
+      </h1>
 
-    <!-- LOGO -->
-    <div class="logo-wrap">
-      <img src="neon-skull-rose.png" class="logo" />
-    </div>
+      <p class="subhead">
+        From digital business card to enterprise SaaS, Misfit AI runs follow-up, books appointments, and keeps revenue moving automatically.
+      </p>
 
-    <!-- HEADLINE -->
-    <h1>
-      <span class="line">Autonomous</span>
-      <span class="line accent">Revenue Engine</span>
-    </h1>
+      <div class="engines">
+        AI Twin · Lead Revival Engine · Affiliate Engine
+      </div>
 
-    <!-- COPY (FIXED) -->
-    <p class="subhead">
-      From digital business card to enterprise SaaS, Misfit AI runs follow-up, books appointments, and keeps revenue moving automatically.
-    </p>
+      <a href="https://misfit-ai-v2.base44.app" class="cta">
+        Launch My AI Empire
+      </a>
 
-    <!-- FEATURES -->
-    <div class="engine-line">
-      AI Twin · Lead Revival Engine · Affiliate Engine
-    </div>
+      <div class="signin">
+        Already have an account?
+        <a href="https://misfit-ai-v2.base44.app">Sign in</a>
+      </div>
 
-    <!-- CTA -->
-    <a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
-      Launch My AI Empire
-    </a>
-
-    <!-- SIGN IN -->
-    <div class="signin">
-      Already have an account?
-      <a href="https://misfit-ai-v2.base44.app">Sign in</a>
-    </div>
-
-  </section>
-
-  <div class="footer">
-    © Misfit Mediahouse
-  </div>
-
-</main>
+      <div class="footer">© Misfit Mediahouse</div>
+    </section>
+  </main>
 </body>
 </html>
