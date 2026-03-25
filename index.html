@@ -14,17 +14,13 @@
 
   <style>
     :root {
-      --bg: #050505;
-      --panel: #0d0d0d;
-      --line: rgba(255,255,255,0.08);
+      --bg: #060606;
       --text: #f5f5f5;
-      --muted: #aaaaaa;
+      --muted: #9b9b9b;
+      --line: rgba(255,255,255,0.08);
       --accent: #20d7c7;
-      --accent-dark: #17b8aa;
-      --danger: #ff3b3b;
-      --shadow: rgba(32, 215, 199, 0.18);
-      --max: 430px;
-      --radius: 28px;
+      --accent-2: #16bfb0;
+      --button-text: #041010;
     }
 
     * {
@@ -36,9 +32,7 @@
     html, body {
       width: 100%;
       min-height: 100%;
-      background:
-        radial-gradient(circle at top center, rgba(32,215,199,0.08), transparent 30%),
-        linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+      background: #060606;
       color: var(--text);
       font-family: "Inter", Arial, Helvetica, sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -48,7 +42,7 @@
     body {
       display: flex;
       justify-content: center;
-      padding: 20px 14px;
+      padding: 24px 16px;
     }
 
     a {
@@ -56,79 +50,60 @@
       text-decoration: none;
     }
 
-    .shell {
+    .page {
       width: 100%;
-      max-width: var(--max);
-      min-height: calc(100dvh - 40px);
-      background: linear-gradient(180deg, rgba(13,13,13,0.98), rgba(8,8,8,0.99));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px 18px 20px;
+      max-width: 420px;
+      min-height: calc(100dvh - 48px);
       display: flex;
       flex-direction: column;
-      box-shadow:
-        0 10px 40px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.03);
+      justify-content: space-between;
     }
 
-    .header {
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 18px;
+      padding-top: 6px;
     }
 
-    .header img {
-      width: 42px;
-      height: 42px;
-      object-fit: cover;
-      border-radius: 12px;
+    .topbar img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 10px;
     }
 
     .brand {
-      font-size: 2rem;
+      font-size: 1.95rem;
       font-weight: 900;
       letter-spacing: -0.07em;
       text-transform: lowercase;
     }
 
-    .main {
+    .hero {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 28px 0;
     }
 
     .logo {
-      width: min(78vw, 250px);
-      margin: 6px auto 24px;
-      filter: drop-shadow(0 0 22px rgba(32,215,199,0.05));
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(32,215,199,0.22);
-      color: var(--accent);
-      background: rgba(32,215,199,0.06);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+      width: min(72vw, 240px);
+      margin-bottom: 28px;
+      object-fit: contain;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 10vw, 4.4rem);
+      font-size: clamp(2.4rem, 9vw, 4.2rem);
       line-height: 0.94;
       letter-spacing: -0.08em;
       font-weight: 900;
       max-width: 360px;
-      margin: 0 auto 18px;
+      margin-bottom: 18px;
     }
 
     .accent {
@@ -136,12 +111,12 @@
     }
 
     .subhead {
-      max-width: 330px;
+      max-width: 335px;
       color: var(--muted);
       font-size: 1.02rem;
       line-height: 1.65;
       font-weight: 500;
-      margin: 0 auto 28px;
+      margin-bottom: 28px;
     }
 
     .cta {
@@ -151,14 +126,13 @@
       align-items: center;
       justify-content: center;
       padding: 18px 20px;
-      border-radius: 20px;
-      background: linear-gradient(90deg, var(--accent-dark) 0%, #2ad3e2 100%);
-      color: #fff;
+      border-radius: 16px;
+      background: linear-gradient(90deg, var(--accent-2) 0%, #35d6e3 100%);
+      color: var(--button-text);
       font-size: 1.08rem;
       font-weight: 900;
-      letter-spacing: -0.02em;
-      box-shadow: 0 0 26px var(--shadow);
-      transition: transform 0.14s ease, opacity 0.14s ease;
+      letter-spacing: -0.03em;
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     .cta:hover,
@@ -169,8 +143,8 @@
 
     .signin {
       margin-top: 16px;
-      font-size: 0.9rem;
       color: var(--muted);
+      font-size: 0.9rem;
       line-height: 1.5;
     }
 
@@ -184,24 +158,21 @@
     }
 
     .footer {
-      margin-top: 24px;
       text-align: center;
+      color: rgba(255,255,255,0.34);
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.36);
+      padding-bottom: 6px;
     }
 
     @media (max-height: 760px) {
-      .shell {
-        min-height: auto;
-      }
-
       .logo {
-        width: min(62vw, 190px);
-        margin-bottom: 18px;
+        width: min(56vw, 180px);
+        margin-bottom: 22px;
       }
 
       h1 {
-        font-size: clamp(2.1rem, 8.7vw, 3.4rem);
+        font-size: clamp(2rem, 8vw, 3.2rem);
+        max-width: 320px;
       }
 
       .subhead {
@@ -216,24 +187,22 @@
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header class="header">
-      <img src="neon-skull-rose.png" alt="Misfit AI logo">
+  <main class="page">
+    <header class="topbar">
+      <img src="neon-skull-rose.png" alt="Misfit AI logo" />
       <div class="brand">misfit ai</div>
     </header>
 
-    <section class="main">
-      <div class="eyebrow">Autonomous Revenue Software</div>
-
-      <img src="neon-skull-rose.png" alt="Misfit AI skull logo" class="logo">
+    <section class="hero">
+      <img src="neon-skull-rose.png" alt="Misfit AI skull logo" class="logo" />
 
       <h1>
-        Move Faster.<br>
-        <span class="accent">Close More.</span>
+        Autonomous <span class="accent">Revenue</span><br />
+        For Operators
       </h1>
 
       <p class="subhead">
-        Misfit AI helps operators revive dead leads, automate follow-up, and keep revenue moving without living inside a bloated CRM.
+        Revive dead leads, automate follow-up, and keep deals moving without living inside a bloated CRM.
       </p>
 
       <a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
