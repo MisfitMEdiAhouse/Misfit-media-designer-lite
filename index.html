@@ -6,7 +6,7 @@
   <title>Misfit AI</title>
   <meta
     name="description"
-    content="Misfit AI is autonomous revenue software for operators who want faster follow-up, revived leads, and cleaner execution."
+    content="Misfit AI is an autonomous revenue engine with AI Twin, lead revival, affiliate growth, and operator-grade automation from digital business card to enterprise SaaS."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,13 @@
 
   <style>
     :root {
-      --bg: #060606;
+      --bg: #050505;
       --text: #f5f5f5;
-      --muted: #9b9b9b;
+      --muted: #9c9c9c;
       --line: rgba(255,255,255,0.08);
-      --accent: #20d7c7;
-      --accent-2: #16bfb0;
-      --button-text: #041010;
+      --accent: #22d7c8;
+      --accent-2: #39d7e2;
+      --button-text: #071111;
     }
 
     * {
@@ -32,7 +32,7 @@
     html, body {
       width: 100%;
       min-height: 100%;
-      background: #060606;
+      background: #050505;
       color: var(--text);
       font-family: "Inter", Arial, Helvetica, sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -43,6 +43,9 @@
       display: flex;
       justify-content: center;
       padding: 24px 16px;
+      background:
+        radial-gradient(circle at top center, rgba(34,215,200,0.08), transparent 32%),
+        linear-gradient(180deg, #080808 0%, #050505 100%);
     }
 
     a {
@@ -61,21 +64,14 @@
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 12px;
+      align-items: center;
       padding-top: 6px;
-    }
-
-    .topbar img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      border-radius: 10px;
+      margin-bottom: 18px;
     }
 
     .brand {
-      font-size: 1.95rem;
+      font-size: 2rem;
       font-weight: 900;
       letter-spacing: -0.07em;
       text-transform: lowercase;
@@ -88,22 +84,23 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 28px 0;
+      padding: 20px 0 28px;
     }
 
     .logo {
-      width: min(72vw, 240px);
+      width: min(72vw, 250px);
       margin-bottom: 28px;
       object-fit: contain;
+      display: block;
     }
 
     h1 {
-      font-size: clamp(2.4rem, 9vw, 4.2rem);
+      font-size: clamp(2.45rem, 9vw, 4.3rem);
       line-height: 0.94;
       letter-spacing: -0.08em;
       font-weight: 900;
       max-width: 360px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .accent {
@@ -111,12 +108,26 @@
     }
 
     .subhead {
-      max-width: 335px;
+      max-width: 350px;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.65;
       font-weight: 500;
+      margin-bottom: 18px;
+    }
+
+    .engine-line {
+      max-width: 355px;
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      font-weight: 700;
       margin-bottom: 28px;
+      opacity: 0.92;
+    }
+
+    .engine-line span {
+      color: var(--accent);
     }
 
     .cta {
@@ -127,7 +138,7 @@
       justify-content: center;
       padding: 18px 20px;
       border-radius: 16px;
-      background: linear-gradient(90deg, var(--accent-2) 0%, #35d6e3 100%);
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
       color: var(--button-text);
       font-size: 1.08rem;
       font-weight: 900;
@@ -171,12 +182,17 @@
       }
 
       h1 {
-        font-size: clamp(2rem, 8vw, 3.2rem);
+        font-size: clamp(2rem, 8vw, 3.3rem);
         max-width: 320px;
       }
 
       .subhead {
-        font-size: 0.96rem;
+        font-size: 0.95rem;
+        margin-bottom: 14px;
+      }
+
+      .engine-line {
+        font-size: 0.86rem;
         margin-bottom: 22px;
       }
 
@@ -189,7 +205,6 @@
 <body>
   <main class="page">
     <header class="topbar">
-      <img src="neon-skull-rose.png" alt="Misfit AI logo" />
       <div class="brand">misfit ai</div>
     </header>
 
@@ -197,12 +212,15 @@
       <img src="neon-skull-rose.png" alt="Misfit AI skull logo" class="logo" />
 
       <h1>
-        Autonomous <span class="accent">Revenue</span><br />
-        For Operators
+        Autonomous <span class="accent">Revenue Engine</span>
       </h1>
 
       <p class="subhead">
-        Revive dead leads, automate follow-up, and keep deals moving without living inside a bloated CRM.
+        From digital business card to enterprise SaaS, Misfit AI turns attention into conversations, conversations into appointments, and appointments into revenue motion.
+      </p>
+
+      <p class="engine-line">
+        <span>AI Twin</span> · <span>Lead Revival Engine</span> · <span>Affiliate Engine</span>
       </p>
 
       <a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
