@@ -16,114 +16,132 @@
   --accent2: #39d7e2;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", sans-serif;
-  display:flex;
-  justify-content:center;
-  padding:20px 14px;
+  display: flex;
+  justify-content: center;
+  padding: 20px 14px;
 }
 
 .page {
-  width:100%;
-  max-width:420px;
-  min-height:100dvh;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .brand {
-  text-align:center;
-  font-weight:900;
-  font-size:1.9rem;
-  letter-spacing:-0.06em;
-  margin-bottom:20px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.9rem;
+  letter-spacing: -0.06em;
+  margin-bottom: 20px;
+  text-transform: lowercase;
 }
 
 .hero {
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* LOGO FIX */
+/* CLEAN LOGO (NO GLOW, NO BLEND HACKS) */
+.logo-wrap {
+  width: min(60vw, 200px);
+  aspect-ratio: 1/1;
+  margin-bottom: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* this lets you swap transparent logo later instantly */
 .logo {
-  width:min(60vw, 200px);
-  margin-bottom:26px;
-  mix-blend-mode: lighten; /* removes visible black box */
-  filter: drop-shadow(0 0 20px rgba(34,215,200,0.15));
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
+/* HEADLINE */
 h1 {
   font-size: clamp(2.6rem, 9vw, 3.8rem);
-  font-weight:900;
-  line-height:0.95;
-  letter-spacing:-0.08em;
-  margin-bottom:14px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.08em;
+  margin-bottom: 14px;
 }
 
-/* STACKED CONTROL */
 .line {
-  display:block;
+  display: block;
 }
 
 .accent {
   color: var(--accent);
 }
 
+/* SUBHEAD */
 .subhead {
-  max-width:330px;
-  color:var(--muted);
-  font-size:1rem;
-  line-height:1.6;
-  margin-bottom:18px;
+  max-width: 330px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 18px;
 }
 
-/* CLEANER LINE */
+/* ENGINE LINE */
 .engine-line {
-  font-size:0.9rem;
-  color:var(--accent);
-  font-weight:700;
-  margin-bottom:28px;
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 28px;
 }
 
+/* CTA */
 .cta {
-  width:100%;
-  max-width:360px;
-  padding:18px;
-  border-radius:16px;
+  width: 100%;
+  max-width: 360px;
+  padding: 18px;
+  border-radius: 16px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
-  color:#041010;
-  font-weight:900;
-  font-size:1.05rem;
-  text-align:center;
-  text-decoration:none;
+  color: #041010;
+  font-weight: 900;
+  font-size: 1.05rem;
+  text-align: center;
+  text-decoration: none;
 }
 
+/* SIGN IN */
 .signin {
-  margin-top:16px;
-  font-size:0.9rem;
-  color:var(--muted);
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .signin a {
-  color:var(--text);
-  font-weight:700;
-  text-decoration:none;
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
 }
 
+/* FOOTER */
 .footer {
-  text-align:center;
-  font-size:0.75rem;
-  color:rgba(255,255,255,0.35);
-  margin-top:20px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 20px;
 }
 
 </style>
@@ -132,39 +150,47 @@ h1 {
 <body>
 <main class="page">
 
-<div class="brand">misfit ai</div>
+  <div class="brand">misfit ai</div>
 
-<section class="hero">
+  <section class="hero">
 
-<img src="neon-skull-rose.png" class="logo"/>
+    <!-- LOGO -->
+    <div class="logo-wrap">
+      <img src="neon-skull-rose.png" class="logo" />
+    </div>
 
-<h1>
-  <span class="line">Autonomous</span>
-  <span class="line accent">Revenue Engine</span>
-</h1>
+    <!-- HEADLINE -->
+    <h1>
+      <span class="line">Autonomous</span>
+      <span class="line accent">Revenue Engine</span>
+    </h1>
 
-<p class="subhead">
-  From digital business card to enterprise SaaS, Misfit AI converts attention into conversations, conversations into bookings, and bookings into revenue.
-</p>
+    <!-- COPY (FIXED) -->
+    <p class="subhead">
+      From digital business card to enterprise SaaS, Misfit AI runs follow-up, books appointments, and keeps revenue moving automatically.
+    </p>
 
-<div class="engine-line">
-  AI Twin · Lead Revival Engine · Affiliate Engine
-</div>
+    <!-- FEATURES -->
+    <div class="engine-line">
+      AI Twin · Lead Revival Engine · Affiliate Engine
+    </div>
 
-<a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
-  Launch My AI Empire
-</a>
+    <!-- CTA -->
+    <a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
+      Launch My AI Empire
+    </a>
 
-<div class="signin">
-  Already have an account?
-  <a href="https://misfit-ai-v2.base44.app">Sign in</a>
-</div>
+    <!-- SIGN IN -->
+    <div class="signin">
+      Already have an account?
+      <a href="https://misfit-ai-v2.base44.app">Sign in</a>
+    </div>
 
-</section>
+  </section>
 
-<div class="footer">
-  © Misfit Mediahouse
-</div>
+  <div class="footer">
+    © Misfit Mediahouse
+  </div>
 
 </main>
 </body>
