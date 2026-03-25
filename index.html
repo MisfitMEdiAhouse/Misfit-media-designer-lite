@@ -6,7 +6,7 @@
   <title>Misfit AI</title>
   <meta
     name="description"
-    content="Misfit AI is an autonomous revenue engine that runs follow-up, books appointments, and keeps revenue moving."
+    content="Misfit AI is an autonomous revenue engine that runs follow-up, books appointments, and keeps revenue moving automatically."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,14 +17,12 @@
 
   <style>
     :root {
-      --bg: #050505;
-      --panel: #0c0c0c;
-      --text: #f4f4f4;
-      --muted: #a3a3a3;
-      --accent: #27d7cf;
-      --accent-2: #47d4f0;
+      --bg: #000000;
+      --text: #f5f5f5;
+      --muted: #9a9a9a;
+      --accent: #25d9d2;
+      --accent-2: #4fd8ee;
       --line: rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0,0,0,0.45);
     }
 
     * {
@@ -35,18 +33,15 @@
 
     html, body {
       min-height: 100%;
-      background: #000;
+      background: var(--bg);
     }
 
     body {
       font-family: "Inter", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(39,215,207,0.08), transparent 35%),
-        linear-gradient(180deg, #040404 0%, #000000 100%);
-      display: flex;
-      justify-content: center;
-      padding: 20px 14px;
+        radial-gradient(circle at top, rgba(37,217,210,0.05), transparent 34%),
+        #000000;
     }
 
     a {
@@ -54,52 +49,43 @@
       text-decoration: none;
     }
 
-    .shell {
-      width: 100%;
-      max-width: 430px;
-      min-height: calc(100dvh - 40px);
+    .page {
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 28px 20px 24px;
     }
 
-    .panel {
+    .wrap {
       width: 100%;
-      background: linear-gradient(180deg, rgba(12,12,12,0.96) 0%, rgba(7,7,7,0.98) 100%);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 26px 22px 24px;
+      max-width: 440px;
       text-align: center;
     }
 
     .brand {
       font-size: clamp(2rem, 8vw, 2.7rem);
-      line-height: 0.95;
       font-weight: 900;
       letter-spacing: -0.08em;
+      line-height: 0.95;
       text-transform: lowercase;
-      margin-bottom: 22px;
-    }
-
-    .logo-wrap {
-      width: min(54vw, 190px);
-      margin: 0 auto 22px;
+      margin-bottom: 26px;
     }
 
     .logo {
+      width: min(58vw, 220px);
       display: block;
-      width: 100%;
+      margin: 0 auto 26px;
       height: auto;
       object-fit: contain;
     }
 
     .headline {
-      margin-bottom: 16px;
+      font-size: clamp(3rem, 13vw, 4.9rem);
       font-weight: 900;
-      letter-spacing: -0.08em;
-      line-height: 0.92;
-      font-size: clamp(2.6rem, 11vw, 4.3rem);
+      letter-spacing: -0.09em;
+      line-height: 0.9;
+      margin-bottom: 22px;
     }
 
     .headline .line {
@@ -111,49 +97,52 @@
     }
 
     .subhead {
-      max-width: 330px;
-      margin: 0 auto 18px;
+      max-width: 360px;
+      margin: 0 auto 20px;
       color: var(--muted);
-      font-size: 1.06rem;
-      line-height: 1.65;
+      font-size: 1.04rem;
+      line-height: 1.7;
       font-weight: 500;
     }
 
     .engines {
-      margin: 0 auto 26px;
+      max-width: 360px;
+      margin: 0 auto 28px;
       color: var(--accent);
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 0.96rem;
+      line-height: 1.55;
       font-weight: 700;
     }
 
     .cta {
       display: block;
       width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
       padding: 20px 18px;
-      border-radius: 18px;
-      border: none;
+      border-radius: 20px;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #041313;
+      color: #031516;
       font-size: 1.12rem;
       font-weight: 900;
       letter-spacing: -0.03em;
-      box-shadow: 0 14px 40px rgba(39,215,207,0.26);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      border: none;
+      box-shadow: 0 14px 34px rgba(37,217,210,0.24);
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
     }
 
     .cta:hover,
     .cta:active {
       transform: translateY(-1px);
-      box-shadow: 0 18px 46px rgba(39,215,207,0.30);
       opacity: 0.98;
+      box-shadow: 0 18px 40px rgba(37,217,210,0.28);
     }
 
     .signin {
-      margin-top: 16px;
+      margin-top: 18px;
       color: var(--muted);
       font-size: 0.95rem;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     .signin a {
@@ -162,30 +151,29 @@
     }
 
     .footer {
-      margin-top: 22px;
-      color: rgba(255,255,255,0.32);
+      margin-top: 30px;
+      color: rgba(255,255,255,0.34);
       font-size: 0.8rem;
       line-height: 1.2;
     }
 
-    @media (max-height: 760px) {
-      .panel {
-        padding-top: 22px;
-        padding-bottom: 20px;
+    @media (max-height: 780px) {
+      .page {
+        align-items: flex-start;
       }
 
       .brand {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
       }
 
-      .logo-wrap {
-        width: min(48vw, 168px);
-        margin-bottom: 18px;
+      .logo {
+        width: min(50vw, 190px);
+        margin-bottom: 20px;
       }
 
       .headline {
-        font-size: clamp(2.3rem, 10vw, 3.6rem);
-        margin-bottom: 14px;
+        font-size: clamp(2.7rem, 11vw, 4.2rem);
+        margin-bottom: 18px;
       }
 
       .subhead {
@@ -194,28 +182,26 @@
       }
 
       .engines {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         margin-bottom: 22px;
       }
 
-      .cta {
-        padding: 18px 16px;
-      }
-
       .footer {
-        margin-top: 18px;
+        margin-top: 22px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <section class="panel">
+  <main class="page">
+    <section class="wrap">
       <div class="brand">misfit ai</div>
 
-      <div class="logo-wrap">
-        <img src="neon-skull-rose.png" alt="Misfit AI logo" class="logo" />
-      </div>
+      <img
+        src="neon-skull-rose.png"
+        alt="Misfit AI logo"
+        class="logo"
+      />
 
       <h1 class="headline">
         <span class="line">Autonomous</span>
