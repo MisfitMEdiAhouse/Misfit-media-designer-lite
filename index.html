@@ -3,229 +3,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Misfit AI</title>
-  <meta
-    name="description"
-    content="Misfit AI is an autonomous revenue engine that runs follow-up, books appointments, and keeps revenue moving automatically."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
+  <title>misfit ai</title>
 
   <style>
-    :root {
-      --bg: #000000;
-      --text: #f5f5f5;
-      --muted: #9a9a9a;
-      --accent: #25d9d2;
-      --accent-2: #4fd8ee;
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html, body {
-      min-height: 100%;
-      background: var(--bg);
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
-      font-family: "Inter", Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(37,217,210,0.05), transparent 34%),
-        #000000;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100dvh;
+      background: #000;
+      color: #fff;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 20px 24px;
     }
 
-    .wrap {
+    .container {
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
+      padding: 20px;
       text-align: center;
     }
 
-    .brand {
-      font-size: clamp(2rem, 8vw, 2.7rem);
-      font-weight: 900;
-      letter-spacing: -0.08em;
-      line-height: 0.95;
-      text-transform: lowercase;
-      margin-bottom: 26px;
+    .logo-text {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
     }
 
-    .logo {
-      width: min(58vw, 220px);
-      display: block;
-      margin: 0 auto 26px;
+    .skull-wrap {
+      margin-bottom: 30px;
+    }
+
+    .skull-wrap img {
+      width: 220px;
       height: auto;
-      object-fit: contain;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto;
+      background: transparent;
     }
 
     .headline {
-      font-size: clamp(3rem, 13vw, 4.9rem);
-      font-weight: 900;
-      letter-spacing: -0.09em;
-      line-height: 0.9;
-      margin-bottom: 22px;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
 
-    .headline .line {
+    .headline span {
       display: block;
-    }
-
-    .headline .accent {
-      color: var(--accent);
+      color: #00cfff; /* neon skull blue */
+      text-shadow:
+        0 0 8px rgba(0, 207, 255, 0.6),
+        0 0 16px rgba(0, 207, 255, 0.3);
     }
 
     .subhead {
-      max-width: 360px;
-      margin: 0 auto 20px;
-      color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.7;
-      font-weight: 500;
+      font-size: 16px;
+      color: #aaa;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      padding: 0 10px;
     }
 
-    .engines {
-      max-width: 360px;
-      margin: 0 auto 28px;
-      color: var(--accent);
-      font-size: 0.96rem;
-      line-height: 1.55;
-      font-weight: 700;
+    .features {
+      font-size: 14px;
+      color: #00cfff;
+      margin-bottom: 28px;
+      opacity: 0.9;
     }
 
     .cta {
       display: block;
       width: 100%;
-      max-width: 360px;
-      margin: 0 auto;
-      padding: 20px 18px;
-      border-radius: 20px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #031516;
-      font-size: 1.12rem;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      border: none;
-      box-shadow: 0 14px 34px rgba(37,217,210,0.24);
-      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+      padding: 16px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #000;
+
+      background: linear-gradient(135deg, #ffd700, #ffb300); /* gold tooth */
+      box-shadow:
+        0 0 12px rgba(255, 215, 0, 0.6),
+        0 0 24px rgba(255, 179, 0, 0.3);
+
+      transition: 0.2s ease;
+      margin-bottom: 16px;
     }
 
-    .cta:hover,
-    .cta:active {
-      transform: translateY(-1px);
-      opacity: 0.98;
-      box-shadow: 0 18px 40px rgba(37,217,210,0.28);
+    .cta:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 0 16px rgba(255, 215, 0, 0.9),
+        0 0 32px rgba(255, 179, 0, 0.5);
     }
 
     .signin {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.45;
+      font-size: 14px;
+      color: #888;
     }
 
     .signin a {
-      color: var(--text);
-      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     .footer {
-      margin-top: 30px;
-      color: rgba(255,255,255,0.34);
-      font-size: 0.8rem;
-      line-height: 1.2;
+      margin-top: 24px;
+      font-size: 12px;
+      color: #555;
     }
 
-    @media (max-height: 780px) {
-      .page {
-        align-items: flex-start;
-      }
-
-      .brand {
-        margin-bottom: 20px;
-      }
-
-      .logo {
-        width: min(50vw, 190px);
-        margin-bottom: 20px;
-      }
-
+    @media (max-height: 700px) {
       .headline {
-        font-size: clamp(2.7rem, 11vw, 4.2rem);
-        margin-bottom: 18px;
+        font-size: 30px;
       }
 
-      .subhead {
-        font-size: 0.98rem;
-        margin-bottom: 16px;
-      }
-
-      .engines {
-        font-size: 0.92rem;
-        margin-bottom: 22px;
-      }
-
-      .footer {
-        margin-top: 22px;
+      .skull-wrap img {
+        width: 180px;
       }
     }
   </style>
 </head>
+
 <body>
-  <main class="page">
-    <section class="wrap">
-      <div class="brand">misfit ai</div>
+  <div class="container">
 
-      <img
-        src="neon-skull-rose.png"
-        alt="Misfit AI logo"
-        class="logo"
-      />
+    <div class="logo-text">misfit ai</div>
 
-      <h1 class="headline">
-        <span class="line">Autonomous</span>
-        <span class="line accent">Revenue Engine</span>
-      </h1>
+    <div class="skull-wrap">
+      <img src="YOUR_SKULL_IMAGE_URL_HERE" alt="misfit skull logo" />
+    </div>
 
-      <p class="subhead">
-        From digital business card to enterprise SaaS, Misfit AI runs follow-up, books appointments, and keeps revenue moving automatically.
-      </p>
+    <div class="headline">
+      Autonomous
+      <span>Revenue Engine</span>
+    </div>
 
-      <div class="engines">
-        AI Twin · Lead Revival Engine · Affiliate Engine
-      </div>
+    <div class="subhead">
+      AI that follows up, books appointments, and keeps revenue moving automatically.
+    </div>
 
-      <a href="https://misfit-ai-v2.base44.app/Pricing" class="cta">
-        Launch My AI Empire
-      </a>
+    <div class="features">
+      AI Twin • Lead Revival Engine • Affiliate Engine
+    </div>
 
-      <div class="signin">
-        Already have an account?
-        <a href="https://misfit-ai-v2.base44.app">Sign in</a>
-      </div>
+    <a class="cta" href="https://misfit-ai-v2.base44.app/Pricing">
+      Launch My AI Revenue Empire
+    </a>
 
-      <div class="footer">© Misfit Mediahouse</div>
-    </section>
-  </main>
+    <div class="signin">
+      Already have an account? <a href="#">Sign in</a>
+    </div>
+
+    <div class="footer">
+      © Misfit Mediahouse
+    </div>
+
+  </div>
 </body>
 </html>
