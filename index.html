@@ -6,41 +6,37 @@
   <title>misfit ai</title>
   <meta
     name="description"
-    content="Misfit AI helps businesses automate lead follow-up, appointment scheduling, and customer communication via SMS."
+    content="Misfit AI helps businesses revive dead leads, book appointments, and keep revenue moving automatically."
   />
+
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     :root {
       --bg: #000000;
-      --white: #f5f5f5;
-      --muted: #9a9aa1;
-      --muted-2: #b8b8be;
+      --panel: #0d0d0f;
+      --text: #f5f5f5;
+      --muted: #a7a7ad;
       --line: rgba(255, 255, 255, 0.08);
       --blue: #18c8ff;
       --gold: #d4a017;
       --gold-dark: #b8860b;
     }
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      background: var(--bg);
-      color: var(--white);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       min-height: 100vh;
-      text-align: center;
+      line-height: 1.45;
     }
 
     a {
@@ -48,171 +44,202 @@
       text-decoration: none;
     }
 
-    .wrap {
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
       width: 100%;
-      max-width: 460px;
-      padding: 28px 22px 36px;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 28px 22px 40px;
     }
 
     .brand {
-      font-size: 30px;
-      font-weight: 900;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
       letter-spacing: -0.04em;
-      margin-bottom: 26px;
       text-transform: lowercase;
+      margin-bottom: 22px;
     }
 
-    .logo-wrap {
+    .hero-image-wrap {
       display: flex;
       justify-content: center;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
-    .logo {
-      width: 250px;
-      max-width: 78vw;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 0 18px rgba(24, 200, 255, 0.16));
+    .hero-image {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 0;
+      box-shadow: 0 0 38px rgba(24, 200, 255, 0.16);
     }
 
     .headline {
-      font-size: 58px;
-      line-height: 0.95;
+      text-align: center;
       font-weight: 900;
+      font-size: 56px;
+      line-height: 0.95;
       letter-spacing: -0.05em;
       margin-bottom: 18px;
     }
 
     .headline .blue {
       color: var(--blue);
-      text-shadow: 0 0 18px rgba(24, 200, 255, 0.48);
+      text-shadow: 0 0 16px rgba(24, 200, 255, 0.5);
     }
 
-    .subcopy {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--muted-2);
-      max-width: 370px;
-      margin: 0 auto 20px;
+    .subhead {
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    .rail {
-      font-size: 15px;
-      line-height: 1.5;
-      font-weight: 700;
+    .mini-row {
+      text-align: center;
       color: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.02em;
       margin-bottom: 28px;
     }
 
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .cta-primary,
+    .cta-secondary {
+      display: block;
       width: 100%;
-      min-height: 66px;
-      border-radius: 999px;
+      text-align: center;
+      border-radius: 18px;
+      font-weight: 800;
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .cta-primary:hover,
+    .cta-secondary:hover {
+      transform: translateY(-1px);
+      opacity: 0.98;
+    }
+
+    .cta-primary {
       background: var(--gold);
       color: #000;
-      font-size: 18px;
-      font-weight: 800;
-      padding: 0 18px;
-      box-shadow: 0 12px 28px rgba(212, 160, 23, 0.22);
-      transition: transform 0.15s ease, background 0.15s ease;
+      font-size: 20px;
+      padding: 19px 18px;
+      box-shadow: 0 0 30px rgba(212, 160, 23, 0.24);
       margin-bottom: 16px;
     }
 
-    .cta:hover {
+    .cta-primary:active {
       background: var(--gold-dark);
-      transform: translateY(-1px);
     }
 
-    .login-link {
-      display: inline-block;
-      margin-bottom: 30px;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--white);
-      opacity: 0.96;
+    .cta-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 16px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .login-link span {
+    .section {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 28px;
+    }
+
+    .proof {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .proof-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 16px;
+    }
+
+    .proof-card h3 {
+      font-size: 17px;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .proof-card p {
       color: var(--muted);
-      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.55;
     }
 
     .compliance {
-      margin-top: 8px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
+      text-align: center;
     }
 
     .compliance p {
-      font-size: 14px;
-      line-height: 1.75;
-      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 16px;
     }
 
     .compliance strong {
-      color: var(--white);
+      color: var(--text);
+      font-weight: 800;
     }
 
-    .support-link,
-    .legal-links a {
-      color: var(--white);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .legal-links {
+    .footer-links {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 4px;
+      gap: 10px;
+      font-size: 15px;
+      margin-top: 8px;
     }
 
-    .divider {
-      color: var(--muted);
+    .footer-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .copyright {
+      text-align: center;
+      color: #7b7b82;
+      font-size: 14px;
       margin-top: 18px;
-      font-size: 13px;
-      color: #6f6f76;
     }
 
     @media (max-width: 420px) {
       .headline {
-        font-size: 50px;
+        font-size: 46px;
       }
 
-      .subcopy {
-        font-size: 16px;
-      }
-
-      .rail {
-        font-size: 14px;
-      }
-
-      .cta {
-        min-height: 62px;
+      .subhead {
         font-size: 17px;
+      }
+
+      .cta-primary {
+        font-size: 18px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <main class="page">
     <div class="brand">misfit ai</div>
 
-    <div class="logo-wrap">
+    <div class="hero-image-wrap">
       <img
-        class="logo"
+        class="hero-image"
         src="./neon-skull-rose.png"
-        alt="Misfit AI skull and rose logo"
+        alt="Misfit AI neon skull and rose"
       />
     </div>
 
@@ -221,37 +248,63 @@
       <span class="blue">Revenue Engine</span>
     </h1>
 
-    <p class="subcopy">
+    <p class="subhead">
       From digital business card to enterprise SaaS, Misfit AI runs follow-up,
       books appointments, and keeps revenue moving automatically.
     </p>
 
-    <div class="rail">AI Twin • Lead Revival Engine • Affiliate Engine</div>
+    <div class="mini-row">AI Twin • Lead Revival Engine • Affiliate Engine</div>
 
     <a
-      class="cta"
-      href="https://chat.misfitmediahouse.com"
-      target="_blank"
-      rel="noopener noreferrer"
+      class="cta-primary"
+      href="https://698e93261c8210dc65fe5200.base44.app/Pricing"
     >
       Launch My AI Empire
     </a>
 
     <a
-      class="login-link"
-      href="https://chat.misfitmediahouse.com"
-      target="_blank"
-      rel="noopener noreferrer"
+      class="cta-secondary"
+      href="https://698e93261c8210dc65fe5200.base44.app/"
     >
-      <span>Already have an account?</span> Sign in
+      Already have an account? Sign in
     </a>
 
-    <section class="compliance" aria-label="Business and SMS compliance information">
-      <p><strong>Misfit AI</strong> is operated by <strong>JPrice Media LLC</strong>.</p>
+    <section class="section">
+      <div class="proof">
+        <div class="proof-card">
+          <h3>Revive dead leads automatically</h3>
+          <p>
+            Reach cold prospects fast with AI follow-up built to restart
+            conversations and turn ignored leads back into revenue.
+          </p>
+        </div>
+
+        <div class="proof-card">
+          <h3>Book appointments without the chase</h3>
+          <p>
+            Misfit AI handles follow-up pressure so your pipeline keeps moving
+            while you focus on closing deals.
+          </p>
+        </div>
+
+        <div class="proof-card">
+          <h3>Built for real businesses</h3>
+          <p>
+            Use it for lead follow-up, appointment scheduling, customer
+            communication, and growth systems that do not die when you get busy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compliance">
+      <p>
+        <strong>Misfit AI</strong> is operated by <strong>JPrice Media LLC</strong>.
+      </p>
 
       <p>
-        We provide AI-powered automation for businesses including lead follow-up,
-        appointment scheduling, and customer communication via SMS.
+        We provide AI-powered automation for businesses including lead
+        follow-up, appointment scheduling, and customer communication via SMS.
       </p>
 
       <p>
@@ -262,15 +315,13 @@
 
       <p>
         Support:
-        <a class="support-link" href="mailto:support@misfitmediahouse.com">
-          support@misfitmediahouse.com
-        </a>
+        <a href="mailto:support@misfitmediahouse.com">support@misfitmediahouse.com</a>
       </p>
 
-      <div class="legal-links">
-        <a href="/privacy">Privacy Policy</a>
-        <span class="divider">|</span>
-        <a href="/terms">Terms of Service</a>
+      <div class="footer-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms.html">Terms of Service</a>
       </div>
 
       <div class="copyright">© Misfit Mediahouse</div>
