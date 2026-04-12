@@ -8,7 +8,6 @@
     name="description"
     content="Misfit AI helps businesses automate lead follow-up, appointment scheduling, and customer communication via SMS."
   />
-
   <style>
     * {
       margin: 0;
@@ -20,10 +19,10 @@
     :root {
       --bg: #000000;
       --white: #f5f5f5;
-      --muted: #8e8e93;
+      --muted: #9a9aa1;
       --muted-2: #b8b8be;
       --line: rgba(255, 255, 255, 0.08);
-      --skull-blue: #18c8ff;
+      --blue: #18c8ff;
       --gold: #d4a017;
       --gold-dark: #b8860b;
     }
@@ -46,40 +45,39 @@
 
     a {
       color: inherit;
+      text-decoration: none;
     }
 
     .wrap {
       width: 100%;
-      max-width: 430px;
-      padding: 28px 22px 34px;
+      max-width: 460px;
+      padding: 28px 22px 36px;
     }
 
     .brand {
-      font-size: 28px;
-      font-weight: 800;
+      font-size: 30px;
+      font-weight: 900;
       letter-spacing: -0.04em;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
       text-transform: lowercase;
     }
 
     .logo-wrap {
-      margin: 0 auto 26px;
-      width: 100%;
       display: flex;
       justify-content: center;
+      margin-bottom: 28px;
     }
 
     .logo {
-      width: 230px;
-      max-width: 72vw;
+      width: 250px;
+      max-width: 78vw;
       height: auto;
       display: block;
-      background: transparent;
-      filter: drop-shadow(0 0 12px rgba(24, 200, 255, 0.16));
+      filter: drop-shadow(0 0 18px rgba(24, 200, 255, 0.16));
     }
 
     .headline {
-      font-size: 54px;
+      font-size: 58px;
       line-height: 0.95;
       font-weight: 900;
       letter-spacing: -0.05em;
@@ -87,24 +85,24 @@
     }
 
     .headline .blue {
-      color: var(--skull-blue);
-      text-shadow: 0 0 18px rgba(24, 200, 255, 0.5);
+      color: var(--blue);
+      text-shadow: 0 0 18px rgba(24, 200, 255, 0.48);
     }
 
     .subcopy {
-      font-size: 18px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.7;
       color: var(--muted-2);
-      margin: 0 auto 22px;
-      max-width: 360px;
+      max-width: 370px;
+      margin: 0 auto 20px;
     }
 
     .rail {
       font-size: 15px;
       line-height: 1.5;
       font-weight: 700;
-      color: var(--skull-blue);
-      margin-bottom: 26px;
+      color: var(--blue);
+      margin-bottom: 28px;
     }
 
     .cta {
@@ -118,11 +116,10 @@
       color: #000;
       font-size: 18px;
       font-weight: 800;
-      text-decoration: none;
-      box-shadow: 0 10px 24px rgba(212, 160, 23, 0.22);
+      padding: 0 18px;
+      box-shadow: 0 12px 28px rgba(212, 160, 23, 0.22);
       transition: transform 0.15s ease, background 0.15s ease;
       margin-bottom: 16px;
-      padding: 0 20px;
     }
 
     .cta:hover {
@@ -132,12 +129,11 @@
 
     .login-link {
       display: inline-block;
-      color: var(--white);
-      font-size: 14px;
+      margin-bottom: 30px;
+      font-size: 15px;
       font-weight: 600;
-      text-decoration: none;
-      margin-bottom: 28px;
-      opacity: 0.95;
+      color: var(--white);
+      opacity: 0.96;
     }
 
     .login-link span {
@@ -146,21 +142,20 @@
     }
 
     .compliance {
-      margin-top: 12px;
-      padding-top: 22px;
+      margin-top: 8px;
+      padding-top: 24px;
       border-top: 1px solid var(--line);
       color: var(--muted);
     }
 
     .compliance p {
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 14px;
     }
 
     .compliance strong {
       color: var(--white);
-      font-weight: 700;
     }
 
     .support-link,
@@ -172,10 +167,10 @@
 
     .legal-links {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 12px;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 12px;
       margin-top: 4px;
     }
 
@@ -191,11 +186,11 @@
 
     @media (max-width: 420px) {
       .headline {
-        font-size: 46px;
+        font-size: 50px;
       }
 
       .subcopy {
-        font-size: 17px;
+        font-size: 16px;
       }
 
       .rail {
@@ -216,7 +211,7 @@
     <div class="logo-wrap">
       <img
         class="logo"
-        src="https://i.imgur.com/S2mT6yx.png"
+        src="./neon-skull-rose.png"
         alt="Misfit AI skull and rose logo"
       />
     </div>
@@ -233,18 +228,26 @@
 
     <div class="rail">AI Twin • Lead Revival Engine • Affiliate Engine</div>
 
-    <a class="cta" href="https://chat.misfitmediahouse.com" target="_blank" rel="noopener noreferrer">
+    <a
+      class="cta"
+      href="https://chat.misfitmediahouse.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Launch My AI Empire
     </a>
 
-    <a class="login-link" href="https://chat.misfitmediahouse.com" target="_blank" rel="noopener noreferrer">
+    <a
+      class="login-link"
+      href="https://chat.misfitmediahouse.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span>Already have an account?</span> Sign in
     </a>
 
     <section class="compliance" aria-label="Business and SMS compliance information">
-      <p>
-        <strong>Misfit AI</strong> is operated by <strong>JPrice Media LLC</strong>.
-      </p>
+      <p><strong>Misfit AI</strong> is operated by <strong>JPrice Media LLC</strong>.</p>
 
       <p>
         We provide AI-powered automation for businesses including lead follow-up,
