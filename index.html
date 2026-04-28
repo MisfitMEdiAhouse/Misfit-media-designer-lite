@@ -28,13 +28,10 @@
       --soft: #d9d9df;
       --line: rgba(255, 255, 255, 0.09);
       --blue: #18c8ff;
-      --blue-soft: rgba(24, 200, 255, 0.13);
-      --blue-glow: rgba(24, 200, 255, 0.32);
       --gold: #d4a017;
       --gold-dark: #b8860b;
       --green: #19d28f;
       --green-soft: rgba(25, 210, 143, 0.12);
-      --red-soft: rgba(255, 65, 90, 0.12);
       --max: 520px;
     }
 
@@ -300,27 +297,13 @@
       margin-top: 16px;
     }
 
-    .consent-row {
-      display: grid;
-      grid-template-columns: 24px 1fr;
-      gap: 10px;
-      align-items: start;
-    }
-
-    .consent-row input {
-      width: 20px;
-      height: 20px;
-      margin-top: 2px;
-      accent-color: var(--blue);
-    }
-
-    .consent-row label {
+    .consent-label {
       color: var(--soft);
       font-size: 13px;
       line-height: 1.5;
     }
 
-    .consent-row strong {
+    .consent-label strong {
       color: var(--text);
     }
 
@@ -501,16 +484,13 @@
       </div>
 
       <div class="consent-panel">
-        <div class="consent-row">
-          <input type="checkbox" id="sms-consent-preview" disabled />
-          <label for="sms-consent-preview">
-            <strong>SMS consent disclosure preview:</strong>
-            I agree to receive SMS messages from Misfit AI / JPrice Media LLC regarding my inquiry, demo request, onboarding, account setup, appointment scheduling, and service updates. Message frequency varies. Message and data rates may apply. Reply STOP to opt out and HELP for help. Consent is not a condition of purchase.
-          </label>
+        <div class="consent-label">
+          <strong>SMS consent disclosure used inside Misfit AI opt-in flows:</strong>
+          I agree to receive SMS messages from Misfit AI / JPrice Media LLC regarding my inquiry, demo request, onboarding, account setup, appointment scheduling, and service updates. Message frequency varies. Message and data rates may apply. Reply STOP to opt out and HELP for help. Consent is not a condition of purchase.
         </div>
 
         <div class="consent-small">
-          This disabled checkbox is shown as a compliance preview. Active consent is collected only inside approved Misfit AI signup, trial, demo, or onboarding flows where the user intentionally submits their details.
+          SMS consent is collected only when a user actively provides their phone number and confirms opt-in inside the Misfit AI signup, trial, demo, or onboarding flow.
         </div>
       </div>
     </section>
