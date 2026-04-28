@@ -1,629 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Misfit AI | AI Follow-Up & Booking Platform</title>
-
-  <meta
-    name="description"
-    content="Misfit AI helps businesses follow up with opted-in leads, book appointments, and manage SMS workflows with consent-aware safeguards."
-  />
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #000000;
-      --panel: #0d0d0f;
-      --panel-2: #11131a;
-      --panel-3: #151821;
-      --text: #f5f5f5;
-      --muted: #a7a7ad;
-      --soft: #d9d9df;
-      --line: rgba(255, 255, 255, 0.09);
-      --blue: #18c8ff;
-      --gold: #d4a017;
-      --gold-dark: #b8860b;
-      --green: #19d28f;
-      --green-soft: rgba(25, 210, 143, 0.12);
-      --max: 520px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at top, rgba(24, 200, 255, 0.16), transparent 34rem),
-        radial-gradient(circle at 50% 16rem, rgba(212, 160, 23, 0.08), transparent 28rem),
-        var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      line-height: 1.45;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .page {
-      width: 100%;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 28px 22px 42px;
-    }
-
-    .brand {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -0.05em;
-      text-transform: lowercase;
-      margin-bottom: 20px;
-    }
-
-    .status-pill {
-      width: fit-content;
-      margin: 0 auto 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--soft);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .hero-image-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 26px;
-    }
-
-    .hero-image {
-      width: 100%;
-      max-width: 320px;
-      filter: drop-shadow(0 0 28px rgba(24, 200, 255, 0.22));
-    }
-
-    .headline {
-      text-align: center;
-      font-weight: 950;
-      font-size: 55px;
-      line-height: 0.94;
-      letter-spacing: -0.06em;
-      margin-bottom: 18px;
-    }
-
-    .headline .blue {
-      color: var(--blue);
-      text-shadow: 0 0 16px rgba(24, 200, 255, 0.5);
-    }
-
-    .subhead {
-      text-align: center;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-
-    .mini-row {
-      text-align: center;
-      color: var(--blue);
-      font-weight: 800;
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
-
-    .cta-primary,
-    .cta-secondary {
-      display: block;
-      width: 100%;
-      text-align: center;
-      border-radius: 18px;
-      font-weight: 900;
-      transition: transform 0.16s ease, opacity 0.16s ease;
-    }
-
-    .cta-primary:hover,
-    .cta-secondary:hover {
-      transform: translateY(-1px);
-    }
-
-    .cta-primary {
-      background: linear-gradient(180deg, var(--gold), var(--gold-dark));
-      color: #000;
-      font-size: 20px;
-      padding: 19px 18px;
-      margin-bottom: 14px;
-      box-shadow: 0 0 28px rgba(212, 160, 23, 0.16);
-    }
-
-    .cta-secondary {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.035);
-      color: var(--text);
-      font-size: 16px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-
-    .cta-note {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .section {
-      border-top: 1px solid var(--line);
-      padding-top: 28px;
-      margin-top: 28px;
-    }
-
-    .section-title {
-      font-size: 27px;
-      line-height: 1.08;
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 12px;
-      letter-spacing: -0.04em;
-    }
-
-    .section-copy {
-      text-align: center;
-      color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 18px;
-    }
-
-    .proof {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .proof-card {
-      background: linear-gradient(180deg, var(--panel-2), var(--panel));
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px 16px;
-    }
-
-    .proof-card h3 {
-      font-size: 17px;
-      margin-bottom: 6px;
-    }
-
-    .proof-card p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .ai-optin {
-      background:
-        linear-gradient(180deg, rgba(24, 200, 255, 0.09), rgba(255, 255, 255, 0.025)),
-        var(--panel);
-      border: 1px solid rgba(24, 200, 255, 0.22);
-      border-radius: 24px;
-      padding: 22px 18px;
-      margin-top: 28px;
-      box-shadow: 0 0 38px rgba(24, 200, 255, 0.08);
-    }
-
-    .ai-optin-eyebrow {
-      text-align: center;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .ai-optin h2 {
-      text-align: center;
-      font-size: 26px;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-      margin-bottom: 10px;
-    }
-
-    .ai-optin p {
-      text-align: center;
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 16px;
-    }
-
-    .ai-card {
-      background: rgba(0, 0, 0, 0.28);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 15px;
-      margin-top: 14px;
-    }
-
-    .ai-card-title {
-      font-size: 15px;
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-
-    .ai-card-copy {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .intent-buttons {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .intent-button {
-      display: block;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 16px;
-      padding: 13px 14px;
-      color: var(--text);
-      font-weight: 800;
-      font-size: 14px;
-      text-align: left;
-    }
-
-    .consent-panel {
-      background: rgba(0, 0, 0, 0.34);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-      border-radius: 18px;
-      padding: 15px;
-      margin-top: 16px;
-    }
-
-    .consent-label {
-      color: var(--soft);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .consent-label strong {
-      color: var(--text);
-    }
-
-    .consent-small {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-      margin-top: 10px;
-    }
-
-    .message-examples {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .sms-example {
-      background: var(--panel-3);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 15px;
-      color: var(--soft);
-      font-size: 14px;
-    }
-
-    .sms-example span {
-      display: block;
-      color: var(--blue);
-      font-size: 12px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-
-    .compliance-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .compliance-item {
-      background: var(--green-soft);
-      border: 1px solid rgba(25, 210, 143, 0.18);
-      border-radius: 18px;
-      padding: 15px;
-    }
-
-    .compliance-item h3 {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .compliance-item p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .final-legal {
-      text-align: center;
-      margin-top: 28px;
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-    }
-
-    .final-legal p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 13px;
-    }
-
-    .final-legal strong {
-      color: var(--text);
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .footer-links a {
-      color: var(--soft);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .copyright {
-      text-align: center;
-      color: #7b7b82;
-      font-size: 13px;
-      margin-top: 18px;
-    }
-
-    @media (max-width: 390px) {
-      .headline {
-        font-size: 48px;
-      }
-
-      .page {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="page">
-
-    <div class="brand">misfit ai</div>
-
-    <div class="status-pill">
-      AI follow-up for opted-in business leads
-    </div>
-
-    <div class="hero-image-wrap">
-      <img class="hero-image" src="./neon-skull-rose.png" alt="Misfit AI neon skull and rose" />
-    </div>
-
-    <h1 class="headline">
-      Autonomous<br />
-      <span class="blue">Revenue Engine</span>
-    </h1>
-
-    <p class="subhead">
-      Misfit AI helps businesses follow up with leads who have already engaged,
-      book appointments faster, and manage SMS workflows with consent-aware safeguards.
-    </p>
-
-    <div class="mini-row">
-      Lead Follow-Up • SMS Workflows • Appointment Booking
-    </div>
-
-    <a class="cta-primary" href="https://ai.misfitmediahouse.com/Pricing">
-      Start Free Trial
-    </a>
-
-    <a class="cta-secondary" href="https://ai.misfitmediahouse.com/TwinPublic">
-      Try AI Demo Tour
-    </a>
-
-    <div class="cta-note">
-      14-day free trial · No credit card required · Cancel anytime
-    </div>
-
-    <section class="ai-optin" aria-labelledby="ai-optin-title">
-      <div class="ai-optin-eyebrow">SaaS AI opt-in</div>
-
-      <h2 id="ai-optin-title">
-        Start with the AI demo — no outdated contact form required.
-      </h2>
-
-      <p>
-        The demo lets you explore Misfit AI, request onboarding help, or start a trial.
-        If you choose to share your phone number inside the Misfit AI experience, you can also opt in to receive SMS messages about your inquiry, onboarding, account setup, demo follow-up, and appointment scheduling.
-      </p>
-
-      <div class="ai-card">
-        <div class="ai-card-title">What you can do inside the AI demo</div>
-        <div class="ai-card-copy">
-          Choose the path that fits your business. Misfit AI only sends SMS messages when a user provides a phone number and gives consent through the AI experience, trial flow, or another approved opt-in path.
-        </div>
-
-        <div class="intent-buttons" aria-label="Misfit AI demo options">
-          <a class="intent-button" href="https://ai.misfitmediahouse.com/TwinPublic">
-            → Ask the AI how lead follow-up works
-          </a>
-          <a class="intent-button" href="https://ai.misfitmediahouse.com/TwinPublic">
-            → Request onboarding guidance
-          </a>
-          <a class="intent-button" href="https://ai.misfitmediahouse.com/Pricing">
-            → Start a free trial
-          </a>
-        </div>
-      </div>
-
-      <div class="consent-panel">
-        <div class="consent-label">
-          <strong>SMS consent disclosure used inside Misfit AI opt-in flows:</strong>
-          I agree to receive SMS messages from Misfit AI / JPrice Media LLC regarding my inquiry, demo request, onboarding, account setup, appointment scheduling, and service updates. Message frequency varies. Message and data rates may apply. Reply STOP to opt out and HELP for help. Consent is not a condition of purchase.
-        </div>
-
-        <div class="consent-small">
-          SMS consent is collected only when a user actively provides their phone number and confirms opt-in inside the Misfit AI signup, trial, demo, or onboarding flow.
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Built for real follow-up, not fake hype</h2>
-
-      <p class="section-copy">
-        Misfit AI is built for businesses that want faster response times,
-        better appointment conversion, and cleaner customer communication.
-      </p>
-
-      <div class="proof">
-        <div class="proof-card">
-          <h3>Re-engage existing leads</h3>
-          <p>
-            Follow up with people who have already shown interest in your business
-            and restart conversations at the right time.
-          </p>
-        </div>
-
-        <div class="proof-card">
-          <h3>Book appointments faster</h3>
-          <p>
-            Route interested prospects into your booking flow without constant back-and-forth.
-          </p>
-        </div>
-
-        <div class="proof-card">
-          <h3>Consent-aware workflows</h3>
-          <p>
-            Use opt-in records, opt-out handling, suppression logic, and message controls
-            to support cleaner customer communication.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">How Misfit AI messaging works</h2>
-
-      <p class="section-copy">
-        Misfit AI is designed for permission-based communication. SMS messages are intended for users who have opted in through an approved form, AI demo flow, trial signup, inbound inquiry, appointment request, or existing business relationship.
-      </p>
-
-      <div class="compliance-grid">
-        <div class="compliance-item">
-          <h3>Opt-in required</h3>
-          <p>
-            Misfit AI is not intended for scraped lists, purchased lists, or unsolicited bulk texting.
-          </p>
-        </div>
-
-        <div class="compliance-item">
-          <h3>Opt-out supported</h3>
-          <p>
-            Recipients can reply STOP to opt out. Suppression logic helps prevent future messages to opted-out contacts.
-          </p>
-        </div>
-
-        <div class="compliance-item">
-          <h3>Business-purpose messages</h3>
-          <p>
-            Messages are related to inquiries, follow-up, appointments, onboarding, account setup, reminders, and service updates.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Example messages</h2>
-
-      <p class="section-copy">
-        Misfit AI messages may include follow-up, appointment, onboarding, and service-related communication.
-      </p>
-
-      <div class="message-examples">
-        <div class="sms-example">
-          <span>Demo follow-up</span>
-          Hi, this is Misfit AI following up on your demo request. Want help seeing how the follow-up engine could work for your business? Reply STOP to opt out.
-        </div>
-
-        <div class="sms-example">
-          <span>Appointment booking</span>
-          Thanks for your interest in Misfit AI. Would you like to book a quick setup call this week? Reply STOP to opt out.
-        </div>
-
-        <div class="sms-example">
-          <span>Account onboarding</span>
-          Your Misfit AI trial is ready. Reply here if you want help setting up your first lead follow-up workflow. Reply STOP to opt out.
-        </div>
-      </div>
-    </section>
-
-    <section class="final-legal">
-
-      <p>
-        <strong>Misfit AI</strong> is operated by <strong>JPrice Media LLC</strong>.
-      </p>
-
-      <p>
-        By starting a trial, using the AI demo, requesting information, booking a call,
-        or submitting your details through an approved Misfit AI flow, you agree that
-        Misfit AI / JPrice Media LLC may contact you regarding your inquiry, demo,
-        onboarding, account setup, appointment scheduling, and service-related updates.
-      </p>
-
-      <p>
-        Message frequency varies. Message and data rates may apply.
-        Consent is not a condition of purchase.
-      </p>
-
-      <p>
-        Reply <strong>STOP</strong> to opt out and <strong>HELP</strong> for help.
-      </p>
-
-      <p>
-        Support:
-        <a href="mailto:support@misfitmediahouse.com">support@misfitmediahouse.com</a>
-      </p>
-
-      <div class="footer-links">
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <span>·</span>
-        <a href="/terms.html">Terms of Service</a>
-      </div>
-
-      <div class="copyright">
-        © 2026 JPrice Media LLC. All rights reserved.
-      </div>
-
-    </section>
-
-  </main>
-</body>
-</html>
+misfit ai
+AI follow-up for opted-in business leads
+
+Autonomous Revenue Engine
+
+Misfit AI helps businesses follow up with leads who have already engaged, book appointments faster, and manage SMS workflows with consent-aware safeguards.
+
+Lead Follow-Up • SMS Workflows • Appointment Booking
+
+Start Free Trial  
+Try AI Demo Tour  
+14-day free trial · No credit card required · Cancel anytime
+
+---
+
+SaaS AI opt-in
+
+Start with the AI demo — no outdated contact form required.
+
+The demo lets you explore Misfit AI, request onboarding help, or start a trial. If you choose to share your phone number inside the Misfit AI experience, you can opt in to receive SMS messages related to your inquiry, onboarding, account setup, demo follow-up, and appointment scheduling.
+
+---
+
+What you can do inside the AI demo
+
+Choose the path that fits your business. Misfit AI only sends SMS messages when a user provides a phone number and gives consent through the AI experience, trial flow, or another approved opt-in flow.
+
+→ Ask the AI how lead follow-up works  
+→ Request onboarding guidance  
+→ Start a free trial  
+
+---
+
+SMS consent disclosure used inside Misfit AI opt-in flows:
+
+I agree to receive SMS messages from Misfit AI / JPrice Media LLC regarding my inquiry, demo request, onboarding, account setup, appointment scheduling, and service updates. Message frequency varies. Message and data rates may apply. Reply STOP to opt out and HELP for help. Consent is not a condition of purchase.
+
+SMS consent is collected only when a user actively provides their phone number and confirms opt-in inside the Misfit AI signup, trial, demo, or onboarding flow.
+
+---
+
+Built for real follow-up, not fake hype
+
+Misfit AI is built for businesses that want faster response times, better appointment conversion, and cleaner customer communication.
+
+Re-engage existing leads  
+Follow up with people who have already shown interest in your business and restart conversations at the right time.
+
+Book appointments faster  
+Route interested prospects into your booking flow without constant back-and-forth.
+
+Consent-aware workflows  
+Use opt-in records, opt-out handling, suppression logic, and message controls to support cleaner customer communication.
+
+---
+
+How Misfit AI messaging works
+
+Misfit AI is designed for permission-based communication. SMS messages are intended for users who have opted in through an approved AI demo flow, trial signup, onboarding flow, inbound inquiry, appointment request, or existing business relationship.
+
+Opt-in required  
+Misfit AI is not intended for scraped lists, purchased lists, or unsolicited bulk texting.
+
+Opt-out supported  
+Recipients can reply STOP to opt out. Suppression logic helps prevent future messages to opted-out contacts.
+
+Business-purpose messages  
+Messages are related to inquiries, follow-up, appointments, onboarding, account setup, reminders, and service updates.
+
+---
+
+Example messages
+
+Demo follow-up  
+Hi, this is Misfit AI following up on your demo request. Want help seeing how the follow-up engine could work for your business? Reply STOP to opt out.
+
+Appointment booking  
+Thanks for your interest in Misfit AI. Would you like to book a quick setup call this week? Reply STOP to opt out.
+
+Account onboarding  
+Your Misfit AI trial is ready. Reply here if you want help setting up your first lead follow-up workflow. Reply STOP to opt out.
+
+---
+
+Misfit AI is operated by JPrice Media LLC.
+
+By starting a trial, using the AI demo, requesting information, booking a call, or submitting your details through an approved Misfit AI flow, you agree that Misfit AI / JPrice Media LLC may contact you regarding your inquiry, demo, onboarding, account setup, appointment scheduling, and service-related updates.
+
+Message frequency varies. Message and data rates may apply. Consent is not a condition of purchase.
+
+Reply STOP to opt out and HELP for help.
+
+Support: support@misfitmediahouse.com
+
+Privacy Policy · Terms of Service  
+© 2026 JPrice Media LLC. All rights reserved.
