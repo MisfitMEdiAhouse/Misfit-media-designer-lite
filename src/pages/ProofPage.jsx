@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -13,6 +14,11 @@ const work = [
 ];
 
 export default function ProofPage() {
+  const [links, setLinks] = useState({});
+  useEffect(() => {
+    fetch('/portfolio-core.json').then((r) => r.json()).then((rows) => setLinks(Object.fromEntries(rows.map((x) => [x.title, x.url])))).catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -27,6 +33,7 @@ export default function ProofPage() {
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-amber-300">{type}</div>
                 <h2 className="mt-3 font-display text-2xl font-bold">{title}</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-400">{copy}</p>
+                {links[title] && <a href={links[title]} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-300">Open live work →</a>}
               </article>
             ))}
           </div>
