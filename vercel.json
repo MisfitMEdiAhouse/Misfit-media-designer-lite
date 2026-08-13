@@ -1,6 +1,23 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/demo", "destination": "/demo.html" }
+    { "source": "/proof", "destination": "/index.html" },
+    { "source": "/enterprise-ai", "destination": "/index.html" },
+    { "source": "/creator-commerce", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
   ]
 }

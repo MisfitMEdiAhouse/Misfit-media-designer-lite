@@ -1,0 +1,4 @@
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+
+export default function EnterpriseAI(){return <div className="min-h-screen bg-black text-white"><Navbar/><main className="pt-28"><section className="mx-auto max-w-7xl px-5 py-16"><div className="font-mono text-xs uppercase tracking-[0.3em] text-amber-300">ENTERPRISE AI · CONTEXTFORGE</div><h1 className="mt-5 max-w-5xl font-display text-5xl sm:text-7xl font-bold uppercase leading-[0.9]">Give coding agents context before important changes.</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300">Metadata-aware impact analysis, governance, human approval and decision memory for AI-generated data changes.</p></section></main><Footer/></div>;}
