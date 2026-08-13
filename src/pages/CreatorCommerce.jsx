@@ -1,0 +1,4 @@
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+
+export default function CreatorCommerce(){return <div className="min-h-screen bg-black text-white"><Navbar/><main className="pt-28"><section className="mx-auto max-w-7xl px-5 py-16"><div className="font-mono text-xs uppercase tracking-[0.3em] text-fuchsia-300">MISFIT CREATOR OS</div><h1 className="mt-5 max-w-5xl font-display text-5xl sm:text-7xl font-bold uppercase leading-[0.9]">Turn creators, campaigns and QR traffic into trackable commerce.</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300">Shopify-oriented creator CRM, campaign workflows, QR attribution and commerce-system architecture.</p></section></main><Footer/></div>;}
