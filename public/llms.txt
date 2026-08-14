@@ -13,7 +13,13 @@ UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
-The UCP profile currently advertises catalog search and lookup only. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
+Catalog search and lookup are advertised. UCP REST catalog responses use a public verification key from the business profile and HTTP message-signature headers. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
+
+## Shopify Agentic Audit
+Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects only public discovery/MCP metadata and never executes cart, checkout, order, payment, credential, or mutation actions.
+Page: https://misfitmediahouse.com/shopify-ai-audit
+API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
+The audit funnels consequential tool surfaces through GHOSBC Safety Gate and recommends ChangePacket for future surface drift.
 
 ## ChangePacket
 Persistent change memory for AI agents. Track public webpages or public MCP tool surfaces. First request creates a baseline; later requests return only the delta.
