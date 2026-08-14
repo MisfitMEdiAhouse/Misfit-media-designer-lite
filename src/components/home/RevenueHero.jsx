@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import Reveal from '../Reveal.jsx';
 
 const MISFIT_LOGO = '/misfit-logo.svg';
@@ -11,6 +11,9 @@ export default function RevenueHero() {
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="max-w-5xl">
           <Reveal>
+            <a href="/quotelink" className="mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200">
+              <Zap size={13}/> New: Misfit QuoteLink · instant lead page · $49 once <ArrowRight size={13}/>
+            </a>
             <img
               src={MISFIT_LOGO}
               alt="Misfit Mediahouse neon skull and rose logo"
@@ -25,7 +28,10 @@ export default function RevenueHero() {
               Misfit Mediahouse builds AI revenue systems for service businesses that need faster follow-up, old-lead revival, better booking, stronger websites, and clear attribution from lead to money.
             </p>
           </Reveal>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 flex-wrap">
+            <a href="/quotelink" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black">
+              Get a QuoteLink — $49 <ArrowRight size={15}/>
+            </a>
             <a href="#request-demo" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black glow-cyan">
               Find My Revenue Leaks <ArrowRight size={15}/>
             </a>
