@@ -27,6 +27,7 @@ export default function App() {
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
         <Route path="/quotelink" element={<SnapSite />} />
         <Route path="/snapsite" element={<Navigate to="/quotelink" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
