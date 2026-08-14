@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
+        <Route path="/quotelink" element={<SnapSite />} />
         <Route path="/snapsite" element={<SnapSite />} />
       </Routes>
     </Router>
