@@ -11,11 +11,21 @@ UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 
 ## A2A — Misfit Machine Agent
 
-Misfit exposes a real A2A v1.0 HTTP+JSON agent at:
+Misfit exposes a real A2A v1.0 agent through two smoke-proven bindings that return equivalent public audit behavior:
+
+JSONRPC:
+https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
+
+HTTP+JSON:
 https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 
-The public Agent Card is at:
+Public Agent Card:
 https://misfitmediahouse.com/.well-known/agent-card.json
+
+Third-party A2A registry identity:
+a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
+
+The registry's own A2A SDK verified the JSONRPC binding at registration and marked the synchronous task/message probe WORKING. Registry health percentages can lag immediately after first registration and should not be confused with the direct runtime smoke result.
 
 Current A2A skill: `audit_shopify_agentic_storefront`.
 
@@ -32,7 +42,7 @@ UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-u
 
 Current machine products may return ordinary Stripe checkout handoff URLs. A checkout URL is a handoff, not permission for an agent to purchase autonomously. Consequential purchasing or money actions require the user's explicit bounded intent and the applicable payment flow.
 
-The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through both the A2A skill above and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
+The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through the A2A skill above and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
 
 ## GHOSBC Safety Gate
 
@@ -64,7 +74,7 @@ Purpose: public-metadata-only storefront readiness and safety audit for Shopify 
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
 MCP access: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
-A2A access: send a v1.0 Message to the Misfit Machine Agent with the storefront domain/URL.
+A2A access: send a v1.0 Message through either declared Misfit Machine Agent binding with the storefront domain/URL.
 
 The audit may inspect public `/.well-known/ucp`, `/agents.md`, and `/api/ucp/mcp` metadata. It never executes cart, checkout, order, payment, credential, or store mutation operations. Audit grades are Misfit diagnostic results, not Shopify certification.
 
