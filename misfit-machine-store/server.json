@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.MisfitMEdiAhouse/misfit-machine-store",
+  "title": "Misfit Machine Store",
+  "description": "UCP-compatible machine catalog for paid Misfit agent APIs and MCP services.",
+  "version": "1.0.0",
+  "websiteUrl": "https://misfitmediahouse.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp"
+    }
+  ]
+}
