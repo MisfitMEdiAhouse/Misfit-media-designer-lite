@@ -4,6 +4,7 @@ Misfit Mediahouse builds hosted tools, machine-commerce surfaces, agent security
 
 ## Durable agent control plane
 Human-readable control plane: https://misfitmediahouse.com/agents
+A2A Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Canonical agent-facing business map: https://misfitmediahouse.com/agents.md
 Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
@@ -11,18 +12,26 @@ Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-des
 Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface. Chat sessions are operators, not databases.
 Private GHOSBC/Castle Gate runtime details are intentionally not exposed through these public surfaces.
 
+## A2A — Misfit Machine Agent
+A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
+Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
+Current skill: `audit_shopify_agentic_storefront`.
+The agent accepts a public Shopify store domain/HTTPS URL in text or structured-data Message parts and returns a direct `ROLE_AGENT` Message with text plus structured audit data. Streaming and push notifications are not advertised. No cart, checkout, order, payment, credential or store mutation capability is exposed.
+
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
 Catalog search and lookup are advertised. UCP REST catalog responses use a public verification key from the business profile and HTTP message-signature headers. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
+The free Shopify Agentic Storefront Audit is a real $0 UCP catalog item with no checkout URL; it points to the public diagnostic and its callable Safety Gate MCP tool.
 
 ## Shopify Agentic Audit
 Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects public `/.well-known/ucp`, `/agents.md`, and storefront MCP metadata, and never executes cart, checkout, order, payment, credential, or mutation actions.
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
 MCP: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
+A2A: send a v1.0 Message to Misfit Machine Agent.
 Audited stores can receive a live embeddable diagnostic badge that links back to their independently rerunnable report. Grades are Misfit diagnostics, not Shopify certification.
 The audit funnels consequential tool surfaces through GHOSBC Safety Gate and recommends ChangePacket for future surface drift.
 
@@ -45,7 +54,7 @@ Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
 Metadata-aware code generation and change governance grounded in DataHub context. ContextForge reasons about blast radius, governance, generated code/tests, approval boundaries, and decision memory. This is a first-class Misfit machine asset, not a chat-only prototype.
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
-ContextForge is currently a DataHub-aware application/client; do not assume a standalone remote ContextForge MCP server unless one is explicitly published.
+ContextForge is currently a DataHub-aware application/client; do not assume a standalone remote ContextForge MCP or A2A server unless one is explicitly published.
 
 ## Private security core
 GHOSBC OS – Agent Brain Hub and Misfit Shield – GHOSBC Sentinel provide private governance, Castle Gate evaluation, approval gates, abuse controls, runtime validation, outbound-context shielding, and sentinel orchestration. Their private source, prompts, cipher/mapping internals, runtime material, and credentials are not public machine interfaces.
