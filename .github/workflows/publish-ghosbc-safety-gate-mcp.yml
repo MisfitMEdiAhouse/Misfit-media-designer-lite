@@ -1,0 +1,28 @@
+name: Publish GHOSBC Safety Gate to MCP Registry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ghosbc-safety-gate/server.json'
+      - '.github/workflows/publish-ghosbc-safety-gate-mcp.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install MCP publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+      - name: Authenticate with GitHub OIDC
+        working-directory: ghosbc-safety-gate
+        run: ../mcp-publisher login github-oidc
+      - name: Publish GHOSBC Safety Gate
+        working-directory: ghosbc-safety-gate
+        run: ../mcp-publisher publish
