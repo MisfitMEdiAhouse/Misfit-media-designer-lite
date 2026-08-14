@@ -6,6 +6,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <a href="/" className="font-display text-lg font-bold text-white">MISFIT<span className="text-cyan-400">.</span></a>
         <div className="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-[0.14em] text-slate-300">
+          <a href="/misfit-ai-v2">Misfit AI</a>
           <a href="/#revenue-ai">Revenue AI</a>
           <a href="/#offers">Offers</a>
           <a href="/proof">Proof</a>
