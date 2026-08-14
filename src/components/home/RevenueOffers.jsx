@@ -24,7 +24,10 @@ export default function RevenueOffers() {
               <h3 className="font-display text-2xl font-bold">{name}</h3>
               <div className="mt-2 font-mono text-xs uppercase tracking-[0.12em] text-cyan-300">{price}</div>
               <p className="mt-4 text-sm leading-6 text-slate-400">{copy}</p>
-              {links[key] && <a href={links[key]} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-black">Start Here <ArrowRight size={13}/></a>}
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                {links[key] && <a href={links[key]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-black">Start Here <ArrowRight size={13}/></a>}
+                {key === 'lead_engine' && <a href="/misfit-ai-v2" className="inline-flex rounded-full border border-white/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.15em] text-white">Product details →</a>}
+              </div>
             </article>
           ))}
         </div>
