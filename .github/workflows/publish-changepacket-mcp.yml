@@ -1,0 +1,32 @@
+name: Publish ChangePacket to MCP Registry
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "changepacket/server.json"
+      - ".github/workflows/publish-changepacket-mcp.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install MCP publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate with GitHub OIDC
+        working-directory: changepacket
+        run: ../mcp-publisher login github-oidc
+
+      - name: Publish ChangePacket
+        working-directory: changepacket
+        run: ../mcp-publisher publish
