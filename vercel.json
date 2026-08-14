@@ -11,6 +11,7 @@
     { "source": "/enterprise-ai", "destination": "/" },
     { "source": "/creator-commerce", "destination": "/" },
     { "source": "/misfit-ai-v2", "destination": "/" },
+    { "source": "/quotelink", "destination": "/" },
     { "source": "/snapsite", "destination": "/" }
   ],
   "headers": [
