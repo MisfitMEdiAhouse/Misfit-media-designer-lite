@@ -1,6 +1,12 @@
-# Misfit Mediahouse — Machine Products
+# Misfit Mediahouse — Machine Products + Agent Infrastructure
 
-Misfit Mediahouse builds hosted tools and agent infrastructure that can be consumed directly by AI systems.
+Misfit Mediahouse builds hosted tools, machine-commerce surfaces, agent security, and infrastructure that can be consumed directly by AI systems.
+
+## Durable agent control plane
+Human-readable control plane: https://misfitmediahouse.com/agents
+Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
+Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
+Private GHOSBC/Castle Gate runtime details are intentionally not exposed through these public surfaces.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
@@ -25,9 +31,12 @@ MCP Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
 Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
 
 ## ContextForge
-Metadata-aware code generation grounded in DataHub context. Public clean-room implementation and demo.
-Demo: https://contextforge-datahub-app.vercel.app/
+Metadata-aware code generation grounded in DataHub context. This is a first-class Misfit machine asset, not a chat-only prototype.
+App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
+
+## Private security core
+GHOSBC OS – Agent Brain Hub and Misfit Shield – GHOSBC Sentinel provide private governance, Castle Gate evaluation, approval gates, abuse controls, runtime validation, outbound-context shielding, and sentinel orchestration. Their private source, prompts, cipher/mapping internals, runtime material, and credentials are not public machine interfaces.
 
 ## Human-facing products with machine interfaces under migration
 Misfit AI V2: https://ai.misfitmediahouse.com/
