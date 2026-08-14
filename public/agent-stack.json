@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3.0",
+  "schema_version": "1.4.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -7,6 +7,8 @@
   "dynamic_health": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health",
   "recovery_guide": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md",
   "machine_discovery": {
+    "a2a_agent_card": "https://misfitmediahouse.com/.well-known/agent-card.json",
+    "a2a_endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
     "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
@@ -32,6 +34,15 @@
       "summary": "Private defensive sentinel interface for outbound-context protection, tripwires, security policy and threat visualization."
     },
     {
+      "name": "Misfit Machine Agent",
+      "class": "a2a-agent",
+      "agent_card": "https://misfitmediahouse.com/.well-known/agent-card.json",
+      "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
+      "protocol_version": "1.0",
+      "skills": ["audit_shopify_agentic_storefront"],
+      "summary": "Real public A2A HTTP+JSON agent. Current skill performs public Shopify agentic-storefront security/readiness audits and returns direct Messages; no cart, checkout, order, payment, credential or mutation capabilities are advertised."
+    },
+    {
       "name": "GHOSBC Safety Gate",
       "class": "public-agent-security",
       "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
@@ -53,7 +64,9 @@
       "product": "https://misfitmediahouse.com/shopify-ai-audit",
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
       "mcp_via": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate#audit_shopify_agentic_storefront",
-      "summary": "Public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge. Never executes cart, checkout, order, payment, credential or mutation actions."
+      "a2a_via": "Misfit Machine Agent#audit_shopify_agentic_storefront",
+      "ucp_product_id": "misfit_shopify_agentic_audit_free",
+      "summary": "Free public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge. Never executes cart, checkout, order, payment, credential or mutation actions."
     },
     {
       "name": "Misfit Machine Store",
