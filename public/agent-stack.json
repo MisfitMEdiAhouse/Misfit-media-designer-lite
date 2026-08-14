@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.5.0",
+  "schema_version": "1.6.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -44,8 +44,16 @@
       "protocol_version": "1.0",
       "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
       "registry_verification": "A2A SDK registration probe WORKING",
-      "skills": ["audit_shopify_agentic_storefront"],
-      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. Current skill performs public Shopify agentic-storefront security/readiness audits and returns direct Messages; no cart, checkout, order, payment, credential or mutation capabilities are advertised."
+      "skills": ["audit_shopify_agentic_storefront", "audit_a2a_agent_card"],
+      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. Current skills perform public Shopify agentic-storefront security/readiness audits and public A2A Agent Card trust audits; neither executes target-agent/store mutations."
+    },
+    {
+      "name": "Misfit A2A Agent Trust Audit",
+      "class": "public-agent-security",
+      "product": "https://misfitmediahouse.com/a2a-agent-audit",
+      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit",
+      "a2a_via": "Misfit Machine Agent#audit_a2a_agent_card",
+      "summary": "Free public-metadata-only A2A Agent Card/binding/skill/security/registry trust audit with a rerunnable share URL and embeddable badge. Never sends a task or executes a target-agent skill."
     },
     {
       "name": "GHOSBC Safety Gate",
