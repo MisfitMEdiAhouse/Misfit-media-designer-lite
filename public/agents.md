@@ -4,9 +4,24 @@ This document is the public-safe machine guide for Misfit Mediahouse. It describ
 
 Canonical site: https://misfitmediahouse.com/
 Human control plane: https://misfitmediahouse.com/agents
+A2A Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Static stack manifest: https://misfitmediahouse.com/agent-stack.json
 Agent-readable product context: https://misfitmediahouse.com/llms.txt
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
+
+## A2A — Misfit Machine Agent
+
+Misfit exposes a real A2A v1.0 HTTP+JSON agent at:
+https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
+
+The public Agent Card is at:
+https://misfitmediahouse.com/.well-known/agent-card.json
+
+Current A2A skill: `audit_shopify_agentic_storefront`.
+
+The skill accepts a public Shopify storefront domain/HTTPS URL in a text or structured-data Message part. It returns a direct A2A `ROLE_AGENT` Message containing a text summary and structured public audit data. The current A2A agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, or store mutations.
+
+Do not infer additional A2A skills until they are explicitly implemented, smoke-proven, and added to the Agent Card.
 
 ## Commerce and discovery
 
@@ -16,6 +31,8 @@ Machine Store MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 
 Current machine products may return ordinary Stripe checkout handoff URLs. A checkout URL is a handoff, not permission for an agent to purchase autonomously. Consequential purchasing or money actions require the user's explicit bounded intent and the applicable payment flow.
+
+The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through both the A2A skill above and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
 
 ## GHOSBC Safety Gate
 
@@ -47,6 +64,7 @@ Purpose: public-metadata-only storefront readiness and safety audit for Shopify 
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
 MCP access: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
+A2A access: send a v1.0 Message to the Misfit Machine Agent with the storefront domain/URL.
 
 The audit may inspect public `/.well-known/ucp`, `/agents.md`, and `/api/ucp/mcp` metadata. It never executes cart, checkout, order, payment, credential, or store mutation operations. Audit grades are Misfit diagnostic results, not Shopify certification.
 
@@ -57,7 +75,7 @@ ContextForge is a first-class Misfit machine asset for metadata-aware code gener
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
 
-ContextForge reasons about metadata, blast radius, ownership/governance, generated code/tests, approval boundaries, and decision memory. Do not assume there is a standalone public ContextForge MCP server until one is explicitly published.
+ContextForge reasons about metadata, blast radius, ownership/governance, generated code/tests, approval boundaries, and decision memory. Do not assume there is a standalone public ContextForge MCP or A2A server until one is explicitly published.
 
 ## Private security and orchestration
 
