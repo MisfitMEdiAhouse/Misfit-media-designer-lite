@@ -9,6 +9,7 @@
   ],
   "rewrites": [
     { "source": "/agents", "destination": "/" },
+    { "source": "/shopify-ai-audit", "destination": "/" },
     { "source": "/proof", "destination": "/" },
     { "source": "/enterprise-ai", "destination": "/" },
     { "source": "/creator-commerce", "destination": "/" },
