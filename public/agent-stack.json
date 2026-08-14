@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -42,6 +42,13 @@
       "ucp": "https://misfitmediahouse.com/.well-known/ucp",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
       "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store"
+    },
+    {
+      "name": "Misfit Shopify Agentic Audit",
+      "class": "public-agent-security",
+      "product": "https://misfitmediahouse.com/shopify-ai-audit",
+      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
+      "summary": "Public-metadata-only Shopify UCP/MCP readiness and tool-surface audit. Never executes cart, checkout, order, payment, credential, or mutation actions."
     },
     {
       "name": "ContextForge",
