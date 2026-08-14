@@ -1,9 +1,11 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
+  "continuity": "Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; misfitmediahouse.com publishes the public control surface. Chat sessions are operators, not databases.",
   "dynamic_health": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health",
+  "recovery_guide": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md",
   "machine_discovery": {
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
     "llms": "https://misfitmediahouse.com/llms.txt",
@@ -11,61 +13,72 @@
   },
   "stack": [
     {
+      "name": "Agent Revenue Factory",
+      "class": "private-orchestration",
+      "public_endpoint": null,
+      "summary": "Autonomous machine-revenue operator for health, discovery, conversion and safe zero-cost deployment."
+    },
+    {
       "name": "GHOSBC OS – Agent Brain Hub",
       "class": "private-security-runtime",
       "public_endpoint": null,
-      "summary": "Private governance runtime containing Castle Gate, approval gates, abuse controls, shadow evaluation, runtime validation, and sentinel orchestration."
+      "summary": "Private governance runtime containing Castle Gate, approval gates, abuse controls, shadow evaluation, runtime validation and sentinel orchestration."
     },
     {
       "name": "Misfit Shield – GHOSBC Sentinel",
       "class": "private-security-runtime",
       "public_endpoint": null,
-      "summary": "Private defensive sentinel interface for outbound-context protection, tripwires, security policy, and threat visualization."
+      "summary": "Private defensive sentinel interface for outbound-context protection, tripwires, security policy and threat visualization."
     },
     {
       "name": "GHOSBC Safety Gate",
       "class": "public-agent-security",
       "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
-      "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate"
+      "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate",
+      "summary": "Public governance boundary for requests, MCP dependencies/tool definitions, bounded consequential actions, payloads and responses."
     },
     {
       "name": "ChangePacket",
       "class": "public-agent-infrastructure",
       "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp",
-      "registry_identity": "io.github.MisfitMEdiAhouse/changepacket"
-    },
-    {
-      "name": "Misfit Machine Store",
-      "class": "machine-commerce",
-      "ucp": "https://misfitmediahouse.com/.well-known/ucp",
-      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
-      "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store"
+      "registry_identity": "io.github.MisfitMEdiAhouse/changepacket",
+      "summary": "Low-token change memory for public webpages and MCP tool surfaces."
     },
     {
       "name": "Misfit Shopify Agentic Audit",
       "class": "public-agent-security",
       "product": "https://misfitmediahouse.com/shopify-ai-audit",
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
-      "summary": "Public-metadata-only Shopify UCP/MCP readiness and tool-surface audit. Never executes cart, checkout, order, payment, credential, or mutation actions."
+      "summary": "Public-metadata-only Shopify UCP/MCP readiness and tool-surface audit. Never executes cart, checkout, order, payment, credential or mutation actions."
+    },
+    {
+      "name": "Misfit Machine Store",
+      "class": "machine-commerce",
+      "ucp": "https://misfitmediahouse.com/.well-known/ucp",
+      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
+      "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store",
+      "summary": "UCP-compatible machine catalog and MCP storefront for current Misfit agent products."
     },
     {
       "name": "ContextForge",
       "class": "agent-infrastructure",
       "product": "https://contextforge-datahub-app.vercel.app/",
-      "summary": "Metadata-aware code generation grounded in DataHub context."
-    },
-    {
-      "name": "Agent Revenue Factory",
-      "class": "private-orchestration",
-      "public_endpoint": null,
-      "summary": "Autonomous machine-revenue operator for health, discovery, conversion, and safe zero-cost deployment."
+      "repository": "https://github.com/MisfitMEdiAhouse/contextforge-datahub",
+      "summary": "Metadata-aware code generation and change governance grounded in DataHub context."
     }
   ],
+  "security": {
+    "default": "deny private state",
+    "public_boundary": "sanitized metadata, decisions, audit receipts/digests and documented tool contracts only",
+    "consequential_actions": "require explicit bounded authorization or review",
+    "private_core": "GHOSBC/Castle Gate internals, private prompts, cipher/mapping material, credentials and reconstruction material are never published"
+  },
   "recovery": {
     "source_repo": "MisfitMEdiAhouse/Misfit-media-designer-lite",
     "control_plane": "Misfit Cloud / Supabase",
-    "rule": "Never publish GHOSBC private runtime material, cipher/mapping internals, founder-private prompts, credentials, secrets, or reconstruction material."
+    "public_guide": "docs/AGENT_CONTROL_PLANE_RECOVERY.md",
+    "rule": "Never publish GHOSBC private runtime material, cipher/mapping internals, founder-private prompts, credentials, secrets or reconstruction material."
   }
 }
