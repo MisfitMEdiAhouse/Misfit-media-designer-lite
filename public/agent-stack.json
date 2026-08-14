@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.4.0",
+  "schema_version": "1.5.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -8,7 +8,9 @@
   "recovery_guide": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md",
   "machine_discovery": {
     "a2a_agent_card": "https://misfitmediahouse.com/.well-known/agent-card.json",
-    "a2a_endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
+    "a2a_jsonrpc": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
+    "a2a_http_json": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
+    "a2a_registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
     "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
@@ -37,10 +39,13 @@
       "name": "Misfit Machine Agent",
       "class": "a2a-agent",
       "agent_card": "https://misfitmediahouse.com/.well-known/agent-card.json",
-      "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
+      "a2a_jsonrpc": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
+      "a2a_http_json": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
       "protocol_version": "1.0",
+      "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
+      "registry_verification": "A2A SDK registration probe WORKING",
       "skills": ["audit_shopify_agentic_storefront"],
-      "summary": "Real public A2A HTTP+JSON agent. Current skill performs public Shopify agentic-storefront security/readiness audits and returns direct Messages; no cart, checkout, order, payment, credential or mutation capabilities are advertised."
+      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. Current skill performs public Shopify agentic-storefront security/readiness audits and returns direct Messages; no cart, checkout, order, payment, credential or mutation capabilities are advertised."
     },
     {
       "name": "GHOSBC Safety Gate",
