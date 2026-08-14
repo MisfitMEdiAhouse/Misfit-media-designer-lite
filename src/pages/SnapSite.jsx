@@ -2,7 +2,7 @@ import { ArrowRight, Check, QrCode, Smartphone, Zap } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
-const BUY_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/snapsite';
+const BUY_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/quotelink';
 const DEMO_URL = `${BUY_URL}/demo`;
 
 const benefits = [
