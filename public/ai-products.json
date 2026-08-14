@@ -1,0 +1,38 @@
+{
+  "publisher": "Misfit Mediahouse",
+  "canonical_url": "https://misfitmediahouse.com/",
+  "products": [
+    {
+      "id": "changepacket",
+      "name": "ChangePacket",
+      "category": "agent_web_memory",
+      "status": "live",
+      "product_url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
+      "mcp_url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp",
+      "openapi_url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi.json",
+      "free_tier": "25 calls/day",
+      "paid_offer": {"price_usd": 9, "credits": 2000},
+      "checkout_url": "https://buy.stripe.com/bJe8wP0sa52mfd02B28ww0p"
+    },
+    {
+      "id": "ghosbc-safety-gate",
+      "name": "GHOSBC Safety Gate",
+      "category": "agent_governance",
+      "status": "live",
+      "product_url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
+      "mcp_url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
+      "free_tier": "50 checks/day",
+      "paid_offer": {"price_usd": 19, "credits": 10000},
+      "checkout_url": "https://buy.stripe.com/bJebJ16Qy8eygh4cbC8ww0q",
+      "private_runtime_exposed": false
+    },
+    {
+      "id": "contextforge",
+      "name": "ContextForge",
+      "category": "metadata_aware_codegen",
+      "status": "public_clean_room",
+      "demo_url": "https://contextforge-datahub-app.vercel.app/",
+      "repository_url": "https://github.com/MisfitMEdiAhouse/contextforge-datahub"
+    }
+  ]
+}
