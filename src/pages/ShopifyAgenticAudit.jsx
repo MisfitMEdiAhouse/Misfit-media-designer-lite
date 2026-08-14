@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Activity, Bot, ExternalLink, LockKeyhole, Search, ShieldCheck, ShoppingBag, Sparkles } from 'lucide-react';
+import { Activity, Bot, Check, Copy, ExternalLink, LockKeyhole, Search, Share2, ShieldCheck, ShoppingBag, Sparkles } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -18,11 +18,12 @@ export default function ShopifyAgenticAudit() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [shareState, setShareState] = useState('');
 
   const run = async (value = store) => {
     const cleaned = String(value || '').trim();
     if (!cleaned) return;
-    setLoading(true); setError('');
+    setLoading(true); setError(''); setShareState('');
     try {
       const r = await fetch(AUDIT, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ store: cleaned }) });
       const d = await r.json();
@@ -40,6 +41,42 @@ export default function ShopifyAgenticAudit() {
     return names.filter((n) => /(^|_)(create|update|complete|cancel|delete|pay|purchase|refund|send|publish|execute)(_|$)/i.test(n));
   }, [result]);
 
+  const sharePayload = useMemo(() => {
+    if (!result) return null;
+    const url = result.share_url || window.location.href;
+    return {
+      title: `${result.store} — Shopify Agentic Grade ${result.grade}`,
+      text: `${result.store} scored ${result.score}/100 (Grade ${result.grade}) on Misfit's Shopify Agentic Audit. See what AI shopping agents can discover and which UCP/MCP surfaces need stronger boundaries.`,
+      url,
+    };
+  }, [result]);
+
+  const copyReport = async () => {
+    if (!sharePayload) return;
+    try {
+      await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
+      setShareState('copied');
+      setTimeout(() => setShareState(''), 2200);
+    } catch {
+      setShareState('copy_failed');
+    }
+  };
+
+  const shareReport = async () => {
+    if (!sharePayload) return;
+    if (navigator.share) {
+      try {
+        await navigator.share(sharePayload);
+        setShareState('shared');
+        setTimeout(() => setShareState(''), 2200);
+        return;
+      } catch (e) {
+        if (e?.name === 'AbortError') return;
+      }
+    }
+    await copyReport();
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -49,6 +86,7 @@ export default function ShopifyAgenticAudit() {
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-300"><ShoppingBag size={12}/> Shopify × UCP × MCP × GHOSBC</div>
             <h1 className="mt-5 font-display text-4xl font-bold tracking-tight md:text-6xl">SHOPIFY <span className="text-emerald-300">AGENTIC AUDIT</span></h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">See what AI shopping agents can discover about a Shopify storefront, which UCP/MCP capabilities are exposed, and which tool surfaces deserve explicit safety boundaries before autonomous use.</p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">Run it on your store, get the grade, then challenge another merchant or developer to beat it.</p>
             <div className="mt-6 flex flex-wrap gap-2 text-[11px] text-slate-500">
               <span className="rounded-full border border-white/10 px-3 py-1.5">public metadata only</span>
               <span className="rounded-full border border-white/10 px-3 py-1.5">no cart mutation</span>
@@ -79,6 +117,22 @@ export default function ShopifyAgenticAudit() {
                 <div className="rounded-2xl border border-white/10 bg-black/30 p-4"><LockKeyhole size={17} className="text-fuchsia-300"/><div className="mt-3 text-xl font-bold">{result.shopify_surface?.ucp?.signing_key_count || 0}</div><div className="mt-1 text-[10px] uppercase tracking-[0.12em] text-slate-600">public signing keys</div></div>
               </div>
             </div>
+          </section>
+
+          <section className="mt-4 rounded-3xl border border-emerald-400/20 bg-emerald-400/[0.04] p-5 md:p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-2xl">
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-300">Make the grade travel</div>
+                <h2 className="mt-2 font-display text-2xl font-semibold">Think your storefront is more agent-ready? Prove it.</h2>
+                <p className="mt-2 text-sm leading-6 text-slate-500">The shared link reruns the public audit for this storefront, so the score can be independently checked instead of being a screenshot somebody can fake.</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={shareReport} className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-black"><Share2 size={13}/> Share grade</button>
+                <button onClick={copyReport} className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-300">{shareState === 'copied' ? <Check size={13}/> : <Copy size={13}/>} {shareState === 'copied' ? 'Copied' : 'Copy report'}</button>
+              </div>
+            </div>
+            {shareState === 'shared' && <div className="mt-3 text-xs text-emerald-300">Shared. Let somebody try to beat the grade.</div>}
+            {shareState === 'copy_failed' && <div className="mt-3 text-xs text-amber-300">Clipboard access was blocked; use the Share button or copy the URL from the address bar.</div>}
           </section>
 
           <section className="mt-6 grid gap-4 lg:grid-cols-2">
