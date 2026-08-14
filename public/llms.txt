@@ -2,17 +2,26 @@
 
 Misfit Mediahouse builds hosted tools and agent infrastructure that can be consumed directly by AI systems.
 
+## Machine commerce discovery
+UCP business profile: https://misfitmediahouse.com/.well-known/ucp
+UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
+UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
+MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
+The UCP profile currently advertises catalog search and lookup only. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
+
 ## ChangePacket
-Persistent web-change memory for AI agents. First request creates a normalized baseline; later requests return only added/removed lines.
+Persistent change memory for AI agents. Track public webpages or public MCP tool surfaces. First request creates a baseline; later requests return only the delta.
 Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp
 OpenAPI: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi.json
+MCP Registry identity: io.github.MisfitMEdiAhouse/changepacket
 Pricing: 25 free calls/day; 2,000 prepaid calls for $9.
 
 ## GHOSBC Safety Gate
-Hosted AI-agent governance boundary for request screening, payload sanitization, risky-capability routing, and outbound-response validation. Public interfaces expose policy decisions and sanitized outputs only; private GHOSBC runtime internals are not published.
+Hosted AI-agent governance boundary. Screen requests, MCP dependencies/tool definitions, bounded consequential actions, outbound payloads, and responses. Public interfaces expose decisions, public-safe summaries, sanitization, and audit digests only; private GHOSBC runtime internals are not published.
 Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
+MCP Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
 Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
 
 ## ContextForge
