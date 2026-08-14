@@ -1,0 +1,28 @@
+# Misfit Mediahouse — Machine Products
+
+Misfit Mediahouse builds hosted tools and agent infrastructure that can be consumed directly by AI systems.
+
+## ChangePacket
+Persistent web-change memory for AI agents. First request creates a normalized baseline; later requests return only added/removed lines.
+Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp
+OpenAPI: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi.json
+Pricing: 25 free calls/day; 2,000 prepaid calls for $9.
+
+## GHOSBC Safety Gate
+Hosted AI-agent governance boundary for request screening, payload sanitization, risky-capability routing, and outbound-response validation. Public interfaces expose policy decisions and sanitized outputs only; private GHOSBC runtime internals are not published.
+Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
+Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
+
+## ContextForge
+Metadata-aware code generation grounded in DataHub context. Public clean-room implementation and demo.
+Demo: https://contextforge-datahub-app.vercel.app/
+Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
+
+## Human-facing products with machine interfaces under migration
+Misfit AI V2: https://ai.misfitmediahouse.com/
+Home Efficiency Pros: https://www.homeefficiencypros.com/
+NexGrid Energy: https://nexgridenergy.net/
+
+Canonical company site: https://misfitmediahouse.com/
