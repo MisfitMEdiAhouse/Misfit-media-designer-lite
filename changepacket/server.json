@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.MisfitMEdiAhouse/changepacket",
   "title": "ChangePacket",
-  "description": "Web-change memory for AI agents. Store a baseline once; later calls return only changed lines.",
-  "version": "1.0.0",
+  "description": "Low-token change memory for webpages and MCP tool surfaces; later calls return only what changed.",
+  "version": "1.1.0",
   "websiteUrl": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
   "remotes": [
     {
