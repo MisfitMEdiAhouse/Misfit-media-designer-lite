@@ -4,6 +4,7 @@ Misfit Mediahouse builds hosted tools, machine-commerce surfaces, agent security
 
 ## Durable agent control plane
 Human-readable control plane: https://misfitmediahouse.com/agents
+Canonical agent-facing business map: https://misfitmediahouse.com/agents.md
 Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
 Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md
@@ -18,9 +19,11 @@ MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
 Catalog search and lookup are advertised. UCP REST catalog responses use a public verification key from the business profile and HTTP message-signature headers. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
 
 ## Shopify Agentic Audit
-Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects only public discovery/MCP metadata and never executes cart, checkout, order, payment, credential, or mutation actions.
+Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects public `/.well-known/ucp`, `/agents.md`, and storefront MCP metadata, and never executes cart, checkout, order, payment, credential, or mutation actions.
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
+MCP: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
+Audited stores can receive a live embeddable diagnostic badge that links back to their independently rerunnable report. Grades are Misfit diagnostics, not Shopify certification.
 The audit funnels consequential tool surfaces through GHOSBC Safety Gate and recommends ChangePacket for future surface drift.
 
 ## ChangePacket
@@ -32,7 +35,7 @@ MCP Registry identity: io.github.MisfitMEdiAhouse/changepacket
 Pricing: 25 free calls/day; 2,000 prepaid calls for $9.
 
 ## GHOSBC Safety Gate
-Hosted AI-agent governance boundary. Screen requests, MCP dependencies/tool definitions, bounded consequential actions, outbound payloads, and responses. Public interfaces expose decisions, public-safe summaries, sanitization, and audit digests only; private GHOSBC runtime internals are not published.
+Hosted AI-agent governance boundary. Screen requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, bounded consequential actions, outbound payloads, and responses. Public interfaces expose decisions, public-safe summaries, sanitization, and audit digests only; private GHOSBC runtime internals are not published.
 Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
