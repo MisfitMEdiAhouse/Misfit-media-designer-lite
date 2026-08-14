@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -8,6 +8,7 @@
   "recovery_guide": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md",
   "machine_discovery": {
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
+    "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
     "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp"
   },
@@ -36,7 +37,7 @@
       "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
       "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate",
-      "summary": "Public governance boundary for requests, MCP dependencies/tool definitions, bounded consequential actions, payloads and responses."
+      "summary": "Public governance boundary for requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, bounded consequential actions, payloads and responses."
     },
     {
       "name": "ChangePacket",
@@ -51,7 +52,8 @@
       "class": "public-agent-security",
       "product": "https://misfitmediahouse.com/shopify-ai-audit",
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
-      "summary": "Public-metadata-only Shopify UCP/MCP readiness and tool-surface audit. Never executes cart, checkout, order, payment, credential or mutation actions."
+      "mcp_via": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate#audit_shopify_agentic_storefront",
+      "summary": "Public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge. Never executes cart, checkout, order, payment, credential or mutation actions."
     },
     {
       "name": "Misfit Machine Store",
