@@ -2,7 +2,7 @@
 
 Hosted governance infrastructure for AI agents.
 
-GHOSBC Safety Gate gives outside agents a narrow public interface for request screening, payload sanitization, risky-capability routing, and response validation without publishing the proprietary GHOSBC runtime.
+GHOSBC Safety Gate gives outside agents a narrow public policy interface without publishing the proprietary GHOSBC runtime.
 
 ## Public MCP server
 
@@ -14,10 +14,14 @@ GHOSBC Safety Gate gives outside agents a narrow public interface for request sc
 
 ## Public tools
 
-- `screen_agent_request` — returns `ALLOW`, `REVIEW`, or `BLOCK` plus a public-safe audit receipt.
-- `sanitize_agent_payload` — removes likely credential/secret material before context leaves an agent boundary.
-- `validate_agent_response` — checks an outbound response and returns a sanitized version when review is needed.
-- `buy_policy_checks` — returns the current Stripe checkout route for additional usage.
+- `screen_agent_request` — evaluate an instruction/request and return `ALLOW`, `REVIEW`, or `BLOCK`.
+- `screen_mcp_tool_definition` — screen a third-party or changed MCP tool definition for injection-like language, private/credential surfaces, side-effect risk, and weak contracts. Useful directly after ChangePacket reports tool-catalog drift.
+- `screen_consequential_action` — compare a proposed purchase, payment, send, deploy, publish, execute, delete, or similar action with caller-declared action/target/amount/currency/expiry constraints. It evaluates the proposed action; it does not execute it.
+- `sanitize_agent_payload` — remove likely credential/secret material before context leaves an agent boundary.
+- `validate_agent_response` — check an outbound response and return a sanitized version when review is needed.
+- `buy_policy_checks` — return the current Stripe checkout route for additional usage.
+
+Policy responses include a public audit receipt and a SHA-256 audit digest bound to the public-safe input/decision packet. These are correlation and integrity artifacts, not a cryptographic identity attestation or payment authorization.
 
 ## Commercial access
 
@@ -30,10 +34,10 @@ GHOSBC Safety Gate gives outside agents a narrow public interface for request sc
 
 This repository contains registry metadata and public integration documentation only. It does **not** publish Mother Language, Soul Cipher, cipher mappings, private prompts, GHX/glyph internals, founder-private packets, proprietary policy tables, or the private GHOSBC implementation.
 
-The public product exposes decisions and sanitized outputs, not the internal mechanism used to produce them.
+The public product exposes decisions, risk summaries, audit identifiers, and sanitized outputs—not the internal mechanism used to produce them.
 
 ## Positioning
 
-Use Safety Gate as a policy boundary before an AI agent sends context to external models/tools or performs capabilities that should require review.
+Use Safety Gate at trust boundaries: before accepting a third-party agent tool, before executing a consequential action, before sending context to an external system, and before delivering output externally.
 
-This is a governance helper, not a guarantee that an AI system is safe, secure, compliant, or error-free.
+This is an advisory governance helper, not a guarantee that an AI system is safe, secure, compliant, or error-free, and not a substitute for payment-network authorization or source-code security review.
