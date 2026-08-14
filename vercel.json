@@ -4,15 +4,15 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false }
+    { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
+    { "source": "/snapsite", "destination": "/quotelink", "permanent": true }
   ],
   "rewrites": [
     { "source": "/proof", "destination": "/" },
     { "source": "/enterprise-ai", "destination": "/" },
     { "source": "/creator-commerce", "destination": "/" },
     { "source": "/misfit-ai-v2", "destination": "/" },
-    { "source": "/quotelink", "destination": "/" },
-    { "source": "/snapsite", "destination": "/" }
+    { "source": "/quotelink", "destination": "/" }
   ],
   "headers": [
     {
