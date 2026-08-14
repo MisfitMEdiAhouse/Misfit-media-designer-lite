@@ -6,6 +6,7 @@ import ProofPage from './pages/ProofPage.jsx';
 import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
 import MisfitAIV2 from './pages/MisfitAIV2.jsx';
+import SnapSite from './pages/SnapSite.jsx';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
+        <Route path="/snapsite" element={<SnapSite />} />
       </Routes>
     </Router>
   );
