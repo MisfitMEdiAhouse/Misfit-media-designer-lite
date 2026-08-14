@@ -7,6 +7,7 @@ import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
 import MisfitAIV2 from './pages/MisfitAIV2.jsx';
 import SnapSite from './pages/SnapSite.jsx';
+import AgentControlPlane from './pages/AgentControlPlane.jsx';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
         <Route path="/proof" element={<ProofPage />} />
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
