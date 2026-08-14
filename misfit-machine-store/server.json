@@ -3,7 +3,7 @@
   "name": "io.github.MisfitMEdiAhouse/misfit-machine-store",
   "title": "Misfit Machine Store",
   "description": "UCP-compatible machine catalog for paid Misfit agent APIs and MCP services.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://misfitmediahouse.com",
   "remotes": [
     {
