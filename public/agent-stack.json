@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Misfit Agent Control Plane",
+  "canonical_site": "https://misfitmediahouse.com",
+  "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
+  "dynamic_health": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health",
+  "machine_discovery": {
+    "ucp": "https://misfitmediahouse.com/.well-known/ucp",
+    "llms": "https://misfitmediahouse.com/llms.txt",
+    "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp"
+  },
+  "stack": [
+    {
+      "name": "GHOSBC OS – Agent Brain Hub",
+      "class": "private-security-runtime",
+      "public_endpoint": null,
+      "summary": "Private governance runtime containing Castle Gate, approval gates, abuse controls, shadow evaluation, runtime validation, and sentinel orchestration."
+    },
+    {
+      "name": "Misfit Shield – GHOSBC Sentinel",
+      "class": "private-security-runtime",
+      "public_endpoint": null,
+      "summary": "Private defensive sentinel interface for outbound-context protection, tripwires, security policy, and threat visualization."
+    },
+    {
+      "name": "GHOSBC Safety Gate",
+      "class": "public-agent-security",
+      "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
+      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
+      "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate"
+    },
+    {
+      "name": "ChangePacket",
+      "class": "public-agent-infrastructure",
+      "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
+      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp",
+      "registry_identity": "io.github.MisfitMEdiAhouse/changepacket"
+    },
+    {
+      "name": "Misfit Machine Store",
+      "class": "machine-commerce",
+      "ucp": "https://misfitmediahouse.com/.well-known/ucp",
+      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
+      "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store"
+    },
+    {
+      "name": "ContextForge",
+      "class": "agent-infrastructure",
+      "product": "https://contextforge-datahub-app.vercel.app/",
+      "summary": "Metadata-aware code generation grounded in DataHub context."
+    },
+    {
+      "name": "Agent Revenue Factory",
+      "class": "private-orchestration",
+      "public_endpoint": null,
+      "summary": "Autonomous machine-revenue operator for health, discovery, conversion, and safe zero-cost deployment."
+    }
+  ],
+  "recovery": {
+    "source_repo": "MisfitMEdiAhouse/Misfit-media-designer-lite",
+    "control_plane": "Misfit Cloud / Supabase",
+    "rule": "Never publish GHOSBC private runtime material, cipher/mapping internals, founder-private prompts, credentials, secrets, or reconstruction material."
+  }
+}
