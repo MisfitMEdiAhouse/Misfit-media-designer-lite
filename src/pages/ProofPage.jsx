@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
 const work = [
+  ['Misfit AI V2', 'AI revenue product', 'Flagship Misfit Mediahouse product for lead response, follow-up, qualification, revival, conversations, booking and revenue operations.'],
   ['ContextForge', 'Enterprise AI', 'Metadata-aware agent control, governance, human approval and decision memory.'],
   ['Home Efficiency Pros', 'Client deployment', 'Lead intake, booking, revival and growth-system work for a real operating business.'],
   ['NexGrid Energy', 'Energy', 'Customer-acquisition and energy-resilience product work.'],
