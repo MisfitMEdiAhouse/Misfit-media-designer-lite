@@ -36,5 +36,16 @@
       ]
     },
     "payment_handlers": {}
-  }
+  },
+  "keys": [
+    {
+      "kid": "EElMWSYCRXffWCyz4sHmOXcZ6W7po6L5B56ugzwx6tI",
+      "kty": "EC",
+      "crv": "P-256",
+      "x": "fjY-GGYVpNxaOD3h4NHVfoZvpCzTk0MY4rUYfB3pXzU",
+      "y": "9E7Xu4-mGUQNew8fwexR8rRot318Xg5VDPYwScRbFOM",
+      "alg": "ES256",
+      "use": "sig"
+    }
+  ]
 }
