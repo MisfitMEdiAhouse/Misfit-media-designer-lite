@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.MisfitMEdiAhouse/changepacket",
+  "title": "ChangePacket",
+  "description": "Persistent webpage memory for AI agents. The first call creates a normalized baseline; later calls return only added and removed lines instead of making agents reread the full page.",
+  "version": "1.0.0",
+  "websiteUrl": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp"
+    }
+  ]
+}
