@@ -6,6 +6,8 @@ Misfit Mediahouse builds hosted tools, machine-commerce surfaces, agent security
 Human-readable control plane: https://misfitmediahouse.com/agents
 Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
+Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md
+Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface. Chat sessions are operators, not databases.
 Private GHOSBC/Castle Gate runtime details are intentionally not exposed through these public surfaces.
 
 ## Machine commerce discovery
@@ -37,9 +39,10 @@ MCP Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
 Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
 
 ## ContextForge
-Metadata-aware code generation grounded in DataHub context. This is a first-class Misfit machine asset, not a chat-only prototype.
+Metadata-aware code generation and change governance grounded in DataHub context. ContextForge reasons about blast radius, governance, generated code/tests, approval boundaries, and decision memory. This is a first-class Misfit machine asset, not a chat-only prototype.
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
+ContextForge is currently a DataHub-aware application/client; do not assume a standalone remote ContextForge MCP server unless one is explicitly published.
 
 ## Private security core
 GHOSBC OS – Agent Brain Hub and Misfit Shield – GHOSBC Sentinel provide private governance, Castle Gate evaluation, approval gates, abuse controls, runtime validation, outbound-context shielding, and sentinel orchestration. Their private source, prompts, cipher/mapping internals, runtime material, and credentials are not public machine interfaces.
