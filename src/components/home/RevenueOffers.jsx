@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const SNAPSite_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/snapsite';
+const SNAPSite_URL = '/snapsite';
 
 const offers = [
   ['Misfit SnapSite — Instant Lead Page', '$49 one-time', 'snapsite', 'INSTANT PRODUCT', 'A focused mobile call/text lead page for local service businesses. Enter the business details, pay once, and the live hosted page plus QR code is generated automatically after confirmed checkout.'],
@@ -31,7 +31,7 @@ export default function RevenueOffers() {
                 <div className="mt-2 font-mono text-xs uppercase tracking-[0.12em] text-cyan-300">{price}</div>
                 <p className="mt-4 text-sm leading-6 text-slate-400">{copy}</p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  {href && <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-black">{key === 'snapsite' ? 'Build Mine' : 'Start Here'} <ArrowRight size={13}/></a>}
+                  {href && <a href={href} target={key === 'snapsite' ? undefined : '_blank'} rel={key === 'snapsite' ? undefined : 'noopener noreferrer'} className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-black">{key === 'snapsite' ? 'Build Mine' : 'Start Here'} <ArrowRight size={13}/></a>}
                   {key === 'lead_engine' && <a href="/misfit-ai-v2" className="inline-flex rounded-full border border-white/15 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.15em] text-white">Product details →</a>}
                 </div>
               </article>
