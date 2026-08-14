@@ -1,6 +1,6 @@
 {
   "name": "Misfit Machine Agent",
-  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing diagnostics. The current skill audits public Shopify agentic-commerce surfaces without creating or mutating carts, checkouts, orders, payments, credentials, or store data.",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security and readiness diagnostics. It audits public Shopify agentic-commerce surfaces and public A2A Agent Card trust metadata without creating or mutating carts, checkouts, orders, payments, credentials, target-agent tasks, or store data.",
   "supportedInterfaces": [
     {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -48,6 +48,31 @@
       "examples": [
         "Audit example.myshopify.com",
         "Check https://example-store.com for Shopify UCP and MCP agent readiness"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "audit_a2a_agent_card",
+      "name": "Audit A2A Agent Card trust",
+      "description": "Inspect a public A2A Agent Card, declared interfaces, protocol versions, skill metadata, security declarations and optional third-party registry verification. Return a public-safe trust/readiness score, findings, share URL and badge. This skill does not send a task or execute any skill on the target agent.",
+      "tags": [
+        "a2a",
+        "agent card",
+        "agent security",
+        "trust",
+        "protocol validation",
+        "registry verification"
+      ],
+      "examples": [
+        "Audit https://agent.example/.well-known/agent-card.json",
+        "Check this A2A Agent Card before my agent depends on it"
       ],
       "inputModes": [
         "text/plain",
