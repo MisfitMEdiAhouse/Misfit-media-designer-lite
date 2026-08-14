@@ -5,6 +5,7 @@ import OwnerCommandCenter from './pages/OwnerCommandCenter.jsx';
 import ProofPage from './pages/ProofPage.jsx';
 import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
+import MisfitAIV2 from './pages/MisfitAIV2.jsx';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/proof" element={<ProofPage />} />
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
+        <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
       </Routes>
     </Router>
   );
