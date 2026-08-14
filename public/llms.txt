@@ -13,10 +13,12 @@ Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery meta
 Private GHOSBC/Castle Gate runtime details are intentionally not exposed through these public surfaces.
 
 ## A2A — Misfit Machine Agent
+A2A v1.0 JSONRPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
 A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
+Third-party A2A registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
 Current skill: `audit_shopify_agentic_storefront`.
-The agent accepts a public Shopify store domain/HTTPS URL in text or structured-data Message parts and returns a direct `ROLE_AGENT` Message with text plus structured audit data. Streaming and push notifications are not advertised. No cart, checkout, order, payment, credential or store mutation capability is exposed.
+The JSONRPC and HTTP+JSON bindings are both smoke-proven for equivalent direct Message behavior. The third-party registry's A2A SDK verified the JSONRPC binding at registration and marked its synchronous probe WORKING. The agent accepts a public Shopify store domain/HTTPS URL in text or structured-data Message parts and returns a direct `ROLE_AGENT` Message with text plus structured audit data. Streaming and push notifications are not advertised. No cart, checkout, order, payment, credential or store mutation capability is exposed.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
@@ -24,14 +26,14 @@ UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-u
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
 Catalog search and lookup are advertised. UCP REST catalog responses use a public verification key from the business profile and HTTP message-signature headers. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
-The free Shopify Agentic Storefront Audit is a real $0 UCP catalog item with no checkout URL; it points to the public diagnostic and its callable Safety Gate MCP tool.
+The free Shopify Agentic Storefront Audit is a real $0 UCP catalog item with no checkout URL; it points to the public diagnostic, its callable Safety Gate MCP tool, and the live A2A audit skill.
 
 ## Shopify Agentic Audit
 Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects public `/.well-known/ucp`, `/agents.md`, and storefront MCP metadata, and never executes cart, checkout, order, payment, credential, or mutation actions.
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
 MCP: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
-A2A: send a v1.0 Message to Misfit Machine Agent.
+A2A: call `audit_shopify_agentic_storefront` through either declared Misfit Machine Agent binding.
 Audited stores can receive a live embeddable diagnostic badge that links back to their independently rerunnable report. Grades are Misfit diagnostics, not Shopify certification.
 The audit funnels consequential tool surfaces through GHOSBC Safety Gate and recommends ChangePacket for future surface drift.
 
