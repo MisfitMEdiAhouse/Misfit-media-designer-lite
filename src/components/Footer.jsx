@@ -7,9 +7,10 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <div className="font-display text-xl font-bold text-white">MISFIT<span className="text-cyan-400">.</span></div>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">AI revenue systems, conversion websites, enterprise agent-control pilots, and creator-commerce systems. Built by Misfit Mediahouse.</p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">AI revenue systems, machine commerce, agent infrastructure, enterprise agent-control pilots, and creator-commerce systems. Built by Misfit Mediahouse.</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500">
+            <a href="/agents">Agent Network</a>
             <a href="/">Revenue AI</a>
             <a href="/proof">Proof</a>
             <a href="/enterprise-ai">Enterprise AI</a>
