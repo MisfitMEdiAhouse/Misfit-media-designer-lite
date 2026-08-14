@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
 import OwnerCommandCenter from './pages/OwnerCommandCenter.jsx';
@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
         <Route path="/quotelink" element={<SnapSite />} />
-        <Route path="/snapsite" element={<SnapSite />} />
+        <Route path="/snapsite" element={<Navigate to="/quotelink" replace />} />
       </Routes>
     </Router>
   );
