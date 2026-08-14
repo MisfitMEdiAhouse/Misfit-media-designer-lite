@@ -9,7 +9,8 @@
   "rewrites": [
     { "source": "/proof", "destination": "/index.html" },
     { "source": "/enterprise-ai", "destination": "/index.html" },
-    { "source": "/creator-commerce", "destination": "/index.html" }
+    { "source": "/creator-commerce", "destination": "/index.html" },
+    { "source": "/misfit-ai-v2", "destination": "/index.html" }
   ],
   "headers": [
     {
