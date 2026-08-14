@@ -1,27 +1,33 @@
 User-agent: *
 Allow: /
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
 
 User-agent: GPTBot
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 
 User-agent: Google-Extended
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 
 User-agent: ClaudeBot
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 
 User-agent: Applebot-Extended
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 
 User-agent: CCBot
 Allow: /.well-known/ucp
+Allow: /agents.md
 Allow: /llms.txt
 
 Sitemap: https://misfitmediahouse.com/sitemap.xml
