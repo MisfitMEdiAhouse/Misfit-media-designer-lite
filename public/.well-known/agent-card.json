@@ -3,6 +3,11 @@
   "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing diagnostics. The current skill audits public Shopify agentic-commerce surfaces without creating or mutating carts, checkouts, orders, payments, credentials, or store data.",
   "supportedInterfaces": [
     {
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    },
+    {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
       "protocolBinding": "HTTP+JSON",
       "protocolVersion": "1.0"
@@ -12,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
