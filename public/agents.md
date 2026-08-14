@@ -25,11 +25,13 @@ https://misfitmediahouse.com/.well-known/agent-card.json
 Third-party A2A registry identity:
 a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
 
-The registry's own A2A SDK verified the JSONRPC binding at registration and marked the synchronous task/message probe WORKING. Registry health percentages can lag immediately after first registration and should not be confused with the direct runtime smoke result.
+The registry's own A2A SDK verified the JSONRPC binding at registration and marked the synchronous task/message probe WORKING. Registry health percentages can lag immediately after first registration and should not be confused with direct runtime smoke results.
 
-Current A2A skill: `audit_shopify_agentic_storefront`.
+Current A2A skills:
+- `audit_shopify_agentic_storefront` — audit public Shopify UCP, agents.md and Storefront MCP metadata without mutating the store.
+- `audit_a2a_agent_card` — audit a public A2A Agent Card, declared bindings, skills, security declarations and third-party registry verification without sending a task to the target agent.
 
-The skill accepts a public Shopify storefront domain/HTTPS URL in a text or structured-data Message part. It returns a direct A2A `ROLE_AGENT` Message containing a text summary and structured public audit data. The current A2A agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, or store mutations.
+Both skills accept text or structured-data Message parts and return direct `ROLE_AGENT` Messages with public-safe structured audit data. The current agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, target-agent tasks, or store mutations.
 
 Do not infer additional A2A skills until they are explicitly implemented, smoke-proven, and added to the Agent Card.
 
@@ -42,7 +44,15 @@ UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-u
 
 Current machine products may return ordinary Stripe checkout handoff URLs. A checkout URL is a handoff, not permission for an agent to purchase autonomously. Consequential purchasing or money actions require the user's explicit bounded intent and the applicable payment flow.
 
-The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through the A2A skill above and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
+The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through A2A and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
+
+## A2A Agent Trust Audit
+
+Page: https://misfitmediahouse.com/a2a-agent-audit
+API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
+A2A access: call `audit_a2a_agent_card` on Misfit Machine Agent.
+
+The audit fetches only a public HTTPS Agent Card and public third-party registry metadata. It checks identity/capability completeness, declared protocol bindings/versions, public endpoint safety, skill-description risk signals, security declarations, cross-host trust boundaries, and registry task-verification evidence. It does not call the target agent's declared interface or execute any target skill. Results can be shared through a rerunnable URL and embeddable diagnostic badge.
 
 ## GHOSBC Safety Gate
 
@@ -74,7 +84,7 @@ Purpose: public-metadata-only storefront readiness and safety audit for Shopify 
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
 MCP access: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
-A2A access: send a v1.0 Message through either declared Misfit Machine Agent binding with the storefront domain/URL.
+A2A access: call `audit_shopify_agentic_storefront` through either declared Misfit Machine Agent binding.
 
 The audit may inspect public `/.well-known/ucp`, `/agents.md`, and `/api/ucp/mcp` metadata. It never executes cart, checkout, order, payment, credential, or store mutation operations. Audit grades are Misfit diagnostic results, not Shopify certification.
 
