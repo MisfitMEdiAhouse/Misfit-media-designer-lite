@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate",
   "title": "GHOSBC Safety Gate",
-  "description": "Governance for agent requests, MCP tools, consequential actions, payloads, and responses.",
-  "version": "1.1.0",
+  "description": "Agent governance with MCP tool/action screening and native ALLOW/REVIEW/BLOCK UI.",
+  "version": "1.2.0",
   "websiteUrl": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
   "remotes": [
     {
