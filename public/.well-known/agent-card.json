@@ -1,0 +1,57 @@
+{
+  "name": "Misfit Machine Agent",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing diagnostics. The current skill audits public Shopify agentic-commerce surfaces without creating or mutating carts, checkouts, orders, payments, credentials, or store data.",
+  "supportedInterfaces": [
+    {
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
+      "protocolBinding": "HTTP+JSON",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "provider": {
+    "organization": "Misfit Mediahouse",
+    "url": "https://misfitmediahouse.com/"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://misfitmediahouse.com/agents.md",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "audit_shopify_agentic_storefront",
+      "name": "Audit Shopify agentic storefront",
+      "description": "Inspect a public Shopify storefront's UCP business profile, agents.md and Storefront MCP metadata; classify catalog/cart/checkout/order tool surfaces; apply GHOSBC Safety Gate to exposed tool definitions; return a public-safe diagnostic score, findings, share URL and badge. This skill does not execute store mutations.",
+      "tags": [
+        "shopify",
+        "agentic commerce",
+        "ucp",
+        "mcp",
+        "storefront security",
+        "agent security"
+      ],
+      "examples": [
+        "Audit example.myshopify.com",
+        "Check https://example-store.com for Shopify UCP and MCP agent readiness"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    }
+  ]
+}
