@@ -7,10 +7,10 @@
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/proof", "destination": "/index.html" },
-    { "source": "/enterprise-ai", "destination": "/index.html" },
-    { "source": "/creator-commerce", "destination": "/index.html" },
-    { "source": "/misfit-ai-v2", "destination": "/index.html" }
+    { "source": "/proof", "destination": "/" },
+    { "source": "/enterprise-ai", "destination": "/" },
+    { "source": "/creator-commerce", "destination": "/" },
+    { "source": "/misfit-ai-v2", "destination": "/" }
   ],
   "headers": [
     {
