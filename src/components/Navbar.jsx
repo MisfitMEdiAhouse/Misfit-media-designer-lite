@@ -5,7 +5,7 @@ const navItems = [
   ['/agents', 'Agent Network'],
   ['/shopify-ai-audit', 'Shopify AI Audit'],
   ['/misfit-ai-v2', 'Misfit AI V2'],
-  ['/#offers', 'Products'],
+  ['/#offers', 'Products + Services'],
   ['/proof', 'Portfolio'],
   ['/enterprise-ai', 'Enterprise AI'],
 ];
