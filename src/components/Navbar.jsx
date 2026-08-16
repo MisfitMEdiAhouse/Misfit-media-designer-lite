@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 const navItems = [
   ['/agents', 'Agent Network'],
+  ['/roads', 'Roads Garage'],
   ['/shopify-ai-audit', 'Shopify AI Audit'],
   ['/misfit-ai-v2', 'Misfit AI V2'],
   ['/#offers', 'Products + Services'],
