@@ -5,7 +5,8 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
-    { "source": "/snapsite", "destination": "/quotelink", "permanent": true }
+    { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
+    { "source": "/roads-garage", "destination": "/roads", "permanent": true }
   ],
   "rewrites": [
     { "source": "/agents", "destination": "/" },
@@ -16,6 +17,7 @@
     { "source": "/enterprise-ai", "destination": "/" },
     { "source": "/creator-commerce", "destination": "/" },
     { "source": "/misfit-ai-v2", "destination": "/" },
+    { "source": "/roads", "destination": "/" },
     { "source": "/quotelink", "destination": "/" }
   ],
   "headers": [
