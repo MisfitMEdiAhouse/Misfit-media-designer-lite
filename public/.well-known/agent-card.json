@@ -1,6 +1,6 @@
 {
   "name": "Misfit Machine Agent",
-  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, and bounded action-governance checks. It audits public Shopify agentic-commerce surfaces and public A2A Agent Card trust metadata, and can evaluate declared action metadata through GHOSBC Safety Gate without executing the proposed action, creating or mutating carts, checkouts, orders, payments, credentials, target-agent tasks, deployments, or store data.",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, and bounded advisory action-governance checks. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
   "supportedInterfaces": [
     {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
@@ -17,26 +17,20 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.3.0",
+  "version": "1.4.0",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
     "pushNotifications": false,
     "extendedAgentCard": false
   },
-  "defaultInputModes": [
-    "text/plain",
-    "application/json"
-  ],
-  "defaultOutputModes": [
-    "text/plain",
-    "application/json"
-  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
   "skills": [
     {
       "id": "audit_shopify_agentic_storefront",
       "name": "Audit Shopify agentic storefront",
-      "description": "Inspect a public Shopify storefront's UCP business profile, agents.md and Storefront MCP metadata; classify catalog/cart/checkout/order tool surfaces; apply GHOSBC Safety Gate to exposed tool definitions; return a public-safe diagnostic score, findings, share URL and badge. This skill does not execute store mutations.",
+      "description": "Inspect a public Shopify storefront's UCP business profile, agents.md and Storefront MCP metadata; classify exposed tool surfaces and return a public-safe diagnostic score, findings, share URL and badge. This skill does not execute store mutations.",
       "tags": ["shopify", "agentic commerce", "ucp", "mcp", "storefront security", "agent security"],
       "examples": ["Audit example.myshopify.com", "Check https://example-store.com for Shopify UCP and MCP agent readiness"],
       "inputModes": ["text/plain", "application/json"],
@@ -45,7 +39,7 @@
     {
       "id": "audit_a2a_agent_card",
       "name": "Audit A2A Agent Card trust",
-      "description": "Inspect a public A2A Agent Card, declared interfaces, protocol versions, skill metadata, security declarations and optional third-party registry verification. Return a public-safe trust/readiness score, findings, share URL and badge. This skill does not send a task or execute any skill on the target agent.",
+      "description": "Inspect a public A2A Agent Card, declared interfaces, protocol versions, skill metadata, security declarations and optional third-party registry verification. Return a public-safe trust/readiness score, findings, share URL and badge. This skill does not send a task or execute a skill on the target agent.",
       "tags": ["a2a", "agent card", "agent security", "trust", "protocol validation", "registry verification"],
       "examples": ["Audit https://agent.example/.well-known/agent-card.json", "Check this A2A Agent Card before my agent depends on it"],
       "inputModes": ["text/plain", "application/json"],
@@ -54,8 +48,8 @@
     {
       "id": "governed_agent_action_check",
       "name": "Check a governed agent action",
-      "description": "Evaluate public-safe structured action metadata against GHOSBC Safety Gate constraints and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only: it never executes the proposed action, moves money, mutates external systems, or exposes private GHOSBC policy internals.",
-      "tags": ["a2a", "agent governance", "safety gate", "action policy", "human gate", "audit"],
+      "description": "Evaluate public-safe structured action metadata through Misfit's private governance boundary and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or exposes private policy internals.",
+      "tags": ["a2a", "agent governance", "action policy", "human gate", "audit"],
       "examples": ["Check whether read_status on public_service_health is within these declared constraints", "Evaluate a proposed agent action before execution without executing it"],
       "inputModes": ["application/json"],
       "outputModes": ["text/plain", "application/json"]
