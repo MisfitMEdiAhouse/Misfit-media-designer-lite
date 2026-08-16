@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.7.0",
+  "schema_version": "1.8.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -25,9 +25,10 @@
     },
     {
       "name": "GHOSBC OS – Agent Brain Hub",
-      "class": "private-security-runtime",
+      "class": "private-cognitive-kernel",
       "public_endpoint": null,
-      "summary": "Private governance runtime containing Castle Gate, approval gates, abuse controls, shadow evaluation, runtime validation and sentinel orchestration."
+      "commercial_product": false,
+      "summary": "Private upstream cognitive and governance kernel used by Misfit-controlled systems. It is not a public product or external runtime surface."
     },
     {
       "name": "Misfit Shield – GHOSBC Sentinel",
@@ -46,7 +47,7 @@
       "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
       "registry_verification": "A2A SDK registration probe WORKING",
       "skills": ["audit_shopify_agentic_storefront", "audit_a2a_agent_card", "governed_agent_action_check"],
-      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. It performs public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and advisory bounded action-governance checks through GHOSBC Safety Gate. The governance skill never executes the proposed action or moves money."
+      "summary": "Public A2A agent for public metadata audits and bounded advisory governance checks. Private GHOSBC implementation details remain behind the Misfit-controlled boundary and are not advertised as a separate product."
     },
     {
       "name": "Misfit A2A Agent Trust Audit",
@@ -55,15 +56,6 @@
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit",
       "a2a_via": "Misfit Machine Agent#audit_a2a_agent_card",
       "summary": "Free public-metadata-only A2A Agent Card/binding/skill/security/registry trust audit with a rerunnable share URL and embeddable badge. Never sends a task or executes a target-agent skill."
-    },
-    {
-      "name": "GHOSBC Safety Gate",
-      "class": "public-agent-security",
-      "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
-      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
-      "a2a_via": "Misfit Machine Agent#governed_agent_action_check",
-      "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate",
-      "summary": "Public governance boundary for requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, bounded consequential actions, payloads and responses."
     },
     {
       "name": "ChangePacket",
@@ -78,7 +70,6 @@
       "class": "public-agent-security",
       "product": "https://misfitmediahouse.com/shopify-ai-audit",
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
-      "mcp_via": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate#audit_shopify_agentic_storefront",
       "a2a_via": "Misfit Machine Agent#audit_shopify_agentic_storefront",
       "ucp_product_id": "misfit_shopify_agentic_audit_free",
       "summary": "Free public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge. Never executes cart, checkout, order, payment, credential or mutation actions."
@@ -89,7 +80,7 @@
       "ucp": "https://misfitmediahouse.com/.well-known/ucp",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
       "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store",
-      "summary": "UCP-compatible machine catalog and MCP storefront for current Misfit agent products."
+      "summary": "UCP-compatible machine catalog and MCP storefront for current public Misfit products."
     },
     {
       "name": "ContextForge",
