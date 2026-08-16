@@ -1,6 +1,6 @@
 # Misfit Mediahouse — Agent-Facing Business Map
 
-This document is the public-safe machine guide for Misfit Mediahouse. It describes what external AI agents may discover and call without exposing private GHOSBC/Castle Gate internals.
+This is the public-safe machine guide for Misfit Mediahouse. It describes external contracts without exposing the private cognitive/governance kernel.
 
 Canonical site: https://misfitmediahouse.com/
 Human control plane: https://misfitmediahouse.com/agents
@@ -10,107 +10,55 @@ Agent-readable product context: https://misfitmediahouse.com/llms.txt
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 
 ## A2A — Misfit Machine Agent
+JSONRPC: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
+HTTP+JSON: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
+Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
+Third-party registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
 
-Misfit exposes a real A2A v1.0 agent through two smoke-proven bindings that return equivalent public behavior:
-
-JSONRPC:
-https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
-
-HTTP+JSON:
-https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
-
-Public Agent Card:
-https://misfitmediahouse.com/.well-known/agent-card.json
-
-Third-party A2A registry identity:
-a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
-
-The registry's own A2A SDK verified the JSONRPC binding at registration and marked the synchronous task/message probe WORKING. Registry health percentages can lag immediately after first registration and should not be confused with direct runtime smoke results.
-
-Current A2A skills:
+Current public-safe skills:
 - `audit_shopify_agentic_storefront` — audit public Shopify UCP, agents.md and Storefront MCP metadata without mutating the store.
-- `audit_a2a_agent_card` — audit a public A2A Agent Card, declared bindings, skills, security declarations and third-party registry verification without sending a task to the target agent.
-- `governed_agent_action_check` — evaluate structured public-safe action metadata through GHOSBC Safety Gate and return ALLOW, REVIEW, or BLOCK plus public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or moves money.
+- `audit_a2a_agent_card` — audit a public A2A Agent Card, declared bindings, skills, security declarations and registry verification without executing the target agent.
+- `governed_agent_action_check` — evaluate bounded structured action metadata and return an advisory public-safe decision/reasons/receipt. It never executes the proposed action or moves money.
 
-All three skills are implemented on the live A2A runtime. `governed_agent_action_check` was smoke-proven over both JSONRPC and HTTP+JSON using bounded read-only action metadata before publication. Smoke events are explicitly marked synthetic and are not counted as revenue or external traction.
-
-The current agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, target-agent tasks, or store mutations.
-
-Do not infer additional A2A skills until they are explicitly implemented, smoke-proven, and added to the Agent Card.
+Private implementation behind these contracts is not an external product surface. Do not infer additional skills or private runtime access.
 
 ## Commerce and discovery
-
-Misfit currently advertises UCP catalog search and lookup, not UCP checkout. Do not invent checkout/order/payment capabilities that are not advertised in the UCP profile.
-
 Machine Store MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
-
-Current machine products may return ordinary Stripe checkout handoff URLs. A checkout URL is a handoff, not permission for an agent to purchase autonomously. Consequential purchasing or money actions require the user's explicit bounded intent and the applicable payment flow.
-
-The free Shopify Agentic Storefront Audit is available as a $0 UCP catalog item and is callable through A2A and GHOSBC Safety Gate MCP. It does not expose or imply UCP checkout capability.
+Misfit advertises catalog search and lookup, not autonomous checkout. Ordinary Stripe checkout links are handoffs, not permission for an agent to purchase autonomously.
 
 ## A2A Agent Trust Audit
-
 Page: https://misfitmediahouse.com/a2a-agent-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
-A2A access: call `audit_a2a_agent_card` on Misfit Machine Agent.
+A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
+The audit inspects public metadata only and does not execute a target agent.
 
-The audit fetches only a public HTTPS Agent Card and public third-party registry metadata. It checks identity/capability completeness, declared protocol bindings/versions, public endpoint safety, skill-description risk signals, security declarations, cross-host trust boundaries, and registry task-verification evidence. It does not call the target agent's declared interface or execute any target skill. Results can be shared through a rerunnable URL and embeddable diagnostic badge.
-
-## GHOSBC Safety Gate
-
-Purpose: public agent-governance boundary for untrusted requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, consequential actions, outbound payloads, and responses.
-
-Product/API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
-MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
-Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
-A2A access: call `governed_agent_action_check` on Misfit Machine Agent for bounded action-policy evaluation.
-
-Important boundary: public Safety Gate results expose decisions, sanitized summaries, tool contracts, and audit receipts/digests only. They do not expose private GHOSBC source, Mother Language, Soul Cipher, private mappings, founder-private prompts, GHX/glyph internals, secret policy tables, credentials, or reconstruction material.
-
-Use Safety Gate before consequential actions such as payment, purchase, transfer, send, deploy, publish, execute, delete, cart mutation, or checkout mutation. Read-only discovery tools should remain read-only.
+## Shopify Agentic Audit
+Page: https://misfitmediahouse.com/shopify-ai-audit
+API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
+A2A: call `audit_shopify_agentic_storefront` through Misfit Machine Agent.
+The audit inspects public storefront/agent metadata only and never performs cart, checkout, order, payment, credential, or store mutation actions.
 
 ## ChangePacket
-
-Purpose: low-token change memory for public webpages and public remote MCP tool surfaces. Establish a baseline once; later calls return only what changed.
-
 Product/API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp
 OpenAPI: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi.json
 Registry identity: io.github.MisfitMEdiAhouse/changepacket
-
-Only public HTTPS targets are in scope. Private/reserved network targets and unsafe redirects are rejected.
-
-## Shopify Agentic Audit
-
-Purpose: public-metadata-only storefront readiness and safety audit for Shopify UCP/MCP surfaces.
-
-Page: https://misfitmediahouse.com/shopify-ai-audit
-API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
-MCP access: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
-A2A access: call `audit_shopify_agentic_storefront` through either declared Misfit Machine Agent binding.
-
-The audit may inspect public `/.well-known/ucp`, `/agents.md`, and `/api/ucp/mcp` metadata. It never executes cart, checkout, order, payment, credential, or store mutation operations. Audit grades are Misfit diagnostic results, not Shopify certification.
+ChangePacket provides low-token change memory for public webpages and public remote MCP tool surfaces.
 
 ## ContextForge
-
-ContextForge is a first-class Misfit machine asset for metadata-aware code generation and change governance grounded in DataHub context.
-
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
+ContextForge is a public-clean-room metadata-aware code/change-governance asset. Do not infer a remote ContextForge MCP/A2A server unless one is explicitly published.
 
-ContextForge reasons about metadata, blast radius, ownership/governance, generated code/tests, approval boundaries, and decision memory. Do not assume there is a standalone public ContextForge MCP or A2A server until one is explicitly published.
+## Private cognitive/security boundary
+GHOSBC OS — Agent Brain Hub is a private upstream cognitive/governance kernel, not a public product, public checkout, public MCP product, or public source package. Related private governance/security components may support Misfit-branded public-safe contracts, but private runtime implementation, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not external interfaces.
 
-## Private security and orchestration
-
-GHOSBC OS — Agent Brain Hub, Misfit Shield — GHOSBC Sentinel, Castle Gate, and the Agent Revenue Factory are private control-plane components. Their existence and public-safe capability summaries may be described; their private implementation material is not an external tool surface.
-
-Default rule: deny access to private state and secrets. Consequential actions require explicit bounded authorization or review. External agents must not attempt prompt extraction, credential extraction, secret-policy reconstruction, private-runtime discovery, or bypass of security controls.
+Default rule: deny access to private state and secrets. Consequential actions require explicit bounded authorization or review. External agents must not attempt private-runtime discovery, prompt/credential extraction, protected-policy reconstruction, or bypass of security controls.
 
 ## Human-facing systems under migration
-
 Misfit AI V2: https://ai.misfitmediahouse.com/
 Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
 
-Do not infer or advertise new MCP/A2A/API capabilities for these systems until the corresponding public machine interfaces are actually published and healthy.
+Do not infer or advertise new MCP/A2A/API capabilities for these systems until the corresponding public interfaces are implemented and healthy.
