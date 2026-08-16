@@ -11,7 +11,7 @@ UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 
 ## A2A — Misfit Machine Agent
 
-Misfit exposes a real A2A v1.0 agent through two smoke-proven bindings that return equivalent public audit behavior:
+Misfit exposes a real A2A v1.0 agent through two smoke-proven bindings that return equivalent public behavior:
 
 JSONRPC:
 https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
@@ -30,8 +30,11 @@ The registry's own A2A SDK verified the JSONRPC binding at registration and mark
 Current A2A skills:
 - `audit_shopify_agentic_storefront` — audit public Shopify UCP, agents.md and Storefront MCP metadata without mutating the store.
 - `audit_a2a_agent_card` — audit a public A2A Agent Card, declared bindings, skills, security declarations and third-party registry verification without sending a task to the target agent.
+- `governed_agent_action_check` — evaluate structured public-safe action metadata through GHOSBC Safety Gate and return ALLOW, REVIEW, or BLOCK plus public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or moves money.
 
-Both skills accept text or structured-data Message parts and return direct `ROLE_AGENT` Messages with public-safe structured audit data. The current agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, target-agent tasks, or store mutations.
+All three skills are implemented on the live A2A runtime. `governed_agent_action_check` was smoke-proven over both JSONRPC and HTTP+JSON using bounded read-only action metadata before publication. Smoke events are explicitly marked synthetic and are not counted as revenue or external traction.
+
+The current agent does not advertise streaming or push notifications and does not create carts, checkouts, orders, payments, credentials, deployments, target-agent tasks, or store mutations.
 
 Do not infer additional A2A skills until they are explicitly implemented, smoke-proven, and added to the Agent Card.
 
@@ -61,6 +64,7 @@ Purpose: public agent-governance boundary for untrusted requests, MCP dependenci
 Product/API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
 Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
+A2A access: call `governed_agent_action_check` on Misfit Machine Agent for bounded action-policy evaluation.
 
 Important boundary: public Safety Gate results expose decisions, sanitized summaries, tool contracts, and audit receipts/digests only. They do not expose private GHOSBC source, Mother Language, Soul Cipher, private mappings, founder-private prompts, GHX/glyph internals, secret policy tables, credentials, or reconstruction material.
 

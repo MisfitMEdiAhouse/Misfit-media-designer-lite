@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.6.0",
+  "schema_version": "1.7.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -42,10 +42,11 @@
       "a2a_jsonrpc": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
       "a2a_http_json": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
       "protocol_version": "1.0",
+      "agent_version": "1.3.0",
       "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
       "registry_verification": "A2A SDK registration probe WORKING",
-      "skills": ["audit_shopify_agentic_storefront", "audit_a2a_agent_card"],
-      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. Current skills perform public Shopify agentic-storefront security/readiness audits and public A2A Agent Card trust audits; neither executes target-agent/store mutations."
+      "skills": ["audit_shopify_agentic_storefront", "audit_a2a_agent_card", "governed_agent_action_check"],
+      "summary": "Real public A2A v1.0 agent with JSONRPC and HTTP+JSON bindings. It performs public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and advisory bounded action-governance checks through GHOSBC Safety Gate. The governance skill never executes the proposed action or moves money."
     },
     {
       "name": "Misfit A2A Agent Trust Audit",
@@ -60,6 +61,7 @@
       "class": "public-agent-security",
       "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate",
       "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp",
+      "a2a_via": "Misfit Machine Agent#governed_agent_action_check",
       "registry_identity": "io.github.MisfitMEdiAhouse/ghosbc-safety-gate",
       "summary": "Public governance boundary for requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, bounded consequential actions, payloads and responses."
     },
