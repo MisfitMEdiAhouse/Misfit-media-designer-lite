@@ -22,7 +22,8 @@ These may wrap or deploy Misfit AI V2 but must be presented as services, not com
 ### Portfolio / proof
 - Misfit AI V2 should appear as both a commercial product and portfolio proof.
 - Client builds and separate systems belong in portfolio/case-study presentation.
-- ContextForge / GHOSBC / other systems must be classified based on their actual product readiness and commercial intent, not simply because a deployed page exists.
+- ContextForge and other systems must be classified based on their actual product readiness and commercial intent, not simply because a deployed page exists.
+- GHOSBC OS — Agent Brain Hub is a private upstream cognitive/governance kernel. It is not a public product, checkout offer, public MCP product, or public portfolio item.
 
 ## Current duplication findings
 
@@ -31,6 +32,15 @@ These may wrap or deploy Misfit AI V2 but must be presented as services, not com
 3. The homepage has a separate "Revenue AI" navigation/section that describes the same capability set at a higher level.
 4. "Website + AI Launch" includes AI lead capture/follow-up, which overlaps Misfit AI V2. It should be a deployment/service package around the product, not a sibling software product.
 5. "Managed Growth" is an operations service and should be clearly separated from software/product pricing.
+
+## Remediation checkpoint — 2026-08-16
+
+- Removed GHOSBC Safety Gate from the public AI product catalog and public portfolio catalog.
+- Reclassified GHOSBC OS — Agent Brain Hub as a private cognitive/governance kernel in the public-safe agent stack manifest.
+- Rewrote public machine-readable `llms.txt` and `agents.md` so Misfit-branded public contracts remain discoverable while GHOSBC itself is not advertised as a separate product or public MCP product.
+- Deactivated the Stripe payment link that sold GHOSBC Safety Gate checks; the link now states that the private internal capability is not a public product.
+- Production deployment containing these public-surface changes is READY.
+- No GHOSBC source material was added to public surfaces during this remediation.
 
 ## Current route verification
 
