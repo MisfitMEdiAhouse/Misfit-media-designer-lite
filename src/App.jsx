@@ -11,7 +11,7 @@ import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import HeirOS from './pages/HeirOS.jsx';
-import RoadsGarageOS from './pages/RoadsGarageOS.jsx';
+import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
 
 export default function App() {
   return (
@@ -28,7 +28,7 @@ export default function App() {
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
-        <Route path="/roads" element={<RoadsGarageOS />} />
+        <Route path="/roads" element={<RoadsGarageOSV2 />} />
         <Route path="/roads-garage" element={<Navigate to="/roads" replace />} />
         <Route path="/quotelink" element={<SnapSite />} />
         <Route path="/snapsite" element={<Navigate to="/quotelink" replace />} />
