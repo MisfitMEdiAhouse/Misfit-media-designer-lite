@@ -10,41 +10,35 @@ Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
 Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md
 Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface. Chat sessions are operators, not databases.
-Private GHOSBC/Castle Gate runtime details are intentionally not exposed through these public surfaces.
+
+Private GHOSBC/Castle Gate runtime details are intentionally not exposed through public surfaces. GHOSBC OS — Agent Brain Hub is a private upstream cognitive/governance kernel, not a public product, checkout offer, MCP product, or public source package.
 
 ## A2A — Misfit Machine Agent
 A2A v1.0 JSONRPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
 A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Third-party A2A registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
-Current skills:
-- `audit_shopify_agentic_storefront`: public Shopify UCP/agents.md/MCP readiness and safety audit.
-- `audit_a2a_agent_card`: public A2A Agent Card/binding/skill/security/registry trust audit that does not execute the target agent.
-The JSONRPC and HTTP+JSON bindings are smoke-proven for equivalent direct Message behavior. The third-party registry's A2A SDK verified the JSONRPC binding at registration and marked its synchronous probe WORKING. Streaming and push notifications are not advertised. No cart, checkout, order, payment, credential, target-agent execution, or store mutation capability is exposed.
+Current public-safe skills include public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and bounded advisory action-governance checks. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
-Catalog search and lookup are advertised. UCP REST catalog responses use a public verification key from the business profile and HTTP message-signature headers. Purchase handoff uses each product's existing Stripe checkout flow; UCP checkout is not advertised.
-The free Shopify Agentic Storefront Audit is a real $0 UCP catalog item with no checkout URL; it points to the public diagnostic, its callable Safety Gate MCP tool, and the live A2A audit skill.
+Catalog search and lookup are advertised. Purchase handoff uses each public product's existing checkout flow; UCP checkout is not advertised.
 
 ## A2A Agent Trust Audit
-Public-metadata-only trust/readiness diagnostic for A2A Agent Cards and their declared machine interfaces. It checks card completeness, protocol bindings/versions, skill descriptions, security declarations, public endpoint safety, cross-host trust boundaries and optional third-party registry task verification. It never sends a task or executes a skill on the target agent.
+Public-metadata-only trust/readiness diagnostic for A2A Agent Cards and their declared machine interfaces. It never executes a target-agent skill.
 Page: https://misfitmediahouse.com/a2a-agent-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
 A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
-Results include a rerunnable share URL and embeddable diagnostic badge. Grades are Misfit diagnostics, not A2A certification.
 
 ## Shopify Agentic Audit
-Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It inspects public `/.well-known/ucp`, `/agents.md`, and storefront MCP metadata, and never executes cart, checkout, order, payment, credential, or mutation actions.
+Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It never executes cart, checkout, order, payment, credential, or mutation actions.
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
-MCP: call `audit_shopify_agentic_storefront` on GHOSBC Safety Gate MCP.
-A2A: call `audit_shopify_agentic_storefront` through either declared Misfit Machine Agent binding.
-Audited stores can receive a live embeddable diagnostic badge that links back to their independently rerunnable report. Grades are Misfit diagnostics, not Shopify certification.
-The audit funnels consequential tool surfaces through GHOSBC Safety Gate and recommends ChangePacket for future surface drift.
+A2A: call `audit_shopify_agentic_storefront` through Misfit Machine Agent.
+Consequential findings may be evaluated through Misfit's private governance boundary without exposing the private cognitive kernel.
 
 ## ChangePacket
 Persistent change memory for AI agents. Track public webpages or public MCP tool surfaces. First request creates a baseline; later requests return only the delta.
@@ -54,23 +48,16 @@ OpenAPI: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi
 MCP Registry identity: io.github.MisfitMEdiAhouse/changepacket
 Pricing: 25 free calls/day; 2,000 prepaid calls for $9.
 
-## GHOSBC Safety Gate
-Hosted AI-agent governance boundary. Screen requests, MCP dependencies/tool definitions, Shopify agentic storefront metadata, bounded consequential actions, outbound payloads, and responses. Public interfaces expose decisions, public-safe summaries, sanitization, and audit digests only; private GHOSBC runtime internals are not published.
-Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate
-MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp
-MCP Registry identity: io.github.MisfitMEdiAhouse/ghosbc-safety-gate
-Pricing: 50 free checks/day; 10,000 prepaid checks for $19.
-
 ## ContextForge
-Metadata-aware code generation and change governance grounded in DataHub context. ContextForge reasons about blast radius, governance, generated code/tests, approval boundaries, and decision memory. This is a first-class Misfit machine asset, not a chat-only prototype.
+Metadata-aware code generation and change governance grounded in DataHub context.
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
-ContextForge is currently a DataHub-aware application/client; do not assume a standalone remote ContextForge MCP or A2A server unless one is explicitly published.
+Do not assume a standalone remote ContextForge MCP or A2A server unless one is explicitly published.
 
-## Private security core
-GHOSBC OS – Agent Brain Hub and Misfit Shield – GHOSBC Sentinel provide private governance, Castle Gate evaluation, approval gates, abuse controls, runtime validation, outbound-context shielding, and sentinel orchestration. Their private source, prompts, cipher/mapping internals, runtime material, and credentials are not public machine interfaces.
+## Private cognitive and security core
+GHOSBC OS — Agent Brain Hub and related private governance/security components operate only as Misfit-controlled internal infrastructure. Public contracts may expose sanitized decisions or advisory results through Misfit-branded interfaces, but private source, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not public interfaces or commercial products.
 
-## Human-facing products with machine interfaces under migration
+## Human-facing systems under migration
 Misfit AI V2: https://ai.misfitmediahouse.com/
 Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
