@@ -10,6 +10,7 @@ import SnapSite from './pages/SnapSite.jsx';
 import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
+import HeirOS from './pages/HeirOS.jsx';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
+        <Route path="/heir" element={<HeirOS />} />
         <Route path="/proof" element={<ProofPage />} />
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
