@@ -22,8 +22,10 @@ export default function RoadsGarageOSV2() {
         image.style.background = 'transparent';
         image.style.objectFit = 'contain';
         image.style.objectPosition = 'center';
-        image.style.maxWidth = '150px';
-        image.style.width = 'auto';
+        image.style.width = '132px';
+        image.style.height = 'auto';
+        image.style.maxWidth = '38vw';
+        image.style.maxHeight = '58px';
       });
 
       root.querySelectorAll('img[src="/roads-tuner.webp"]').forEach((image) => {
