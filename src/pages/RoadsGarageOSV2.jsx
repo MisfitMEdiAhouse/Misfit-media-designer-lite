@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import RoadsGarageOSV2Core from './RoadsGarageOSV2Core.jsx';
+import RoadsGarageOSV3Core from './RoadsGarageOSV3Core.jsx';
 import { ROADS_TUNER_DATA, ROADS_WHEEL_DATA, ROADS_MERCH_DATA } from '../assets/roadsMediaData.js';
 
 // Roads visual assets are deliberately pinned here so mobile never falls back to broken placeholders.
@@ -57,7 +57,7 @@ export default function RoadsGarageOSV2() {
 
   return (
     <div ref={rootRef} className="roads-page-shell">
-      <RoadsGarageOSV2Core />
+      <RoadsGarageOSV3Core />
     </div>
   );
 }
