@@ -30,27 +30,6 @@ export default function RoadsGarageOSV2() {
     if (!root) return undefined;
 
     const applyMedia = () => {
-      root.querySelectorAll('img[alt="Roads Co."]').forEach((image) => {
-        setMedia(image, ROADS_LOGO_DATA);
-        // Source mark is black/transparent. The Roads UI header is black, so render the exact mark in white.
-        image.classList.add('invert');
-        image.style.filter = 'invert(1)';
-        image.style.background = 'transparent';
-        image.style.objectFit = 'contain';
-        image.style.objectPosition = 'left center';
-        image.style.width = '160px';
-        image.style.height = 'auto';
-        image.style.maxWidth = '46vw';
-        image.style.maxHeight = '58px';
-        image.style.display = 'block';
-        image.style.opacity = '1';
-        if (image.parentElement) {
-          image.parentElement.style.overflow = 'visible';
-          image.parentElement.style.justifyContent = 'flex-start';
-          image.parentElement.style.minWidth = '150px';
-        }
-      });
-
       root.querySelectorAll('img[alt="Roads engine work"]').forEach((image) => {
         setMedia(image, ROADS_TUNER_DATA, FALLBACK.tuner);
         image.style.objectFit = 'cover';
@@ -78,8 +57,49 @@ export default function RoadsGarageOSV2() {
   }, []);
 
   return (
-    <div ref={rootRef}>
-      <RoadsGarageOSV2Core />
-    </div>
+    <>
+      <style>{`
+        .roads-page-shell img[alt="Roads Co."] {
+          opacity: 0 !important;
+        }
+
+        .roads-header-logo-lock {
+          position: fixed;
+          top: 12px;
+          left: 16px;
+          z-index: 60;
+          width: 160px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          pointer-events: none;
+        }
+
+        .roads-header-logo-lock img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: left center;
+          filter: invert(1);
+          background: transparent;
+        }
+
+        @media (min-width: 640px) {
+          .roads-header-logo-lock {
+            top: 16px;
+            left: 24px;
+            width: 176px;
+            height: 40px;
+          }
+        }
+      `}</style>
+      <div className="roads-header-logo-lock" aria-hidden="true">
+        <img src={ROADS_LOGO_DATA} alt="" />
+      </div>
+      <div ref={rootRef} className="roads-page-shell">
+        <RoadsGarageOSV2Core />
+      </div>
+    </>
   );
 }
