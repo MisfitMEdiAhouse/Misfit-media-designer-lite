@@ -18,6 +18,7 @@
     { "source": "/creator-commerce", "destination": "/" },
     { "source": "/misfit-ai-v2", "destination": "/" },
     { "source": "/roads", "destination": "/" },
+    { "source": "/roads/admin", "destination": "/" },
     { "source": "/quotelink", "destination": "/" }
   ],
   "headers": [
@@ -47,6 +48,14 @@
     },
     {
       "source": "/heir",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+        { "key": "Cache-Control", "value": "private, no-store" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    },
+    {
+      "source": "/roads/admin",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
         { "key": "Cache-Control", "value": "private, no-store" },
