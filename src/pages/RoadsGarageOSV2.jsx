@@ -32,15 +32,23 @@ export default function RoadsGarageOSV2() {
     const applyMedia = () => {
       root.querySelectorAll('img[alt="Roads Co."]').forEach((image) => {
         setMedia(image, ROADS_LOGO_DATA);
-        image.classList.remove('invert');
+        // Source mark is black/transparent. The Roads UI header is black, so render the exact mark in white.
+        image.classList.add('invert');
+        image.style.filter = 'invert(1)';
         image.style.background = 'transparent';
         image.style.objectFit = 'contain';
-        image.style.objectPosition = 'center';
-        image.style.width = '138px';
+        image.style.objectPosition = 'left center';
+        image.style.width = '160px';
         image.style.height = 'auto';
-        image.style.maxWidth = '42vw';
-        image.style.maxHeight = '64px';
-        if (image.parentElement) image.parentElement.style.overflow = 'visible';
+        image.style.maxWidth = '46vw';
+        image.style.maxHeight = '58px';
+        image.style.display = 'block';
+        image.style.opacity = '1';
+        if (image.parentElement) {
+          image.parentElement.style.overflow = 'visible';
+          image.parentElement.style.justifyContent = 'flex-start';
+          image.parentElement.style.minWidth = '150px';
+        }
       });
 
       root.querySelectorAll('img[alt="Roads engine work"]').forEach((image) => {
