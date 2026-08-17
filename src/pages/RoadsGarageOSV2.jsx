@@ -55,11 +55,34 @@ export default function RoadsGarageOSV2() {
     return () => observer.disconnect();
   }, []);
 
-  // Keep the Roads logo in the real header component. Do not hide it or float a second
-  // post-render copy over the page; that was the source of repeated mobile failures.
   return (
-    <div ref={rootRef} className="roads-page-shell">
-      <RoadsGarageOSV2Core />
-    </div>
+    <>
+      <style>{`
+        /* The exact Roads graffiti asset lives in the real header. Size and contrast it here
+           so mobile cannot collapse or hide it. No duplicate/floating logo. */
+        .roads-page-shell img[alt="Roads Co."] {
+          display: block !important;
+          width: 160px !important;
+          height: 42px !important;
+          max-width: 160px !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          object-fit: contain !important;
+          object-position: left center !important;
+          filter: invert(1) !important;
+        }
+
+        @media (min-width: 640px) {
+          .roads-page-shell img[alt="Roads Co."] {
+            width: 176px !important;
+            max-width: 176px !important;
+            height: 44px !important;
+          }
+        }
+      `}</style>
+      <div ref={rootRef} className="roads-page-shell">
+        <RoadsGarageOSV2Core />
+      </div>
+    </>
   );
 }
