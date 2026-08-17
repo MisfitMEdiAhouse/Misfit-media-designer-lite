@@ -1,10 +1,25 @@
 import { useLayoutEffect, useRef } from 'react';
 import RoadsGarageOSV2Core from './RoadsGarageOSV2Core.jsx';
 import { ROADS_LOGO_DATA } from '../assets/roadsLogoData.js';
+import { ROADS_TUNER_DATA, ROADS_WHEEL_DATA, ROADS_MERCH_DATA } from '../assets/roadsMediaData.js';
 
-const TUNER_PHOTO = 'https://roadscollective.com/cdn/shop/files/IMG_5049.jpg?crop=center&height=1200&v=1736916492&width=1200';
-const WHEEL_PHOTO = 'https://fifteen52.com/cdn/shop/files/preview_images/5eed44feaf4643899b3a291676264151.thumbnail.0000000000.jpg?v=1768413993&width=1920';
-const MERCH_PHOTO = 'https://roadscollective.com/cdn/shop/files/Screenshot_29.png?crop=center&height=1200&v=1736916292&width=1200';
+const FALLBACK = {
+  tuner: 'https://roadscollective.com/cdn/shop/files/IMG_5049.jpg?crop=center&height=1000&v=1736916492&width=1000',
+  wheel: 'https://roadscollective.com/cdn/shop/files/Red-porsche-next-to-fine-art.jpg?crop=center&height=1000&v=1736899403&width=1000',
+  merch: 'https://roadscollective.com/cdn/shop/files/DSC09062-Edit.jpg?crop=center&height=1000&v=1755978742&width=1000',
+};
+
+function setMedia(image, src, fallback) {
+  image.removeAttribute('srcset');
+  image.removeAttribute('sizes');
+  image.onerror = fallback
+    ? () => {
+        image.onerror = null;
+        image.src = fallback;
+      }
+    : null;
+  image.src = src;
+}
 
 export default function RoadsGarageOSV2() {
   const rootRef = useRef(null);
@@ -14,42 +29,36 @@ export default function RoadsGarageOSV2() {
     if (!root) return undefined;
 
     const applyMedia = () => {
-      root.querySelectorAll('img[src="/roads-co-logo.svg"], img[alt="Roads Co."]').forEach((image) => {
-        image.src = ROADS_LOGO_DATA;
-        image.removeAttribute('srcset');
-        image.removeAttribute('sizes');
+      root.querySelectorAll('img[alt="Roads Co."]').forEach((image) => {
+        setMedia(image, ROADS_LOGO_DATA);
         image.classList.remove('invert');
         image.style.background = 'transparent';
         image.style.objectFit = 'contain';
         image.style.objectPosition = 'center';
-        image.style.width = '132px';
+        image.style.width = '138px';
         image.style.height = 'auto';
-        image.style.maxWidth = '38vw';
-        image.style.maxHeight = '58px';
+        image.style.maxWidth = '42vw';
+        image.style.maxHeight = '64px';
+        if (image.parentElement) image.parentElement.style.overflow = 'visible';
       });
 
-      root.querySelectorAll('img[src="/roads-tuner.webp"]').forEach((image) => {
-        image.src = TUNER_PHOTO;
-        image.removeAttribute('srcset');
-        image.removeAttribute('sizes');
+      root.querySelectorAll('img[alt="Roads engine work"]').forEach((image) => {
+        setMedia(image, ROADS_TUNER_DATA, FALLBACK.tuner);
         image.style.objectFit = 'cover';
         image.style.objectPosition = 'center';
       });
 
-      root.querySelectorAll('img[src="/roads-wheel.webp"]').forEach((image) => {
-        image.src = WHEEL_PHOTO;
-        image.removeAttribute('srcset');
-        image.removeAttribute('sizes');
+      root.querySelectorAll('img[alt="Roads wheel and fitment"]').forEach((image) => {
+        setMedia(image, ROADS_WHEEL_DATA, FALLBACK.wheel);
         image.style.objectFit = 'cover';
         image.style.objectPosition = 'center';
       });
 
-      root.querySelectorAll('img[src="/roads-merch.webp"], img[alt="Roads Collective apparel"]').forEach((image) => {
-        image.src = MERCH_PHOTO;
-        image.removeAttribute('srcset');
-        image.removeAttribute('sizes');
+      root.querySelectorAll('img[alt="Roads Collective apparel"]').forEach((image) => {
+        setMedia(image, ROADS_MERCH_DATA, FALLBACK.merch);
+        image.style.display = 'block';
         image.style.objectFit = 'cover';
-        image.style.objectPosition = 'center 35%';
+        image.style.objectPosition = 'center 38%';
       });
     };
 
