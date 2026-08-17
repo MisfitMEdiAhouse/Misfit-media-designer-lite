@@ -58,25 +58,71 @@ export default function RoadsGarageOSV2() {
   return (
     <>
       <style>{`
-        /* The exact Roads graffiti asset lives in the real header. Size and contrast it here
-           so mobile cannot collapse or hide it. No duplicate/floating logo. */
-        .roads-page-shell img[alt="Roads Co."] {
-          display: block !important;
-          width: 160px !important;
-          height: 42px !important;
-          max-width: 160px !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          object-fit: contain !important;
-          object-position: left center !important;
-          filter: invert(1) !important;
+        /* Browser-proof Roads wordmark: kill the failing image entirely and render the
+           brand as live text on the real header link. There is nothing left to 404. */
+        .roads-page-shell a[aria-label="Roads Garage home"] {
+          position: relative !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          width: 154px !important;
+          min-width: 154px !important;
+          height: 48px !important;
+          overflow: visible !important;
+          text-decoration: none !important;
+        }
+
+        .roads-page-shell a[aria-label="Roads Garage home"] img[alt="Roads Co."] {
+          display: none !important;
+        }
+
+        .roads-page-shell a[aria-label="Roads Garage home"]::before {
+          content: "Roads Co.";
+          position: absolute;
+          left: 1px;
+          top: 50%;
+          transform: translateY(-54%) rotate(-4deg) skewX(-6deg);
+          transform-origin: left center;
+          white-space: nowrap;
+          color: #fff;
+          font-family: "Permanent Marker", "Brush Script MT", "Segoe Print", cursive;
+          font-size: 29px;
+          font-weight: 400;
+          line-height: 1;
+          letter-spacing: -0.055em;
+          text-shadow:
+            0 1px 0 #fff,
+            1px 0 0 #fff,
+            -1px 0 0 #fff,
+            0 0 14px rgba(255,255,255,.14);
+        }
+
+        .roads-page-shell a[aria-label="Roads Garage home"]::after {
+          content: "";
+          position: absolute;
+          left: 7px;
+          bottom: 7px;
+          width: 122px;
+          height: 3px;
+          border-radius: 999px;
+          background: #fff;
+          opacity: .9;
+          transform: rotate(-3deg) skewX(-22deg);
+          box-shadow: 0 0 7px rgba(255,255,255,.16);
         }
 
         @media (min-width: 640px) {
-          .roads-page-shell img[alt="Roads Co."] {
+          .roads-page-shell a[aria-label="Roads Garage home"] {
             width: 176px !important;
-            max-width: 176px !important;
-            height: 44px !important;
+            min-width: 176px !important;
+            height: 52px !important;
+          }
+
+          .roads-page-shell a[aria-label="Roads Garage home"]::before {
+            font-size: 33px;
+          }
+
+          .roads-page-shell a[aria-label="Roads Garage home"]::after {
+            width: 139px;
           }
         }
       `}</style>
