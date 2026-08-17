@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="t" cx="50%" cy="42%" r="58%"><stop offset="0" stop-color="#3a3a3a"/><stop offset=".58" stop-color="#121212"/><stop offset="1" stop-color="#020202"/></radialGradient>
+    <radialGradient id="b" cx="35%" cy="28%" r="75%"><stop offset="0" stop-color="#f0c77a"/><stop offset=".45" stop-color="#b77b28"/><stop offset="1" stop-color="#4e2f0d"/></radialGradient>
+  </defs>
+  <circle cx="256" cy="256" r="246" fill="url(#t)"/>
+  <circle cx="256" cy="256" r="192" fill="#08090a" stroke="#3a3a3a" stroke-width="8"/>
+  <circle cx="256" cy="256" r="170" fill="url(#b)" stroke="#17120a" stroke-width="5"/>
+  <g fill="#18130a" stroke="#060504" stroke-width="3">
+    <path d="M246 245 221 89l35-16 34 17-21 157z"/><path d="M267 247 396 153l33 17 9 37-157 61z"/>
+    <path d="M277 265 410 346l-5 37-31 22-110-120z"/><path d="M256 278 216 431l-37 8-28-26 82-141z"/><path d="M237 263 81 276l-22-31 12-36 165 31z"/>
+  </g>
+  <circle cx="256" cy="256" r="63" fill="#1c160d" stroke="#e0ad56" stroke-width="7"/>
+  <circle cx="256" cy="256" r="25" fill="#070707" stroke="#e6b325" stroke-width="5"/>
+  <g fill="#f2d6a0"><circle cx="256" cy="210" r="7"/><circle cx="300" cy="242" r="7"/><circle cx="283" cy="294" r="7"/><circle cx="229" cy="294" r="7"/><circle cx="212" cy="242" r="7"/></g>
+  <circle cx="256" cy="256" r="219" fill="none" stroke="#292929" stroke-width="9" stroke-dasharray="7 7" opacity=".72"/>
+</svg>
