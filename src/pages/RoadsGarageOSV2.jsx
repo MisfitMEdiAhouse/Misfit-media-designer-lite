@@ -3,6 +3,7 @@ import RoadsGarageOSV2Core from './RoadsGarageOSV2Core.jsx';
 import { ROADS_LOGO_DATA } from '../assets/roadsLogoData.js';
 import { ROADS_TUNER_DATA, ROADS_WHEEL_DATA, ROADS_MERCH_DATA } from '../assets/roadsMediaData.js';
 
+// Roads visual assets are deliberately pinned here so mobile never falls back to broken placeholders.
 const FALLBACK = {
   tuner: 'https://roadscollective.com/cdn/shop/files/IMG_5049.jpg?crop=center&height=1000&v=1736916492&width=1000',
   wheel: 'https://roadscollective.com/cdn/shop/files/Red-porsche-next-to-fine-art.jpg?crop=center&height=1000&v=1736899403&width=1000',
