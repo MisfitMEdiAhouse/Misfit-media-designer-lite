@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
 import RoadsGarageOSV2Core from './RoadsGarageOSV2Core.jsx';
-import { ROADS_LOGO_DATA } from '../assets/roadsLogoData.js';
 import { ROADS_TUNER_DATA, ROADS_WHEEL_DATA, ROADS_MERCH_DATA } from '../assets/roadsMediaData.js';
 
 // Roads visual assets are deliberately pinned here so mobile never falls back to broken placeholders.
@@ -56,50 +55,11 @@ export default function RoadsGarageOSV2() {
     return () => observer.disconnect();
   }, []);
 
+  // Keep the Roads logo in the real header component. Do not hide it or float a second
+  // post-render copy over the page; that was the source of repeated mobile failures.
   return (
-    <>
-      <style>{`
-        .roads-page-shell img[alt="Roads Co."] {
-          opacity: 0 !important;
-        }
-
-        .roads-header-logo-lock {
-          position: fixed;
-          top: 12px;
-          left: 16px;
-          z-index: 60;
-          width: 160px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          pointer-events: none;
-        }
-
-        .roads-header-logo-lock img {
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          object-position: left center;
-          filter: invert(1);
-          background: transparent;
-        }
-
-        @media (min-width: 640px) {
-          .roads-header-logo-lock {
-            top: 16px;
-            left: 24px;
-            width: 176px;
-            height: 40px;
-          }
-        }
-      `}</style>
-      <div className="roads-header-logo-lock" aria-hidden="true">
-        <img src={ROADS_LOGO_DATA} alt="" />
-      </div>
-      <div ref={rootRef} className="roads-page-shell">
-        <RoadsGarageOSV2Core />
-      </div>
-    </>
+    <div ref={rootRef} className="roads-page-shell">
+      <RoadsGarageOSV2Core />
+    </div>
   );
 }
