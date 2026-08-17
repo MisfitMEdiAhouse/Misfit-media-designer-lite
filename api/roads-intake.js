@@ -28,10 +28,13 @@ export default async function handler(req, res) {
     tier: text(body.tier, 50),
     vendorPreferences: obj(body.vendorPreferences),
     sourceAssetRef: text(body.sourceAssetRef, 1000),
+    resultAssetRef: text(body.resultAssetRef, 1000),
     partnerKey: text(body.partnerKey, 80),
     productSku: text(body.productSku, 160),
     wheelSpec: obj(body.wheelSpec),
     tireSpec: obj(body.tireSpec),
+    configuration: obj(body.configuration),
+    versionLabel: text(body.versionLabel, 120),
     guideType: text(body.guideType, 80),
     title: text(body.title, 200),
     useCase: text(body.useCase, 300),
@@ -49,8 +52,6 @@ export default async function handler(req, res) {
   try {
     let { response: upstream, data } = await postJson(INTAKE_UPSTREAM, payload);
 
-    // A Roads intake must never fail simply because analytics/session creation raced it.
-    // Bootstrap the attribution session through the canonical event service, then retry once.
     if (upstream.status === 409) {
       const bootstrapPayload = {
         anonymousId: payload.anonymousId,
