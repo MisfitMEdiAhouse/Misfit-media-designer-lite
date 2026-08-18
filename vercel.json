@@ -1,14 +1,17 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "alias": ["vtest.coffeeandajoint.co"],
   "redirects": [
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
     { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
     { "source": "/roads-garage", "destination": "/roads", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/", "has": [{"type":"host","value":"vtest.coffeeandajoint.co"}], "destination": "/coffee-restored" },
     { "source": "/agents", "destination": "/" },
     { "source": "/heir", "destination": "/" },
     { "source": "/shopify-ai-audit", "destination": "/" },
