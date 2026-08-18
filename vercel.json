@@ -3,6 +3,7 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "alias": ["coffeeandajoint.co", "www.coffeeandajoint.co"],
   "redirects": [
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
     { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
