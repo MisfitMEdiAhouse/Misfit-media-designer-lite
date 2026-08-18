@@ -1,25 +1,9 @@
-const CUSTOMER='219348257';
-const DOMAIN='coffeeandajoint.co';
-const TARGET='https://misfit-media-designer-lite.vercel.app/coffee-restored';
-const API='https://api.godaddy.com';
-
-async function request(path,token,options={}){
-  const r=await fetch(API+path,{...options,headers:{Authorization:`Bearer ${token}`,Accept:'application/json',...(options.body?{'Content-Type':'application/json'}:{}),...(options.headers||{})}});
-  const text=await r.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  return {ok:r.ok,status:r.status,data};
-}
-export default async function handler(req,res){
-  res.setHeader('Cache-Control','no-store');
-  res.setHeader('X-Robots-Tag','noindex');
-  if(req.method!=='POST')return res.status(405).json({ok:false});
-  const token=process.env.GODADDY_PAT;
-  if(!token)return res.status(503).json({ok:false,error:'godaddy_pat_missing'});
-  try{
-    const path=`/v2/customers/${CUSTOMER}/domains/forwards/${DOMAIN}`;
-    const before=await request(path,token);
-    const payload={fqdn:DOMAIN,type:'MASKED',url:TARGET,title:'coffee & a joint.',description:'DRUGS $45 · Marijuana $65 · Coffee & A Joint'};
-    const put=await request(path,token,{method:'PUT',body:JSON.stringify(payload)});
-    const after=await request(path,token);
-    return res.status(put.ok?200:502).json({ok:put.ok,domain:DOMAIN,target:TARGET,before_status:before.status,put_status:put.status,put:put.data,after_status:after.status,after:after.data});
-  }catch(e){return res.status(500).json({ok:false,error:String(e?.message||e)})}
-}
+const ZONE='coffeeandajoint.co';
+const HOST='restore-test';
+const TXT='_redirect.restore-test';
+const API='https://api.godaddy.com/v3/domains/zones';
+async function req(url,token,options={}){const r=await fetch(url,{...options,headers:{Authorization:`Bearer ${token}`,Accept:'application/json',...(options.body?{'Content-Type':'application/json'}:{})}});const text=await r.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text};return{ok:r.ok,status:r.status,data}}
+async function list(name,type,token){const u=new URL(`${API}/${ZONE}/dns-records`);u.searchParams.set('name',name);u.searchParams.set('type',type);u.searchParams.set('pageSize','100');u.searchParams.set('totalRequired','true');return req(u.toString(),token)}
+async function del(id,token){return req(`${API}/${ZONE}/dns-records/${encodeURIComponent(id)}`,token,{method:'DELETE'})}
+async function add(record,token){return req(`${API}/${ZONE}/dns-records`,token,{method:'POST',body:JSON.stringify(record)})}
+export default async function handler(req,res){res.setHeader('Cache-Control','no-store');res.setHeader('X-Robots-Tag','noindex');if(req.method!=='POST')return res.status(405).json({ok:false});const token=process.env.GODADDY_PAT;if(!token)return res.status(503).json({ok:false,error:'godaddy_pat_missing'});try{const c=await list(HOST,'CNAME',token),t=await list(TXT,'TXT',token);const items=x=>Array.isArray(x.data?.items)?x.data.items:(Array.isArray(x.data)?x.data:[]);for(const r of [...items(c),...items(t)])if(r.recordId)await del(r.recordId,token);const cname=await add({name:HOST,type:'CNAME',data:'proxy.txtd.io',ttl:600},token);const txt=await add({name:TXT,type:'TXT',data:'v=txtv0;type=proxy;to=https://misfit-media-designer-lite.vercel.app/coffee-restored',ttl:600},token);return res.status(cname.ok&&txt.ok?200:502).json({ok:cname.ok&&txt.ok,host:`${HOST}.${ZONE}`,cname_status:cname.status,txt_status:txt.status,cname:cname.data,txt:txt.data})}catch(e){return res.status(500).json({ok:false,error:String(e?.message||e)})}}
