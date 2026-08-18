@@ -1,0 +1,40 @@
+name: Coffee Pages Bootstrap
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/caj-pages-bootstrap.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Configure Pages source and custom domain
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          API='https://api.github.com/repos/MisfitMEdiAhouse/Misfit-media-designer-lite/pages'
+          HDR=(-H 'Accept: application/vnd.github+json' -H 'X-GitHub-Api-Version: 2022-11-28' -H "Authorization: Bearer $GH_TOKEN")
+          get_code=$(curl -sS -o /tmp/get.json -w '%{http_code}' "${HDR[@]}" "$API")
+          create_code='skip'
+          if [ "$get_code" = '404' ]; then
+            create_code=$(curl -sS -o /tmp/create.json -w '%{http_code}' -X POST "${HDR[@]}" -H 'Content-Type: application/json' "$API" --data '{"source":{"branch":"coffee-pages","path":"/"}}')
+          fi
+          update_code=$(curl -sS -o /tmp/update.json -w '%{http_code}' -X PUT "${HDR[@]}" -H 'Content-Type: application/json' "$API" --data '{"cname":"coffeeandajoint.co","source":{"branch":"coffee-pages","path":"/"}}')
+          final_code=$(curl -sS -o /tmp/final.json -w '%{http_code}' "${HDR[@]}" "$API")
+          jq -n --arg get "$get_code" --arg create "$create_code" --arg update "$update_code" --arg final "$final_code" --argjson finalbody "$(cat /tmp/final.json 2>/dev/null || echo '{}')" '{get_status:$get,create_status:$create,update_status:$update,final_status:$final,html_url:($finalbody.html_url // null),cname:($finalbody.cname // null),source:($finalbody.source // null),protected_domain_state:($finalbody.protected_domain_state // null),status:($finalbody.status // null)}' > caj-pages-bootstrap-result.json
+          cat caj-pages-bootstrap-result.json
+      - name: Persist bootstrap result
+        run: |
+          git config user.name 'Misfit Pages Bot'
+          git config user.email 'pricemedia82@gmail.com'
+          git add caj-pages-bootstrap-result.json
+          git commit -m 'Record Coffee Pages bootstrap result' || exit 0
+          git push
