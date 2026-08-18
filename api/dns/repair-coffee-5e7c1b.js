@@ -13,7 +13,7 @@ function decodeJwtPayload(token) {
 function collectIds(value, out = new Set()) {
   if (!value || typeof value !== 'object') return out;
   for (const [k, v] of Object.entries(value)) {
-    if (/^(customer.?id|shopper.?id|account.?id|sub)$/i.test(k) && (typeof v === 'string' || typeof v === 'number')) out.add(String(v));
+    if (/^(customer.?id|shopper.?id|account.?id|subaccount.?id|domain.?id|sub)$/i.test(k) && (typeof v === 'string' || typeof v === 'number')) out.add(String(v));
     if (v && typeof v === 'object') collectIds(v, out);
   }
   return out;
@@ -40,7 +40,7 @@ async function discoverCustomerId(token) {
   ].filter(Boolean).map(String));
   collectIds(decodeJwtPayload(token), candidates);
 
-  for (const path of [`/v1/domains/${DOMAIN}`, '/v1/domains']) {
+  for (const path of [`/v1/domains/${DOMAIN}`, '/v1/domains?limit=1000']) {
     try {
       const r = await gd(path, token);
       const text = await r.text();
@@ -48,13 +48,15 @@ async function discoverCustomerId(token) {
     } catch {}
   }
 
+  const tried = [];
   for (const id of candidates) {
     try {
       const r = await gd(`/v2/customers/${encodeURIComponent(id)}/domains/forwards/${DOMAIN}`, token);
-      if ([200, 404].includes(r.status)) return id;
-    } catch {}
+      tried.push(r.status);
+      if ([200, 404].includes(r.status)) return { id, tried };
+    } catch { tried.push(0); }
   }
-  return null;
+  return { id: null, tried };
 }
 
 async function deleteApexARecords(token) {
@@ -66,7 +68,7 @@ async function deleteApexARecords(token) {
   for (const rec of items) {
     if (!rec?.recordId) continue;
     const d = await gd(`/v3/domains/zones/${DOMAIN}/dns-records/${encodeURIComponent(rec.recordId)}`, token, { method: 'DELETE' });
-    deleted.push({ id: rec.recordId, status: d.status });
+    deleted.push({ status: d.status });
   }
   return { ok: deleted.every(x => x.status >= 200 && x.status < 300), deleted };
 }
@@ -85,17 +87,17 @@ export default async function handler(req, res) {
   const token = process.env.GODADDY_PAT;
   if (!token) return res.status(503).json({ ok: false, error: 'godaddy_not_configured' });
   try {
-    const customerId = await discoverCustomerId(token);
-    if (!customerId) return res.status(409).json({ ok: false, error: 'customer_id_not_discoverable' });
+    const found = await discoverCustomerId(token);
+    if (!found.id) return res.status(409).json({ ok: false, error: 'customer_id_not_discoverable', candidate_statuses: found.tried });
 
-    let f = await putForward(token, customerId);
+    let f = await putForward(token, found.id);
     let firstStatus = f.status;
     let firstText = await f.text();
     let dnsCleanup = null;
 
     if (!f.ok && [409, 422].includes(firstStatus)) {
       dnsCleanup = await deleteApexARecords(token);
-      f = await putForward(token, customerId);
+      f = await putForward(token, found.id);
     }
     const finalText = await f.text();
     return res.status(f.ok ? 200 : 502).json({
