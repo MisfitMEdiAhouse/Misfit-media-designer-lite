@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node -e \"console.log(process.env.VERCEL_OIDC_TOKEN?'VERCEL_OIDC_PRESENT':'VERCEL_OIDC_MISSING')\"; (vercel whoami >/dev/null 2>/tmp/vercel-whoami.err && echo VERCEL_BUILD_AUTH_OK || (echo VERCEL_BUILD_AUTH_NO; tail -c 300 /tmp/vercel-whoami.err)); npm run build",
+  "buildCommand": "node -e \"console.log(process.env.VERCEL_OIDC_TOKEN?'OIDC_PRESENT':'OIDC_MISSING')\"; vercel whoami >/dev/null 2>&1 && echo AUTH_OK || echo AUTH_NO; npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
