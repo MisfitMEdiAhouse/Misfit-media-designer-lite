@@ -24,10 +24,12 @@ async function deleteApexARecords(token){
 }
 
 async function putForward(token){
-  return gd(`/v2/customers/${CUSTOMER_ID}/domains/forwards/${DOMAIN}`,token,{
+  const r=await gd(`/v2/customers/${CUSTOMER_ID}/domains/forwards/${DOMAIN}`,token,{
     method:'PUT',
     body:JSON.stringify({fqdn:DOMAIN,type:'REDIRECT_TEMPORARY',url:TARGET})
   });
+  const text=await r.text();
+  return{ok:r.ok,status:r.status,text};
 }
 
 export default async function handler(req,res){
@@ -38,14 +40,12 @@ export default async function handler(req,res){
   if(!token)return res.status(503).json({ok:false,error:'godaddy_not_configured'});
   try{
     let f=await putForward(token);
-    const firstStatus=f.status;
-    const firstText=await f.text();
+    const first={status:f.status,error:f.text?f.text.slice(0,400):null};
     let dnsCleanup=null;
-    if(!f.ok&&[409,422].includes(firstStatus)){
+    if(!f.ok&&[409,422].includes(f.status)){
       dnsCleanup=await deleteApexARecords(token);
       f=await putForward(token);
     }
-    const finalText=await f.text();
-    return res.status(f.ok?200:502).json({ok:f.ok,domain:DOMAIN,target:TARGET,redirect_type:'temporary',first_status:firstStatus,first_error:firstText?firstText.slice(0,400):null,dns_cleanup:dnsCleanup,final_status:f.status,final_error:f.ok?null:(finalText?finalText.slice(0,400):null)});
+    return res.status(f.ok?200:502).json({ok:f.ok,domain:DOMAIN,target:TARGET,redirect_type:'temporary',first_status:first.status,first_error:first.error,dns_cleanup:dnsCleanup,final_status:f.status,final_error:f.ok?null:(f.text?f.text.slice(0,400):null)});
   }catch(e){return res.status(500).json({ok:false,error:String(e?.message||e)})}
 }
