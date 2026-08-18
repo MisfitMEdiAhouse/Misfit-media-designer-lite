@@ -1,33 +1,34 @@
-name: Coffee domain attach
+name: Coffee domain token probe
 on:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/caj-domain-attach.yml'
+  workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  attach:
+  probe:
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN || secrets.VERCEL_ACCESS_TOKEN }}
       PROJECT_ID: prj_nQVmclxNH0gBRnYt23XFQSofnuQI
       TEAM_ID: team_7ZHStyjjCpAKFogk5jXp9gZo
     steps:
-      - name: Check token
+      - uses: actions/checkout@v5
+      - name: Probe token and test domain
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "VERCEL_TOKEN_MISSING"
-            exit 42
+            printf '%s\n' '{"token_present":false,"status":null,"ok":false,"message":"VERCEL_TOKEN_MISSING"}' > caj-domain-token-result.json
+          else
+            code=$(curl -sS -o /tmp/result.json -w '%{http_code}' -X POST "https://api.vercel.com/v10/projects/$PROJECT_ID/domains?teamId=$TEAM_ID" -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' --data '{"name":"vtest.coffeeandajoint.co"}')
+            jq -n --argjson status "$code" --arg msg "$(jq -r '.error.message // .message // empty' /tmp/result.json 2>/dev/null)" --arg name "$(jq -r '.name // "vtest.coffeeandajoint.co"' /tmp/result.json 2>/dev/null)" --arg verified "$(jq -r '.verified // empty' /tmp/result.json 2>/dev/null)" '{token_present:true,status:$status,ok:($status>=200 and $status<300),name:$name,verified:$verified,message:$msg}' > caj-domain-token-result.json
           fi
-      - name: Attach apex
+          cat caj-domain-token-result.json
+      - name: Persist sanitized result
         run: |
-          code=$(curl -sS -o /tmp/apex.json -w '%{http_code}' -X POST "https://api.vercel.com/v10/projects/$PROJECT_ID/domains?teamId=$TEAM_ID" -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' --data '{"name":"coffeeandajoint.co"}')
-          echo "apex_status=$code"
-          cat /tmp/apex.json | jq '{name,verified,error,verification}'
-          if [ "$code" -ge 400 ] && [ "$code" -ne 400 ]; then exit 1; fi
-      - name: Attach www
-        run: |
-          code=$(curl -sS -o /tmp/www.json -w '%{http_code}' -X POST "https://api.vercel.com/v10/projects/$PROJECT_ID/domains?teamId=$TEAM_ID" -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' --data '{"name":"www.coffeeandajoint.co"}')
-          echo "www_status=$code"
-          cat /tmp/www.json | jq '{name,verified,error,verification}'
-          if [ "$code" -ge 400 ] && [ "$code" -ne 400 ]; then exit 1; fi
+          git config user.name 'Misfit Domain Probe'
+          git config user.email 'pricemedia82@gmail.com'
+          git add caj-domain-token-result.json
+          git commit -m 'Record Vercel domain token probe result' || exit 0
+          git push
