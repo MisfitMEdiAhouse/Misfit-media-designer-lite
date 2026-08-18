@@ -29,6 +29,15 @@ export default function RoadsGarageOSV2() {
     if (!root) return undefined;
 
     const applyMedia = () => {
+      root.querySelectorAll('img[alt="Roads Co."]').forEach((image) => {
+        setMedia(image, '/roads-co-logo.png', null);
+        image.style.display = 'block';
+        image.style.opacity = '1';
+        image.style.visibility = 'visible';
+        image.style.objectFit = 'contain';
+        image.style.objectPosition = 'left center';
+      });
+
       root.querySelectorAll('img[alt="Roads engine work"]').forEach((image) => {
         setMedia(image, ROADS_TUNER_DATA, FALLBACK.tuner);
         image.style.objectFit = 'cover';
