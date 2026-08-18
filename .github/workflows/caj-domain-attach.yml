@@ -1,0 +1,33 @@
+name: Coffee domain attach
+on:
+  push:
+    paths:
+      - '.github/workflows/caj-domain-attach.yml'
+permissions:
+  contents: read
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN || secrets.VERCEL_ACCESS_TOKEN }}
+      PROJECT_ID: prj_nQVmclxNH0gBRnYt23XFQSofnuQI
+      TEAM_ID: team_7ZHStyjjCpAKFogk5jXp9gZo
+    steps:
+      - name: Check token
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN_MISSING"
+            exit 42
+          fi
+      - name: Attach apex
+        run: |
+          code=$(curl -sS -o /tmp/apex.json -w '%{http_code}' -X POST "https://api.vercel.com/v10/projects/$PROJECT_ID/domains?teamId=$TEAM_ID" -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' --data '{"name":"coffeeandajoint.co"}')
+          echo "apex_status=$code"
+          cat /tmp/apex.json | jq '{name,verified,error,verification}'
+          if [ "$code" -ge 400 ] && [ "$code" -ne 400 ]; then exit 1; fi
+      - name: Attach www
+        run: |
+          code=$(curl -sS -o /tmp/www.json -w '%{http_code}' -X POST "https://api.vercel.com/v10/projects/$PROJECT_ID/domains?teamId=$TEAM_ID" -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' --data '{"name":"www.coffeeandajoint.co"}')
+          echo "www_status=$code"
+          cat /tmp/www.json | jq '{name,verified,error,verification}'
+          if [ "$code" -ge 400 ] && [ "$code" -ne 400 ]; then exit 1; fi
