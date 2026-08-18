@@ -1,0 +1,11 @@
+{
+  "get_status": "404",
+  "create_status": "403",
+  "update_status": "403",
+  "final_status": "404",
+  "html_url": null,
+  "cname": null,
+  "source": null,
+  "protected_domain_state": null,
+  "status": "404"
+}
