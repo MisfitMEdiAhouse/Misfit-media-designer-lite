@@ -35,7 +35,7 @@
           <div class="contactStrip">
             <a href="tel:+18017910165"><b>Call Tyler</b><span>(801) 791-0165</span></a>
             <a href="sms:+18017910165?body=Hey%20Tyler%2C%20I%20found%20your%20contractor%20site%20and%20wanted%20to%20ask%20about%20a%20project."><b>Text Tyler</b><span>Start the conversation</span></a>
-            <a href="#shop"><b>Local crate planter</b><span>Vintage surplus + flowers</span></a>
+            <a href="#shop"><b>Local crate planter</b><span>Pickup in Eden</span></a>
           </div>
         </div>
         <aside class="heroCard">
@@ -95,14 +95,14 @@
       <div>
         <div class="kicker">Local shop · separate Misfit product</div>
         <h2>Make Love, Not War. Planted locally.</h2>
-        <p class="intro">A local planted version of the vintage military-surplus crate: crate + soil + seasonal flowers, with pickup/delivery options once fulfillment is locked. This is separate from the CoffeeAndJoint empty-crate product.</p>
-        <div class="productMeta"><span class="tag">Misfit-owned</span><span class="tag">Tyler partner channel</span><span class="tag">Local fulfillment</span></div>
+        <p class="intro">Vintage military-surplus crate + soil + seasonal flowers. Default fulfillment is local pickup in Eden, Utah after the order is confirmed. The exact pickup address stays private and is shared directly with the buyer. Optional local delivery can be priced separately when available.</p>
+        <div class="productMeta"><span class="tag">Misfit-owned</span><span class="tag">Tyler partner channel</span><span class="tag">Eden pickup</span></div>
         <div class="productList">
           <div class="productLine"><span>+</span><div><strong>Vintage military-surplus crate</strong><span class="muted">Authentic surplus wording; no unverified WWII dating claim.</span></div></div>
           <div class="productLine"><span>+</span><div><strong>Soil + seasonal flowers</strong><span class="muted">Planted local SKU, not the empty-crate listing.</span></div></div>
-          <div class="productLine"><span>+</span><div><strong>Local partner fulfillment</strong><span class="muted">Tyler can earn a higher fulfillment payout if he supplies/installs/delivers the planting package.</span></div></div>
+          <div class="productLine"><span>+</span><div><strong>Pickup in Eden</strong><span class="muted">Tyler can stage the finished planter for customer pickup. Delivery is optional and priced separately instead of being baked into every order.</span></div></div>
         </div>
-        <div class="priceBox"><b>Launch price is intentionally not live yet.</b><span>The product exists in Misfit’s live Stripe account, but checkout stays off until soil/flower/delivery economics are verified.</span></div>
+        <div class="priceBox"><b>Launch price is intentionally not live yet.</b><span>The product exists in Misfit’s live Stripe account. Local pickup removes delivery from the base economics; checkout stays off until soil + flower cost is verified.</span></div>
         <button class="btn dark" id="crateButton">I want one →</button>
         <div class="status" id="crateStatus" aria-live="polite"></div>
       </div>
@@ -113,7 +113,7 @@
 
   <div class="stickyMobile"><a href="tel:+18017910165">Call Tyler</a><a href="sms:+18017910165?body=Hey%20Tyler%2C%20I%20wanted%20to%20ask%20about%20a%20project.">Text Tyler</a></div>
 
-  <div class="modal" id="crateModal"><div class="modalCard"><h3>Get on the planted-crate list</h3><p class="muted">We’ll save your interest now and contact you when the local price / delivery setup is ready.</p><form id="crateForm"><input type="hidden" name="project_key" value="tyler-ward-contractor-site"><input type="hidden" name="kind" value="crate_interest"><input type="hidden" name="service" value="planted_crate"><div class="honeypot"><input name="website" tabindex="-1"></div><div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone or email</label><input name="contact" required placeholder="801… or you@email.com"></div><div class="field"><label>City</label><input name="city"></div><div class="field"><label>Notes</label><textarea name="message" placeholder="Pickup/delivery, quantity, gift, etc."></textarea></div><div class="modalActions"><button class="btn dark" type="submit">Save my interest</button><button class="btn" type="button" id="closeCrate">Not yet</button></div><div class="status" id="crateModalStatus"></div></form></div></div>
+  <div class="modal" id="crateModal"><div class="modalCard"><h3>Get on the planted-crate list</h3><p class="muted">Local pickup in Eden is the default. We’ll save your interest now; the exact pickup address is shared privately only after an order is confirmed. Optional delivery can be quoted separately.</p><form id="crateForm"><input type="hidden" name="project_key" value="tyler-ward-contractor-site"><input type="hidden" name="kind" value="crate_interest"><input type="hidden" name="service" value="planted_crate"><div class="honeypot"><input name="website" tabindex="-1"></div><div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone or email</label><input name="contact" required placeholder="801… or you@email.com"></div><div class="field"><label>City</label><input name="city"></div><div class="field"><label>Notes</label><textarea name="message" placeholder="Quantity, gift, Eden pickup, or ask about optional delivery."></textarea></div><div class="modalActions"><button class="btn dark" type="submit">Save my interest</button><button class="btn" type="button" id="closeCrate">Not yet</button></div><div class="status" id="crateModalStatus"></div></form></div></div>
 
   <script>
     const endpoint='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/tyler-contractor-lead';
