@@ -5,233 +5,52 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0d100c">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="description" content="Private preview for Tyler Ward general contracting, construction, remodeling, flooring, landscaping and outdoor projects in Eden, Utah.">
-  <title>Tyler Ward — General Contracting · Construction · Landscaping</title>
+  <meta name="description" content="Private preview for Tyler Ward general contracting, construction, remodeling, flooring, landscaping, snow removal and property projects in Eden, Utah.">
+  <title>Tyler Ward — General Contracting · Construction · Eden, Utah</title>
   <style>
-    :root{
-      --black:#0b0d0a;--deep:#121711;--forest:#1d281c;--moss:#65795a;--olive:#85936f;
-      --paper:#efe8d8;--paper2:#f7f2e7;--sand:#dcc79a;--ink:#151713;--muted:#62685c;
-      --rust:#aa4d2a;--line:rgba(21,23,19,.16);--white:#f7f4eb;
-    }
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.35}
-    a{color:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.preview{
-      background:#10150f;color:#eee9dc;border-bottom:1px solid rgba(255,255,255,.1);
-      font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase
-    }.preview .wrap{padding:9px 0}
-    .top{background:var(--black);color:var(--white);border-bottom:1px solid rgba(255,255,255,.08)}
-    .topbar{height:92px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{font-size:clamp(28px,4vw,45px);font-weight:950;line-height:.9;letter-spacing:-.045em}
-    .brand small{display:block;font-size:11px;line-height:1.25;letter-spacing:.13em;color:#91a175;text-transform:uppercase;margin-top:10px}
-    .topactions{display:flex;gap:12px}.iconBtn{height:54px;width:54px;border:1px solid rgba(220,199,154,.28);border-radius:13px;
-      display:grid;place-items:center;text-decoration:none;background:#111510;color:#f4efdf;font-size:24px}
-    .hamb{font-size:0}.hamb:before{content:"☰";font-size:29px}
-    .hero{position:relative;overflow:hidden;background:#10150f;color:white}
-    .heroBg{position:absolute;inset:0;background:
-      linear-gradient(90deg,rgba(8,10,8,.98) 0%,rgba(8,10,8,.92) 31%,rgba(8,10,8,.48) 55%,rgba(8,10,8,.12) 100%),
-      url('/assets/tyler-crate-hero.webp') right center/auto 100% no-repeat;
-    }.heroBg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.1))}
-    .heroInner{position:relative;z-index:2;min-height:590px;display:flex;align-items:center;padding:48px 0 56px}
-    .heroCopy{width:min(610px,61%)}.eyebrow,.kicker{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
-    .eyebrow{color:#9cad7d;margin-bottom:16px}.hero h1{margin:0;color:#f7f2e8;font-size:clamp(64px,9vw,112px);
-      line-height:.72;letter-spacing:-.075em}.hero h1 span{display:block;color:var(--sand)}
-    .lede{font-size:20px;max-width:555px;margin:27px 0 25px;color:#e2dfd6}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:510px}
-    .btn{border:0;text-decoration:none;border-radius:8px;min-height:54px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;
-      font-weight:950;font-size:14px;text-transform:uppercase;letter-spacing:.02em;cursor:pointer}
-    .bid{background:#f1e7cf;color:#161913}.visit{background:#6f835f;color:white}.call{background:#171c15;color:#f5f1e8;border:1px solid rgba(255,255,255,.13)}
-    .text{background:#ac4d28;color:white}.btn .arr{font-size:25px;font-weight:500}
-    .tradeStrip{background:repeating-linear-gradient(-45deg,#cfb982 0,#cfb982 18px,#d8c694 18px,#d8c694 36px);color:#151713;border-top:1px solid rgba(0,0,0,.35);border-bottom:1px solid rgba(0,0,0,.18)}
-    .tradeStrip .wrap{padding:11px 0;display:flex;gap:20px;overflow:hidden;white-space:nowrap;font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
-    .tradeStrip span:before{content:"■";font-size:7px;color:var(--rust);margin-right:9px;vertical-align:2px}
-    .section{padding:42px 0}.services{background:var(--paper2)}.sectionHead{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px}
-    .kicker{color:#6c7c5a}.sectionHead h2,.product h2,.contact h2{font-size:clamp(44px,6vw,72px);line-height:.84;letter-spacing:-.055em;margin:6px 0 0}
-    .outlineBtn{border:1px solid #7f7767;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:12px;font-weight:900;text-transform:uppercase;white-space:nowrap}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.serviceCard{background:#121710;color:#f0ede3;border-radius:13px;padding:20px;min-height:190px;
-      box-shadow:0 15px 35px rgba(17,24,16,.12);border-top:3px solid #71835f}.serviceCard.construction{border-top-color:var(--rust)}.serviceIcon{font-size:34px;color:#879b69;line-height:1;margin-bottom:26px}.construction .serviceIcon{color:#c06a45}
-    .serviceCard b{display:block;font-size:13px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px}.serviceCard p{margin:0;color:#d0cec5;font-size:15px}
-    .serviceFoot{margin-top:18px;padding-top:16px;border-top:1px solid rgba(21,23,19,.13);display:flex;flex-wrap:wrap;gap:8px}.serviceFoot span{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;border:1px solid #a99e89;border-radius:999px;padding:7px 9px;color:#4f554a}
-    .product{background:#0f140e;color:#f6f1e6;padding:42px 0}.productShell{border:1px solid rgba(255,255,255,.08);border-radius:15px;overflow:hidden;
-      display:grid;grid-template-columns:.88fr 1.12fr;min-height:400px;background:#151a13}.productCopy{padding:30px 28px}
-    .product .kicker{color:#b95b35}.product h2{font-size:clamp(44px,5vw,67px);margin-bottom:16px}.productIntro{font-size:19px;max-width:520px;color:#e5e1d7;margin:0 0 18px}
-    .features{display:grid;gap:8px;font-size:15px}.features div:before{content:"✓";display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #7e9164;
-      border-radius:50%;margin-right:9px;color:#93a773;font-size:12px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.chip{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 10px;
-      font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.11em}.productVisual{position:relative;min-height:400px;
-      background:linear-gradient(90deg,rgba(21,26,19,.88),rgba(21,26,19,.06) 25%),url('/assets/tyler-crate-hero.webp') center/cover no-repeat}
-    .buyBox{position:absolute;right:20px;bottom:20px;display:flex;overflow:hidden;border-radius:10px;background:#f4efe4;color:#192017;text-decoration:none;
-      box-shadow:0 18px 50px rgba(0,0,0,.32)}.buyCopy{padding:11px 16px 10px}.buyCopy b{display:block;font-size:12px;text-transform:uppercase}.priceRow{display:flex;align-items:end;gap:12px}
-    .price{font-size:31px;font-weight:950;line-height:1}.pickup{font-size:10px;font-weight:900;line-height:1.1;text-transform:uppercase}.buyArrow{width:66px;background:#70815d;display:grid;place-items:center;font-size:35px}
-    .contact{background:#f0e8d8;padding:38px 0 40px}.contactGrid{display:grid;grid-template-columns:.75fr 1.25fr;gap:46px;align-items:start}
-    .contact .kicker{color:#2d3828}.contact h2{font-size:clamp(45px,5vw,66px)}.benefits{display:grid;gap:10px;margin-top:27px;font-size:14px}
-    .benefits div:before{content:"✓";display:inline-grid;place-items:center;width:23px;height:23px;border:1px solid #80916b;border-radius:50%;margin-right:9px;color:#627b51}
-    .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form input,.form select,.form textarea{width:100%;border:1px solid #a99e89;background:#f5efe3;border-radius:5px;
-      padding:14px 13px;font:inherit;color:#191c18;outline:none}.form textarea{grid-column:1/-1;min-height:100px;resize:vertical}.form button{grid-column:1/-1;background:#637b52;color:white;border:0;border-radius:5px;padding:15px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
-    .formStatus{grid-column:1/-1;font-size:13px;font-weight:800;min-height:18px}.honeypot{position:absolute;left:-10000px;opacity:0}
-    footer{background:#171c15;color:#d0cec4;padding:21px 0}.footer{display:flex;align-items:center;justify-content:space-between;gap:20px}.footerBrand{font-size:24px;font-weight:950;letter-spacing:-.04em}
-    .footerBrand small{display:block;color:#889b6f;font-size:9px;text-transform:uppercase;letter-spacing:.1em}.built{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:800}
-    .built img{width:44px;height:44px;object-fit:cover;border-radius:50%;filter:saturate(.8)}.sticky{display:none}
-    @media(max-width:880px){
-      .wrap{width:min(100% - 28px,760px)}.topbar{height:76px}.brand{font-size:31px}.iconBtn{height:48px;width:48px}
-      .heroBg{background:linear-gradient(90deg,rgba(8,10,8,.97) 0%,rgba(8,10,8,.82) 43%,rgba(8,10,8,.25) 77%),
-        url('/assets/tyler-crate-hero.webp') right center/cover no-repeat}
-      .heroInner{min-height:610px}.heroCopy{width:72%}.hero h1{font-size:82px}.cards{grid-template-columns:1fr 1fr}.productShell{grid-template-columns:1fr}
-      .productVisual{min-height:380px}.contactGrid{grid-template-columns:1fr}.footer{align-items:flex-end}
-    }
-    @media(max-width:600px){
-      .preview{font-size:10px}.wrap{width:calc(100% - 24px)}.topbar{height:78px}.brand{font-size:29px}.brand small{font-size:8.5px;margin-top:7px;letter-spacing:.1em}
-      .iconBtn{width:46px;height:46px}.topactions{gap:8px}.heroBg{background:
-        linear-gradient(180deg,rgba(8,10,8,.16) 0%,rgba(8,10,8,.55) 47%,rgba(8,10,8,.98) 77%),
-        url('/assets/tyler-crate-hero.webp') center top/cover no-repeat}.heroInner{min-height:700px;align-items:flex-end;padding:250px 0 28px}
-      .heroCopy{width:100%}.eyebrow{font-size:9.5px;margin-bottom:10px}.hero h1{font-size:66px;line-height:.78}.lede{font-size:17px;margin:18px 0 18px;max-width:100%}
-      .actions{grid-template-columns:1fr 1fr}.btn{min-height:50px;font-size:12px;padding:0 13px}.tradeStrip .wrap{overflow:auto;scrollbar-width:none}.tradeStrip .wrap::-webkit-scrollbar{display:none}
-      .section{padding:32px 0}.sectionHead{align-items:flex-start}.sectionHead h2{font-size:48px}.outlineBtn{display:none}.cards{grid-template-columns:1fr 1fr;gap:10px}.serviceCard{min-height:192px;padding:16px}.serviceIcon{margin-bottom:20px}.serviceCard p{font-size:13px}
-      .serviceFoot{gap:6px}.serviceFoot span{font-size:9px;padding:6px 8px}.product{padding:22px 0}.productShell{display:block}.productCopy{padding:24px 19px}.product h2{font-size:45px}.productIntro{font-size:16px}.features{font-size:13px}
-      .productVisual{min-height:330px}.buyBox{right:12px;bottom:12px}.buyCopy{padding:9px 12px}.price{font-size:26px}.buyArrow{width:54px}
-      .contact{padding:30px 0 92px}.contact h2{font-size:47px}.contactGrid{gap:25px}.form{grid-template-columns:1fr}.form textarea,.form button,.formStatus{grid-column:1}
-      footer{padding:20px 0 84px}.built{font-size:11px}.built img{width:36px;height:36px}.footerBrand{font-size:20px}
-      .sticky{position:fixed;display:grid;grid-template-columns:1fr 1fr;gap:10px;left:10px;right:10px;bottom:10px;z-index:80;background:rgba(15,19,14,.94);padding:9px;border-radius:18px;backdrop-filter:blur(12px)}
-      .sticky a{text-decoration:none;text-align:center;padding:14px 10px;border-radius:11px;color:white;font-weight:950}.sticky a:first-child{background:#6b7f60}.sticky a:last-child{background:#aa4d2a}
-    }
+    :root{--black:#0b0d0a;--deep:#11150f;--forest:#1d281c;--moss:#687b5d;--paper:#f2eadb;--paper2:#f8f3e9;--sand:#dcc79a;--ink:#151713;--rust:#aa4d2a;--white:#f8f4ea}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.35}a{color:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+    .preview{background:#10150f;color:#eee9dc;border-bottom:1px solid rgba(255,255,255,.1);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.preview .wrap{padding:9px 0}
+    .top{background:var(--black);color:var(--white);border-bottom:1px solid rgba(255,255,255,.08)}.topbar{height:92px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:clamp(28px,4vw,45px);font-weight:950;line-height:.9;letter-spacing:-.045em}.brand small{display:block;font-size:11px;line-height:1.25;letter-spacing:.13em;color:#91a175;text-transform:uppercase;margin-top:10px}.topactions{display:flex;gap:12px}.iconBtn{height:54px;width:54px;border:1px solid rgba(220,199,154,.28);border-radius:13px;display:grid;place-items:center;text-decoration:none;background:#111510;color:#f4efdf;font-size:24px}.hamb{font-size:0}.hamb:before{content:"☰";font-size:29px}
+    .hero{position:relative;overflow:hidden;background:#0c0f0c;color:white}.heroBg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,7,.98) 0%,rgba(7,9,7,.9) 30%,rgba(7,9,7,.42) 56%,rgba(7,9,7,.10) 100%),url('/assets/tyler-mountain-lodge-hero.webp') right center/cover no-repeat}.heroBg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.18))}.heroInner{position:relative;z-index:2;min-height:610px;display:flex;align-items:center;padding:50px 0 58px}.heroCopy{width:min(620px,61%)}.eyebrow,.kicker{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.eyebrow{color:#a2b487;margin-bottom:16px}.hero h1{margin:0;color:#f7f2e8;font-size:clamp(64px,9vw,112px);line-height:.72;letter-spacing:-.075em}.hero h1 span{display:block;color:var(--sand)}.lede{font-size:20px;max-width:570px;margin:27px 0 25px;color:#e5e2d9}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:520px}.btn{border:0;text-decoration:none;border-radius:8px;min-height:54px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;font-weight:950;font-size:14px;text-transform:uppercase;letter-spacing:.02em;cursor:pointer}.bid{background:#f1e7cf;color:#161913}.visit{background:#6f835f;color:white}.call{background:#171c15;color:#f5f1e8;border:1px solid rgba(255,255,255,.13)}.text{background:#ac4d28;color:white}.arr{font-size:25px;font-weight:500}
+    .tradeStrip{background:#d6c28e;color:#151713;border-top:1px solid rgba(0,0,0,.28);border-bottom:1px solid rgba(0,0,0,.18)}.tradeStrip .wrap{padding:11px 0;display:flex;gap:20px;overflow:hidden;white-space:nowrap;font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.tradeStrip span:before{content:"■";font-size:7px;color:var(--rust);margin-right:9px;vertical-align:2px}
+    .section{padding:42px 0}.services{background:var(--paper2)}.sectionHead{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px}.kicker{color:#647653}.sectionHead h2,.product h2,.contact h2{font-size:clamp(44px,6vw,72px);line-height:.84;letter-spacing:-.055em;margin:6px 0 0}.outlineBtn{border:1px solid #7f7767;border-radius:999px;padding:11px 18px;text-decoration:none;font-size:12px;font-weight:900;text-transform:uppercase;white-space:nowrap}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.serviceCard{background:#121710;color:#f0ede3;border-radius:13px;padding:20px;min-height:205px;box-shadow:0 15px 35px rgba(17,24,16,.12);border-top:3px solid #71835f}.serviceCard.construction{border-top-color:var(--rust)}.serviceIcon{font-size:33px;color:#879b69;line-height:1;margin-bottom:24px}.construction .serviceIcon{color:#c06a45}.serviceCard b{display:block;font-size:13px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px}.serviceCard p{margin:0;color:#d0cec5;font-size:15px}.serviceFoot{margin-top:18px;padding-top:16px;border-top:1px solid rgba(21,23,19,.13);display:flex;flex-wrap:wrap;gap:8px}.serviceFoot span{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;border:1px solid #a99e89;border-radius:999px;padding:7px 9px;color:#4f554a}
+    .product{background:#0f140e;color:#f6f1e6;padding:42px 0}.productShell{border:1px solid rgba(255,255,255,.08);border-radius:15px;overflow:hidden;display:grid;grid-template-columns:.88fr 1.12fr;min-height:400px;background:#151a13}.productCopy{padding:30px 28px}.product .kicker{color:#b95b35}.product h2{font-size:clamp(44px,5vw,67px);margin-bottom:16px}.productIntro{font-size:19px;max-width:520px;color:#e5e1d7;margin:0 0 18px}.features{display:grid;gap:8px;font-size:15px}.features div:before{content:"✓";display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #7e9164;border-radius:50%;margin-right:9px;color:#93a773;font-size:12px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.chip{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.11em}.productVisual{position:relative;min-height:400px;background:linear-gradient(90deg,rgba(21,26,19,.88),rgba(21,26,19,.06) 25%),url('/assets/tyler-crate-hero.webp') center/cover no-repeat}.buyBox{position:absolute;right:20px;bottom:20px;display:flex;overflow:hidden;border-radius:10px;background:#f4efe4;color:#192017;text-decoration:none;box-shadow:0 18px 50px rgba(0,0,0,.32)}.buyCopy{padding:11px 16px 10px}.buyCopy b{display:block;font-size:12px;text-transform:uppercase}.priceRow{display:flex;align-items:end;gap:12px}.price{font-size:31px;font-weight:950;line-height:1}.pickup{font-size:10px;font-weight:900;line-height:1.1;text-transform:uppercase}.buyArrow{width:66px;background:#70815d;display:grid;place-items:center;font-size:35px}
+    .contact{background:#f0e8d8;padding:38px 0 40px}.contactGrid{display:grid;grid-template-columns:.75fr 1.25fr;gap:46px;align-items:start}.contact .kicker{color:#2d3828}.benefits{display:grid;gap:10px;margin-top:27px;font-size:14px}.benefits div:before{content:"✓";display:inline-grid;place-items:center;width:23px;height:23px;border:1px solid #80916b;border-radius:50%;margin-right:9px;color:#627b51}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form input,.form select,.form textarea{width:100%;border:1px solid #a99e89;background:#f5efe3;border-radius:5px;padding:14px 13px;font:inherit;color:#191c18;outline:none}.form textarea{grid-column:1/-1;min-height:100px;resize:vertical}.form button{grid-column:1/-1;background:#637b52;color:white;border:0;border-radius:5px;padding:15px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}.formStatus{grid-column:1/-1;font-size:13px;font-weight:800;min-height:18px}.honeypot{position:absolute;left:-10000px;opacity:0}
+    footer{background:#171c15;color:#d0cec4;padding:21px 0}.footer{display:flex;align-items:center;justify-content:space-between;gap:20px}.footerBrand{font-size:24px;font-weight:950;letter-spacing:-.04em}.footerBrand small{display:block;color:#889b6f;font-size:9px;text-transform:uppercase;letter-spacing:.1em}.built{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:800}.built img{width:44px;height:44px;object-fit:cover;border-radius:50%;filter:saturate(.8)}.sticky{display:none}
+    @media(max-width:880px){.wrap{width:min(100% - 28px,760px)}.topbar{height:76px}.brand{font-size:31px}.iconBtn{height:48px;width:48px}.heroBg{background:linear-gradient(90deg,rgba(8,10,8,.97) 0%,rgba(8,10,8,.8) 43%,rgba(8,10,8,.18) 77%),url('/assets/tyler-mountain-lodge-hero.webp') 68% center/cover no-repeat}.heroInner{min-height:620px}.heroCopy{width:72%}.hero h1{font-size:82px}.cards{grid-template-columns:1fr 1fr}.productShell{grid-template-columns:1fr}.productVisual{min-height:380px}.contactGrid{grid-template-columns:1fr}.footer{align-items:flex-end}}
+    @media(max-width:600px){.preview{font-size:10px}.wrap{width:calc(100% - 24px)}.topbar{height:78px}.brand{font-size:29px}.brand small{font-size:8.5px;margin-top:7px;letter-spacing:.1em}.iconBtn{width:46px;height:46px}.topactions{gap:8px}.heroBg{background:linear-gradient(180deg,rgba(8,10,8,.05) 0%,rgba(8,10,8,.28) 38%,rgba(8,10,8,.96) 75%),url('/assets/tyler-mountain-lodge-hero.webp') 67% top/cover no-repeat}.heroInner{min-height:710px;align-items:flex-end;padding:265px 0 28px}.heroCopy{width:100%}.eyebrow{font-size:9.5px;margin-bottom:10px}.hero h1{font-size:64px;line-height:.79}.lede{font-size:17px;margin:18px 0;max-width:100%}.actions{grid-template-columns:1fr 1fr}.btn{min-height:50px;font-size:12px;padding:0 13px}.tradeStrip .wrap{overflow:auto;scrollbar-width:none}.tradeStrip .wrap::-webkit-scrollbar{display:none}.section{padding:32px 0}.sectionHead{align-items:flex-start}.sectionHead h2{font-size:48px}.outlineBtn{display:none}.cards{grid-template-columns:1fr 1fr;gap:10px}.serviceCard{min-height:198px;padding:16px}.serviceIcon{margin-bottom:19px}.serviceCard p{font-size:13px}.serviceFoot{gap:6px}.serviceFoot span{font-size:9px;padding:6px 8px}.product{padding:22px 0}.productShell{display:block}.productCopy{padding:24px 19px}.product h2{font-size:45px}.productIntro{font-size:16px}.features{font-size:13px}.productVisual{min-height:330px}.buyBox{right:12px;bottom:12px}.buyCopy{padding:9px 12px}.price{font-size:26px}.buyArrow{width:54px}.contact{padding:30px 0 92px}.contact h2{font-size:47px}.contactGrid{gap:25px}.form{grid-template-columns:1fr}.form textarea,.form button,.formStatus{grid-column:1}footer{padding:20px 0 84px}.built{font-size:11px}.built img{width:36px;height:36px}.footerBrand{font-size:20px}.sticky{position:fixed;display:grid;grid-template-columns:1fr 1fr;gap:10px;left:10px;right:10px;bottom:10px;z-index:80;background:rgba(15,19,14,.94);padding:9px;border-radius:18px;backdrop-filter:blur(12px)}.sticky a{text-decoration:none;text-align:center;padding:14px 10px;border-radius:11px;color:white;font-weight:950}.sticky a:first-child{background:#6b7f60}.sticky a:last-child{background:#aa4d2a}}
   </style>
 </head>
 <body>
   <div class="preview"><div class="wrap">PRIVATE PREVIEW · NOINDEX</div></div>
-  <header class="top">
-    <div class="wrap topbar">
-      <div class="brand">TYLER WARD<small>General Contracting · Construction · Landscaping · Outdoor Projects</small></div>
-      <div class="topactions">
-        <a class="iconBtn" href="tel:+18017910165" aria-label="Call Tyler">☎</a>
-        <a class="iconBtn hamb" href="#services" aria-label="View services">Menu</a>
-      </div>
-    </div>
-  </header>
+  <header class="top"><div class="wrap topbar"><div class="brand">TYLER WARD<small>General Contracting · Construction · Property & Landscape</small></div><div class="topactions"><a class="iconBtn" href="tel:+18017910165" aria-label="Call Tyler">☎</a><a class="iconBtn hamb" href="#services" aria-label="View services">Menu</a></div></div></header>
 
-  <section class="hero">
-    <div class="heroBg"></div>
-    <div class="wrap heroInner">
-      <div class="heroCopy">
-        <div class="eyebrow">General contracting · Construction · Landscaping</div>
-        <h1>Get the<br>project<span>moving.</span></h1>
-        <p class="lede">From remodels, flooring and repairs to landscaping, outdoor builds and property maintenance — tell Tyler what needs done and get the job scoped right.</p>
-        <div class="actions">
-          <a class="btn bid" href="#contact" data-kind="bid_request">Request a bid <span class="arr">→</span></a>
-          <a class="btn visit" href="#contact" data-kind="site_visit">Book a site visit <span class="arr">▣</span></a>
-          <a class="btn call" href="tel:+18017910165">Call Tyler <span class="arr">⌕</span></a>
-          <a class="btn text" href="sms:+18017910165?body=Hey%20Tyler%2C%20I%20found%20your%20site%20and%20want%20to%20talk%20about%20a%20project.">Text Tyler <span class="arr">◌</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="hero"><div class="heroBg"></div><div class="wrap heroInner"><div class="heroCopy"><div class="eyebrow">Eden · Ogden Valley · Mountain property work</div><h1>Build it.<br><span>Make it last.</span></h1><p class="lede">General construction, remodels, flooring, repairs, outdoor builds, landscaping and year-round property work for homes in Eden and the surrounding valley.</p><div class="actions"><a class="btn bid" href="#contact" data-kind="bid_request">Request a bid <span class="arr">→</span></a><a class="btn visit" href="#contact" data-kind="site_visit">Book a site visit <span class="arr">▣</span></a><a class="btn call" href="tel:+18017910165">Call Tyler <span class="arr">⌕</span></a><a class="btn text" href="sms:+18017910165?body=Hey%20Tyler%2C%20I%20found%20your%20site%20and%20want%20to%20talk%20about%20a%20project.">Text Tyler <span class="arr">◌</span></a></div></div></div></section>
 
-  <div class="tradeStrip" aria-label="Services at a glance">
-    <div class="wrap"><span>General Construction</span><span>Remodels</span><span>Flooring</span><span>Repairs</span><span>Landscaping</span><span>Outdoor Builds</span><span>Property Maintenance</span></div>
-  </div>
+  <div class="tradeStrip" aria-label="Services at a glance"><div class="wrap"><span>General Construction</span><span>Remodels</span><span>Flooring</span><span>Repairs</span><span>Outdoor Builds</span><span>Landscaping</span><span>Snow Removal</span></div></div>
 
-  <section class="section services" id="services">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div><div class="kicker">General contractor + property work</div><h2>Built inside & out.<br>Made to last.</h2></div>
-        <a class="outlineBtn" href="#contact">Request a bid →</a>
-      </div>
-      <div class="cards">
-        <article class="serviceCard construction"><div class="serviceIcon">⌂</div><b>General construction</b><p>Repairs, build-outs, punch-list work and practical property improvements from scope through finish.</p></article>
-        <article class="serviceCard construction"><div class="serviceIcon">▰</div><b>Remodels & renovations</b><p>Interior updates, demo, rebuild and finish work that makes an existing space work better.</p></article>
-        <article class="serviceCard construction"><div class="serviceIcon">▥</div><b>Flooring & finish work</b><p>Flooring, trim, doors and finish details that pull a room together and hold up to real use.</p></article>
-        <article class="serviceCard"><div class="serviceIcon">◒</div><b>Landscaping</b><p>Landscape installs, cleanup and outdoor improvements shaped around the property.</p></article>
-        <article class="serviceCard"><div class="serviceIcon">⌁</div><b>Patios, walls & steps</b><p>Hardscape and outdoor spaces built to look right, function right and fit the site.</p></article>
-        <article class="serviceCard"><div class="serviceIcon">⚙</div><b>Cleanup & maintenance</b><p>Property resets, ongoing care and the smaller jobs that keep a place looking sharp.</p></article>
-      </div>
-      <div class="serviceFoot"><span>Construction</span><span>Remodeling</span><span>Flooring</span><span>Repairs</span><span>Landscaping</span><span>Hardscape</span><span>Maintenance</span></div>
-    </div>
-  </section>
+  <section class="section services" id="services"><div class="wrap"><div class="sectionHead"><div><div class="kicker">Mountain homes · inside + out</div><h2>One call.<br>Whole property.</h2></div><a class="outlineBtn" href="#contact">Request a bid →</a></div><div class="cards">
+    <article class="serviceCard construction"><div class="serviceIcon">⌂</div><b>General construction</b><p>Repairs, build-outs, punch-list work and practical improvements from scope through finish.</p></article>
+    <article class="serviceCard construction"><div class="serviceIcon">▰</div><b>Remodels & renovations</b><p>Interior updates, demo, rebuild and finish work that makes an existing home work better.</p></article>
+    <article class="serviceCard construction"><div class="serviceIcon">▥</div><b>Flooring & finish work</b><p>Flooring, trim, doors and finish details built for everyday use and clean mountain-home style.</p></article>
+    <article class="serviceCard"><div class="serviceIcon">⌁</div><b>Outdoor builds & hardscape</b><p>Patios, walls, steps and outdoor spaces that fit the terrain and the property.</p></article>
+    <article class="serviceCard"><div class="serviceIcon">◒</div><b>Landscaping & property</b><p>Landscape installs, cleanup, grading-style property work and ongoing outdoor improvements.</p></article>
+    <article class="serviceCard"><div class="serviceIcon">❄</div><b>Snow removal & seasonal care</b><p>Winter access, snow removal and year-round property support without turning the whole site into a ski brochure.</p></article>
+  </div><div class="serviceFoot"><span>Construction</span><span>Remodeling</span><span>Flooring</span><span>Repairs</span><span>Hardscape</span><span>Landscaping</span><span>Snow Removal</span><span>Maintenance</span></div></div></section>
 
-  <section class="product" id="shop">
-    <div class="wrap productShell">
-      <div class="productCopy">
-        <div class="kicker">Limited. Authentic. One of a kind.</div>
-        <h2>Make Love,<br>Not War.</h2>
-        <p class="productIntro">Genuine WWII .50 caliber ammunition crates, repurposed and planted with soil and seasonal flowers.</p>
-        <div class="features">
-          <div>Real WWII .50 caliber ammunition crates</div>
-          <div>Planted with premium soil & seasonal flowers</div>
-          <div>Limited supply — each one is unique</div>
-          <div>Local pickup in Eden, Utah</div>
-        </div>
-        <div class="chips"><span class="chip">Limited supply</span><span class="chip">WWII .50 cal crates</span><span class="chip">Pickup in Eden</span></div>
-      </div>
-      <div class="productVisual">
-        <a class="buyBox" href="https://buy.stripe.com/28E5kD0saeCWfd05Ne8ww0s" target="_blank" rel="noopener" aria-label="Reserve a planted crate for $495">
-          <div class="buyCopy"><b>Reserve a crate</b><div class="priceRow"><span class="price">$495</span><span class="pickup">Local pickup<br>in Eden, Utah</span></div></div><span class="buyArrow">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
+  <section class="product" id="shop"><div class="wrap productShell"><div class="productCopy"><div class="kicker">Limited. Authentic. One of a kind.</div><h2>Make Love,<br>Not War.</h2><p class="productIntro">Genuine WWII .50 caliber ammunition crates, repurposed and planted with soil and seasonal flowers.</p><div class="features"><div>Real WWII .50 caliber ammunition crates</div><div>Planted with premium soil & seasonal flowers</div><div>Limited supply — each one is unique</div><div>Local pickup in Eden, Utah</div></div><div class="chips"><span class="chip">Limited supply</span><span class="chip">WWII .50 cal crates</span><span class="chip">Pickup in Eden</span></div></div><div class="productVisual"><a class="buyBox" href="https://buy.stripe.com/28E5kD0saeCWfd05Ne8ww0s" target="_blank" rel="noopener" aria-label="Reserve a planted crate for $495"><div class="buyCopy"><b>Reserve a crate</b><div class="priceRow"><span class="price">$495</span><span class="pickup">Local pickup<br>in Eden, Utah</span></div></div><span class="buyArrow">→</span></a></div></div></section>
 
-  <section class="contact" id="contact">
-    <div class="wrap contactGrid">
-      <div>
-        <div class="kicker">Construction, landscape or property work?</div>
-        <h2>Let’s get your<br>project on the books.</h2>
-        <div class="benefits"><div>One call for inside + outside work</div><div>Fast, local response</div><div>Straight answers</div></div>
-      </div>
-      <form class="form" id="leadForm">
-        <input type="hidden" name="project_key" value="tyler-ward-contractor-site">
-        <input type="hidden" name="kind" id="kind" value="bid_request">
-        <div class="honeypot"><input name="website" tabindex="-1" autocomplete="off"></div>
-        <input name="name" placeholder="Your Name" required>
-        <input name="contact" placeholder="Phone or Email" required>
-        <select name="service">
-          <option value="">Project Type</option>
-          <option value="general_construction">General construction</option>
-          <option value="remodel">Remodel / renovation</option>
-          <option value="flooring">Flooring / finish work</option>
-          <option value="repairs">Repairs / punch list</option>
-          <option value="landscaping">Landscaping</option>
-          <option value="hardscape">Patios / walls / steps</option>
-          <option value="yard_cleanup">Cleanup / reset</option>
-          <option value="property_maintenance">Property maintenance</option>
-          <option value="other">Other</option>
-        </select>
-        <input name="preferred_date" type="datetime-local" aria-label="Preferred day and time">
-        <textarea name="message" placeholder="Tell us about your project..."></textarea>
-        <button type="submit">Send request →</button>
-        <div class="formStatus" id="formStatus"></div>
-      </form>
-    </div>
-  </section>
+  <section class="contact" id="contact"><div class="wrap contactGrid"><div><div class="kicker">Construction, landscape or property work?</div><h2>Let’s get your<br>project moving.</h2><div class="benefits"><div>Inside + outside projects</div><div>Fast, local response</div><div>Straight answers</div></div></div><form class="form" id="leadForm"><input type="hidden" name="project_key" value="tyler-ward-contractor-site"><input type="hidden" name="kind" id="kind" value="bid_request"><div class="honeypot"><input name="website" tabindex="-1" autocomplete="off"></div><input name="name" placeholder="Your Name" required><input name="contact" placeholder="Phone or Email" required><select name="service"><option value="">Project Type</option><option value="general_construction">General construction</option><option value="remodel">Remodel / renovation</option><option value="flooring">Flooring / finish work</option><option value="repairs">Repairs / punch list</option><option value="outdoor_builds">Outdoor builds / hardscape</option><option value="landscaping">Landscaping</option><option value="snow_removal">Snow removal</option><option value="property_maintenance">Property maintenance</option><option value="other">Other</option></select><input name="preferred_date" type="datetime-local" aria-label="Preferred day and time"><textarea name="message" placeholder="Tell us about your project..."></textarea><button type="submit">Send request →</button><div class="formStatus" id="formStatus"></div></form></div></section>
 
-  <footer>
-    <div class="wrap footer">
-      <div class="footerBrand">TYLER WARD<small>General Contracting · Construction · Landscaping · Outdoor Projects</small></div>
-      <div class="built">Built by misfit MEdiAHouse <img src="/assets/neon-skull-rose.png.png" alt="" aria-hidden="true"></div>
-    </div>
-  </footer>
-
+  <footer><div class="wrap footer"><div class="footerBrand">TYLER WARD<small>General Contracting · Construction · Property & Landscape</small></div><div class="built">Built by misfit MEdiAHouse <img src="/assets/neon-skull-rose.png.png" alt="" aria-hidden="true"></div></div></footer>
   <div class="sticky"><a href="tel:+18017910165">Call Tyler</a><a href="sms:+18017910165?body=Hey%20Tyler%2C%20I%20want%20to%20talk%20about%20a%20project.">Text Tyler</a></div>
-
   <script>
     const endpoint='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/tyler-contractor-lead';
     const form=document.getElementById('leadForm'),statusEl=document.getElementById('formStatus'),kind=document.getElementById('kind');
     document.querySelectorAll('[data-kind]').forEach(el=>el.addEventListener('click',()=>{kind.value=el.dataset.kind||'bid_request'}));
-    form.addEventListener('submit',async e=>{
-      e.preventDefault();
-      const raw=Object.fromEntries(new FormData(form).entries());
-      const contact=(raw.contact||'').trim();
-      delete raw.contact;
-      raw.email=contact.includes('@')?contact:'';
-      raw.phone=contact.includes('@')?'':contact;
-      raw.contact_preference=contact.includes('@')?'email':'text';
-      raw.time_window='flexible';
-      if(!raw.phone&&!raw.email){statusEl.textContent='Add a phone number or email so Tyler can follow up.';return}
-      statusEl.textContent='Sending…';
-      try{
-        const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(raw)});
-        const j=await r.json();
-        if(!r.ok||!j.ok) throw new Error('save failed');
-        statusEl.textContent=raw.kind==='site_visit'?'Site-visit request saved — Tyler can confirm directly.':'Request saved — Tyler has your project details.';
-        form.reset();kind.value='bid_request';
-      }catch(err){statusEl.textContent='Could not save that request yet. Call or text Tyler and we’ll get it handled.'}
-    });
+    form.addEventListener('submit',async e=>{e.preventDefault();const raw=Object.fromEntries(new FormData(form).entries());const contact=(raw.contact||'').trim();delete raw.contact;raw.email=contact.includes('@')?contact:'';raw.phone=contact.includes('@')?'':contact;raw.contact_preference=contact.includes('@')?'email':'text';raw.time_window='flexible';if(!raw.phone&&!raw.email){statusEl.textContent='Add a phone number or email so Tyler can follow up.';return}statusEl.textContent='Sending…';try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(raw)});const j=await r.json();if(!r.ok||!j.ok)throw new Error('save failed');statusEl.textContent=raw.kind==='site_visit'?'Site-visit request saved — Tyler can confirm directly.':'Request saved — Tyler has your project details.';form.reset();kind.value='bid_request'}catch(err){statusEl.textContent='Could not save that request yet. Call or text Tyler and we’ll get it handled.'}});
   </script>
 </body>
 </html>
