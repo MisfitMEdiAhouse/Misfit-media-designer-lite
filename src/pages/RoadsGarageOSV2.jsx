@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
 import RoadsGarageOSV3Core from './RoadsGarageOSV3Core.jsx';
-import { ROADS_LOGO_DATA } from '../assets/roadsLogoData.js';
 import { ROADS_TUNER_DATA, ROADS_WHEEL_DATA, ROADS_MERCH_DATA } from '../assets/roadsMediaData.js';
 
 // Roads visual assets are deliberately pinned here so mobile never falls back to broken placeholders.
@@ -30,17 +29,6 @@ export default function RoadsGarageOSV2() {
     if (!root) return undefined;
 
     const applyMedia = () => {
-      // Exact owner-provided Roads Co. graffiti artwork. Render the PNG data directly;
-      // do not use a font recreation, SVG wrapper, external CDN, or substitute logo.
-      root.querySelectorAll('img[alt="Roads Co."]').forEach((image) => {
-        setMedia(image, ROADS_LOGO_DATA, null);
-        image.style.display = 'block';
-        image.style.opacity = '1';
-        image.style.visibility = 'visible';
-        image.style.objectFit = 'contain';
-        image.style.objectPosition = 'left center';
-      });
-
       root.querySelectorAll('img[alt="Roads engine work"]').forEach((image) => {
         setMedia(image, ROADS_TUNER_DATA, FALLBACK.tuner);
         image.style.objectFit = 'cover';
