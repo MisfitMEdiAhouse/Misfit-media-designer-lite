@@ -48,5 +48,38 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      (() => {
+        if (!location.pathname.startsWith('/tyler')) return;
+        let cachedDataUri = '';
+        let loading = false;
+        async function hydrateTylerCrate() {
+          const img = Array.from(document.images).find((node) =>
+            (node.alt || '').includes('Flower-filled vintage .50 caliber ammunition crate planter')
+          );
+          if (!img || img.dataset.crateHydrated === 'true' || loading) return;
+          try {
+            loading = true;
+            if (!cachedDataUri) {
+              const response = await fetch('/tyler-crate-catalog.data', { cache: 'force-cache' });
+              if (!response.ok) throw new Error('crate source unavailable');
+              const encoded = (await response.text()).trim();
+              cachedDataUri = `data:image/webp;base64,${encoded}`;
+            }
+            img.src = cachedDataUri;
+            img.removeAttribute('srcset');
+            img.dataset.crateHydrated = 'true';
+          } catch (error) {
+            img.dataset.crateHydrated = 'false';
+          } finally {
+            loading = false;
+          }
+        }
+        const observer = new MutationObserver(hydrateTylerCrate);
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+        window.addEventListener('load', hydrateTylerCrate);
+        hydrateTylerCrate();
+      })();
+    </script>
   </body>
 </html>
