@@ -7,7 +7,8 @@
   "redirects": [
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
     { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
-    { "source": "/roads-garage", "destination": "/roads", "permanent": true }
+    { "source": "/roads-garage", "destination": "/roads", "permanent": true },
+    { "source": "/tyler", "destination": "/tyler-ward", "permanent": true }
   ],
   "rewrites": [
     { "source": "/agents", "destination": "/" },
@@ -20,6 +21,7 @@
     { "source": "/misfit-ai-v2", "destination": "/" },
     { "source": "/roads", "destination": "/" },
     { "source": "/roads/admin", "destination": "/" },
+    { "source": "/tyler-ward", "destination": "/" },
     { "source": "/quotelink", "destination": "/" }
   ],
   "headers": [
