@@ -47,10 +47,39 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
     <script>
       (() => {
         if (!location.pathname.startsWith('/tyler')) return;
+
+        const TYLER_LEAD_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/tyler-contractor-lead';
+        const serviceMap = {
+          'General construction': 'general_project',
+          'Remodel / renovation': 'general_project',
+          'Flooring / finish work': 'general_project',
+          'Repair / maintenance': 'property_maintenance',
+          'Outdoor build / hardscape': 'hardscape',
+          'Landscape / property work': 'landscaping',
+          'Snow removal': 'property_maintenance',
+          'Other': 'other'
+        };
+
+        const nativeFetch = window.fetch.bind(window);
+        window.fetch = async (input, init = {}) => {
+          const url = typeof input === 'string' ? input : input?.url;
+          if (url === TYLER_LEAD_ENDPOINT && init?.body && typeof init.body === 'string') {
+            try {
+              const body = JSON.parse(init.body);
+              body.project_key = 'tyler-ward-contractor-site';
+              body.service = serviceMap[body.project_type] || body.service || 'general_project';
+              body.preferred_date = body.preferred_date || body.preferred_day || '';
+              delete body.project_type;
+              delete body.preferred_day;
+              init = { ...init, body: JSON.stringify(body) };
+            } catch (_) {}
+          }
+          return nativeFetch(input, init);
+        };
+
         let cachedDataUri = '';
         let loading = false;
         async function hydrateTylerCrate() {
@@ -61,15 +90,16 @@
           try {
             loading = true;
             if (!cachedDataUri) {
-              const response = await fetch('/tyler-crate-catalog.data', { cache: 'force-cache' });
+              const response = await nativeFetch('/tyler-crate-catalog.data', { cache: 'force-cache' });
               if (!response.ok) throw new Error('crate source unavailable');
               const encoded = (await response.text()).trim();
+              if (!encoded.startsWith('UklGR')) throw new Error('invalid crate image payload');
               cachedDataUri = `data:image/webp;base64,${encoded}`;
             }
             img.src = cachedDataUri;
             img.removeAttribute('srcset');
             img.dataset.crateHydrated = 'true';
-          } catch (error) {
+          } catch (_) {
             img.dataset.crateHydrated = 'false';
           } finally {
             loading = false;
@@ -81,5 +111,6 @@
         hydrateTylerCrate();
       })();
     </script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
