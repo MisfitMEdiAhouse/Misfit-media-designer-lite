@@ -80,34 +80,60 @@
           return nativeFetch(input, init);
         };
 
-        let cachedDataUri = '';
+        let cachedObjectUrl = '';
         let loading = false;
+
+        function base64WebpToObjectUrl(encoded) {
+          const clean = encoded.replace(/\s+/g, '');
+          if (!clean.startsWith('UklGR')) throw new Error('invalid crate image payload');
+          const binary = atob(clean);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+          return URL.createObjectURL(new Blob([bytes], { type: 'image/webp' }));
+        }
+
         async function hydrateTylerCrate() {
           const img = Array.from(document.images).find((node) =>
             (node.alt || '').includes('Flower-filled vintage .50 caliber ammunition crate planter')
           );
-          if (!img || img.dataset.crateHydrated === 'true' || loading) return;
+          if (!img || loading) return;
+          if (img.dataset.crateHydrated === 'true' && img.complete && img.naturalWidth > 0) return;
+
           try {
             loading = true;
-            if (!cachedDataUri) {
-              const response = await nativeFetch('/tyler-crate-catalog.data', { cache: 'force-cache' });
+            if (!cachedObjectUrl) {
+              const response = await nativeFetch('/tyler-crate-catalog.data?v=3', { cache: 'no-store' });
               if (!response.ok) throw new Error('crate source unavailable');
-              const encoded = (await response.text()).trim();
-              if (!encoded.startsWith('UklGR')) throw new Error('invalid crate image payload');
-              cachedDataUri = `data:image/webp;base64,${encoded}`;
+              cachedObjectUrl = base64WebpToObjectUrl(await response.text());
             }
-            img.src = cachedDataUri;
+
+            img.dataset.crateHydrated = 'loading';
+            img.onload = () => { img.dataset.crateHydrated = 'true'; };
+            img.onerror = () => {
+              img.dataset.crateHydrated = 'false';
+              if (cachedObjectUrl) URL.revokeObjectURL(cachedObjectUrl);
+              cachedObjectUrl = '';
+            };
             img.removeAttribute('srcset');
-            img.dataset.crateHydrated = 'true';
+            img.src = cachedObjectUrl;
           } catch (_) {
             img.dataset.crateHydrated = 'false';
           } finally {
             loading = false;
           }
         }
+
         const observer = new MutationObserver(hydrateTylerCrate);
         observer.observe(document.documentElement, { childList: true, subtree: true });
         window.addEventListener('load', hydrateTylerCrate);
+        const retryTimer = setInterval(() => {
+          hydrateTylerCrate();
+          const img = Array.from(document.images).find((node) =>
+            (node.alt || '').includes('Flower-filled vintage .50 caliber ammunition crate planter')
+          );
+          if (img?.dataset.crateHydrated === 'true' && img.naturalWidth > 0) clearInterval(retryTimer);
+        }, 500);
+        setTimeout(() => clearInterval(retryTimer), 15000);
         hydrateTylerCrate();
       })();
     </script>
