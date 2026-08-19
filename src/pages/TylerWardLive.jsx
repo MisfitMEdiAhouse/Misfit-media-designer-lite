@@ -1,7 +1,8 @@
 import TylerWard from './TylerWard.jsx';
+import crateCatalog from '../assets/tyler/tyler-crate-catalog.webp';
 
 const EDEN_MOUNTAIN_HOME = 'https://images.pexels.com/photos/7746904/pexels-photo-7746904.jpeg?auto=compress&cs=tinysrgb&w=1800';
-const CRATE_CATALOG = 'https://coffeeandajoint.co/images/make-love-not-war-crate.png';
+const CRATE_CATALOG = crateCatalog;
 
 export default function TylerWardLive() {
   return (
