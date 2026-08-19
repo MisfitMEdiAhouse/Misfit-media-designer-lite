@@ -13,7 +13,7 @@ import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
 import RoadsAdminGate from './pages/RoadsAdminGate.jsx';
-import TylerWard from './pages/TylerWard.jsx';
+import TylerWardLive from './pages/TylerWardLive.jsx';
 
 export default function App() {
   return (
@@ -33,7 +33,7 @@ export default function App() {
         <Route path="/roads" element={<RoadsGarageOSV2 />} />
         <Route path="/roads/admin" element={<RoadsAdminGate />} />
         <Route path="/roads-garage" element={<Navigate to="/roads" replace />} />
-        <Route path="/tyler-ward" element={<TylerWard />} />
+        <Route path="/tyler-ward" element={<TylerWardLive />} />
         <Route path="/tyler" element={<Navigate to="/tyler-ward" replace />} />
         <Route path="/quotelink" element={<SnapSite />} />
         <Route path="/snapsite" element={<Navigate to="/quotelink" replace />} />
