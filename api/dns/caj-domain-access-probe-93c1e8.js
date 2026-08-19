@@ -8,10 +8,12 @@ async function inspect(domain){
   const r=await fetch(`https://api.godaddy.com/v1/domains/${encodeURIComponent(domain)}`,{headers:headers()});
   const text=await r.text();
   let data=null; try{data=text?JSON.parse(text):null}catch{data=null}
+  const responseHeaders=Object.fromEntries([...r.headers.entries()].filter(([k])=>/(shopper|customer|request|correlation|trace|account|id)/i.test(k)));
   return {
     domain,
     ok:r.ok,
     status:r.status,
+    responseHeaders,
     keys:data&&typeof data==='object'?Object.keys(data).sort():[],
     domainId:data?.domainId??null,
     customerId:data?.customerId??null,
