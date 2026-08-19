@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import TylerWard from './TylerWard.jsx';
 
 const EDEN_MOUNTAIN_HOME = 'https://images.pexels.com/photos/7746904/pexels-photo-7746904.jpeg?auto=compress&cs=tinysrgb&w=1800';
-const CRATE_IMAGE = '/tyler-crate-catalog-v16.webp';
+const CRATE_IMAGE = '/tyler-crate-catalog-v17.webp';
 
 export default function TylerWardLive() {
   useLayoutEffect(() => {
