@@ -1,0 +1,38 @@
+name: Build Tyler crate image assets
+
+on:
+  push:
+    branches:
+      - fix-tyler-crate-images
+    paths:
+      - 'public/tyler-crate-a.part*'
+      - 'public/tyler-crate-b.part*'
+      - 'scripts/decode-tyler-crate.mjs'
+      - '.github/workflows/tyler-crate-assets.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: fix-tyler-crate-images
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rebuild Tyler images
+        run: node scripts/decode-tyler-crate.mjs
+      - name: Commit binary assets
+        run: |
+          git config user.name 'Misfit Tyler Asset Bot'
+          git config user.email 'pricemedia82@gmail.com'
+          git add src/assets/tyler/tyler-crate-catalog.webp \
+                  src/assets/tyler/tyler-crate-catalog-2.webp \
+                  public/tyler-crate-catalog.webp \
+                  public/tyler-crate-catalog-2.webp
+          git commit -m 'Build Tyler crate image assets' || exit 0
+          git push origin HEAD:fix-tyler-crate-images
