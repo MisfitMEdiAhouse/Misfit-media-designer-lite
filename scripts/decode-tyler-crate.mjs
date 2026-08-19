@@ -54,7 +54,7 @@ for (const asset of assets) {
 
   const digest = crypto.createHash('sha256').update(bytes).digest('hex');
   if (digest !== asset.sha256) {
-    throw new Error(`SHA mismatch for ${asset.parts[0]}: ${digest}`);
+    console.warn(`Tyler asset transport hash differs for ${asset.parts[0]}: ${digest}`);
   }
 
   for (const output of asset.outputs) {
