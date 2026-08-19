@@ -1,0 +1,1 @@
+Mobile-safe Tyler assets and responsive layout are managed in TylerWard.jsx.
