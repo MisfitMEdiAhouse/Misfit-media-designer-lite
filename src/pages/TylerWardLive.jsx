@@ -1,14 +1,13 @@
 import TylerWard from './TylerWard.jsx';
-import crateCatalog from '../assets/tyler/tyler-crate-catalog.webp';
+import crateCatalogAlt from '../assets/tyler/tyler-crate-catalog-2.webp';
 
 const EDEN_MOUNTAIN_HOME = 'https://images.pexels.com/photos/7746904/pexels-photo-7746904.jpeg?auto=compress&cs=tinysrgb&w=1800';
-const CRATE_CATALOG = crateCatalog;
 
 export default function TylerWardLive() {
   return (
     <div className="tw-live">
       <style>{`
-        /* Actual contractor hero: mountain-home architecture, not the planter product. */
+        /* Contractor hero stays separate from the product catalog. */
         .tw-live .tw .heroMedia {
           background-image: url("${EDEN_MOUNTAIN_HOME}") !important;
           background-size: cover !important;
@@ -20,33 +19,69 @@ export default function TylerWardLive() {
           background: linear-gradient(90deg,rgba(7,9,7,.92) 0%,rgba(7,9,7,.80) 28%,rgba(7,9,7,.34) 55%,rgba(7,9,7,.04) 100%) !important;
         }
 
-        /* Product is a clean ecommerce/catalog image. No zoom, no dark overlay, no fake lifestyle background. */
-        .tw-live .tw .productVisual {
-          background-color: #fff !important;
-          background-image: url("${CRATE_CATALOG}") !important;
-          background-size: contain !important;
-          background-position: center center !important;
-          background-repeat: no-repeat !important;
-          min-height: 520px !important;
+        /* Exact supplied crate catalog photos. The first is the real img from TylerWard;
+           the second is a second flex panel, so no external host or Coffee dependency exists. */
+        .tw-live .tw .catalogImage {
+          display: flex !important;
+          align-items: stretch !important;
+          justify-content: flex-start !important;
+          gap: 1px !important;
+          padding: 0 !important;
+          min-height: 390px !important;
+          background: #e7e3da !important;
+          overflow: hidden !important;
         }
-        .tw-live .tw .productVisual:before { display: none !important; }
-        .tw-live .tw .buyBox { z-index: 4 !important; }
+        .tw-live .tw .catalogImage > img,
+        .tw-live .tw .catalogImage::after {
+          flex: 1 1 50% !important;
+          width: 50% !important;
+          min-width: 0 !important;
+          min-height: 390px !important;
+          max-height: 500px !important;
+          background-color: #fff !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          background-size: contain !important;
+        }
+        .tw-live .tw .catalogImage > img {
+          display: block !important;
+          height: auto !important;
+          object-fit: contain !important;
+          object-position: center !important;
+        }
+        .tw-live .tw .catalogImage::after {
+          content: "" !important;
+          display: block !important;
+          background-image: url("${crateCatalogAlt}") !important;
+        }
 
         @media (max-width: 880px) {
           .tw-live .tw .heroMedia { background-position: 58% center !important; }
-          .tw-live .tw .productVisual { min-height: 500px !important; }
         }
-        @media (max-width: 600px) {
-          .tw-live .tw .heroMedia {
-            background-position: 56% center !important;
+
+        @media (max-width: 640px) {
+          .tw-live .tw .heroMedia { background-position: 56% center !important; }
+          .tw-live .tw .heroShade { display: none !important; }
+          .tw-live .tw .catalogImage {
+            min-height: 0 !important;
+            height: auto !important;
+            aspect-ratio: auto !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            scroll-snap-type: x mandatory !important;
+            scrollbar-width: none !important;
           }
-          .tw-live .tw .heroShade {
-            background: linear-gradient(180deg,rgba(8,10,8,.04) 0%,rgba(8,10,8,.10) 35%,rgba(8,10,8,.72) 63%,rgba(8,10,8,.98) 84%) !important;
-          }
-          .tw-live .tw .productVisual {
-            background-color: #fff !important;
-            background-size: contain !important;
-            min-height: 430px !important;
+          .tw-live .tw .catalogImage::-webkit-scrollbar { display: none !important; }
+          .tw-live .tw .catalogImage > img,
+          .tw-live .tw .catalogImage::after {
+            flex: 0 0 100% !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+            aspect-ratio: 1 / 1 !important;
+            scroll-snap-align: start !important;
           }
         }
       `}</style>
