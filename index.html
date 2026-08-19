@@ -41,7 +41,6 @@
         if (!location.pathname.startsWith('/tyler')) return;
 
         const TYLER_LEAD_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/tyler-contractor-lead';
-        const TYLER_CRATE_DATA = '/tyler-crate-catalog.data?v=4';
         const serviceMap = {
           'General construction': 'general_project',
           'Remodel / renovation': 'general_project',
@@ -69,61 +68,6 @@
           }
           return nativeFetch(input, init);
         };
-
-        let tylerCrateDataUri = '';
-        let tylerCrateLoading = null;
-
-        async function getTylerCrateDataUri() {
-          if (tylerCrateDataUri) return tylerCrateDataUri;
-          if (!tylerCrateLoading) {
-            tylerCrateLoading = nativeFetch(TYLER_CRATE_DATA, { cache: 'no-store' })
-              .then((response) => {
-                if (!response.ok) throw new Error(`crate asset ${response.status}`);
-                return response.text();
-              })
-              .then((encoded) => {
-                const clean = encoded.replace(/\s+/g, '');
-                if (!clean.startsWith('UklGR')) throw new Error('invalid crate image payload');
-                tylerCrateDataUri = `data:image/webp;base64,${clean}`;
-                return tylerCrateDataUri;
-              })
-              .catch((error) => {
-                tylerCrateLoading = null;
-                throw error;
-              });
-          }
-          return tylerCrateLoading;
-        }
-
-        async function restoreTylerCrate() {
-          const img = Array.from(document.images).find((node) =>
-            (node.alt || '').includes('Flower-filled vintage .50 caliber ammunition crate planter')
-          );
-          if (!img) return false;
-          if (img.dataset.catalogHydrated === 'true' && img.complete && img.naturalWidth > 0) return true;
-
-          try {
-            img.removeAttribute('srcset');
-            img.loading = 'eager';
-            img.decoding = 'async';
-            const src = await getTylerCrateDataUri();
-            img.onload = () => { img.dataset.catalogHydrated = 'true'; };
-            img.onerror = () => { img.dataset.catalogHydrated = 'false'; };
-            if (img.src !== src) img.src = src;
-            if (img.complete && img.naturalWidth > 0) img.dataset.catalogHydrated = 'true';
-          } catch (error) {
-            img.dataset.catalogHydrated = 'false';
-            console.error('Tyler crate image failed', error);
-          }
-          return true;
-        }
-
-        const observer = new MutationObserver(() => { restoreTylerCrate(); });
-        observer.observe(document.documentElement, { childList: true, subtree: true });
-        window.addEventListener('load', restoreTylerCrate);
-        const crateRetry = setInterval(restoreTylerCrate, 750);
-        setTimeout(() => clearInterval(crateRetry), 15000);
-        restoreTylerCrate();
       })();
     </script>
     <script type="module" src="/src/main.jsx"></script>
