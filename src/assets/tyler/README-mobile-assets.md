@@ -1,0 +1,1 @@
+Tyler mobile hero and catalog assets are intentionally optimized for phone-first rendering.
