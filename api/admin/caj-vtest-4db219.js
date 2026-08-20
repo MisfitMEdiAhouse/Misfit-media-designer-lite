@@ -1,6 +1,6 @@
 const DOMAIN='coffeeandajoint.co';
 const NAME='vtest';
-const TARGET='misfit-media-designer-lite.vercel.app';
+const TARGET='cname.vercel-dns.com';
 function h(write=false){const t=process.env.GODADDY_PAT;if(!t) throw new Error('GODADDY_PAT missing');return {Authorization:`Bearer ${t}`,Accept:'application/json',...(write?{'Content-Type':'application/json'}:{})};}
 async function call(method,url,body){const r=await fetch(url,{method,headers:h(method!=='GET'),...(body?{body:JSON.stringify(body)}:{})});const text=await r.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}return {status:r.status,ok:r.ok,data};}
 export default async function handler(req,res){res.setHeader('Cache-Control','no-store');res.setHeader('X-Robots-Tag','noindex');try{
