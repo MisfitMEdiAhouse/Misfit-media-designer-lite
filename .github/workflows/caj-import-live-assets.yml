@@ -1,0 +1,30 @@
+name: Import CoffeeAndAJoint Approved Assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/caj-import-live-assets.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Copy approved live storefront assets into GitHub canon
+        run: |
+          set -euo pipefail
+          mkdir -p public/coffeeandajoint/assets
+          curl -fL --retry 4 --retry-delay 2 'https://www.coffeeandajoint.co/images/drugs-hat-island.png' -o public/coffeeandajoint/assets/drugs-hat-island.png
+          curl -fL --retry 4 --retry-delay 2 'https://www.coffeeandajoint.co/images/drugs-hat-product.png' -o public/coffeeandajoint/assets/drugs-hat-product.png
+          curl -fL --retry 4 --retry-delay 2 'https://www.coffeeandajoint.co/images/drugs-hat-maker.png' -o public/coffeeandajoint/assets/drugs-hat-maker.png
+          curl -fL --retry 4 --retry-delay 2 'https://www.coffeeandajoint.co/images/authorized-crate-catalog.jpg' -o public/coffeeandajoint/assets/authorized-crate-catalog.jpg
+          file public/coffeeandajoint/assets/*
+      - name: Commit copied assets
+        run: |
+          git config user.name 'Misfit Coffee Asset Bot'
+          git config user.email 'pricemedia82@gmail.com'
+          git add public/coffeeandajoint/assets
+          git commit -m 'Import approved CoffeeAndAJoint storefront assets' || exit 0
+          git push
