@@ -16,11 +16,18 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219' > caj-vtest-result.json
-          cat caj-vtest-result.json
+      - name: Verify custom hostname behavior
+        run: |
+          set +e
+          sleep 15
+          curl -sS -L -D caj-vtest-headers.txt -o caj-vtest-body.html -w '%{http_code}\n%{url_effective}\n' 'https://vtest.coffeeandajoint.co/' > caj-vtest-http.txt
+          head -c 500 caj-vtest-body.html > caj-vtest-body-head.txt || true
+          cat caj-vtest-http.txt
+          cat caj-vtest-body-head.txt
       - name: Record result
         run: |
           git config user.name 'Misfit CAJ Test Bot'
           git config user.email 'pricemedia82@gmail.com'
-          git add caj-vtest-result.json
-          git commit -m 'Record CoffeeAndAJoint replacement host test' || exit 0
+          git add caj-vtest-result.json caj-vtest-http.txt caj-vtest-headers.txt caj-vtest-body-head.txt
+          git commit -m 'Record CoffeeAndAJoint custom host verification' || exit 0
           git push
