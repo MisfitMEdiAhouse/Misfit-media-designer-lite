@@ -5,35 +5,52 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 User-agent: GPTBot
 Allow: /.well-known/ucp
 Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
+Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 User-agent: Google-Extended
 Allow: /.well-known/ucp
 Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
+Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 User-agent: ClaudeBot
 Allow: /.well-known/ucp
 Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
+Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 User-agent: Applebot-Extended
 Allow: /.well-known/ucp
 Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
+Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 User-agent: CCBot
 Allow: /.well-known/ucp
 Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
+Disallow: /command
+Disallow: /heir
+Disallow: /roads/admin
 
 Sitemap: https://misfitmediahouse.com/sitemap.xml

@@ -1,44 +1,36 @@
-import { ArrowRight, Zap } from 'lucide-react';
-import Reveal from '../Reveal.jsx';
+import { Activity, Gauge, ShoppingBag, Sparkles } from 'lucide-react';
+import BusinessScrubSearch from './BusinessScrubSearch.jsx';
 
-const MISFIT_LOGO = '/misfit-logo.svg';
+const scanSignals = [
+  [ShoppingBag, 'Storefront'],
+  [Gauge, 'Conversion'],
+  [Activity, 'Site health'],
+  [Sparkles, 'AI readiness'],
+];
 
 export default function RevenueHero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden pb-8 pt-24 sm:pt-28">
       <div className="absolute inset-0 grid-bg opacity-25" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.11),transparent_58%)]" />
-      <div className="relative mx-auto max-w-7xl px-5">
-        <div className="max-w-5xl">
-          <Reveal>
-            <a href="/quotelink" className="mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-200">
-              <Zap size={13}/> New: Misfit QuoteLink · instant lead page · $49 once <ArrowRight size={13}/>
-            </a>
-            <img
-              src={MISFIT_LOGO}
-              alt="Misfit Mediahouse neon skull and rose logo"
-              className="mb-6 w-40 sm:w-48 drop-shadow-[0_0_38px_rgba(0,229,255,0.32)]"
-            />
-            <div className="font-mono text-[11px] uppercase tracking-[0.32em] text-cyan-300">MISFIT AI REVENUE SYSTEMS</div>
-            <h1 className="mt-5 font-display text-[clamp(3rem,11vw,6.8rem)] font-bold uppercase leading-[0.88] tracking-[-0.055em]">
-              Stop losing leads.
-              <span className="block text-cyan-400">Turn more attention into revenue.</span>
-            </h1>
-            <p className="mt-7 max-w-3xl text-lg sm:text-xl leading-8 text-slate-300">
-              Misfit Mediahouse builds AI revenue systems for service businesses that need faster follow-up, old-lead revival, better booking, stronger websites, and clear attribution from lead to money.
-            </p>
-          </Reveal>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 flex-wrap">
-            <a href="/quotelink" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black">
-              Get a QuoteLink — $49 <ArrowRight size={15}/>
-            </a>
-            <a href="#request-demo" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black glow-cyan">
-              Find My Revenue Leaks <ArrowRight size={15}/>
-            </a>
-            <a href="/proof" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 font-mono text-xs uppercase tracking-[0.14em]">
-              See Live Results <ArrowRight size={15}/>
-            </a>
-          </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_26%,rgba(0,229,255,.15),transparent_35%),radial-gradient(circle_at_85%_90%,rgba(217,70,239,.08),transparent_30%)]" />
+      <div className="relative mx-auto w-full max-w-6xl px-5 text-center">
+        <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-cyan-300 sm:text-xs">
+          Shopify store + business health scanner
+        </div>
+        <h1 className="mx-auto mt-5 max-w-5xl font-display text-[clamp(2.75rem,9vw,6.8rem)] font-bold uppercase leading-[0.86] tracking-[-0.055em]">
+          Enter your site.
+          <span className="block text-cyan-300">Find what is costing you sales.</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-slate-400 sm:text-lg sm:leading-8">
+          Misfit reads the public surface, scores the leaks, and gives you the next fixes—whether you run a Shopify store or a service business.
+        </p>
+        <BusinessScrubSearch />
+        <div className="mx-auto mt-7 grid max-w-2xl grid-cols-2 gap-2 sm:flex sm:justify-center sm:gap-3">
+          {scanSignals.map(([Icon, label]) => (
+            <div key={label} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-slate-500">
+              <Icon size={13} className="text-cyan-300/80" aria-hidden="true" /> {label}
+            </div>
+          ))}
         </div>
       </div>
     </section>

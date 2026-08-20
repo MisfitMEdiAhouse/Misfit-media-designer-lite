@@ -28,6 +28,15 @@
   "defaultOutputModes": ["text/plain", "application/json"],
   "skills": [
     {
+      "id": "scrub_public_business",
+      "name": "Scrub a public business website",
+      "description": "Inspect a public business website, response headers, DNS, robots/sitemap and public agent metadata; score web foundation, conversion, discoverability, trust and AI readiness; then return prioritized leaks and a recommended Misfit path. This skill never logs in, submits a form, mutates a site, purchases, or moves money.",
+      "tags": ["business audit", "website", "conversion", "lead generation", "dns", "seo", "ai readiness"],
+      "examples": ["Scrub https://example.com for public revenue leaks", "Run a Business Scrub on this website without submitting anything"],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["text/plain", "application/json"]
+    },
+    {
       "id": "audit_shopify_agentic_storefront",
       "name": "Audit Shopify agentic storefront",
       "description": "Inspect a public Shopify storefront's UCP business profile, agents.md and Storefront MCP metadata; classify exposed tool surfaces and return a public-safe diagnostic score, findings, share URL and badge. This skill does not execute store mutations.",

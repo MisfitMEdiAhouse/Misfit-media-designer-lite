@@ -1,23 +1,14 @@
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
-const work = [
-  ['Misfit AI V2', 'AI revenue product', 'Flagship Misfit Mediahouse product for lead response, follow-up, qualification, revival, conversations, booking and revenue operations.'],
-  ['ContextForge', 'Enterprise AI', 'Metadata-aware agent control, governance, human approval and decision memory.'],
-  ['Home Efficiency Pros', 'Client deployment', 'Lead intake, booking, revival and growth-system work for a real operating business.'],
-  ['NexGrid Energy', 'Energy', 'Customer-acquisition and energy-resilience product work.'],
-  ['Misfit Equipment Network', 'Marketplace', 'Heavy-equipment rental and network product architecture.'],
-  ['Weber Junk Rescue', 'Local services', 'Mobile-first quote, intake, deposit and booking flow.'],
-  ['Off-Grid Water', 'Digital commerce', 'Property test, calculators, paid guides and checkout flow.'],
-  ['IALS Turbine Logistics', 'Aviation', 'B2B inventory, RFQ and operations workflow work for a client business.'],
-  ['GHOSBC OS', 'AI systems architecture', 'Symbolic runtime, safety gates, agent routing, audit and developer-runtime architecture.'],
-];
-
 export default function ProofPage() {
-  const [links, setLinks] = useState({});
+  const [work, setWork] = useState([]);
+
   useEffect(() => {
-    fetch('/portfolio-core.json').then((r) => r.json()).then((rows) => setLinks(Object.fromEntries(rows.map((x) => [x.title, x.url])))).catch(() => {});
+    document.title = 'Portfolio | Misfit Mediahouse';
+    fetch('/portfolio-core.json').then((response) => response.json()).then(setWork).catch(() => setWork([]));
   }, []);
 
   return (
@@ -25,16 +16,29 @@ export default function ProofPage() {
       <Navbar />
       <main className="pt-28">
         <section className="mx-auto max-w-7xl px-5 py-12">
-          <div className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-300">MISFIT PROOF</div>
-          <h1 className="mt-4 max-w-5xl font-display text-[clamp(3rem,10vw,6rem)] font-bold uppercase leading-[0.9] tracking-[-0.05em]">Open the work. Judge the build.</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">Client deployments, live products, AI systems, competition work and technical architecture organized as inspectable proof.</p>
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-300">Public portfolio</div>
+          <h1 className="mt-4 max-w-5xl font-display text-[clamp(3rem,10vw,6rem)] font-bold uppercase leading-[0.9] tracking-[-0.05em]">One asset. One card. Open the work.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">Canonical live builds only. Source repos, Base44 backups, Vercel revisions, and owner-only systems are intentionally not repeated here.</p>
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.05] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.13em] text-emerald-300">
+            <CheckCircle2 size={13} /> {work.length || '—'} public builds · deduplicated
+          </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {work.map(([title, type, copy]) => (
-              <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-amber-300">{type}</div>
-                <h2 className="mt-3 font-display text-2xl font-bold">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{copy}</p>
-                {links[title] && <a href={links[title]} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-300">Open live work →</a>}
+            {work.map((item) => (
+              <article key={item.id} className="flex min-h-[285px] flex-col rounded-3xl border border-white/10 bg-white/[0.025] p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-amber-300">{item.type}</div>
+                  <div className="rounded-full border border-emerald-400/20 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-emerald-300">Live</div>
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold">{item.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-slate-400">{item.summary}</p>
+                <a
+                  href={item.url}
+                  target={item.url.startsWith('http') ? '_blank' : undefined}
+                  rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="mt-auto inline-flex items-center gap-2 pt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-300"
+                >
+                  Open live work <ArrowUpRight size={13} />
+                </a>
               </article>
             ))}
           </div>

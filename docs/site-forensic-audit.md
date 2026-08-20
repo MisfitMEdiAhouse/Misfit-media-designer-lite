@@ -42,6 +42,20 @@ These may wrap or deploy Misfit AI V2 but must be presented as services, not com
 - Production deployment containing these public-surface changes is READY.
 - No GHOSBC source material was added to public surfaces during this remediation.
 
+## Remediation checkpoint — 2026-08-20
+
+- Replaced the public homepage information stack with one above-fold Shopify store + business health scanner.
+- Reduced public navigation to Scanner, Agency, Portfolio and Products. Owner, heir, agent-control and admin routes are not advertised in public navigation or the footer.
+- Added distinct Agency and Products pages so services, software and proof no longer compete on the homepage.
+- Rebuilt the public portfolio as 11 canonical live assets. Coffee & A Joint and Iron Network are included; source repos, Base44 copies, Vercel revisions and owner-only systems are not repeated as separate cards.
+- Marked nine older Weber Junk Rescue deployments as superseded by the canonical v9 deployment in the owner registry.
+- Imported all discovered Base44 apps into the owner-only registry as migration sources or archives and linked obvious legacy copies to their canonical assets.
+- Corrected the Business Scrub lead handoff from a nonexistent local `/api/lead` route to the live rate-limited `lead-capture` Edge Function.
+- Removed private Heir recovery document URLs from the public source bundle; authenticated users receive them from owner-only registry metadata after authorization.
+- Updated robots, sitemap, redirects and metadata to reinforce the new public/private boundary and scanner-first search position.
+- The `ai.misfitmediahouse.com` Base44 path is still not the canonical public Misfit AI V2 link; public portfolio copy points to the verified Vercel deployment until DNS cutover is complete.
+- The active $297 Stripe checkout is named `Misfit AI Intake + Membership Engine`; public checkout copy now uses that exact SKU name instead of calling it a generic lead-engine subscription.
+
 ## Current route verification
 
 Verified at infrastructure level on 2026-08-13:

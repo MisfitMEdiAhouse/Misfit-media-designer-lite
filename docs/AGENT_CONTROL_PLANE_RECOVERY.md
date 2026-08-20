@@ -25,7 +25,7 @@ The website is the durable public control surface; chat interfaces are operators
 ## Recovery order
 
 1. Verify Misfit Cloud/Supabase is reachable and the canonical registry exists.
-2. Verify GHOSBC Safety Gate, ChangePacket, Misfit Machine Store, and Misfit Agent Hub edge functions.
+2. Verify the Misfit Machine Agent governed-action contract, ChangePacket, Misfit Machine Store, and Misfit Agent Hub edge functions.
 3. Verify `/.well-known/ucp`, `/llms.txt`, `/agent-stack.json`, `/agents`, and `/shopify-ai-audit` on `misfitmediahouse.com`.
 4. Verify MCP Registry publication workflows and remote MCP initialization for public machine products.
 5. Verify ContextForge and any other independent Vercel deployments.
@@ -40,17 +40,18 @@ The website is the durable public control surface; chat interfaces are operators
 - Consequential operations such as purchase, payment, transfer, send, deploy, publish, execute, delete, credential access, checkout completion, and order mutation require explicit bounded authorization or review.
 - Never publish private GHOSBC runtime material or enough detail to reconstruct it.
 - Public UCP/MCP metadata may be discoverable; private signing material and credentials remain server-side.
-- Use GHOSBC Safety Gate to screen untrusted instructions, changed MCP tool definitions, dependencies, and consequential actions.
+- Use the public-safe `governed_agent_action_check` exposed by the Misfit Machine Agent to screen bounded consequential-action metadata. The private GHOSBC implementation stays behind that contract.
 - Use ChangePacket to detect public web/MCP surface drift.
 
 ## Core public machine stack
 
-### GHOSBC Safety Gate
-Hosted public governance boundary. The private GHOSBC mechanism remains sealed.
+### Misfit Governance Boundary
+Public-safe governance is exposed through the Misfit Machine Agent rather than a raw GHOSBC-named product or endpoint.
 
-- Product: `https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate`
-- MCP: `https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-safety-gate-mcp`
-- Registry identity: `io.github.MisfitMEdiAhouse/ghosbc-safety-gate`
+- Agent Card: `https://misfitmediahouse.com/.well-known/agent-card.json`
+- Public skill: `governed_agent_action_check`
+- Contract: bounded structured action metadata in; advisory `ALLOW`, `REVIEW`, or `BLOCK` decision plus reasons out
+- Execution boundary: the check evaluates only and never executes the proposed action or moves money
 
 ### ChangePacket
 Low-token change memory for public webpages and MCP tool surfaces.

@@ -1,11 +1,12 @@
 const builds = [
+  'Coffee & A Joint',
+  'Iron Network — Equipment Rental',
   'Misfit AI V2',
   'Home Efficiency Pros',
   'NexGrid Energy',
   'ContextForge',
   'Weber Junk Rescue',
   'Off-Grid Water',
-  'IALS Turbine Logistics',
 ];
 
 export default function RevenueProof() {
@@ -22,7 +23,7 @@ export default function RevenueProof() {
             </div>
           ))}
         </div>
-        <a href="/proof" className="mt-7 inline-flex rounded-full border border-white/15 px-5 py-3 font-mono text-xs uppercase tracking-[0.15em]">Full portfolio →</a>
+        <a href="/portfolio" className="mt-7 inline-flex rounded-full border border-white/15 px-5 py-3 font-mono text-xs uppercase tracking-[0.15em]">Full portfolio →</a>
       </div>
     </section>
   );

@@ -5,9 +5,9 @@ const QUOTELINK_URL = '/quotelink';
 
 const offers = [
   ['Misfit QuoteLink — Instant Lead Page', '$49 one-time', 'quotelink', 'INSTANT PRODUCT', 'A focused mobile quote/call/text lead page for local service businesses. Enter the business details, pay once, and the live hosted page plus QR code is generated automatically after confirmed checkout.'],
-  ['Website + AI Launch', '$1,500 one-time', 'website_ai_launch', 'SERVICE', 'A deployment package for a conversion-focused site with Misfit AI-powered lead capture and follow-up where appropriate.'],
-  ['Misfit AI V2 — AI Lead Engine', '$297/mo', 'lead_engine', 'FLAGSHIP PRODUCT', 'Misfit Mediahouse\'s canonical AI revenue product for lead response, follow-up, qualification, revival, conversations and booking.'],
-  ['Managed Growth', '$997/mo', 'managed_growth', 'SERVICE', 'Hands-on implementation, optimization and growth operations around the systems and conversion stack.'],
+  ['SnapSite Website + AI Activation', '$1,500 one-time', 'website_ai_launch', 'SERVICE', 'A conversion-focused site, Ask AI setup, launch support, and conversion-system activation.'],
+  ['Misfit AI V2 — Intake + Membership Engine', '$297/mo', 'lead_engine', 'FLAGSHIP PRODUCT', 'The current live Stripe subscription for AI intake, package guidance, structured booking handoff, membership checkout activation support, and ongoing optimization.'],
+  ['Growth Partner / Managed Marketing', '$997/mo', 'managed_growth', 'SERVICE', 'Monthly campaign planning, QR/referral strategy, offer updates, local content support, and growth reporting. Ad spend is separate.'],
 ];
 
 export default function RevenueOffers() {

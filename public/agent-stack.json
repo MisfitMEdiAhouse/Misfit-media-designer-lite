@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.8.0",
+  "schema_version": "1.9.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -14,7 +14,8 @@
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
     "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
-    "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp"
+    "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
+    "business_scrub_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub"
   },
   "stack": [
     {
@@ -43,11 +44,19 @@
       "a2a_jsonrpc": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
       "a2a_http_json": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
       "protocol_version": "1.0",
-      "agent_version": "1.3.0",
+      "agent_version": "1.4.0",
       "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
       "registry_verification": "A2A SDK registration probe WORKING",
-      "skills": ["audit_shopify_agentic_storefront", "audit_a2a_agent_card", "governed_agent_action_check"],
+      "skills": ["scrub_public_business", "audit_shopify_agentic_storefront", "audit_a2a_agent_card", "governed_agent_action_check"],
       "summary": "Public A2A agent for public metadata audits and bounded advisory governance checks. Private GHOSBC implementation details remain behind the Misfit-controlled boundary and are not advertised as a separate product."
+    },
+    {
+      "name": "Misfit Business Scrub",
+      "class": "public-revenue-diagnostic",
+      "product": "https://misfitmediahouse.com/scrub",
+      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub",
+      "a2a_via": "Misfit Machine Agent#scrub_public_business",
+      "summary": "Free public-signal business website diagnostic with prioritized revenue leaks, offer routing and a human-approved lead handoff. Never logs in, submits target forms, mutates a site, purchases or moves money."
     },
     {
       "name": "Misfit A2A Agent Trust Audit",

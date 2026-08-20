@@ -9,8 +9,6 @@ import {
 const SUPABASE_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
 const HEIR_API = `${SUPABASE_URL}/functions/v1/misfit-heir-portal`;
-const PRIVATE_VAULT = 'https://drive.google.com/drive/folders/1IV1pk2gTAXeZMA2MG6b52lGONzoPlMMp';
-const START_HERE = 'https://docs.google.com/document/d/1mhcZS5NXRe5Q0b1PhJDkfXgfbnME4VXiY6M10DdC1Us/edit';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
@@ -178,6 +176,11 @@ export default function HeirOS() {
 
   const profile = state.profile || {};
   const blueprint = state.wealth_blueprints?.[0];
+  const heirAsset = (state.assets || []).find((asset) => asset.asset_key === 'kingston-heir-os');
+  const privateLinks = state.private_links || {
+    start_here_url: heirAsset?.metadata?.start_here_doc || '',
+    vault_url: heirAsset?.metadata?.private_drive_folder || '',
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -262,8 +265,9 @@ export default function HeirOS() {
 
         {tab === 'recovery' && (
           <section className="mt-5 grid gap-4 md:grid-cols-2">
-            <a href={START_HERE} target="_blank" rel="noreferrer" className="rounded-3xl border border-fuchsia-400/20 bg-fuchsia-400/[.04] p-6 hover:border-fuchsia-400/40"><BookOpen className="text-fuchsia-300"/><h2 className="mt-4 font-display text-xl font-semibold">Start Here — private succession record</h2><p className="mt-2 text-sm leading-6 text-slate-500">Family context, operating principles and Kingston's learn → observe → operate → co-admin → inherit path.</p><div className="mt-4 inline-flex items-center gap-2 text-xs text-fuchsia-200"><ExternalLink size={12}/> Open private document</div></a>
-            <a href={PRIVATE_VAULT} target="_blank" rel="noreferrer" className="rounded-3xl border border-cyan-400/20 bg-cyan-400/[.04] p-6 hover:border-cyan-400/40"><Vault className="text-cyan-300"/><h2 className="mt-4 font-display text-xl font-semibold">Kingston Heir OS private Drive</h2><p className="mt-2 text-sm leading-6 text-slate-500">Succession materials and private family records. This is not a public asset surface.</p><div className="mt-4 inline-flex items-center gap-2 text-xs text-cyan-200"><ExternalLink size={12}/> Open vault</div></a>
+            {privateLinks.start_here_url && <a href={privateLinks.start_here_url} target="_blank" rel="noreferrer" className="rounded-3xl border border-fuchsia-400/20 bg-fuchsia-400/[.04] p-6 hover:border-fuchsia-400/40"><BookOpen className="text-fuchsia-300"/><h2 className="mt-4 font-display text-xl font-semibold">Start Here — private succession record</h2><p className="mt-2 text-sm leading-6 text-slate-500">Family context, operating principles and Kingston's learn → observe → operate → co-admin → inherit path.</p><div className="mt-4 inline-flex items-center gap-2 text-xs text-fuchsia-200"><ExternalLink size={12}/> Open private document</div></a>}
+            {privateLinks.vault_url && <a href={privateLinks.vault_url} target="_blank" rel="noreferrer" className="rounded-3xl border border-cyan-400/20 bg-cyan-400/[.04] p-6 hover:border-cyan-400/40"><Vault className="text-cyan-300"/><h2 className="mt-4 font-display text-xl font-semibold">Kingston Heir OS private Drive</h2><p className="mt-2 text-sm leading-6 text-slate-500">Succession materials and private family records. This is not a public asset surface.</p><div className="mt-4 inline-flex items-center gap-2 text-xs text-cyan-200"><ExternalLink size={12}/> Open vault</div></a>}
+            {!privateLinks.start_here_url && !privateLinks.vault_url && <div className="rounded-3xl border border-cyan-400/20 bg-cyan-400/[.04] p-6 md:col-span-2"><Vault className="text-cyan-300"/><h2 className="mt-4 font-display text-xl font-semibold">Private recovery links stay server-side</h2><p className="mt-2 text-sm leading-6 text-slate-500">Recovery documents are returned only by the authenticated Heir API when the approved account is entitled to them. No private Drive links are embedded in the public website bundle.</p></div>}
             <div className="rounded-3xl border border-white/10 p-6 md:col-span-2"><h2 className="font-display text-xl font-semibold">Recovery invariants</h2><div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">{Object.entries(state.invariants || {}).map(([k,v])=><div key={k} className="rounded-2xl border border-white/10 bg-white/[.025] p-4"><ShieldCheck size={15} className={v?'text-emerald-300':'text-rose-300'}/><div className="mt-2 text-xs capitalize text-slate-400">{k.replaceAll('_',' ')}</div></div>)}</div></div>
           </section>
         )}

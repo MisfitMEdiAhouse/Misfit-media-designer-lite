@@ -37,10 +37,10 @@ export default function MisfitAIV2() {
           <div className="mt-9 flex flex-wrap gap-3">
             {checkout && (
               <a href={checkout} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black">
-                Start for $297/mo <ArrowRight size={14} />
+                Start AI Intake + Membership — $297/mo <ArrowRight size={14} />
               </a>
             )}
-            <a href="https://ai.misfitmediahouse.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] text-white">
+            <a href="https://misfit-ai-v2.vercel.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-mono text-xs uppercase tracking-[0.14em] text-white">
               Open live product <ExternalLink size={14} />
             </a>
           </div>
@@ -71,13 +71,13 @@ export default function MisfitAIV2() {
               <p className="mt-5 max-w-3xl leading-7 text-slate-300">
                 Misfit AI V2 is both a commercial product and inspectable proof of the systems work behind Misfit Mediahouse: lead operations, messaging workflows, AI-assisted conversations, booking logic, revenue operations and business software architecture.
               </p>
-              <a href="/proof" className="mt-7 inline-flex font-mono text-xs uppercase tracking-[0.15em] text-cyan-300">See the full portfolio →</a>
+              <a href="/portfolio" className="mt-7 inline-flex font-mono text-xs uppercase tracking-[0.15em] text-cyan-300">See the full portfolio →</a>
             </article>
 
             <article className="rounded-3xl border border-white/10 bg-white/[0.025] p-7">
               <div className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300">START HERE</div>
               <div className="mt-4 font-display text-5xl font-bold">$297<span className="text-xl text-slate-400">/mo</span></div>
-              <p className="mt-4 text-sm leading-6 text-slate-400">Misfit AI V2 — AI Lead Engine.</p>
+              <p className="mt-4 text-sm leading-6 text-slate-400">Current subscription: Misfit AI Intake + Membership Engine. The checkout name and price match the live Stripe SKU.</p>
               {checkout && (
                 <a href={checkout} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-cyan-400 px-5 py-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-black">
                   Buy through Misfit <ArrowRight size={14} />

@@ -1,7 +1,79 @@
 [
-  {"title":"Misfit AI V2","url":"https://ai.misfitmediahouse.com/"},
-  {"title":"Home Efficiency Pros","url":"https://www.homeefficiencypros.com/"},
-  {"title":"NexGrid Energy","url":"https://nexgridenergy.net/"},
-  {"title":"ContextForge","url":"https://contextforge-datahub-app.vercel.app/"},
-  {"title":"ChangePacket","url":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed"}
+  {
+    "id": "coffee-and-a-joint",
+    "title": "Coffee & A Joint",
+    "type": "Ecommerce brand",
+    "summary": "A direct-to-consumer headwear storefront with live products, checkout, affiliate attribution, and a distinct brand system.",
+    "url": "https://www.coffeeandajoint.co/"
+  },
+  {
+    "id": "iron-network",
+    "title": "Iron Network — Equipment Rental",
+    "type": "Equipment rental marketplace",
+    "summary": "The canonical equipment network build: inventory, rental requests, owner connections, checkout, evidence, and settlement workflows.",
+    "url": "https://misfit-equipment-network.vercel.app/"
+  },
+  {
+    "id": "misfit-ai-v2",
+    "title": "Misfit AI V2",
+    "type": "AI revenue software",
+    "summary": "Lead intake, response, qualification, follow-up, revival, booking, and revenue operations in one flagship product.",
+    "url": "https://misfit-ai-v2.vercel.app/"
+  },
+  {
+    "id": "home-efficiency-pros",
+    "title": "Home Efficiency Pros",
+    "type": "Dealer lead system",
+    "summary": "A live dealer site with product education, AI intake, quote requests, appointment booking, and installation coordination.",
+    "url": "https://www.homeefficiencypros.com/"
+  },
+  {
+    "id": "nexgrid-energy",
+    "title": "NexGrid Energy",
+    "type": "Energy lead generation",
+    "summary": "A customer-acquisition and home backup-power experience built around energy resilience and qualified next steps.",
+    "url": "https://nexgridenergy.net/"
+  },
+  {
+    "id": "contextforge",
+    "title": "ContextForge",
+    "type": "Enterprise AI",
+    "summary": "DataHub-aware code generation grounded in metadata, lineage, ownership, governance, and usage context.",
+    "url": "https://contextforge-datahub-app.vercel.app/"
+  },
+  {
+    "id": "weber-junk-rescue",
+    "title": "Weber Junk Rescue",
+    "type": "Local service conversion",
+    "summary": "The canonical v9 local-service build with a mobile-first quote, intake, deposit, and booking path.",
+    "url": "https://weber-junk-rescue-v9.vercel.app/"
+  },
+  {
+    "id": "off-grid-water",
+    "title": "Off-Grid Water",
+    "type": "Digital commerce",
+    "summary": "A ram-pump property test, calculators, personalized blueprint flow, paid guides, and checkout experience.",
+    "url": "https://misfit-media-house-off-grid-water.vercel.app/"
+  },
+  {
+    "id": "roads-garage",
+    "title": "Roads Garage",
+    "type": "Automotive commerce",
+    "summary": "An automotive garage and commerce concept spanning wheel selection, tuning, merchandise, and field-service workflows.",
+    "url": "/roads"
+  },
+  {
+    "id": "tyler-ward",
+    "title": "Tyler Ward Contractor",
+    "type": "Contractor lead system",
+    "summary": "A mobile-first contractor site with project intake, scheduling context, service selection, and direct call or text paths.",
+    "url": "/tyler-ward"
+  },
+  {
+    "id": "misfit-quotelink",
+    "title": "Misfit QuoteLink",
+    "type": "Conversion product",
+    "summary": "A focused hosted quote, call, text, and QR lead page that local service businesses can launch without a full rebuild.",
+    "url": "/quotelink"
+  }
 ]

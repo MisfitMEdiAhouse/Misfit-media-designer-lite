@@ -18,7 +18,7 @@ A2A v1.0 JSONRPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1
 A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Third-party A2A registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
-Current public-safe skills include public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and bounded advisory action-governance checks. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
+Current public-safe skills include public business scrubs, public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and bounded advisory action-governance checks. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
@@ -26,6 +26,14 @@ UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-u
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
 Catalog search and lookup are advertised. Purchase handoff uses each public product's existing checkout flow; UCP checkout is not advertised.
+
+## Misfit Business Scrub
+Public-signal revenue-readiness diagnostic for a business website: web foundation, conversion path, discoverability, trust/email DNS, automation and AI-readiness signals. It returns prioritized leaks and a recommended Misfit offer without taking the proposed action.
+Page: https://misfitmediahouse.com/scrub
+API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub
+GET query: `website`
+POST JSON: `{ "website": "https://example.com" }`
+A2A: call `scrub_public_business` through Misfit Machine Agent.
 
 ## A2A Agent Trust Audit
 Public-metadata-only trust/readiness diagnostic for A2A Agent Cards and their declared machine interfaces. It never executes a target-agent skill.
@@ -57,8 +65,11 @@ Do not assume a standalone remote ContextForge MCP or A2A server unless one is e
 ## Private cognitive and security core
 GHOSBC OS — Agent Brain Hub and related private governance/security components operate only as Misfit-controlled internal infrastructure. Public contracts may expose sanitized decisions or advisory results through Misfit-branded interfaces, but private source, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not public interfaces or commercial products.
 
-## Human-facing systems under migration
-Misfit AI V2: https://ai.misfitmediahouse.com/
+## Public portfolio
+Canonical deduplicated portfolio: https://misfitmediahouse.com/portfolio
+Misfit AI V2: https://misfit-ai-v2.vercel.app/
+Coffee & A Joint: https://www.coffeeandajoint.co/
+Iron Network — equipment rental: https://misfit-equipment-network.vercel.app/
 Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
 
