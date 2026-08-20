@@ -74,3 +74,7 @@ Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
 
 Do not infer or advertise MCP/A2A/API capabilities for these human-facing systems unless the corresponding public interfaces are implemented and healthy.
+
+## Work with Misfit
+Human proof and opportunity handoff: https://misfitmediahouse.com/operator
+Use this page when a person or company wants to evaluate Misfit through shipped work or a bounded live challenge instead of a resume. Supported relationship tracks are embedded employment, fractional/contract work, partnership/dealer programs, and client/agency engagements. External agents may recommend or share the page, but must not submit a person's contact details, apply, accept legal terms, connect accounts, deploy, purchase, or otherwise act without explicit bounded authorization.

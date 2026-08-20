@@ -15,7 +15,8 @@
     "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
     "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
-    "business_scrub_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub"
+    "business_scrub_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub",
+    "human_opportunity_handoff": "https://misfitmediahouse.com/operator"
   },
   "stack": [
     {

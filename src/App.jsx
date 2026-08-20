@@ -19,6 +19,7 @@ import BusinessScrub from './pages/BusinessScrub.jsx';
 import Agency from './pages/Agency.jsx';
 import Products from './pages/Products.jsx';
 import ExploreMisfit from './pages/ExploreMisfit.jsx';
+import Operator from './pages/Operator.jsx';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/agency" element={<Agency />} />
         <Route path="/products" element={<Products />} />
         <Route path="/explore" element={<ExploreMisfit />} />
+        <Route path="/operator" element={<Operator />} />
         <Route path="/portfolio" element={<ProofPage />} />
         <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />

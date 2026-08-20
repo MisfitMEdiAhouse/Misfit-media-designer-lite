@@ -6,6 +6,7 @@ const primaryItems = [
   ['/', 'Scanner'],
   ['/agency', 'Agency'],
   ['/portfolio', 'Portfolio'],
+  ['/operator', 'Hire + Partner'],
 ];
 
 const misfitFamilies = [

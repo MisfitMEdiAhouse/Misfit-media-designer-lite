@@ -74,3 +74,7 @@ Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
 
 Canonical company site: https://misfitmediahouse.com/
+
+## Work with Misfit
+Proof-first human handoff for companies, clients, partners, dealer programs, and hiring teams: https://misfitmediahouse.com/operator
+Personalized links may include the public query parameters `company`, `site`, `challenge`, and `track` (`embedded`, `fractional`, `partner`, or `client`). The page can route a public website into the Business Scrub and capture a human-approved challenge. It does not authorize an agent to apply, accept terms, connect accounts, deploy, purchase, or act on a company's behalf.

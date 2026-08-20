@@ -12,6 +12,7 @@ export default function Footer() {
             <a href="/explore">Explore Misfit</a>
             <a href="/agency">Agency</a>
             <a href="/portfolio">Portfolio</a>
+            <a href="/operator">Hire + Partner</a>
             <a href="/products">Products</a>
           </div>
         </div>

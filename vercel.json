@@ -19,6 +19,7 @@
     { "source": "/agency", "destination": "/" },
     { "source": "/products", "destination": "/" },
     { "source": "/explore", "destination": "/" },
+    { "source": "/operator", "destination": "/" },
     { "source": "/portfolio", "destination": "/" },
     { "source": "/agents", "destination": "/" },
     { "source": "/heir", "destination": "/" },
