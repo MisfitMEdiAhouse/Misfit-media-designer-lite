@@ -6,7 +6,7 @@ on:
       - '.github/workflows/caj-pages-deploy.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -24,13 +24,37 @@ jobs:
         with:
           ref: coffee-pages
       - name: Configure GitHub Pages
+        id: configure
+        continue-on-error: true
         uses: actions/configure-pages@v5
         with:
           enablement: true
       - name: Upload storefront artifact
+        id: upload
+        if: steps.configure.outcome == 'success'
+        continue-on-error: true
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
       - name: Deploy storefront
         id: deployment
+        if: steps.configure.outcome == 'success' && steps.upload.outcome == 'success'
+        continue-on-error: true
         uses: actions/deploy-pages@v4
+      - name: Record deployment result on main
+        if: always()
+        env:
+          CONFIGURE_OUTCOME: ${{ steps.configure.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          printf 'run_id=%s\nconfigure=%s\nupload=%s\ndeploy=%s\npage_url=%s\n' "$RUN_ID" "$CONFIGURE_OUTCOME" "$UPLOAD_OUTCOME" "$DEPLOY_OUTCOME" "$PAGE_URL" > caj-pages-deploy-result.txt
+          git config user.name 'Misfit Pages Bot'
+          git config user.email 'pricemedia82@gmail.com'
+          git add caj-pages-deploy-result.txt
+          git commit -m 'Record CoffeeAndAJoint Pages deploy result' || exit 0
+          git push origin main
