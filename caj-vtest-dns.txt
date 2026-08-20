@@ -1,4 +1,4 @@
-misfit-media-designer-lite.vercel.app.
-misfit-media-designer-lite.vercel.app.
-216.198.79.3
-64.29.17.3
+cname.vercel-dns.com.
+cname.vercel-dns.com.
+66.33.60.34
+76.76.21.164

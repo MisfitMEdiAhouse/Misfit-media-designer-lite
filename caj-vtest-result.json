@@ -1,1 +1,1 @@
-{"ok":true,"write":{"status":200,"ok":true,"data":null},"read":{"status":200,"ok":true,"data":[{"data":"misfit-media-designer-lite.vercel.app","name":"vtest","ttl":600,"type":"CNAME"}]},"fqdn":"vtest.coffeeandajoint.co","target":"misfit-media-designer-lite.vercel.app"}
+{"ok":true,"write":{"status":200,"ok":true,"data":null},"read":{"status":200,"ok":true,"data":[{"data":"cname.vercel-dns.com","name":"vtest","ttl":600,"type":"CNAME"}]},"fqdn":"vtest.coffeeandajoint.co","target":"cname.vercel-dns.com"}
