@@ -4,7 +4,6 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "alias": ["vtest.coffeeandajoint.co"],
   "redirects": [
     { "source": "/command", "destination": "https://misfit-cloud.vercel.app/login", "permanent": false },
     { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
@@ -12,7 +11,6 @@
     { "source": "/tyler", "destination": "/tyler-ward", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/:path*", "has": [{ "type": "header", "key": "host", "value": "vtest\\.coffeeandajoint\\.co" }], "destination": "https://misfit-media-designer-lite-git-co-b746a4-misfit-medias-projects.vercel.app/:path*" },
     { "source": "/agents", "destination": "/" },
     { "source": "/heir", "destination": "/" },
     { "source": "/shopify-ai-audit", "destination": "/" },
