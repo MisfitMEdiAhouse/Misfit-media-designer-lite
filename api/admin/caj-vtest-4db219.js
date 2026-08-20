@@ -1,5 +1,5 @@
 const DOMAIN='coffeeandajoint.co';
-const TARGET='https://misfit-media-designer-lite-git-co-b746a4-misfit-medias-projects.vercel.app/';
+const TARGET='https://misfitmediahouse.com/coffee-restored';
 const REDIRECT_IP='45.55.126.223';
 const REDIRECT_CNAME='alias.redirect.name';
 const CONFIRM='caj-495-cutover-20260820';
