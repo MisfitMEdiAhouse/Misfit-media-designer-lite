@@ -16,13 +16,13 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219' > caj-vtest-result.json
-      - name: Diagnose DNS and Vercel host routing
+      - name: Diagnose DNS and Vercel host routing after branch alias
         run: |
           set +e
           sleep 15
           { dig +short vtest.coffeeandajoint.co CNAME; dig +short vtest.coffeeandajoint.co A; } > caj-vtest-dns.txt 2>&1
           curl -k -sS -L -D caj-vtest-headers.txt -o caj-vtest-body.html -w '%{http_code}\n%{url_effective}\n' 'https://vtest.coffeeandajoint.co/' > caj-vtest-http.txt 2>caj-vtest-curl-error.txt
-          head -c 800 caj-vtest-body.html > caj-vtest-body-head.txt || true
+          head -c 1200 caj-vtest-body.html > caj-vtest-body-head.txt || true
           cat caj-vtest-dns.txt
           cat caj-vtest-http.txt
           cat caj-vtest-curl-error.txt
@@ -32,5 +32,5 @@ jobs:
           git config user.name 'Misfit CAJ Test Bot'
           git config user.email 'pricemedia82@gmail.com'
           git add caj-vtest-result.json caj-vtest-dns.txt caj-vtest-http.txt caj-vtest-headers.txt caj-vtest-curl-error.txt caj-vtest-body-head.txt
-          git commit -m 'Record CoffeeAndAJoint host routing diagnosis' || exit 0
+          git commit -m 'Record CoffeeAndAJoint alias recheck' || exit 0
           git push
