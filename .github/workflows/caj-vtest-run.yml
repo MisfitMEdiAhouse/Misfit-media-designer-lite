@@ -1,47 +1,15 @@
-name: CoffeeAndAJoint Production Cutover
+name: CoffeeAndAJoint Temporary DNS Cleanup
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/caj-vtest-run.yml'
-  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  cutover:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - name: Cut production DNS to verified public storefront
+      - name: Remove temporary vtest DNS records
         run: |
-          set -euo pipefail
-          curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219?action=cutover&confirm=caj-495-cutover-20260820' > caj-cutover-result.json
-          cat caj-cutover-result.json
-      - name: Wait for DNS and verify customer-visible storefront
-        run: |
-          set +e
-          : > caj-cutover-dns.txt
-          for i in $(seq 1 18); do
-            A=$(dig +short coffeeandajoint.co A | tr '\n' ' ')
-            W=$(dig +short www.coffeeandajoint.co CNAME | tr '\n' ' ')
-            T=$(dig +short TXT _redirect.coffeeandajoint.co | tr '\n' ' ')
-            echo "try=$i apex=$A www=$W rule=$T" >> caj-cutover-dns.txt
-            if echo "$A" | grep -q '45.55.126.223' && echo "$W" | grep -q 'alias.redirect.name'; then break; fi
-            sleep 10
-          done
-          curl -k -sS -L --retry 6 --retry-delay 5 -D caj-cutover-headers.txt -o caj-cutover-body.html -w '%{http_code}\n%{url_effective}\n' 'https://coffeeandajoint.co/' > caj-cutover-http.txt 2>caj-cutover-error.txt
-          grep -o -E 'CRATE[^<]{0,60}\$495|\$495|\$530' caj-cutover-body.html | head -20 > caj-cutover-price-check.txt || true
-          cat caj-cutover-dns.txt
-          cat caj-cutover-http.txt
-          cat caj-cutover-error.txt
-          cat caj-cutover-price-check.txt
-      - name: Clean temporary DNS test
-        run: |
-          curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219?action=cleanup-test&confirm=caj-495-cutover-20260820' > caj-cutover-cleanup.json || true
-      - name: Record sanitized production result
-        run: |
-          git config user.name 'Misfit CAJ Cutover Bot'
-          git config user.email 'pricemedia82@gmail.com'
-          git add caj-cutover-result.json caj-cutover-dns.txt caj-cutover-http.txt caj-cutover-error.txt caj-cutover-price-check.txt caj-cutover-cleanup.json
-          git commit -m 'Record CoffeeAndAJoint production cutover verification' || exit 0
-          git push
+          curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219?action=cleanup-test&confirm=caj-495-cutover-20260820'
