@@ -12,30 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Create temporary vtest DNS record through existing GoDaddy bridge
+      - name: Ensure temporary vtest DNS target
         run: |
           set -euo pipefail
           curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219' > caj-vtest-result.json
-      - name: Diagnose Vercel custom host mapping
+      - name: Verify Vercel production alias attachment
         run: |
           set +e
-          sleep 20
+          sleep 15
           { dig +short vtest.coffeeandajoint.co CNAME; dig +short vtest.coffeeandajoint.co A; } > caj-vtest-dns.txt 2>&1
+          curl -k -sS -L -D caj-vtest-https-headers.txt -o caj-vtest-https-body.html -w '%{http_code}\n%{url_effective}\n' 'https://vtest.coffeeandajoint.co/' > caj-vtest-https.txt 2>caj-vtest-https-error.txt
           curl -sS -D caj-vtest-http80-headers.txt -o caj-vtest-http80-body.html -w '%{http_code}\n%{url_effective}\n' 'http://vtest.coffeeandajoint.co/' > caj-vtest-http80.txt 2>caj-vtest-http80-error.txt
-          curl -sS -H 'Host: vtest.coffeeandajoint.co' -D caj-vtest-direct-headers.txt -o caj-vtest-direct-body.html -w '%{http_code}\n' 'http://76.76.21.21/' > caj-vtest-direct.txt 2>caj-vtest-direct-error.txt
+          head -c 1200 caj-vtest-https-body.html > caj-vtest-https-body-head.txt || true
           head -c 1200 caj-vtest-http80-body.html > caj-vtest-http80-body-head.txt || true
-          head -c 1200 caj-vtest-direct-body.html > caj-vtest-direct-body-head.txt || true
           cat caj-vtest-dns.txt
+          cat caj-vtest-https.txt
+          cat caj-vtest-https-error.txt
+          cat caj-vtest-https-body-head.txt
           cat caj-vtest-http80.txt
           cat caj-vtest-http80-error.txt
           cat caj-vtest-http80-body-head.txt
-          cat caj-vtest-direct.txt
-          cat caj-vtest-direct-error.txt
-          cat caj-vtest-direct-body-head.txt
       - name: Record result
         run: |
           git config user.name 'Misfit CAJ Test Bot'
           git config user.email 'pricemedia82@gmail.com'
-          git add caj-vtest-result.json caj-vtest-dns.txt caj-vtest-http80*.txt caj-vtest-direct*.txt
-          git commit -m 'Record CoffeeAndAJoint HTTP host mapping test' || exit 0
+          git add caj-vtest-result.json caj-vtest-dns.txt caj-vtest-https*.txt caj-vtest-http80*.txt
+          git commit -m 'Record CoffeeAndAJoint production alias verification' || exit 0
           git push
