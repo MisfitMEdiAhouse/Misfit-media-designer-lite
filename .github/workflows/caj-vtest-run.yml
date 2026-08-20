@@ -1,0 +1,26 @@
+name: CoffeeAndAJoint Replacement Host Test
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/caj-vtest-run.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Create temporary vtest DNS record through existing GoDaddy bridge
+        run: |
+          set -euo pipefail
+          curl -fsS -X POST 'https://misfit-media-designer-lite.vercel.app/api/admin/caj-vtest-4db219' > caj-vtest-result.json
+          cat caj-vtest-result.json
+      - name: Record result
+        run: |
+          git config user.name 'Misfit CAJ Test Bot'
+          git config user.email 'pricemedia82@gmail.com'
+          git add caj-vtest-result.json
+          git commit -m 'Record CoffeeAndAJoint replacement host test' || exit 0
+          git push
