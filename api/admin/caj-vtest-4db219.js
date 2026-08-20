@@ -1,7 +1,7 @@
 const DOMAIN='coffeeandajoint.co';
 const TARGET='https://misfit-media-designer-lite-git-co-b746a4-misfit-medias-projects.vercel.app/';
 function gh(write=false){const t=process.env.GODADDY_PAT;if(!t) throw new Error('GODADDY_PAT missing');return {Authorization:`Bearer ${t}`,Accept:'application/json',...(write?{'Content-Type':'application/json'}:{})};}
-async function gcall(method,url,body){const r=await fetch(url,{method,headers:gh(method!=='GET'),...(body?{body:JSON.stringify(body)}:{})});const text=await r.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}return {status:r.status,ok:r.ok,data};}
+async function gcall(method,url,body){const r=await fetch(url,{method,headers:gh(method!=='GET'),...(body?{body:JSON.stringify(body)}:{})});const text=await r.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}const safeHeaders={};for(const [k,v] of r.headers.entries()){if(/shopper|customer|account/i.test(k))safeHeaders[k]=v;}return {status:r.status,ok:r.ok,data,safeHeaders};}
 function customerCandidates(){const keys=['GODADDY_CUSTOMER_ID','GODADDY_SHOPPER_ID','CUSTOMER_ID','SHOPPER_ID'];return keys.filter(k=>process.env[k]).map(k=>({key:k,value:String(process.env[k]).trim()}));}
 async function forwardCall(customer,fqdn,method='GET'){
   const url=`https://api.godaddy.com/v2/customers/${encodeURIComponent(customer)}/domains/forwards/${encodeURIComponent(fqdn)}`;
@@ -19,7 +19,7 @@ export default async function handler(req,res){res.setHeader('Cache-Control','no
       if(r.ok||r.status===404)return res.status(200).json({ok:true,customerKey:c.key,status:r.status,hasRule:r.ok});
     }
     const domains=await gcall('GET','https://api.godaddy.com/v1/domains');
-    return res.status(200).json({ok:false,candidateKeys:candidates.map(c=>c.key),attempts,domainsStatus:domains.status,domainFields:Array.isArray(domains.data)&&domains.data[0]?Object.keys(domains.data[0]):[]});
+    return res.status(200).json({ok:false,candidateKeys:candidates.map(c=>c.key),attempts,domainsStatus:domains.status,domainFields:Array.isArray(domains.data)&&domains.data[0]?Object.keys(domains.data[0]):[],identityHeaders:domains.safeHeaders});
   }
   if(action==='forward'){
     if(req.method!=='POST')return res.status(405).json({ok:false});
