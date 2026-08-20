@@ -1,0 +1,8 @@
+HTTP/1.1 404 Not Found
+Content-Length: 107
+Content-Type: text/plain; charset=utf-8
+Date: Thu, 20 Aug 2026 09:20:00 GMT
+Server: Vercel
+X-Vercel-Error: DEPLOYMENT_NOT_FOUND
+X-Vercel-Id: sfo1::qz52h-1787217600356-cfb90a436db7
+

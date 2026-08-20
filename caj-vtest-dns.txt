@@ -1,4 +1,4 @@
 cname.vercel-dns.com.
 cname.vercel-dns.com.
-66.33.60.34
-76.76.21.164
+66.33.60.35
+76.76.21.123
