@@ -75,12 +75,17 @@
     .visual.photo img { object-fit: cover; object-position: 50% 24%; }
     .visual.patch { padding: 28px; }
     .visual.crate img { object-fit: cover; }
+    .visual.drugs-catalog { background: var(--cream); }
+    .visual.drugs-catalog img { object-fit: contain; padding: clamp(18px, 3vw, 42px); }
     .tag { position: absolute; top: 15px; left: 15px; z-index: 2; border-radius: 999px; padding: 8px 10px; background: var(--black); color: var(--acid); font-size: 9px; }
     .info { display: flex; flex-direction: column; padding: 26px; }
     .drop { color: var(--aqua); }
     .name { margin: 14px 0 8px; font-size: clamp(33px, 4vw, 55px); line-height: .86; letter-spacing: -.055em; text-transform: uppercase; }
     .price { color: var(--acid); font-size: 38px; font-weight: 950; }
     .desc { margin: 18px 0; color: var(--muted); line-height: 1.58; }
+    .worn-proof { display: grid; grid-template-columns: 112px 1fr; align-items: center; gap: 16px; margin: 0 0 18px; padding: 10px; border: 1px solid #333; background: #111; }
+    .worn-proof img { width: 112px; height: 112px; object-fit: cover; object-position: 50% 28%; }
+    .worn-proof figcaption { color: #d9d5cc; font-size: 9px; line-height: 1.55; }
     .spec { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #333; padding: 10px 0; color: #aaa; font-size: 10px; }
     .spec strong { color: white; }
     .info .cta { min-width: 0; width: 100%; margin-top: auto; }
@@ -225,15 +230,19 @@
       </article>
 
       <article id="drugs-hat" class="card">
-        <div class="visual">
+        <div class="visual drugs-catalog">
           <span class="tag mono">DROP 001 · POD</span>
-          <img src="/coffeeandjoint/drugs-hat-product.svg" width="1200" height="1200" loading="lazy" alt="Black DRUGS mesh-back trucker hat">
+          <img src="/coffeeandjoint/assets/drugs-hat-catalog.webp" width="1536" height="1229" loading="lazy" alt="Real black DRUGS mesh-back trucker hat product photo">
         </div>
         <div class="info">
           <div class="drop mono">DRUGS · DROP 001</div>
           <h3 class="name">The DRUGS Trucker</h3>
           <div class="price">$45</div>
           <p class="desc">Black foam-front mesh trucker with the distressed bone-white gothic DRUGS wordmark. Printed to order.</p>
+          <figure class="worn-proof">
+            <img src="/coffeeandjoint/assets/drugs-hat-worn.webp" width="1100" height="1467" loading="lazy" alt="Coffee and A Joint founder wearing the real DRUGS trucker hat">
+            <figcaption class="mono">REAL HAT · REAL WEAR TEST · PHOTOGRAPHED IN THE SHOP</figcaption>
+          </figure>
           <div class="spec"><strong>FULFILLMENT</strong><span>POD · MADE TO ORDER</span></div>
           <div class="spec"><strong>FIT</strong><span>ADJUSTABLE SNAPBACK</span></div>
           <div class="spec"><strong>SHIPPING</strong><span>U.S. INCLUDED</span></div>
