@@ -67,6 +67,8 @@ GHOSBC OS — Agent Brain Hub and related private governance/security components
 
 ## Public portfolio
 Canonical deduplicated portfolio: https://misfitmediahouse.com/portfolio
+IALS Turbine Command proof case: https://misfitmediahouse.com/portfolio/ials-turbine-command
+IALS is a two-surface aerospace aftermarket operating system built by Misfit Mediahouse. The public surface supports part-number discovery, bearing recovery and demand acquisition; the private operator workflow matches repair pricing to inventory, compares repair routes, gates spend before overhaul, manages compliance evidence and generates customer-facing transaction documents. Current published aggregate proof: 94 repair-price P/N rows, 22 inventory-to-pricing matches, 4 multi-shop comparison P/Ns and 12 priced matches with known quantity. Private vendor names, exact rates, customer records, signed documents and controlled technical data are not public.
 Misfit AI V2: https://misfit-ai-v2.vercel.app/
 Coffee & A Joint: https://www.coffeeandajoint.co/
 Iron Network — equipment rental: https://misfit-equipment-network.vercel.app/

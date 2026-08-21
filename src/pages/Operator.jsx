@@ -101,6 +101,13 @@ const proof = [
     copy: 'Public A2A, MCP, UCP, agent discovery, trust audits, and bounded advisory action checks around a sealed private core.',
     href: '/agents',
   },
+  {
+    icon: Workflow,
+    label: 'Aerospace operations',
+    name: 'IALS Turbine Command',
+    copy: 'Inventory-to-repair pricing intelligence, buyer-first recovery, compliance gates, document automation and human-approved deal control.',
+    href: '/portfolio/ials-turbine-command',
+  },
 ];
 
 function cleanParam(value, limit = 180) {

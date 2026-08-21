@@ -20,6 +20,7 @@ import Agency from './pages/Agency.jsx';
 import Products from './pages/Products.jsx';
 import ExploreMisfit from './pages/ExploreMisfit.jsx';
 import Operator from './pages/Operator.jsx';
+import IALSTurbineCommand from './pages/IALSTurbineCommand.jsx';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/explore" element={<ExploreMisfit />} />
         <Route path="/operator" element={<Operator />} />
         <Route path="/portfolio" element={<ProofPage />} />
+        <Route path="/portfolio/ials-turbine-command" element={<IALSTurbineCommand />} />
         <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />

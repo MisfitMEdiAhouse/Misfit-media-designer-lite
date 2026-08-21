@@ -1,5 +1,19 @@
 [
   {
+    "id": "ials-turbine-command",
+    "title": "IALS Turbine Command",
+    "type": "Aerospace aftermarket operating system",
+    "summary": "A two-surface turbine-bearing revenue and risk system spanning public demand capture, private repair economics, inventory-to-pricing intelligence, compliance gates, document automation, and human-approved deal control.",
+    "url": "/portfolio/ials-turbine-command",
+    "featured": true,
+    "metrics": [
+      "94 repair-price rows",
+      "22 inventory matches",
+      "4 multi-shop P/Ns",
+      "12 priced matches with qty"
+    ]
+  },
+  {
     "id": "coffee-and-a-joint",
     "title": "Coffee & A Joint",
     "type": "Ecommerce brand",
