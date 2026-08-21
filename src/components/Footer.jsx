@@ -14,6 +14,7 @@ export default function Footer() {
             <a href="/portfolio">Portfolio</a>
             <a href="/operator">Hire + Partner</a>
             <a href="/products">Products</a>
+            <a href="/field-notes">Field Notes</a>
           </div>
         </div>
         <div className="mt-8 border-t border-white/5 pt-6">

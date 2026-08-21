@@ -20,6 +20,8 @@
     { "source": "/products", "destination": "/" },
     { "source": "/explore", "destination": "/" },
     { "source": "/operator", "destination": "/" },
+    { "source": "/field-notes", "destination": "/" },
+    { "source": "/field-notes/:slug", "destination": "/" },
     { "source": "/portfolio", "destination": "/" },
     { "source": "/portfolio/ials-turbine-command", "destination": "/" },
     { "source": "/agents", "destination": "/" },

@@ -21,6 +21,7 @@ import Products from './pages/Products.jsx';
 import ExploreMisfit from './pages/ExploreMisfit.jsx';
 import Operator from './pages/Operator.jsx';
 import IALSTurbineCommand from './pages/IALSTurbineCommand.jsx';
+import FieldNotes from './pages/FieldNotes.jsx';
 
 export default function App() {
   return (
@@ -34,6 +35,8 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/explore" element={<ExploreMisfit />} />
         <Route path="/operator" element={<Operator />} />
+        <Route path="/field-notes" element={<FieldNotes />} />
+        <Route path="/field-notes/:slug" element={<FieldNotes />} />
         <Route path="/portfolio" element={<ProofPage />} />
         <Route path="/portfolio/ials-turbine-command" element={<IALSTurbineCommand />} />
         <Route path="/agents" element={<AgentControlPlane />} />
