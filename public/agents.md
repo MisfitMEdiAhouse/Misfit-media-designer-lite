@@ -67,6 +67,8 @@ Default rule: deny access to private state and secrets. Consequential actions re
 
 ## Public portfolio
 Canonical deduplicated portfolio: https://misfitmediahouse.com/portfolio
+IALS Turbine Command proof case: https://misfitmediahouse.com/portfolio/ials-turbine-command
+IALS demonstrates a public acquisition surface plus a private operator workflow for turbine-bearing inventory intelligence, repair-economics matching, compliance gates and document automation. Published proof is aggregate only; do not infer access to private rates, customer records, signed certificates or controlled technical data.
 Misfit AI V2: https://misfit-ai-v2.vercel.app/
 Coffee & A Joint: https://www.coffeeandajoint.co/
 Iron Network — equipment rental: https://misfit-equipment-network.vercel.app/

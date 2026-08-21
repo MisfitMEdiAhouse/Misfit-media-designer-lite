@@ -21,6 +21,7 @@
     { "source": "/explore", "destination": "/" },
     { "source": "/operator", "destination": "/" },
     { "source": "/portfolio", "destination": "/" },
+    { "source": "/portfolio/ials-turbine-command", "destination": "/" },
     { "source": "/agents", "destination": "/" },
     { "source": "/heir", "destination": "/" },
     { "source": "/shopify-ai-audit", "destination": "/" },

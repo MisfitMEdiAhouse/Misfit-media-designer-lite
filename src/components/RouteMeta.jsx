@@ -6,6 +6,7 @@ const publicMeta = {
   '/scrub': ['/scrub', 'Scan a Shopify store or business website and get a public-signal health score with prioritized fixes.'],
   '/agency': ['/agency', 'Misfit Mediahouse builds websites, AI intake, commerce, custom software, and managed growth systems.'],
   '/portfolio': ['/portfolio', 'Open the canonical public portfolio of live products, client deployments, commerce builds, and business systems from Misfit Mediahouse.'],
+  '/portfolio/ials-turbine-command': ['/portfolio/ials-turbine-command', 'Inspect how Misfit Mediahouse built the IALS aerospace aftermarket operating system across inventory intelligence, repair economics, compliance workflow, document automation, and human-gated deal control.'],
   '/products': ['/products', 'Misfit Business Health Scanner, QuoteLink, Misfit AI V2, Shopify Agentic Audit, and ContextForge.'],
   '/explore': ['/explore', 'Explore Misfit Cloud, Misfit Engines, Misfit Governance, Misfit AI-to-AI, and the protected GHOSBC OS API Brain.'],
   '/operator': ['/operator', 'Skip the resume pile. Give Misfit a live full-stack, AI, revenue, commerce, migration, partnership, dealer, or product challenge and judge the shipped work.'],
