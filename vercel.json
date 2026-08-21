@@ -9,6 +9,7 @@
     { "source": "/proof", "destination": "/portfolio", "permanent": true },
     { "source": "/snapsite", "destination": "/quotelink", "permanent": true },
     { "source": "/roads-garage", "destination": "/roads", "permanent": true },
+    { "source": "/coffee-admin", "destination": "/coffee/admin", "permanent": false },
     { "source": "/tyler", "destination": "/tyler-ward", "permanent": true },
     { "source": "/caj-live", "destination": "https://www.coffeeandajoint.co/", "permanent": true },
     { "source": "/caj-live.html", "destination": "https://www.coffeeandajoint.co/", "permanent": true },
@@ -33,6 +34,7 @@
     { "source": "/misfit-ai-v2", "destination": "/" },
     { "source": "/roads", "destination": "/" },
     { "source": "/roads/admin", "destination": "/" },
+    { "source": "/coffee/admin", "destination": "/" },
     { "source": "/tyler-ward", "destination": "/" },
     { "source": "/quotelink", "destination": "/" }
   ],
@@ -41,6 +43,7 @@
     { "source": "/command", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
     { "source": "/heir", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
     { "source": "/roads/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
+    { "source": "/coffee/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }, { "key": "Cache-Control", "value": "private, no-store" }] },
     { "source": "/coffee-restored", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },
     { "source": "/(.*)", "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }, { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }, { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }] }
   ]

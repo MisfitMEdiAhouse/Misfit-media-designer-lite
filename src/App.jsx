@@ -22,6 +22,7 @@ import ExploreMisfit from './pages/ExploreMisfit.jsx';
 import Operator from './pages/Operator.jsx';
 import IALSTurbineCommand from './pages/IALSTurbineCommand.jsx';
 import FieldNotes from './pages/FieldNotes.jsx';
+import CoffeeLaunchConsole from './pages/CoffeeLaunchConsole.jsx';
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
         <Route path="/roads" element={<RoadsGarageOSV2 />} />
         <Route path="/roads/admin" element={<RoadsAdminGate />} />
+        <Route path="/coffee/admin" element={<CoffeeLaunchConsole />} />
         <Route path="/roads-garage" element={<Navigate to="/roads" replace />} />
         <Route path="/tyler-ward" element={<TylerWardLive />} />
         <Route path="/tyler" element={<Navigate to="/tyler-ward" replace />} />

@@ -21,9 +21,10 @@ const publicMeta = {
   '/creator-commerce': ['/creator-commerce', 'Creator commerce, campaign attribution, and tracked conversion systems by Misfit Mediahouse.'],
   '/roads': ['/roads', 'Misfit Road Lab calculators for wheel power, metric and flotation tires, gearing, crawl ratio, wheel concepts, field kits, vehicle power, and overland comms.'],
   '/tyler-ward': ['/tyler-ward', 'Tyler Ward general contractor services and project intake.'],
+  '/coffee/admin': ['/coffee/admin', 'Private owner launch console for Coffee & A Joint revenue, fulfillment, launch-proof, and product-quality gates.'],
 };
 
-const privatePaths = new Set(['/command', '/heir', '/roads/admin']);
+const privatePaths = new Set(['/command', '/heir', '/roads/admin', '/coffee/admin']);
 
 const publicTitles = {
   '/': 'Misfit Mediahouse | Shopify Store Health Scanner',
@@ -44,6 +45,7 @@ const publicTitles = {
   '/creator-commerce': 'Creator Commerce | Misfit Mediahouse',
   '/roads': 'Misfit Road Lab',
   '/tyler-ward': 'Tyler Ward Construction',
+  '/coffee/admin': 'Coffee & A Joint Launch Console — Private',
 };
 
 function upsertMeta(name, content) {
