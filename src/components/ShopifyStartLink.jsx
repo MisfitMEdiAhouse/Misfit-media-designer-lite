@@ -16,12 +16,11 @@ function anonymousId() {
 export default function ShopifyStartLink({ className = '', label = 'Start a Shopify store →', moduleKey = 'shopify_scanner' }) {
   const track = () => {
     const params = new URLSearchParams(window.location.search);
-    fetch('/api/roads-event', {
+    fetch('/api/referral-event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         anonymousId: anonymousId(),
-        eventType: 'partner_clickout',
         source: params.get('utm_source') || 'direct',
         medium: params.get('utm_medium') || '',
         campaign: params.get('utm_campaign') || '',
@@ -32,7 +31,7 @@ export default function ShopifyStartLink({ className = '', label = 'Start a Shop
         offerKey: SHOPIFY_AFFILIATE_ACTIVE ? 'affiliate_signup' : 'official_signup',
         outboundUrl: SHOPIFY_REFERRAL_URL,
         clickId: `clk_${crypto.randomUUID()}`,
-        metadata: { affiliate_active: SHOPIFY_AFFILIATE_ACTIVE },
+        affiliateActive: SHOPIFY_AFFILIATE_ACTIVE,
       }),
       keepalive: true,
     }).catch(() => {});
