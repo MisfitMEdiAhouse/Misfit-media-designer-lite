@@ -20,6 +20,7 @@ import {
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import ShopifyStartLink from '../components/ShopifyStartLink.jsx';
 
 const SCRUB_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub';
 const LEAD_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/lead-capture';
@@ -322,6 +323,10 @@ export default function BusinessScrub() {
                   </a>
                 </div>
                 {result.deeper_audit?.href && <a href={`${result.deeper_audit.href}${result.deeper_audit.query ? `?${result.deeper_audit.query}=${encodeURIComponent(result.domain)}` : ''}`} className="mt-5 inline-flex items-center gap-2 text-xs text-cyan-300 hover:text-white">{result.deeper_audit.label} <ExternalLink size={12}/></a>}
+                <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div><div className="font-mono text-[9px] uppercase tracking-[0.14em] text-slate-600">Starting fresh?</div><div className="mt-1 text-sm text-slate-400">Launch the store on Shopify, then bring Misfit back for the build and revenue system.</div></div>
+                  <ShopifyStartLink label="Start a new Shopify store →" moduleKey="business_scrub_results" className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 px-5 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white hover:border-cyan-300/50 hover:text-cyan-300" />
+                </div>
               </section>
             )}
 

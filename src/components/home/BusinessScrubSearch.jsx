@@ -1,6 +1,7 @@
 import { ArrowRight, Search } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ShopifyStartLink from '../ShopifyStartLink.jsx';
 
 export default function BusinessScrubSearch() {
   const [website, setWebsite] = useState('');
@@ -48,8 +49,9 @@ export default function BusinessScrubSearch() {
       </form>
       <div className="mt-4 flex flex-col items-center justify-center gap-2 text-center text-[11px] leading-5 text-slate-600 sm:flex-row sm:gap-5">
         <span>Free public-signal scan · no login required</span>
+        <ShopifyStartLink className="text-slate-400 underline decoration-white/20 underline-offset-4 hover:text-cyan-300" />
         <Link to="/quotelink" className="text-slate-400 underline decoration-white/20 underline-offset-4 hover:text-cyan-300">
-          No website yet? Build one with Misfit →
+          Need the whole site? Build with Misfit →
         </Link>
       </div>
       {showError && <p role="alert" className="mt-3 text-center text-xs text-rose-300">Enter a public store or business website to start.</p>}
