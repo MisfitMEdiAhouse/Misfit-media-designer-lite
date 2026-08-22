@@ -243,11 +243,17 @@ async function dispatchPrintify(order: Json, session: Json, spec: PlanItem) {
   });
 }
 
+function printfulPrefix(productKey: PlanItem["productKey"]) {
+  if (productKey === "classic_patch") return "printful_patch";
+  if (productKey === "titties_patch") return "printful_titties_patch";
+  return "printful_classic";
+}
+
 async function dispatchPrintful(order: Json, session: Json, spec: PlanItem) {
   const current = await upsertItem(order.id, spec, "awaiting_dispatch");
   if (["submitted", "shipped", "fulfilled"].includes(current.status)) return;
 
-  const prefix = spec.productKey === "classic_patch" ? "printful_patch" : "printful_classic";
+  const prefix = printfulPrefix(spec.productKey);
   const secret = await secrets([
     "printful_api_token",
     "printful_store_id",
@@ -457,11 +463,12 @@ Deno.serve(async (request) => {
     return response(200, {
       ok: true,
       service: "coffee-joint-stripe-webhook",
-      version: 4,
+      version: 5,
       routes: {
         drugs_hat: "printify",
         classic_herb_hat: "printful",
         classic_patch: "printful",
+        titties_patch: "printful",
         crate: "owner",
         bundle: "printify+owner",
       },
