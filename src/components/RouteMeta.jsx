@@ -19,7 +19,7 @@ const publicMeta = {
   '/agents': ['/agents', 'Public-safe machine and agent discovery for Misfit Mediahouse.'],
   '/enterprise-ai': ['/enterprise-ai', 'ContextForge enterprise AI and metadata-aware change governance by Misfit Mediahouse.'],
   '/creator-commerce': ['/creator-commerce', 'Creator commerce, campaign attribution, and tracked conversion systems by Misfit Mediahouse.'],
-  '/roads': ['/roads', 'Misfit Road Lab calculators for wheel power, metric and flotation tires, gearing, crawl ratio, wheel concepts, field kits, vehicle power, and overland comms.'],
+  '/roads': ['/roads', 'Misfit Road Lab calculators for wheel power, metric and flotation tires, corrected speed, gearing, crawl ratio, vehicle profiles, field kits, vehicle power, and overland comms.'],
   '/tyler-ward': ['/tyler-ward', 'Tyler Ward general contractor services and project intake.'],
   '/coffee/admin': ['/coffee/admin', 'Private owner launch console for Coffee & A Joint revenue, fulfillment, launch-proof, and product-quality gates.'],
 };
