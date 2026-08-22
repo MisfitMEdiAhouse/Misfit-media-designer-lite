@@ -5,6 +5,17 @@ import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { fieldNotes, findFieldNote } from '../content/fieldNotes.js';
 
+function rebrandPublicNote(note) {
+  if (!note) return note;
+  const serialized = JSON.stringify(note)
+    .replaceAll('ROAD LAB', 'RIG RADAR')
+    .replaceAll('Road Lab', 'Rig Radar')
+    .replaceAll('"/roads"', '"/rig-radar"');
+  return JSON.parse(serialized);
+}
+
+const publicFieldNotes = fieldNotes.map(rebrandPublicNote);
+
 function JsonLd({ note }) {
   useEffect(() => {
     if (!note) return undefined;
@@ -45,7 +56,7 @@ function NotesIndex() {
 
       <section className="px-5 py-14 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">
-          {fieldNotes.map((note, index) => (
+          {publicFieldNotes.map((note, index) => (
             <article key={note.slug} className={`group flex min-h-[330px] flex-col border border-white/10 bg-white/[0.025] p-7 transition hover:border-cyan-300/35 hover:bg-cyan-300/[0.04] sm:p-9 ${index === 0 ? 'lg:col-span-2 lg:min-h-[390px]' : ''}`}>
               <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-300">{note.kicker}</p>
               <h2 className={`mt-5 font-display font-black uppercase leading-[0.95] ${index === 0 ? 'text-4xl sm:text-6xl' : 'text-3xl sm:text-4xl'}`}>{note.title}</h2>
@@ -120,7 +131,7 @@ function NoteArticle({ note }) {
 
 export default function FieldNotes() {
   const { slug } = useParams();
-  const note = slug ? findFieldNote(slug) : null;
+  const note = slug ? rebrandPublicNote(findFieldNote(slug)) : null;
 
   if (slug && !note) return <Navigate to="/field-notes" replace />;
 
