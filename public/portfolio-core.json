@@ -70,11 +70,11 @@
     "url": "https://misfit-media-house-off-grid-water.vercel.app/"
   },
   {
-    "id": "roads-garage",
-    "title": "Misfit Road Lab",
-    "type": "Automotive + overland lead engine",
-    "summary": "A working vehicle lab for power estimates, metric and flotation tire math, corrected speed, axle gearing, crawl ratio, saved vehicle profiles, field kits, vehicle power, comms, and tracked merch conversion.",
-    "url": "/roads"
+    "id": "misfit-rig-radar",
+    "title": "Misfit Rig Radar",
+    "type": "Automotive + overland utility suite",
+    "summary": "A working vehicle toolkit for power estimates, metric and flotation tire math, corrected speed, axle gearing, crawl ratio, saved vehicle profiles, field kits, vehicle power, comms, and tracked merch conversion.",
+    "url": "/rig-radar"
   },
   {
     "id": "tyler-ward",
