@@ -6,6 +6,7 @@ const expected = [
   [LINKS.drugs, 'hat', 'printify', 4500],
   [LINKS.classic, 'hat', 'printful', 6500],
   [LINKS.patch, 'patch', 'printful', 0],
+  [LINKS.tittiesPatch, 'patch', 'printful', 0],
   [LINKS.crate, 'crate', 'owner', 0],
   [LINKS.bundle, 'bundle', 'printify', 4500],
 ];
@@ -19,8 +20,12 @@ for (const [paymentLink, orderKind, provider, commissionBaseAmount] of expected)
 }
 
 assert.equal(
-  resolvePlan({ metadata: { brand: 'CoffeeAndAJoint', catalog_sku: 'classic-herb-patch' } })?.orderKind,
-  'patch',
+  resolvePlan({ metadata: { brand: 'CoffeeAndAJoint', catalog_sku: 'classic-herb-patch' } })?.items[0].productKey,
+  'classic_patch',
+);
+assert.equal(
+  resolvePlan({ metadata: { brand: 'CoffeeAndAJoint', catalog_sku: 'titties-patch', fulfillment_provider: 'printful' } })?.items[0].productKey,
+  'titties_patch',
 );
 assert.equal(
   resolvePlan({ metadata: { brand: 'coffeeandajoint', fulfillment_provider: 'printify' } })?.items[0].productKey,
@@ -28,7 +33,7 @@ assert.equal(
 );
 assert.equal(resolvePlan({ metadata: { brand: 'some-other-store' } }), null);
 assert.throws(
-  () => resolvePlan({ metadata: { brand: 'CoffeeAndAJoint', catalog_sku: 'unknown' } }),
+  () => resolvePlan({ metadata: { brand: 'CoffeeAndAJoint', catalog_sku: 'unknown', fulfillment_provider: 'printful' } }),
   /no fulfillment mapping/,
 );
 
