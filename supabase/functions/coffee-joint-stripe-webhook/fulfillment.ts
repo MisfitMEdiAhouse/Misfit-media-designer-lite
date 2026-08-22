@@ -1,6 +1,6 @@
 export type ItemKind = "hat" | "patch" | "crate";
 export type Provider = "printify" | "printful" | "owner";
-export type ProductKey = "drugs" | "classic_herb" | "classic_patch" | "crate";
+export type ProductKey = "drugs" | "classic_herb" | "classic_patch" | "titties_patch" | "crate";
 export type PlanItem = { itemKind: ItemKind; provider: Provider; productKey: ProductKey };
 export type FulfillmentPlan = {
   orderKind: "hat" | "patch" | "crate" | "bundle";
@@ -14,6 +14,7 @@ export const LINKS = {
   classicLegacy: "plink_1U5YwIFpcFPyAHAYtFcP9QiY",
   classic: "plink_1U6QHWFpcFPyAHAYjjPl6E3N",
   patch: "plink_1U6QHdFpcFPyAHAYlkuFqc7n",
+  tittiesPatch: "plink_1U74WaFpcFPyAHAYyRNE0OuF",
   crate: "plink_1U6RFlFpcFPyAHAY6ukpnzH6",
   bundle: "plink_1U6RFzFpcFPyAHAYugMIScGX",
 } as const;
@@ -42,6 +43,12 @@ export const PLAN_BY_LINK: Record<string, FulfillmentPlan> = {
     pendingStatus: "printful_pending",
     commissionBaseAmount: 0,
     items: [{ itemKind: "patch", provider: "printful", productKey: "classic_patch" }],
+  },
+  [LINKS.tittiesPatch]: {
+    orderKind: "patch",
+    pendingStatus: "printful_pending",
+    commissionBaseAmount: 0,
+    items: [{ itemKind: "patch", provider: "printful", productKey: "titties_patch" }],
   },
   [LINKS.crate]: {
     orderKind: "crate",
@@ -74,7 +81,8 @@ export function resolvePlan(session: Record<string, any>): FulfillmentPlan | nul
   const orderKind = normalized(session.metadata?.order_kind);
   const provider = normalized(session.metadata?.fulfillment_provider);
   if (sku === "classicherbpatch") return PLAN_BY_LINK[LINKS.patch];
-  if (sku === "classicherbhat" || provider === "printful") return PLAN_BY_LINK[LINKS.classic];
+  if (sku === "tittiespatch") return PLAN_BY_LINK[LINKS.tittiesPatch];
+  if (sku === "classicherbhat") return PLAN_BY_LINK[LINKS.classic];
   if (orderKind === "bundle") return PLAN_BY_LINK[LINKS.bundle];
   if (orderKind === "crate" || provider === "owner") return PLAN_BY_LINK[LINKS.crate];
   if (provider === "printify" || normalized(session.metadata?.drop) === "001") return PLAN_BY_LINK[LINKS.drugs];
