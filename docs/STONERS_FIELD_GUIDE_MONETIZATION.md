@@ -1,14 +1,22 @@
 # The Stoner's Field Guide — Hands-Off Monetization
 
-Status: STAGED ONLY. Do not merge/deploy until the book + POD release gate is approved.
+Status: STAGED ONLY. Do not merge/deploy until the physical book + POD release gate is approved.
+
+## Product rule
+
+**One paid product: the physical Collector's Edition hardcover.**
+
+There is no ebook, downloadable edition, digital companion, web-readable copy, or duplicate digital guide product.
+
+The only web layer connected to the book is commerce infrastructure:
+
+`printed book -> Coffee & A Joint Field Supply QR -> Field Supply ID -> approved vendor/dealer/affiliate -> vendor fulfillment -> Misfit attribution/commission`
+
+The website must not reproduce the book. It only sells the hardcover and resolves current equipment/supply purchasing routes.
 
 ## Owner rule
 
 The owner does not stock, pack, ship, source ad hoc inventory, or manually fulfill equipment orders. Coffee & A Joint owns discovery, attribution, audience and merchandising. The manufacturer, dealer, POD printer or retailer owns fulfillment.
-
-## Product rule
-
-There is **no separate downloadable/digital edition requirement**. The paid product is the physical Collector's Edition. The printed book carries stable Field Supply IDs plus one permanent Coffee & A Joint QR destination. That web destination is an equipment/supplier portal, not a second copy of the book.
 
 ## Printed QR architecture
 
@@ -17,44 +25,37 @@ Canonical QR destination:
 `https://coffeeandajoint.co/field-supply?src=sfg`
 
 Rules:
-1. The QR must be generated as a real standards-compliant QR code, not decorative AI artwork.
-2. The code must be decoded from the final print PDF and from the physical proof before release.
-3. The QR points only to Coffee & A Joint, never directly to Amazon or a vendor.
-4. Printed Field Supply IDs identify the recommendation; the web route resolves each ID to the current partner, dealer, substitute, price/spec page, or source.
-5. The inbound `src=sfg` attribution records that the visit originated from the printed Stoner's Field Guide.
-6. Partner click/order attribution is reconciled behind the Field Supply ID so commissions can be measured without reprinting the book.
-7. If a vendor or commission rail changes, routing changes online while the printed QR and Field Supply ID stay valid.
+1. The QR must be a real standards-compliant code, never decorative AI artwork.
+2. Decode-test the QR from the final print PDF and from the physical proof before release.
+3. The printed QR points only to Coffee & A Joint, never directly to Amazon or another vendor.
+4. Printed Field Supply IDs identify the recommendation; the web route resolves each ID to the current approved supplier/partner route.
+5. `src=sfg` records that the visit originated from the physical Stoner's Field Guide.
+6. Partner click/order attribution reconciles to the Field Supply ID.
+7. Vendor routing may change without reprinting the book.
 
-## Funnel
+## Commercial routing priority
 
-1. Reader buys or encounters the physical Stoner's Field Guide.
-2. Reader scans the printed Coffee & A Joint Field Supply QR.
-3. Reader selects or searches the Field Supply ID printed beside the tool/equipment recommendation.
-4. Routing chooses the best **approved** active commercial rail:
-   - direct manufacturer sales-rep/dealer/referral margin;
-   - high-commission creator/affiliate partner;
-   - specialty retailer affiliate;
-   - Amazon fallback for commodity parts.
-5. Vendor fulfills the order.
-6. Referral/affiliate/dealer revenue reconciles back to the Field Supply ID and source `sfg`.
-7. If a better supplier or commission rail appears, routing changes without changing the printed book.
+1. Direct manufacturer sales-rep/dealer/referral margin.
+2. Approved high-commission creator/affiliate partner.
+3. Specialty retailer affiliate.
+4. Amazon fallback for commodity parts when compliant and approved.
 
 ## Amazon rule
 
-Amazon Special Links must not be printed in the book or embedded in a PDF/ebook. The printed book links only to Coffee & A Joint. A live Coffee & A Joint web page may carry compliant Amazon Associates links after program approval.
+Amazon Special Links are never printed in the hardcover or embedded in any book file. The hardcover points only to Coffee & A Joint. A live Coffee & A Joint Field Supply page may carry compliant Amazon Associates links only after account approval.
 
 ## Priority B2B relationships
 
 ### Seedburo
-Publicly recruiting sales representatives with competitive margins. Strong first direct relationship because the Stoner's Field Guide has legitimate hemp moisture / grain / seed QC use cases. Ask for rep margin, attribution, quote flow, territory, product feed and direct fulfillment.
+Pursue a direct sales-rep/referral arrangement for hemp moisture, grain and seed QC equipment with Seedburo fulfilling the order.
 
 ### PITEBA
-Manufacturer sells worldwide and already maintains a dealer network. Ask for a US referral/dealer arrangement for homestead and micro-scale oil presses, accessories and replacement parts with direct fulfillment.
+Pursue a US referral/dealer arrangement for homestead/micro-scale presses, parts and accessories with direct fulfillment.
 
 ### Farmet
-Manufacturer explicitly says partners can become sales representatives and already has US dealers. Ask for referral/rep terms for small-capacity oilseed presses and turnkey systems, with leads fulfilled by Farmet or an assigned US dealer.
+Pursue referral/rep terms for small-capacity oilseed presses and turnkey systems with Farmet or an assigned dealer fulfilling leads.
 
-## Public affiliate rails
+## Affiliate candidates
 
 Candidates only until approved in-account:
 - Lowe's Creator
@@ -66,28 +67,20 @@ Candidates only until approved in-account:
 
 ## Current partnership status
 
-Outreach has been sent to Seedburo, PITEBA and Farmet. No negotiated agreement is considered active until a reply/approval and terms are verified. Public affiliate rails are also **not active** merely because a public program exists; account approval, tax and payout onboarding are required first.
+Outreach has been sent to Seedburo, PITEBA and Farmet. No negotiated relationship is active until a reply/approval and terms are verified. Public affiliate programs are not active merely because the program exists; account approval, tax and payout onboarding are required.
 
 ## Human gates
 
-The remaining application gates require owner/account-holder information that should not be guessed or hard-coded:
-
-1. Lowe's Creator application — identity, social/site profile, tax/payment onboarding.
-2. Home Depot Creator application — identity/profile, terms, tax/payment onboarding.
-3. Northern Tool / CJ application — publisher account, tax/payment onboarding.
-4. Tractor Supply affiliate-network application — publisher account, tax/payment onboarding.
-5. Amazon Associates application — site/account, tax/payment onboarding and program review.
-6. VEVOR affiliate application if used.
-7. Review any negotiated Seedburo/PITEBA/Farmet agreement before acceptance.
+1. Affiliate/dealer applications requiring owner identity, tax or payout information.
+2. Acceptance of negotiated Seedburo/PITEBA/Farmet terms.
+3. Approval of the physical proof before checkout is activated.
 
 ## Data model
 
-Every buyable recommendation should resolve through:
-
-`Printed QR -> src=sfg -> Field Supply ID -> category -> active partner -> destination -> attribution -> vendor fulfillment -> revenue reconciliation`
+`Printed QR -> src=sfg -> Field Supply ID -> active partner -> destination -> attribution -> vendor fulfillment -> revenue reconciliation`
 
 Track partner, commission model, attribution window, fulfillment owner, last verified date, backup partner, clicks, leads, orders and commission revenue.
 
 ## Release rule
 
-Do not expose affiliate claims, commission rates or partner logos publicly until the corresponding program is approved and the terms are verified in the account. The Field Supply page can show unbiased equipment recommendations before monetization is active.
+Do not expose partner logos, commission claims or payout rates publicly until the corresponding account/program is approved and terms are verified. The Field Supply page can show unbiased equipment recommendations before monetization is active.
