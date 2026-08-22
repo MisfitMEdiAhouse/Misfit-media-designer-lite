@@ -1,0 +1,60 @@
+name: 'ChangePacket Drift Check'
+description: 'Thin CI wrapper around the hosted ChangePacket API. Checks public URL or MCP-surface drift without duplicating product logic.'
+author: 'Misfit Mediahouse'
+branding:
+  icon: 'activity'
+  color: 'blue'
+inputs:
+  mode:
+    description: 'Check mode: url or mcp.'
+    required: false
+    default: 'url'
+  target:
+    description: 'Public HTTPS webpage URL or MCP endpoint to check.'
+    required: true
+  api_key:
+    description: 'Optional ChangePacket paid API key. Store it in GitHub Actions secrets.'
+    required: false
+outputs:
+  result:
+    description: 'Compact JSON ChangePacket response.'
+    value: ${{ steps.check.outputs.result }}
+runs:
+  using: 'composite'
+  steps:
+    - id: check
+      shell: bash
+      env:
+        CHANGEPACKET_MODE: ${{ inputs.mode }}
+        CHANGEPACKET_TARGET: ${{ inputs.target }}
+        CHANGEPACKET_API_KEY: ${{ inputs.api_key }}
+      run: |
+        set -euo pipefail
+        case "$CHANGEPACKET_MODE" in
+          url)
+            endpoint='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/check'
+            payload=$(jq -cn --arg url "$CHANGEPACKET_TARGET" '{url:$url}')
+            ;;
+          mcp)
+            endpoint='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp-surface'
+            payload=$(jq -cn --arg endpoint_url "$CHANGEPACKET_TARGET" '{endpoint_url:$endpoint_url}')
+            ;;
+          *)
+            echo "Unsupported mode: $CHANGEPACKET_MODE" >&2
+            exit 2
+            ;;
+        esac
+
+        headers=(-H 'content-type: application/json' -H 'user-agent: changepacket-github-action/0.1.0')
+        if [[ -n "${CHANGEPACKET_API_KEY:-}" ]]; then
+          headers+=(-H "authorization: Bearer ${CHANGEPACKET_API_KEY}")
+        fi
+
+        response=$(curl --fail-with-body --silent --show-error --location --max-time 30 \
+          "${headers[@]}" \
+          --data "$payload" \
+          "$endpoint")
+
+        compact=$(printf '%s' "$response" | jq -c .)
+        echo "result=$compact" >> "$GITHUB_OUTPUT"
+        printf '%s\n' "$compact"
