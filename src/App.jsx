@@ -49,10 +49,11 @@ export default function App() {
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
         <Route path="/creator-commerce" element={<CreatorCommerce />} />
         <Route path="/misfit-ai-v2" element={<MisfitAIV2 />} />
-        <Route path="/roads" element={<RoadsGarageOSV2 />} />
+        <Route path="/rig-radar" element={<RoadsGarageOSV2 />} />
+        <Route path="/roads" element={<Navigate to="/rig-radar" replace />} />
         <Route path="/roads/admin" element={<RoadsAdminGate />} />
         <Route path="/coffee/admin" element={<CoffeeLaunchConsole />} />
-        <Route path="/roads-garage" element={<Navigate to="/roads" replace />} />
+        <Route path="/roads-garage" element={<Navigate to="/rig-radar" replace />} />
         <Route path="/tyler-ward" element={<TylerWardLive />} />
         <Route path="/tyler" element={<Navigate to="/tyler-ward" replace />} />
         <Route path="/quotelink" element={<SnapSite />} />
