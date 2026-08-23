@@ -51,3 +51,24 @@
     background-size: 48px 48px;
   }
 }
+
+/* Golden Essence artwork header is #011013. Keep every coded header/fold on that exact surface. */
+:root { --golden-essence-header: #011013; }
+
+nav[aria-label="Golden Essence mobile navigation"],
+nav[aria-label="Golden Essence desktop navigation"],
+section[id^="golden-"] {
+  background-color: var(--golden-essence-header) !important;
+}
+
+@media (max-width: 767px) {
+  section[id^="golden-"]:not(#golden-policies) > div:first-child {
+    background-color: var(--golden-essence-header) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  section[id^="golden-"] > div.relative > div.absolute.z-20.hidden {
+    background-color: var(--golden-essence-header) !important;
+  }
+}
