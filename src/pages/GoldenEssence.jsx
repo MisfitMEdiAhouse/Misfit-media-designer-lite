@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const PAYMENT_URL = 'https://buy.stripe.com/9B6cN5caS66q4ym1wY8ww0y';
 const EMAIL = 'goldenessencetherapeutics@gmail.com';
 const PHONE = '+14357604808';
+
+const pageOrder = ['home', 'about', 'services', 'policies', 'contact'];
 
 const pages = {
   home: {
@@ -51,25 +53,45 @@ function routeKey(pathname) {
   return 'home';
 }
 
-const portraitNav = [
-  ['home', 38.0, 1.4, 7.0, 5.5],
-  ['about', 45.0, 1.4, 7.2, 5.5],
-  ['services', 52.2, 1.4, 8.5, 5.5],
-  ['services', 60.8, 1.4, 7.4, 5.5],
-  ['contact', 68.2, 1.4, 8.3, 5.5],
-  ['contact', 76.5, 1.4, 7.4, 5.5],
-  ['contact', 83.4, 1.0, 15.7, 6.0],
-];
-
-const landscapeNav = [
-  ['home', 41.2, 0.9, 5.4, 7.5],
-  ['about', 46.6, 0.9, 5.8, 7.5],
-  ['services', 52.4, 0.9, 6.4, 7.5],
-  ['services', 58.8, 0.9, 5.6, 7.5],
-  ['contact', 64.4, 0.9, 6.5, 7.5],
-  ['contact', 70.9, 0.9, 6.1, 7.5],
-  ['contact', 77.2, 0.6, 20.5, 8.2],
-];
+// Each artwork has a slightly different header. These hit zones follow the actual supplied mockups.
+const hotspotSets = {
+  home: [
+    ['home', 42.5, 2.5, 5.8, 4.7],
+    ['about', 49.7, 2.5, 6.0, 4.7],
+    ['services', 57.2, 2.5, 7.0, 4.7],
+    ['services', 65.4, 2.5, 6.6, 4.7], // Pricing
+    ['contact', 73.2, 2.5, 9.2, 4.7], // Book now
+    ['contact', 86.4, 2.0, 12.2, 5.2], // gold button
+  ],
+  about: [
+    ['home', 33.0, 2.0, 5.2, 5.5],
+    ['about', 39.2, 2.0, 5.6, 5.5],
+    ['services', 45.6, 2.0, 6.5, 5.5],
+    ['services', 52.6, 2.0, 6.1, 5.5], // Pricing
+    ['contact', 59.5, 2.0, 8.0, 5.5], // Book now
+    ['contact', 68.6, 2.0, 7.0, 5.5],
+    ['contact', 79.2, 1.4, 18.5, 6.4], // gold button
+  ],
+  services: [
+    ['home', 36.0, 1.6, 5.5, 5.2],
+    ['about', 42.3, 1.6, 5.8, 5.2],
+    ['services', 48.8, 1.6, 7.0, 5.2],
+    ['services', 56.3, 1.6, 6.2, 5.2], // Pricing
+    ['contact', 63.3, 1.6, 8.2, 5.2], // Book now
+    ['contact', 71.9, 1.6, 7.2, 5.2],
+    ['contact', 81.0, 1.2, 17.0, 6.0], // gold button
+  ],
+  policies: [],
+  contact: [
+    ['home', 38.7, 1.6, 5.3, 5.1],
+    ['about', 44.7, 1.6, 5.8, 5.1],
+    ['services', 51.2, 1.6, 7.0, 5.1],
+    ['services', 58.7, 1.6, 6.2, 5.1], // Pricing
+    ['contact', 65.7, 1.6, 8.0, 5.1], // Book now
+    ['contact', 73.9, 1.6, 7.4, 5.1],
+    ['contact', 82.0, 1.1, 16.0, 6.0], // gold button
+  ],
+};
 
 function Hotspot({ left, top, width, height, label, onClick }) {
   return (
@@ -83,13 +105,12 @@ function Hotspot({ left, top, width, height, label, onClick }) {
   );
 }
 
-function NavigationHotspots({ landscape, navigate }) {
-  const nav = landscape ? landscapeNav : portraitNav;
+function NavigationHotspots({ pageKey, go }) {
   return (
     <>
-      <Hotspot left={1} top={0.5} width={landscape ? 37 : 35} height={landscape ? 8 : 6.5} label="Golden Essence home" onClick={() => navigate(pages.home.path)} />
-      {nav.map(([key, left, top, width, height], i) => (
-        <Hotspot key={`${key}-${i}`} left={left} top={top} width={width} height={height} label={`Open ${key}`} onClick={() => navigate(pages[key].path)} />
+      <Hotspot left={1} top={0.5} width={pageKey === 'about' ? 29 : 34} height={pageKey === 'about' ? 8 : 6.5} label="Golden Essence home" onClick={() => go('home')} />
+      {(hotspotSets[pageKey] || []).map(([target, left, top, width, height], i) => (
+        <Hotspot key={`${pageKey}-${target}-${i}`} left={left} top={top} width={width} height={height} label={`Open ${target}`} onClick={() => go(target)} />
       ))}
     </>
   );
@@ -103,30 +124,24 @@ function ContactFormOverlay() {
   const submit = (event) => {
     event.preventDefault();
     const subject = form.subject || 'Golden Essence website inquiry';
-    const body = [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      `Phone: ${form.phone}`,
-      '',
-      form.message,
-    ].join('\n');
+    const body = [`Name: ${form.name}`, `Email: ${form.email}`, `Phone: ${form.phone}`, '', form.message].join('\n');
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const common = 'pointer-events-auto absolute z-30 border-0 px-[1.1%] text-[#18363a] outline-none focus:ring-2 focus:ring-[#c68a2f]';
   return (
     <form onSubmit={submit} className="pointer-events-none absolute inset-0 z-30" aria-label="Golden Essence contact form">
-      <input required aria-label="Full name" value={form.name} onChange={update('name')} className={common} style={{ left: '32.1%', top: '41.4%', width: '33.5%', height: '2.9%', ...fieldStyle(form.name), fontSize: 'clamp(8px,1.15vw,15px)' }} />
-      <input required type="email" aria-label="Email address" value={form.email} onChange={update('email')} className={common} style={{ left: '32.1%', top: '45.8%', width: '33.5%', height: '2.9%', ...fieldStyle(form.email), fontSize: 'clamp(8px,1.15vw,15px)' }} />
-      <input type="tel" aria-label="Phone number" value={form.phone} onChange={update('phone')} className={common} style={{ left: '32.1%', top: '50.2%', width: '33.5%', height: '2.9%', ...fieldStyle(form.phone), fontSize: 'clamp(8px,1.15vw,15px)' }} />
-      <select aria-label="Subject" value={form.subject} onChange={update('subject')} className={common} style={{ left: '32.1%', top: '54.6%', width: '33.5%', height: '2.9%', ...fieldStyle(form.subject), fontSize: 'clamp(8px,1.15vw,15px)', opacity: form.subject ? 1 : 0.02 }}>
+      <input required aria-label="Full name" value={form.name} onChange={update('name')} className={common} style={{ left: '32.1%', top: '41.4%', width: '33.5%', height: '2.9%', ...fieldStyle(form.name), fontSize: 'clamp(10px,1.15vw,15px)' }} />
+      <input required type="email" aria-label="Email address" value={form.email} onChange={update('email')} className={common} style={{ left: '32.1%', top: '45.8%', width: '33.5%', height: '2.9%', ...fieldStyle(form.email), fontSize: 'clamp(10px,1.15vw,15px)' }} />
+      <input type="tel" aria-label="Phone number" value={form.phone} onChange={update('phone')} className={common} style={{ left: '32.1%', top: '50.2%', width: '33.5%', height: '2.9%', ...fieldStyle(form.phone), fontSize: 'clamp(10px,1.15vw,15px)' }} />
+      <select aria-label="Subject" value={form.subject} onChange={update('subject')} className={common} style={{ left: '32.1%', top: '54.6%', width: '33.5%', height: '2.9%', ...fieldStyle(form.subject), fontSize: 'clamp(10px,1.15vw,15px)', opacity: form.subject ? 1 : 0.02 }}>
         <option value="">Select a topic</option>
         <option>New client question</option>
         <option>Help choosing a service</option>
         <option>Booking request</option>
         <option>Other question</option>
       </select>
-      <textarea required aria-label="Message" value={form.message} onChange={update('message')} className={`${common} resize-none py-[1%]`} style={{ left: '32.1%', top: '59.0%', width: '33.5%', height: '7.7%', ...fieldStyle(form.message), fontSize: 'clamp(8px,1.15vw,15px)' }} />
+      <textarea required aria-label="Message" value={form.message} onChange={update('message')} className={`${common} resize-none py-[1%]`} style={{ left: '32.1%', top: '59.0%', width: '33.5%', height: '7.7%', ...fieldStyle(form.message), fontSize: 'clamp(10px,1.15vw,15px)' }} />
       <button type="submit" aria-label="Send message" className="pointer-events-auto absolute z-40 cursor-pointer bg-transparent" style={{ left: '32.1%', top: '67.7%', width: '33.5%', height: '3.25%' }} />
       <a href={`tel:${PHONE}`} aria-label="Call Golden Essence" className="pointer-events-auto absolute z-40" style={{ left: '7.5%', top: '39.2%', width: '22%', height: '5%' }} />
       <a href={`mailto:${EMAIL}`} aria-label="Email Golden Essence" className="pointer-events-auto absolute z-40" style={{ left: '7.5%', top: '44.2%', width: '23%', height: '5%' }} />
@@ -134,45 +149,92 @@ function ContactFormOverlay() {
   );
 }
 
+function ArtworkPage({ pageKey, go, mobile = false }) {
+  const page = pages[pageKey];
+  return (
+    <section
+      id={`golden-${pageKey}`}
+      className="relative mx-auto w-full scroll-mt-16 bg-[#031d20]"
+      style={{ maxWidth: mobile ? '100%' : `${page.width}px` }}
+      aria-label={`Golden Essence ${pageKey}`}
+    >
+      <div className="relative w-full" style={{ aspectRatio: `${page.width} / ${page.height}` }}>
+        <img
+          src={page.src}
+          width={page.width}
+          height={page.height}
+          alt={`Golden Essence Therapeutics ${pageKey} page`}
+          className="block h-auto w-full select-none"
+          draggable="false"
+        />
+        <NavigationHotspots pageKey={pageKey} go={go} />
+        {pageKey === 'home' && (
+          <Hotspot left={34.0} top={52.7} width={31.5} height={5.8} label="Book your session" onClick={() => go('contact')} />
+        )}
+        {pageKey === 'contact' && <ContactFormOverlay />}
+      </div>
+    </section>
+  );
+}
+
+function MobileNav({ go }) {
+  return (
+    <nav className="sticky top-0 z-[70] border-b border-[#b77d2b]/50 bg-[#031d20]/95 px-2 py-2 backdrop-blur md:hidden" aria-label="Golden Essence mobile navigation">
+      <div className="flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {pageOrder.map((key) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => go(key)}
+            className="shrink-0 rounded-full border border-[#c79339]/40 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#f0c466] active:bg-[#c79339] active:text-[#031d20]"
+          >
+            {key}
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
 export default function GoldenEssence() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const key = routeKey(pathname);
-  const page = pages[key];
-  const landscape = page.width > page.height;
+
+  const go = (target) => {
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      const node = document.getElementById(`golden-${target}`);
+      if (node) node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.location.pathname !== pages[target].path) window.history.replaceState({}, '', pages[target].path);
+      return;
+    }
+    navigate(pages[target].path);
+  };
 
   useEffect(() => {
-    document.title = page.title;
-  }, [page.title]);
-
-  const aspect = useMemo(() => `${page.width} / ${page.height}`, [page.width, page.height]);
+    document.title = pages[key].title;
+    if (window.matchMedia('(max-width: 767px)').matches && key !== 'home') {
+      const timer = window.setTimeout(() => document.getElementById(`golden-${key}`)?.scrollIntoView({ block: 'start' }), 80);
+      return () => window.clearTimeout(timer);
+    }
+  }, [key]);
 
   return (
     <main className="min-h-screen bg-[#031d20]">
-      <div className="relative mx-auto w-full" style={{ maxWidth: `${page.width}px`, aspectRatio: aspect }}>
-        <img
-          key={page.src}
-          src={page.src}
-          width={page.width}
-          height={page.height}
-          alt={`Golden Essence Therapeutics ${key} page`}
-          className="block h-auto w-full select-none"
-          draggable="false"
-        />
-        <NavigationHotspots landscape={landscape} navigate={navigate} />
+      <div className="md:hidden">
+        <MobileNav go={go} />
+        {pageOrder.map((pageKey) => <ArtworkPage key={pageKey} pageKey={pageKey} go={go} mobile />)}
+      </div>
 
-        {key === 'home' && (
-          <Hotspot left={34.0} top={52.7} width={31.5} height={5.8} label="Book your session" onClick={() => navigate(pages.contact.path)} />
-        )}
-
-        {key === 'contact' && <ContactFormOverlay />}
+      <div className="hidden md:block">
+        <ArtworkPage pageKey={key} go={go} />
       </div>
 
       <a
         href={PAYMENT_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 z-[80] rounded-full border border-[#f2c85d] bg-[#f2c85d] px-4 py-2.5 text-xs font-bold text-[#08272a] shadow-2xl shadow-black/40 transition hover:bg-white sm:px-5 sm:py-3 sm:text-sm"
+        className="fixed bottom-3 right-3 z-[90] rounded-full border border-[#f2c85d] bg-[#f2c85d] px-3 py-2 text-[11px] font-bold text-[#08272a] shadow-2xl shadow-black/40 transition hover:bg-white sm:bottom-4 sm:right-4 sm:px-5 sm:py-3 sm:text-sm"
       >
         Activate site · $297
       </a>
