@@ -1,10 +1,11 @@
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ ok: false });
-  const base = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation';
+  const healthBase = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation';
+  const checkoutUrl = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation-checkout';
   try {
-    const healthRes = await fetch(`${base}/health`, { cache: 'no-store' });
+    const healthRes = await fetch(`${healthBase}/health`, { cache: 'no-store' });
     const health = await healthRes.json().catch(() => ({}));
-    const checkoutRes = await fetch(`${base}/create-checkout`, {
+    const checkoutRes = await fetch(checkoutUrl, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -21,8 +22,9 @@ export default async function handler(req, res) {
       service_version: health.version || null,
       checkout_status: checkoutRes.status,
       intent_id: checkout.intent_id || null,
-      checkout_session_id: checkout.checkout_session_id || null,
+      payment_mode: checkout.payment_mode || null,
       has_checkout_url: Boolean(checkout.checkout_url),
+      checkout_uses_client_reference: typeof checkout.checkout_url === 'string' && checkout.checkout_url.includes('client_reference_id='),
       checkout_error: checkout.error || null
     });
   } catch (error) {
