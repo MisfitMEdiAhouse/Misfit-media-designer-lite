@@ -7,143 +7,59 @@
   <meta name="robots" content="noindex,nofollow" />
   <title>Referral Center | Misfit Mediahouse</title>
   <style>
-    :root{color-scheme:dark;--bg:#031516;--card:#072426;--line:rgba(231,180,91,.28);--gold:#e8b45a;--cream:#fff7e9;--muted:#aebdbc;--cyan:#7ee7ef;--black:#021112}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(232,180,90,.08),transparent 35%),radial-gradient(circle at 100% 25%,rgba(126,231,239,.07),transparent 32%),var(--bg);color:var(--cream);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{width:min(980px,100%);margin:0 auto;padding:22px 16px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.brand{font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--gold)}.back{color:var(--cream);text-decoration:none;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px 13px;font-size:11px}.hero,.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(7,36,38,.97),rgba(2,20,21,.98));border-radius:28px;padding:24px;box-shadow:0 28px 85px rgba(0,0,0,.38)}.hero{margin-bottom:16px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}h1{font-family:Georgia,serif;font-size:clamp(38px,9vw,62px);line-height:.98;margin:10px 0 0;font-weight:500}h2{font-family:Georgia,serif;font-size:clamp(28px,7vw,42px);line-height:1.02;margin:8px 0 0;font-weight:500}p{line-height:1.65;color:#dce3df}.two{display:grid;gap:16px}.qrWrap{background:#fffaf1;border-radius:24px;padding:18px;display:grid;place-items:center;margin-top:18px}.qrWrap img{width:min(330px,100%);height:auto;display:block}.shareUrl{margin-top:12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:var(--black);padding:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;line-height:1.5;color:#dce9e7;word-break:break-all}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.btn{border:0;border-radius:999px;min-height:46px;padding:0 14px;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center}.primary{background:var(--gold);color:#082526}.cyan{background:var(--cyan);color:#062326}.secondary{background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.16)}.info{border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:15px;background:rgba(255,255,255,.025);margin-top:12px}.info strong{color:#fff}.mini{font-size:12px;color:var(--muted);line-height:1.6}.commission{border:1px solid rgba(126,231,239,.18);background:rgba(126,231,239,.035);border-radius:18px;padding:15px;color:#d8eeee;font-size:12px;line-height:1.6;margin-top:12px}.field{display:grid;gap:7px;margin-top:12px}.field label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:var(--gold)}.field input{width:100%;min-height:46px;border:1px solid rgba(255,255,255,.13);border-radius:14px;background:#03191a;color:white;padding:0 13px;font:inherit}.stats{display:grid;gap:8px;margin-top:10px}.stat{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:10px 12px;background:rgba(0,0,0,.14);font-size:11px}.stat b{color:#fff}.stat span{color:var(--muted)}.loading{padding:50px 0;text-align:center;color:var(--muted)}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#fff7e9;color:#082526;border-radius:999px;padding:11px 16px;font-size:11px;font-weight:900;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.tag{display:inline-flex;margin-top:10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#d8e9e7}@media(min-width:760px){.hero,.card{padding:32px}.two{grid-template-columns:1fr 1fr}.actions{grid-template-columns:repeat(3,1fr)}}
+    :root{color-scheme:dark;--bg:#031516;--card:#072426;--line:rgba(231,180,91,.28);--gold:#e8b45a;--cream:#fff7e9;--muted:#aebdbc;--cyan:#7ee7ef;--black:#021112;--red:#ff9f9f}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(232,180,90,.08),transparent 35%),radial-gradient(circle at 100% 25%,rgba(126,231,239,.07),transparent 32%),var(--bg);color:var(--cream);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{width:min(980px,100%);margin:0 auto;padding:22px 16px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.brand{font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--gold)}.back{color:var(--cream);text-decoration:none;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px 13px;font-size:11px}.hero,.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(7,36,38,.97),rgba(2,20,21,.98));border-radius:28px;padding:24px;box-shadow:0 28px 85px rgba(0,0,0,.38)}.hero{margin-bottom:16px}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}h1{font-family:Georgia,serif;font-size:clamp(38px,9vw,62px);line-height:.98;margin:10px 0 0;font-weight:500}h2{font-family:Georgia,serif;font-size:clamp(28px,7vw,42px);line-height:1.02;margin:8px 0 0;font-weight:500}p{line-height:1.65;color:#dce3df}.two{display:grid;gap:16px}.qrWrap{background:#fffaf1;border-radius:24px;padding:18px;display:grid;place-items:center;margin-top:18px;min-height:260px}.qrWrap img{width:min(330px,100%);height:auto;display:block}.shareUrl{margin-top:12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:var(--black);padding:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;line-height:1.5;color:#dce9e7;word-break:break-all}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.btn{border:0;border-radius:999px;min-height:46px;padding:0 14px;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center}.primary{background:var(--gold);color:#082526}.cyan{background:var(--cyan);color:#062326}.secondary{background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.16)}.info{border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:15px;background:rgba(255,255,255,.025);margin-top:12px}.info strong{color:#fff}.mini{font-size:12px;color:var(--muted);line-height:1.6}.commission{border:1px solid rgba(126,231,239,.18);background:rgba(126,231,239,.035);border-radius:18px;padding:15px;color:#d8eeee;font-size:12px;line-height:1.6;margin-top:12px}.field{display:grid;gap:7px;margin-top:12px}.field label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:var(--gold)}.field input{width:100%;min-height:46px;border:1px solid rgba(255,255,255,.13);border-radius:14px;background:#03191a;color:white;padding:0 13px;font:inherit}.stats{display:grid;gap:8px;margin-top:10px}.stat{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:10px 12px;background:rgba(0,0,0,.14);font-size:11px}.stat b{color:#fff}.stat span{color:var(--muted)}.loading{padding:36px 0;text-align:center;color:var(--muted)}.error{color:var(--red);font-size:12px;text-align:center;padding:12px 0}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#fff7e9;color:#082526;border-radius:999px;padding:11px 16px;font-size:11px;font-weight:900;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.tag{display:inline-flex;margin-top:10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:7px 10px;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#d8e9e7}@media(min-width:760px){.hero,.card{padding:32px}.two{grid-template-columns:1fr 1fr}.actions{grid-template-columns:repeat(3,1fr)}}
   </style>
 </head>
 <body>
   <main class="shell">
     <div class="top"><div class="brand">MISFIT × CLIENT REFERRALS</div><a id="back" class="back" href="/">Back to site</a></div>
-    <section class="hero">
-      <div class="eyebrow">Referral Center</div>
-      <h1><span id="clientName">Your business</span><br><span style="color:var(--gold)">Two ways to share.</span></h1>
-      <p>One QR helps grow your own business. The other pays you when someone you send to Misfit becomes a qualifying paid agency client.</p>
-    </section>
-
+    <section class="hero"><div class="eyebrow">Referral Center</div><h1><span id="clientName">Your business</span><br><span style="color:var(--gold)">Two ways to share.</span></h1><p>One QR helps grow your own business. The other pays you when someone you send to Misfit becomes a qualifying paid agency client.</p></section>
     <div id="loading" class="loading">Loading referral tools…</div>
+    <div id="error" class="error" hidden></div>
     <div id="content" class="two" hidden>
       <section class="card">
-        <div class="eyebrow">QR 1 · Grow your business</div>
-        <h2 id="growTitle">Share your business.</h2>
-        <p>Give this QR to customers, friends, or partners who want to send new clients your way. Use the general QR, or create a tracked QR for a specific person so you can see who is actually referring business.</p>
-        <div class="qrWrap"><img id="customerQr" alt="Customer referral QR code" /></div>
-        <div id="customerUrl" class="shareUrl"></div>
-        <div class="actions">
-          <button id="copyCustomer" class="btn primary" type="button">Copy link</button>
-          <button id="shareCustomer" class="btn secondary" type="button">Share</button>
-          <a id="openCustomer" class="btn secondary" target="_blank" rel="noopener noreferrer">Open site</a>
-        </div>
-        <div class="info">
-          <strong>Make a tracked QR for one of your clients</strong>
-          <div class="mini" style="margin-top:6px">Type a first name or nickname. Their QR gets its own referral code. You decide later if you want to reward them with cash, a discount, a free add-on, or nothing at all.</div>
-          <div class="field"><label for="referrerLabel">Referrer name / nickname</label><input id="referrerLabel" maxlength="80" placeholder="Example: Sarah" /></div>
-          <button id="makeCustomerQr" class="btn cyan" style="width:100%;margin-top:10px" type="button">Create tracked QR</button>
-          <div id="activeCustomerRef" class="tag">General Share</div>
-        </div>
-        <div class="info">
-          <strong>Referral activity</strong>
-          <div class="mini" style="margin-top:5px">Visits = people who opened the site from that QR. Leads = tracked contact actions like tapping phone/email. Booking/payment attribution can plug into the same ledger later.</div>
-          <div id="customerStats" class="stats"><div class="mini">No referral activity yet.</div></div>
-        </div>
+        <div class="eyebrow">QR 1 · Grow your business</div><h2 id="growTitle">Share your business.</h2><p>Give this QR to customers, friends, or partners who want to send new clients your way. Use the general QR, or create a tracked QR for a specific person so you can see who is actually referring business.</p>
+        <div class="qrWrap"><img id="customerQr" alt="Customer referral QR code" /></div><div id="customerUrl" class="shareUrl"></div>
+        <div class="actions"><button id="copyCustomer" class="btn primary">Copy link</button><button id="shareCustomer" class="btn secondary">Share</button><a id="openCustomer" class="btn secondary" target="_blank" rel="noopener noreferrer">Open site</a></div>
+        <div class="info"><strong>Make a tracked QR for one of your clients</strong><div class="mini" style="margin-top:6px">Type a first name or nickname. Their QR gets its own referral code. You decide later if you want to reward them with cash, a discount, a free add-on, or nothing at all.</div><div class="field"><label for="referrerLabel">Referrer name / nickname</label><input id="referrerLabel" maxlength="80" placeholder="Example: Sarah" /></div><button id="makeCustomerQr" class="btn cyan" style="width:100%;margin-top:10px">Create tracked QR</button><div id="activeCustomerRef" class="tag">General Share</div></div>
+        <div class="info"><strong>Referral activity</strong><div class="mini" style="margin-top:5px">Visits = people who opened the site from that QR. Leads = tracked contact actions like tapping phone/email.</div><div id="customerStats" class="stats"><div class="mini">No referral activity yet.</div></div></div>
       </section>
-
       <section class="card">
-        <div class="eyebrow">QR 2 · Earn with Misfit</div>
-        <h2>Refer websites + AI.</h2>
-        <p>If somebody asks who built your site—or says they need a website, AI receptionist, chat agent, booking flow, automation, or custom system—send them this QR.</p>
-        <div class="qrWrap"><img id="misfitQr" alt="Misfit Mediahouse referral QR code" /></div>
-        <div id="misfitUrl" class="shareUrl"></div>
-        <div class="actions">
-          <button id="copyMisfit" class="btn primary" type="button">Copy link</button>
-          <button id="shareMisfit" class="btn secondary" type="button">Share</button>
-          <a id="openMisfit" class="btn secondary" target="_blank" rel="noopener noreferrer">Open Misfit</a>
-        </div>
+        <div class="eyebrow">QR 2 · Earn with Misfit</div><h2>Refer websites + AI.</h2><p>If somebody asks who built your site—or says they need a website, AI receptionist, chat agent, booking flow, automation, or custom system—send them this QR.</p>
+        <div class="qrWrap"><img id="misfitQr" alt="Misfit Mediahouse referral QR code" /></div><div id="misfitUrl" class="shareUrl"></div>
+        <div class="actions"><button id="copyMisfit" class="btn primary">Copy link</button><button id="shareMisfit" class="btn secondary">Share</button><a id="openMisfit" class="btn secondary" target="_blank" rel="noopener noreferrer">Open Misfit</a></div>
         <div class="commission"><strong>Your Misfit referral rate:</strong><br><span id="commission"></span></div>
-        <div class="info">
-          <strong>What qualifies?</strong>
-          <div class="mini" style="margin-top:7px">Websites, AI voice receptionists, AI chat/intake, booking + payments, lead follow-up, Growth Partner work, and custom business systems. Misfit tracks the referral through the sales path and Stripe checkout.</div>
-        </div>
-        <div class="info">
-          <strong>Easy text to send</strong>
-          <div id="misfitShareCopy" class="mini" style="margin-top:8px"></div>
-          <button id="copyMisfitText" class="btn secondary" style="width:100%;margin-top:12px" type="button">Copy message</button>
-        </div>
+        <div class="info"><strong>What qualifies?</strong><div class="mini" style="margin-top:7px">Websites, AI voice receptionists, AI chat/intake, booking + payments, lead follow-up, Growth Partner work, and custom business systems. Misfit tracks the referral through the sales path and Stripe checkout.</div></div>
+        <div class="info"><strong>Easy text to send</strong><div id="misfitShareCopy" class="mini" style="margin-top:8px"></div><button id="copyMisfitText" class="btn secondary" style="width:100%;margin-top:12px">Copy message</button></div>
       </section>
     </div>
-  </main>
-  <div id="toast" class="toast">Copied</div>
+  </main><div id="toast" class="toast">Copied</div>
 <script>
 (() => {
-  const API = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/client-referral';
   const params = new URLSearchParams(location.search);
   const site = (params.get('site') || 'golden-essence').trim().toLowerCase();
   const $ = (s) => document.querySelector(s);
-  const toast = (text) => { const el = $('#toast'); el.textContent = text; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1600); };
-  const copy = async (text) => { try { await navigator.clipboard.writeText(text); toast('Copied'); } catch { prompt('Copy this:', text); } };
-  const share = async (title, text, url) => { if (navigator.share) { try { await navigator.share({ title, text, url }); return; } catch (_) {} } await copy(url); };
-  let customerUrl = '';
-  let customerCode = '';
-  let misfitUrl = '';
-
-  function setCustomerQr(url, code, label) {
-    customerUrl = url;
-    customerCode = code;
-    $('#customerUrl').textContent = url;
-    $('#customerQr').src = `${API}/customer-qr?site=${encodeURIComponent(site)}&code=${encodeURIComponent(code)}`;
-    $('#openCustomer').href = url;
-    $('#activeCustomerRef').textContent = label || 'General Share';
-  }
-
-  async function loadStats() {
-    const r = await fetch(`${API}/customer-stats?site=${encodeURIComponent(site)}`, { cache:'no-store' });
-    const data = await r.json().catch(() => ({}));
-    if (!r.ok) return;
-    const rows = (data.referrals || []).filter((x) => x.visits || x.leads || x.referrer_label === 'General Share').slice(0, 12);
-    $('#customerStats').innerHTML = rows.length ? rows.map((x) => `<div class="stat"><b>${String(x.referrer_label).replace(/[<>]/g,'')}</b><span>${x.visits} visits</span><span>${x.leads} leads</span></div>`).join('') : '<div class="mini">No referral activity yet.</div>';
-  }
-
-  Promise.all([
-    fetch(`${API}/profile?site=${encodeURIComponent(site)}`, { cache:'no-store' }).then(async r => { const d=await r.json(); if(!r.ok) throw new Error(d.error||'Misfit referral unavailable'); return d; }),
-    fetch(`${API}/customer-profile?site=${encodeURIComponent(site)}`, { cache:'no-store' }).then(async r => { const d=await r.json(); if(!r.ok) throw new Error(d.error||'Customer referral unavailable'); return d; }),
-  ]).then(([misfit, customer]) => {
-    $('#clientName').textContent = misfit.display_name;
-    $('#growTitle').textContent = `Grow ${customer.display_name}.`;
-    if (site === 'golden-essence') $('#back').href = '/portfolio/golden-essence';
-
-    misfitUrl = misfit.share_url;
-    $('#misfitUrl').textContent = misfitUrl;
-    $('#misfitQr').src = `${API}/qr?site=${encodeURIComponent(site)}`;
-    $('#openMisfit').href = misfitUrl;
-    $('#commission').textContent = misfit.commission_label;
-    const misfitText = `Need a website or AI receptionist? Misfit Mediahouse built my site. Check them out here: ${misfitUrl}`;
-    $('#misfitShareCopy').textContent = misfitText;
-
-    setCustomerQr(customer.general_share_url, customer.general_referrer_code, 'General Share');
-    $('#copyCustomer').onclick = () => copy(customerUrl);
-    $('#shareCustomer').onclick = () => share(customer.display_name, `Check out ${customer.display_name}:`, customerUrl);
-    $('#copyMisfit').onclick = () => copy(misfitUrl);
-    $('#shareMisfit').onclick = () => share('Misfit Mediahouse', 'Misfit Mediahouse built my site — websites, AI voice, chat and business systems.', misfitUrl);
-    $('#copyMisfitText').onclick = () => copy(misfitText);
-
-    $('#makeCustomerQr').onclick = async () => {
-      const label = $('#referrerLabel').value.trim();
-      if (!label) { toast('Enter a name first'); return; }
-      const button = $('#makeCustomerQr'); button.disabled = true; button.textContent = 'Creating…';
-      try {
-        const r = await fetch(`${API}/customer-code`, { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ site_key:site, referrer_label:label }) });
-        const data = await r.json(); if (!r.ok) throw new Error(data.error || 'Could not create QR');
-        setCustomerQr(data.share_url, data.referrer_code, data.referrer_label);
-        toast('Tracked QR ready');
-        loadStats();
-      } catch (e) { toast(e.message || 'Could not create QR'); }
-      finally { button.disabled = false; button.textContent = 'Create tracked QR'; }
-    };
-
-    $('#loading').hidden = true;
-    $('#content').hidden = false;
-    document.title = `${misfit.display_name} Referral Center`;
-    loadStats();
-  }).catch((error) => { $('#loading').textContent = error.message || 'Referral center unavailable.'; });
+  const api = (path, query = {}) => { const u = new URL('/api/client-referral', location.origin); u.searchParams.set('path', path); Object.entries(query).forEach(([k,v]) => v != null && u.searchParams.set(k,String(v))); return u.toString(); };
+  const toast = (text) => { const el=$('#toast'); el.textContent=text; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),1600); };
+  const copy = async (text) => { try { await navigator.clipboard.writeText(text); toast('Copied'); } catch { prompt('Copy this:',text); } };
+  const share = async (title,text,url) => { if(navigator.share){ try{await navigator.share({title,text,url});return;}catch(_){} } await copy(url); };
+  const getJson = async (path, query={}) => { const r=await fetch(api(path,query),{cache:'no-store'}); const d=await r.json().catch(()=>({})); if(!r.ok) throw new Error(d.error||`Request failed (${r.status})`); return d; };
+  const postJson = async (path, body) => { const r=await fetch(api(path),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}); const d=await r.json().catch(()=>({})); if(!r.ok) throw new Error(d.error||`Request failed (${r.status})`); return d; };
+  let customerUrl='', misfitUrl='';
+  function qrError(img,label){ img.onerror=()=>{ img.onerror=null; img.alt=`${label} unavailable`; img.style.display='none'; const note=document.createElement('div'); note.className='error'; note.textContent='QR could not load. Tap Copy link or refresh once.'; img.parentElement.appendChild(note); }; }
+  function setCustomerQr(url,code,label){ customerUrl=url; $('#customerUrl').textContent=url; $('#customerQr').style.display='block'; $('#customerQr').src=api('customer-qr',{site,code,ts:Date.now()}); $('#openCustomer').href=url; $('#activeCustomerRef').textContent=label||'General Share'; }
+  async function loadStats(){ try{ const d=await getJson('customer-stats',{site}); const rows=(d.referrals||[]).filter(x=>x.visits||x.leads||x.referrer_label==='General Share').slice(0,12); $('#customerStats').innerHTML=rows.length?rows.map(x=>`<div class="stat"><b>${String(x.referrer_label).replace(/[<>]/g,'')}</b><span>${x.visits} visits</span><span>${x.leads} leads</span></div>`).join(''):'<div class="mini">No referral activity yet.</div>'; }catch(_){} }
+  qrError($('#customerQr'),'Customer referral QR'); qrError($('#misfitQr'),'Misfit referral QR');
+  Promise.all([getJson('profile',{site}),getJson('customer-profile',{site})]).then(([misfit,customer])=>{
+    $('#clientName').textContent=misfit.display_name; $('#growTitle').textContent=`Grow ${customer.display_name}.`; if(site==='golden-essence') $('#back').href='/portfolio/golden-essence';
+    misfitUrl=misfit.share_url; $('#misfitUrl').textContent=misfitUrl; $('#misfitQr').src=api('qr',{site,ts:Date.now()}); $('#openMisfit').href=misfitUrl; $('#commission').textContent=misfit.commission_label;
+    const misfitText=`Need a website or AI receptionist? Misfit Mediahouse built my site. Check them out here: ${misfitUrl}`; $('#misfitShareCopy').textContent=misfitText;
+    setCustomerQr(customer.general_share_url,customer.general_referrer_code,'General Share');
+    $('#copyCustomer').onclick=()=>copy(customerUrl); $('#shareCustomer').onclick=()=>share(customer.display_name,`Check out ${customer.display_name}:`,customerUrl); $('#copyMisfit').onclick=()=>copy(misfitUrl); $('#shareMisfit').onclick=()=>share('Misfit Mediahouse','Misfit Mediahouse built my site — websites, AI voice, chat and business systems.',misfitUrl); $('#copyMisfitText').onclick=()=>copy(misfitText);
+    $('#makeCustomerQr').onclick=async()=>{ const label=$('#referrerLabel').value.trim(); if(!label){toast('Enter a name first');return;} const b=$('#makeCustomerQr'); b.disabled=true;b.textContent='Creating…'; try{ const d=await postJson('customer-code',{site_key:site,referrer_label:label}); setCustomerQr(d.share_url,d.referrer_code,d.referrer_label); toast('Tracked QR ready'); loadStats(); }catch(e){toast(e.message||'Could not create QR');} finally{b.disabled=false;b.textContent='Create tracked QR';} };
+    $('#loading').hidden=true; $('#content').hidden=false; document.title=`${misfit.display_name} Referral Center`; loadStats();
+  }).catch((error)=>{ $('#loading').hidden=true; $('#error').hidden=false; $('#error').textContent=`Referral tools are temporarily unavailable: ${error.message}. Refresh once.`; });
 })();
 </script>
 </body>
