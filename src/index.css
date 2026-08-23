@@ -71,4 +71,21 @@ section[id^="golden-"] {
   section[id^="golden-"] > div.relative > div.absolute.z-20.hidden {
     background-color: var(--golden-essence-header) !important;
   }
+
+  /* Client-requested desktop Home hierarchy: tagline in header, business name at waterfall. */
+  #golden-home > div:first-of-type::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-home-desktop-swapped.jpg?v=1787460928');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  #golden-home > div:first-of-type > img {
+    opacity: 0;
+  }
 }
