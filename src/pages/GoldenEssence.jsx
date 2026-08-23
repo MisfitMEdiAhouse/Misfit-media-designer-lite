@@ -13,6 +13,7 @@ const pages = {
     width: 1024,
     height: 1536,
     title: 'Golden Essence Therapeutics | Home',
+    mobileCrop: 8.15,
   },
   about: {
     path: '/portfolio/golden-essence/about',
@@ -20,6 +21,7 @@ const pages = {
     width: 1536,
     height: 1229,
     title: 'Golden Essence Therapeutics | About',
+    mobileCrop: 9.2,
   },
   services: {
     path: '/portfolio/golden-essence/services',
@@ -27,6 +29,7 @@ const pages = {
     width: 1024,
     height: 1536,
     title: 'Golden Essence Therapeutics | Services',
+    mobileCrop: 7.8,
   },
   policies: {
     path: '/portfolio/golden-essence/policies',
@@ -34,6 +37,7 @@ const pages = {
     width: 1024,
     height: 1536,
     title: 'Golden Essence Therapeutics | Policies',
+    mobileCrop: 0,
   },
   contact: {
     path: '/portfolio/golden-essence/contact',
@@ -41,6 +45,7 @@ const pages = {
     width: 1024,
     height: 1536,
     title: 'Golden Essence Therapeutics | Contact',
+    mobileCrop: 7.9,
   },
 };
 
@@ -64,34 +69,28 @@ function Hotspot({ left, top, width, height, label, onClick, className = '' }) {
   );
 }
 
-function HeaderCleanup({ pageKey, go }) {
+function DesktopHeaderCleanup({ pageKey, go }) {
   if (pageKey === 'policies') return null;
   const landscape = pageKey === 'about';
-  const mobileMask = landscape
-    ? { left: '31%', top: '0%', width: '69%', height: '9.0%' }
-    : { left: '40%', top: '0%', width: '60%', height: '7.75%' };
   const desktopMask = landscape
     ? { left: '31%', top: '0%', width: '69%', height: '9.0%' }
     : { left: '38%', top: '0%', width: '62%', height: '7.75%' };
 
   return (
-    <>
-      <div className="absolute z-20 border-b border-[#b77d2b]/70 bg-[#031d20] md:hidden" style={mobileMask} />
-      <div className="absolute z-20 hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:block" style={desktopMask}>
-        <div className="flex h-full items-center justify-end gap-[2%] px-[2%]">
-          {pageOrder.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => go(key)}
-              className="whitespace-nowrap border-b border-transparent pb-1 font-serif text-[clamp(9px,1vw,14px)] uppercase tracking-[0.04em] text-[#f7eee0] transition hover:border-[#e2ad45] hover:text-[#e7b44d]"
-            >
-              {key}
-            </button>
-          ))}
-        </div>
+    <div className="absolute z-20 hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:block" style={desktopMask}>
+      <div className="flex h-full items-center justify-end gap-[2%] px-[2%]">
+        {pageOrder.map((key) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => go(key)}
+            className="whitespace-nowrap border-b border-transparent pb-1 font-serif text-[clamp(9px,1vw,14px)] uppercase tracking-[0.04em] text-[#f7eee0] transition hover:border-[#e2ad45] hover:text-[#e7b44d]"
+          >
+            {key}
+          </button>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -112,6 +111,22 @@ function PoliciesDesktopNav({ go }) {
         </div>
       </div>
     </nav>
+  );
+}
+
+function MobileBrandStrip({ go }) {
+  return (
+    <div className="relative h-[58px] overflow-hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:hidden">
+      <button type="button" onClick={() => go('home')} aria-label="Golden Essence home" className="absolute inset-y-0 left-0 w-[45%] overflow-hidden text-left">
+        <img
+          src={pages.home.src}
+          alt="Golden Essence Therapeutics"
+          draggable="false"
+          className="pointer-events-none absolute left-0 top-0 h-auto max-w-none select-none"
+          style={{ width: '100vw' }}
+        />
+      </button>
+    </div>
   );
 }
 
@@ -174,34 +189,60 @@ function ContactFormOverlay() {
   );
 }
 
+function FullArtwork({ pageKey, go, desktop = false }) {
+  const page = pages[pageKey];
+  return (
+    <div className="relative w-full" style={{ aspectRatio: `${page.width} / ${page.height}` }}>
+      <img
+        src={page.src}
+        width={page.width}
+        height={page.height}
+        alt={`Golden Essence Therapeutics ${pageKey} page`}
+        className="block h-auto w-full select-none"
+        draggable="false"
+      />
+      {desktop && <DesktopHeaderCleanup pageKey={pageKey} go={go} />}
+      {desktop && pageKey !== 'policies' && (
+        <Hotspot left={1} top={0.4} width={pageKey === 'about' ? 29 : 38} height={pageKey === 'about' ? 8.5 : 7.2} label="Golden Essence home" onClick={() => go('home')} />
+      )}
+      {pageKey === 'home' && <HomeContactCTA go={go} />}
+      {pageKey === 'contact' && <ContactQuestionCleanup />}
+      {pageKey === 'contact' && <ContactFormOverlay />}
+    </div>
+  );
+}
+
+function MobileCroppedArtwork({ pageKey, go }) {
+  const page = pages[pageKey];
+  const crop = page.mobileCrop || 0;
+  if (!crop) return <FullArtwork pageKey={pageKey} go={go} />;
+
+  const remainingHeight = page.height * (1 - crop / 100);
+  return (
+    <div className="relative w-full overflow-hidden" style={{ aspectRatio: `${page.width} / ${remainingHeight}` }}>
+      <div
+        className="absolute left-0 top-0 w-full"
+        style={{ aspectRatio: `${page.width} / ${page.height}`, transform: `translateY(-${crop}%)` }}
+      >
+        <FullArtwork pageKey={pageKey} go={go} />
+      </div>
+    </div>
+  );
+}
+
 function ArtworkPage({ pageKey, go, mobile = false }) {
   const page = pages[pageKey];
   return (
     <section
       id={`golden-${pageKey}`}
-      className="relative mx-auto w-full scroll-mt-[52px] overflow-hidden bg-[#031d20] md:scroll-mt-0"
+      className="relative mx-auto w-full scroll-mt-[54px] overflow-hidden bg-[#031d20] md:scroll-mt-0"
       style={{ maxWidth: mobile ? '100%' : `${page.width}px` }}
       aria-label={`Golden Essence ${pageKey}`}
     >
+      {mobile && <MobileBrandStrip go={go} />}
       {pageKey === 'policies' && !mobile && <PoliciesDesktopNav go={go} />}
-      <div className="relative w-full" style={{ aspectRatio: `${page.width} / ${page.height}` }}>
-        <img
-          src={page.src}
-          width={page.width}
-          height={page.height}
-          alt={`Golden Essence Therapeutics ${pageKey} page`}
-          className="block h-auto w-full select-none"
-          draggable="false"
-        />
-        <HeaderCleanup pageKey={pageKey} go={go} />
-        {pageKey !== 'policies' && (
-          <Hotspot left={1} top={0.4} width={pageKey === 'about' ? 29 : 38} height={pageKey === 'about' ? 8.5 : 7.2} label="Golden Essence home" onClick={() => go('home')} />
-        )}
-        {pageKey === 'home' && <HomeContactCTA go={go} />}
-        {pageKey === 'contact' && <ContactQuestionCleanup />}
-        {pageKey === 'contact' && <ContactFormOverlay />}
-      </div>
-      {mobile && pageKey !== 'contact' && <div className="h-2 border-y border-[#b77d2b]/30 bg-[#021719]" aria-hidden="true" />}
+      {mobile ? <MobileCroppedArtwork pageKey={pageKey} go={go} /> : <FullArtwork pageKey={pageKey} go={go} desktop />}
+      {mobile && pageKey !== 'contact' && <div className="h-1 border-y border-[#b77d2b]/35 bg-[#021719]" aria-hidden="true" />}
     </section>
   );
 }
