@@ -5,6 +5,12 @@ const EMAIL = 'goldenessencetherapeutics@gmail.com';
 const PHONE_DISPLAY = '435-760-4808';
 const PHONE = '+14357604808';
 
+const HOME_ART = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-home.jpg?v=1787457016';
+const ABOUT_ART = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-about.jpg?v=1787457028';
+const SERVICES_ART = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-services.jpg?v=1787457091';
+const POLICIES_ART = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-policies.jpg?v=1787457099';
+const CONTACT_ART = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-contact.jpg?v=1787457108';
+
 const navItems = [
   ['home', 'Home'],
   ['about', 'About'],
@@ -84,20 +90,35 @@ function scrollTo(id) {
 
 function BrandHeader() {
   return (
-    <button type="button" onClick={() => scrollTo('home')} className="grid w-full grid-cols-[54px_1fr_54px] items-center gap-2 px-4 py-4 text-[#e9b95a]" aria-label="Golden Essence home">
-      <Lotus className="h-11 w-11 justify-self-start" />
+    <button type="button" onClick={() => scrollTo('home')} className="grid w-full grid-cols-[48px_1fr_48px] items-center gap-2 px-4 py-3.5 text-[#e9b95a]" aria-label="Golden Essence home">
+      <Lotus className="h-10 w-10 justify-self-start" />
       <span className="text-center">
-        <span className="block font-serif text-[18px] font-semibold tracking-[0.14em]">GOLDEN ESSENCE</span>
-        <span className="mt-0.5 block font-serif text-[10px] tracking-[0.30em] text-[#f1e5d0]">THERAPEUTICS</span>
-        <span className="mt-1 block font-serif text-[11px] italic tracking-[0.08em] text-[#d8ad63]">Where Healing Comes Home.</span>
+        <span className="block font-serif text-[18px] font-semibold leading-none tracking-[0.13em]">GOLDEN ESSENCE</span>
+        <span className="mt-1 block font-serif text-[9px] tracking-[0.30em] text-[#f1e5d0]">THERAPEUTICS</span>
+        <span className="mt-1 block font-serif text-[10px] italic tracking-[0.05em] text-[#d8ad63]">Where Healing Comes Home.</span>
       </span>
-      <Lotus className="h-11 w-11 justify-self-end" />
+      <Lotus className="h-10 w-10 justify-self-end" />
     </button>
   );
 }
 
-function SectionLabel({ children }) {
-  return <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#dda94f]">{children}</div>;
+function SectionLabel({ children, light = false }) {
+  return <div className={`text-[11px] font-bold uppercase tracking-[0.28em] ${light ? 'text-[#f0bd60]' : 'text-[#b87b25]'}`}>{children}</div>;
+}
+
+function ScenicPanel({ image, position = '70% 45%', eyebrow, title, subtitle }) {
+  return (
+    <div className="relative min-h-[330px] overflow-hidden border-y border-[#b78535]/35">
+      <img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-[1.03] object-cover" style={{ objectPosition: position }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#001214]/20 via-[#001214]/42 to-[#001214]/96" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#001214]/82 via-[#001214]/30 to-transparent" />
+      <div className="relative flex min-h-[330px] flex-col justify-end px-6 pb-8 pt-12">
+        <SectionLabel light>{eyebrow}</SectionLabel>
+        <h2 className="mt-3 max-w-[330px] font-serif text-[40px] leading-[1.02] text-[#fff8ed]">{title}</h2>
+        {subtitle && <p className="mt-3 max-w-[330px] text-[15px] leading-6 text-[#f2e8db]/80">{subtitle}</p>}
+      </div>
+    </div>
+  );
 }
 
 export default function GoldenEssenceMobile() {
@@ -116,172 +137,190 @@ export default function GoldenEssenceMobile() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#011013] pb-20 text-[#f6efe3]">
-      <header className="sticky top-0 z-50 border-b border-[#b78535]/50 bg-[#011013]/98 shadow-[0_8px_24px_rgba(0,0,0,.28)] backdrop-blur">
+      <header className="sticky top-0 z-50 border-b border-[#b78535]/55 bg-[#011013]/97 shadow-[0_8px_26px_rgba(0,0,0,.32)] backdrop-blur">
         <BrandHeader />
       </header>
 
-      <section id="home" className="scroll-mt-28 relative overflow-hidden border-b border-[#b78535]/35">
-        <div className="absolute inset-0 opacity-90" style={{ background: 'radial-gradient(circle at 70% 20%, rgba(234,181,82,.24), transparent 22%), radial-gradient(circle at 24% 42%, rgba(13,104,103,.38), transparent 35%), linear-gradient(160deg, #011013 0%, #062d30 52%, #011013 100%)' }} />
-        <div className="absolute -right-16 top-16 h-52 w-52 rounded-full border-[18px] border-[#e8b658]/80 shadow-[0_0_70px_rgba(232,182,88,.18)]" />
-        <div className="relative px-6 pb-16 pt-16 text-center">
-          <div className="mx-auto mb-7 w-fit rounded-full border border-[#c79642]/35 bg-[#052326]/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e6b65b]">Mobile Massage Therapy · Cache County</div>
-          <h1 className="font-serif text-[48px] leading-[0.92] text-[#fffaf0]">Golden Essence<br /><span className="text-[#e4ad4f]">Therapeutics</span></h1>
-          <p className="mx-auto mt-5 max-w-sm font-serif text-2xl italic text-[#dcb66f]">Where Healing Comes Home.</p>
-          <p className="mx-auto mt-7 max-w-md text-[17px] leading-8 text-[#ece4d7]/82">Professional, personalized mobile massage therapy serving Cache County and surrounding areas in Utah.</p>
-          <div className="mx-auto mt-8 grid max-w-sm gap-3">
-            <button onClick={() => scrollTo('services')} className="rounded-full bg-[#e0a23a] px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#06292c]">View Services & Pricing</button>
-            <button onClick={() => scrollTo('contact')} className="rounded-full border border-[#d7a34b]/60 bg-[#041c1f] px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#efc26d]">Contact / Questions</button>
+      <section id="home" className="scroll-mt-24 relative min-h-[86svh] overflow-hidden border-b border-[#b78535]/40">
+        <img src={HOME_ART} alt="Golden Essence waterfall, moon, lotus and butterflies" className="absolute inset-0 h-full w-full object-cover object-[52%_30%]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#011013]/12 via-[#011013]/18 to-[#011013]/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#011013]/30 via-transparent to-[#011013]/12" />
+        <div className="relative flex min-h-[86svh] flex-col justify-end px-6 pb-10 pt-20 text-center">
+          <div className="mx-auto w-full max-w-sm rounded-[30px] border border-[#e0b45c]/35 bg-[#011013]/64 p-6 shadow-[0_18px_60px_rgba(0,0,0,.42)] backdrop-blur-[2px]">
+            <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e4b158]">Mobile Massage Therapy · Cache County</div>
+            <h1 className="mt-3 font-serif text-[47px] leading-[0.94] text-[#fffaf0]">Golden Essence<br /><span className="text-[#e4ad4f]">Therapeutics</span></h1>
+            <p className="mt-4 font-serif text-2xl italic text-[#e6bd70]">Where Healing Comes Home.</p>
+            <p className="mt-5 text-[15px] leading-7 text-[#f0e8dc]/86">Professional, personalized mobile massage therapy serving Cache County and surrounding areas in Utah.</p>
+            <div className="mt-6 grid gap-3">
+              <button onClick={() => scrollTo('services')} className="rounded-full bg-[#e0a23a] px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#06292c] shadow-lg">View Services & Pricing</button>
+              <button onClick={() => scrollTo('contact')} className="rounded-full border border-[#d7a34b]/70 bg-[#011013]/78 px-6 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#efc26d]">Contact / Questions</button>
+            </div>
           </div>
-        </div>
-        <div className="relative border-t border-[#b78535]/30 bg-[#031c1f] px-6 py-8 text-center">
-          <Lotus className="mx-auto h-14 w-14 text-[#d6a449]" />
-          <div className="mt-3 font-serif text-2xl tracking-[0.11em] text-[#e0ae51]">RELAX · RESTORE · RENEW</div>
-          <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#ded6c8]/75">Bringing healing, relaxation, and balance into your life — so you can feel your best, wherever you are.</p>
+          <div className="mx-auto mt-7 flex items-center gap-3 text-[#dca84c]">
+            <span className="h-px w-14 bg-[#dca84c]/60" /><Lotus className="h-9 w-9" /><span className="h-px w-14 bg-[#dca84c]/60" />
+          </div>
+          <div className="mt-2 font-serif text-lg tracking-[0.13em] text-[#e4b356]">RELAX · RESTORE · RENEW</div>
         </div>
       </section>
 
-      <section id="about" className="scroll-mt-28 px-5 py-14">
-        <div className="mx-auto max-w-xl">
-          <SectionLabel>About</SectionLabel>
-          <h2 className="mt-3 font-serif text-4xl leading-tight text-[#f7f0e4]">Care that feels personal, calm, and close to home.</h2>
-          <p className="mt-5 text-base leading-7 text-[#ddd5c8]/82">Golden Essence Therapeutics was created from a passion for helping people feel better in their bodies and giving them a safe space to relax, restore, and renew.</p>
-          <p className="mt-4 text-base leading-7 text-[#ddd5c8]/82">The experience is built around compassionate, personalized care — not a rushed appointment. The goal is to create space to slow down, breathe, and focus on what your body needs.</p>
-
-          <div className="mt-8 space-y-3">
-            {aboutCards.map(([title, body], index) => (
-              <details key={title} className="group overflow-hidden rounded-2xl border border-[#b88738]/28 bg-[#052629]" open={index === 0}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 marker:hidden">
-                  <span className="font-serif text-2xl text-[#edbd63]">{title}</span>
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d4a34c]/45 text-xl text-[#dca94d] transition group-open:rotate-45">＋</span>
-                </summary>
-                <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/80">{body}</p>
-              </details>
-            ))}
+      <section id="about" className="scroll-mt-24">
+        <ScenicPanel
+          image={ABOUT_ART}
+          position="78% 40%"
+          eyebrow="About"
+          title="Care that feels personal, calm, and close to home."
+          subtitle="Golden Essence was created from a passion for helping people feel better in their bodies and giving them a safe space to relax, restore, and renew."
+        />
+        <div className="px-5 py-10">
+          <div className="mx-auto max-w-xl">
+            <p className="text-base leading-7 text-[#e2dacd]/84">The experience is built around compassionate, personalized care — not a rushed appointment. The goal is to create space to slow down, breathe, and focus on what your body needs.</p>
+            <div className="mt-7 space-y-3">
+              {aboutCards.map(([title, body], index) => (
+                <details key={title} className="group overflow-hidden rounded-2xl border border-[#b88738]/30 bg-[#052629] shadow-[0_8px_25px_rgba(0,0,0,.16)]" open={index === 0}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 marker:hidden">
+                    <span className="flex items-center gap-3 font-serif text-[22px] text-[#edbd63]"><span className="text-sm">✦</span>{title}</span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d4a34c]/45 text-xl text-[#dca94d] transition group-open:rotate-45">＋</span>
+                  </summary>
+                  <p className="border-t border-[#b88738]/20 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/82">{body}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="services" className="scroll-mt-28 bg-[#f5eee2] px-5 py-14 text-[#12383b]">
-        <div className="mx-auto max-w-xl">
-          <SectionLabel>Services & Pricing</SectionLabel>
-          <h2 className="mt-3 font-serif text-4xl leading-tight text-[#0d3c40]">Massage therapy, clearly priced.</h2>
-          <p className="mt-4 text-base leading-7 text-[#36595c]">All sessions are customized to your needs. Prices reflect massage time only. Travel fees apply to all mobile appointments.</p>
+      <section id="services" className="scroll-mt-24 bg-[#f5eee2] text-[#12383b]">
+        <ScenicPanel
+          image={SERVICES_ART}
+          position="80% 28%"
+          eyebrow="Services & Pricing"
+          title="Massage therapy designed around you."
+          subtitle="Relax. Restore. Renew. Clear pricing, personalized care, and mobile service brought to your space."
+        />
+        <div className="px-5 py-10">
+          <div className="mx-auto max-w-xl">
+            <p className="text-base leading-7 text-[#36595c]">All sessions are customized to your needs. Prices reflect massage time only. Travel fees apply to all mobile appointments.</p>
+            <div className="mt-7 space-y-4">
+              {services.map((service) => (
+                <article key={service.name} className="overflow-hidden rounded-3xl border border-[#c9a46a]/45 bg-[#fffaf2] shadow-[0_10px_30px_rgba(76,49,14,.08)]">
+                  <div className="border-b border-[#dcc7a2] bg-gradient-to-r from-[#fffaf2] to-[#f0e1c8] px-5 py-4">
+                    <h3 className="font-serif text-2xl text-[#17484c]">{service.name}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[#446467]">{service.description}</p>
+                  </div>
+                  <div className="divide-y divide-[#dfcdae]">
+                    {service.prices.map(([duration, price]) => (
+                      <div key={duration} className="flex items-center justify-between px-5 py-4">
+                        <span className="font-semibold text-[#536c6e]">{duration}</span>
+                        <span className="font-serif text-[28px] text-[#9a6523]">{price}</span>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
 
-          <div className="mt-8 space-y-4">
-            {services.map((service) => (
-              <article key={service.name} className="rounded-3xl border border-[#c9a46a]/40 bg-[#fffaf2] p-5 shadow-sm">
-                <h3 className="font-serif text-2xl text-[#17484c]">{service.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#446467]">{service.description}</p>
-                <div className="mt-5 divide-y divide-[#dfcdae] rounded-2xl border border-[#dcc6a2] bg-[#f9f0e2]">
-                  {service.prices.map(([duration, price]) => (
-                    <div key={duration} className="flex items-center justify-between px-4 py-3.5">
-                      <span className="font-semibold text-[#536c6e]">{duration}</span>
-                      <span className="font-serif text-2xl text-[#9a6523]">{price}</span>
+            <div className="mt-4 grid gap-4">
+              <article className="relative overflow-hidden rounded-3xl bg-[#07383b] p-6 text-[#f7eee0] shadow-lg">
+                <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#d99d36]/12" />
+                <h3 className="font-serif text-2xl text-[#efbf68]">Hot Stone Upgrade</h3>
+                <p className="mt-2 text-sm leading-6 text-[#efe3d2]/82">Add smooth, heated stones to any massage to melt away tension and promote deeper relaxation.</p>
+                <div className="mt-5 font-serif text-4xl text-[#f3c56f]">+ $20</div>
+              </article>
+              <article className="rounded-3xl border border-[#c9a46a]/45 bg-[#fffaf2] p-6 shadow-sm">
+                <h3 className="font-serif text-2xl text-[#17484c]">Chair Massage</h3>
+                <div className="mt-4 flex items-center justify-between border-b border-[#dfcdae] py-3"><span>15 minutes</span><span className="font-serif text-2xl text-[#9a6523]">$20</span></div>
+                <div className="flex items-center justify-between py-3"><span>30 minutes</span><span className="font-serif text-2xl text-[#9a6523]">$35</span></div>
+              </article>
+              <article className="rounded-3xl border border-[#c9a46a]/45 bg-[#fffaf2] p-6 shadow-sm">
+                <h3 className="font-serif text-2xl text-[#17484c]">Mobile Massage Travel Fee</h3>
+                <p className="mt-2 text-sm leading-6 text-[#446467]">Travel fees are based on one-way distance to the client’s location.</p>
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  {[['0–10 mi', '$10'], ['11–20 mi', '$25'], ['21–50 mi', '$50'], ['51+ mi', '$75+']].map(([miles, price]) => (
+                    <div key={miles} className="rounded-2xl border border-[#d7bd92] bg-[#f8efe1] px-3 py-4 text-center">
+                      <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#5b7071]">{miles}</div>
+                      <div className="mt-1 font-serif text-[30px] text-[#9a6523]">{price}</div>
                     </div>
                   ))}
                 </div>
+                <p className="mt-4 text-xs leading-5 text-[#617577]">51+ miles requires a 90-minute minimum appointment or multiple clients at the same location. Additional fees may apply beyond 50 miles.</p>
               </article>
-            ))}
-          </div>
-
-          <div className="mt-4 grid gap-4">
-            <article className="rounded-3xl bg-[#07383b] p-6 text-[#f7eee0]">
-              <h3 className="font-serif text-2xl text-[#efbf68]">Hot Stone Upgrade</h3>
-              <p className="mt-2 text-sm leading-6 text-[#f0e6d5]/80">Add smooth, heated stones to any massage to melt away tension and promote deeper relaxation.</p>
-              <div className="mt-4 font-serif text-4xl text-[#f1c46e]">+ $20</div>
-            </article>
-
-            <article className="rounded-3xl border border-[#c9a46a]/40 bg-[#fffaf2] p-6">
-              <h3 className="font-serif text-2xl text-[#17484c]">Chair Massage</h3>
-              <div className="mt-4 flex justify-between border-b border-[#ddc9a7] py-3"><span>15 minutes</span><strong className="font-serif text-2xl text-[#9a6523]">$20</strong></div>
-              <div className="flex justify-between py-3"><span>30 minutes</span><strong className="font-serif text-2xl text-[#9a6523]">$35</strong></div>
-            </article>
-
-            <article className="rounded-3xl border border-[#c9a46a]/40 bg-[#fffaf2] p-6">
-              <h3 className="font-serif text-2xl text-[#17484c]">Mobile Massage Travel Fee</h3>
-              <p className="mt-2 text-sm leading-6 text-[#446467]">Travel fees are based on one-way distance to the client’s location.</p>
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                {[['0–10 miles', '$10'], ['11–20 miles', '$25'], ['21–50 miles', '$50'], ['51+ miles', '$75+']].map(([distance, price]) => (
-                  <div key={distance} className="rounded-2xl border border-[#d8c09a] bg-[#f8eee0] p-4 text-center">
-                    <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#5d7274]">{distance}</div>
-                    <div className="mt-1 font-serif text-3xl text-[#9a6523]">{price}</div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-xs leading-5 text-[#607678]">51+ miles requires a 90-minute minimum appointment or multiple clients at the same location. Additional fees may apply for distances over 50 miles.</p>
-            </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="policies" className="scroll-mt-28 px-5 py-14">
-        <div className="mx-auto max-w-xl">
-          <SectionLabel>Policies</SectionLabel>
-          <h2 className="mt-3 font-serif text-4xl leading-tight text-[#f7f0e4]">Professional care. Clear expectations. Peace of mind.</h2>
-          <p className="mt-4 text-base leading-7 text-[#ddd5c8]/82">Tap any policy below to read it. Nothing is hidden inside a desktop graphic.</p>
-          <div className="mt-8 space-y-3">
+      <section id="policies" className="scroll-mt-24 bg-[#011013]">
+        <ScenicPanel
+          image={POLICIES_ART}
+          position="72% 4%"
+          eyebrow="Policies"
+          title="Professional care. Clear expectations. Peace of mind."
+          subtitle="Every policy is readable and expandable right here on your phone."
+        />
+        <div className="px-5 py-10">
+          <div className="mx-auto max-w-xl space-y-3">
             {policies.map(([title, body], index) => (
-              <details key={title} className="group rounded-2xl border border-[#b88738]/28 bg-[#052629]" open={index === 0}>
+              <details key={title} className="group overflow-hidden rounded-2xl border border-[#b88738]/28 bg-[#052629]" open={index === 0}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 marker:hidden">
-                  <span className="font-serif text-xl text-[#efbf68]">{title}</span>
+                  <span className="font-serif text-[21px] text-[#edbd63]">{title}</span>
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d4a34c]/45 text-xl text-[#dca94d] transition group-open:rotate-45">＋</span>
                 </summary>
-                <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/80">{body}</p>
+                <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/82">{body}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contact" className="scroll-mt-28 bg-[#f5eee2] px-5 py-14 text-[#143b3e]">
-        <div className="mx-auto max-w-xl">
-          <SectionLabel>Contact</SectionLabel>
-          <h2 className="mt-3 font-serif text-4xl leading-tight text-[#0d3c40]">Questions? Reach out anytime.</h2>
-          <p className="mt-4 text-base leading-7 text-[#446467]">Booking will be added later. For now, this site gives future clients a clean way to learn about Golden Essence and ask questions.</p>
-
-          <div className="mt-7 space-y-3">
-            <a href={`tel:${PHONE}`} className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/40 bg-[#fffaf2] p-4">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-xl text-[#e8b75d]">☎</span>
-              <span><span className="block text-xs font-bold uppercase tracking-[0.12em] text-[#728486]">Phone</span><span className="font-semibold">{PHONE_DISPLAY}</span></span>
-            </a>
-            <a href={`mailto:${EMAIL}`} className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/40 bg-[#fffaf2] p-4">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-xl text-[#e8b75d]">✉</span>
-              <span className="min-w-0"><span className="block text-xs font-bold uppercase tracking-[0.12em] text-[#728486]">Email</span><span className="block break-all font-semibold">{EMAIL}</span></span>
-            </a>
-            <div className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/40 bg-[#fffaf2] p-4">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-xl text-[#e8b75d]">⌖</span>
-              <span><span className="block text-xs font-bold uppercase tracking-[0.12em] text-[#728486]">Service Area</span><span className="font-semibold">Cache County & surrounding areas, Utah</span></span>
+      <section id="contact" className="scroll-mt-24 bg-[#f5eee2] text-[#143b3e]">
+        <ScenicPanel
+          image={CONTACT_ART}
+          position="80% 14%"
+          eyebrow="Contact"
+          title="Questions? I’m here to help."
+          subtitle="Booking will be connected when Golden Essence is ready. For now, reach out with questions about services or the future business."
+        />
+        <div className="px-5 py-10">
+          <div className="mx-auto max-w-xl">
+            <div className="grid gap-3">
+              <a href={`tel:${PHONE}`} className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/45 bg-[#fffaf2] p-4 shadow-sm"><span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-[#efbd64]">☎</span><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#788889]">Phone</div><div className="mt-1 font-semibold">{PHONE_DISPLAY}</div></div></a>
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/45 bg-[#fffaf2] p-4 shadow-sm"><span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-[#efbd64]">✉</span><div className="min-w-0"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#788889]">Email</div><div className="mt-1 break-all font-semibold">{EMAIL}</div></div></a>
+              <div className="flex items-center gap-4 rounded-2xl border border-[#c9a46a]/45 bg-[#fffaf2] p-4 shadow-sm"><span className="grid h-11 w-11 place-items-center rounded-full bg-[#07383b] text-[#efbd64]">⌖</span><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#788889]">Service Area</div><div className="mt-1 font-semibold">Cache County & surrounding areas, Utah</div></div></div>
             </div>
+
+            <form onSubmit={(event) => { event.preventDefault(); window.location.href = mailto; }} className="mt-6 rounded-3xl border border-[#c9a46a]/45 bg-[#fffaf2] p-5 shadow-[0_14px_35px_rgba(76,49,14,.09)]">
+              <h3 className="font-serif text-3xl text-[#17484c]">Send a Message</h3>
+              <p className="mt-2 text-sm leading-6 text-[#5c7375]">Fill this out and your email app will open with the message ready to send.</p>
+              <div className="mt-5 grid gap-4">
+                <label className="text-sm font-semibold">Full Name<input required value={form.name} onChange={update('name')} className="mt-2 w-full rounded-xl border border-[#cfba96] bg-white px-4 py-3 text-base outline-none focus:border-[#b67c29]" placeholder="Your name" /></label>
+                <label className="text-sm font-semibold">Email<input required type="email" value={form.email} onChange={update('email')} className="mt-2 w-full rounded-xl border border-[#cfba96] bg-white px-4 py-3 text-base outline-none focus:border-[#b67c29]" placeholder="you@example.com" /></label>
+                <label className="text-sm font-semibold">Phone<input type="tel" value={form.phone} onChange={update('phone')} className="mt-2 w-full rounded-xl border border-[#cfba96] bg-white px-4 py-3 text-base outline-none focus:border-[#b67c29]" placeholder="Optional" /></label>
+                <label className="text-sm font-semibold">Subject<select value={form.subject} onChange={update('subject')} className="mt-2 w-full rounded-xl border border-[#cfba96] bg-white px-4 py-3 text-base outline-none focus:border-[#b67c29]"><option>General question</option><option>Help choosing a service</option><option>School / business information</option><option>Other question</option></select></label>
+                <label className="text-sm font-semibold">Message<textarea required rows={5} value={form.message} onChange={update('message')} className="mt-2 w-full resize-none rounded-xl border border-[#cfba96] bg-white px-4 py-3 text-base outline-none focus:border-[#b67c29]" placeholder="How can I help?" /></label>
+                <button type="submit" className="rounded-full bg-[#dda13a] px-5 py-4 text-sm font-bold uppercase tracking-[0.09em] text-[#082c2f] shadow-lg">Send Message</button>
+              </div>
+            </form>
           </div>
-
-          <form onSubmit={(event) => { event.preventDefault(); window.location.href = mailto; }} className="mt-6 rounded-3xl border border-[#c9a46a]/40 bg-[#fffaf2] p-5 shadow-lg">
-            <h3 className="font-serif text-2xl text-[#17484c]">Send a Message</h3>
-            <p className="mt-1 text-sm text-[#617779]">Your email app will open with the message ready to send.</p>
-            <div className="mt-5 grid gap-4">
-              <label className="text-sm font-semibold">Full Name<input required value={form.name} onChange={update('name')} className="mt-2 w-full rounded-xl border border-[#cfbb96] bg-white px-4 py-3 text-base outline-none focus:border-[#a87527]" placeholder="Your name" /></label>
-              <label className="text-sm font-semibold">Email<input required type="email" value={form.email} onChange={update('email')} className="mt-2 w-full rounded-xl border border-[#cfbb96] bg-white px-4 py-3 text-base outline-none focus:border-[#a87527]" placeholder="you@example.com" /></label>
-              <label className="text-sm font-semibold">Phone<input type="tel" value={form.phone} onChange={update('phone')} className="mt-2 w-full rounded-xl border border-[#cfbb96] bg-white px-4 py-3 text-base outline-none focus:border-[#a87527]" placeholder="Optional" /></label>
-              <label className="text-sm font-semibold">Subject<select value={form.subject} onChange={update('subject')} className="mt-2 w-full rounded-xl border border-[#cfbb96] bg-white px-4 py-3 text-base outline-none focus:border-[#a87527]"><option>General question</option><option>Help choosing a service</option><option>School / business information</option><option>Other question</option></select></label>
-              <label className="text-sm font-semibold">Message<textarea required rows={5} value={form.message} onChange={update('message')} className="mt-2 w-full resize-none rounded-xl border border-[#cfbb96] bg-white px-4 py-3 text-base outline-none focus:border-[#a87527]" placeholder="How can I help?" /></label>
-              <button type="submit" className="rounded-full bg-[#dca13a] px-5 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#073034]">Send Message</button>
-            </div>
-          </form>
         </div>
       </section>
 
-      <footer className="px-5 py-12 text-center">
-        <Lotus className="mx-auto h-16 w-16 text-[#d8a64b]" />
-        <div className="mt-4 font-serif text-xl tracking-[0.12em] text-[#e6ad4c]">GOLDEN ESSENCE THERAPEUTICS</div>
-        <div className="mt-1 font-serif italic text-[#d4aa64]">Where Healing Comes Home.</div>
-        <p className="mx-auto mt-4 max-w-sm text-xs leading-5 text-[#d5ccbd]/60">Mobile massage therapy serving Cache County and surrounding areas in Utah.</p>
-        <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex rounded-full bg-[#f2c85d] px-7 py-4 text-sm font-bold text-[#08272a]">Activate this site · $297</a>
-        <div className="mt-4 text-[10px] uppercase tracking-[0.18em] text-[#c8bca8]/45">Portfolio preview built by Misfit Mediahouse</div>
+      <footer className="bg-[#011013] px-5 py-10 text-center">
+        <div className="mx-auto flex max-w-xl flex-col items-center">
+          <div className="grid w-full grid-cols-[58px_1fr_58px] items-center gap-2 text-[#dfac4e]">
+            <Lotus className="h-12 w-12" />
+            <div><div className="font-serif text-xl tracking-[0.12em]">GOLDEN ESSENCE</div><div className="mt-1 text-[10px] tracking-[0.28em] text-[#f0e6d7]">THERAPEUTICS</div></div>
+            <Lotus className="h-12 w-12 justify-self-end" />
+          </div>
+          <div className="mt-2 font-serif italic text-[#d7ae66]">Where Healing Comes Home.</div>
+          <p className="mt-4 text-xs leading-5 text-[#d5ccbd]/58">Portfolio preview · Built by Misfit Mediahouse</p>
+          <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="mt-6 rounded-full bg-[#f0c55f] px-7 py-4 text-sm font-bold text-[#08272a] shadow-lg">Activate this site · $297</a>
+        </div>
       </footer>
 
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#b78535]/45 bg-[#011013]/98 px-2 py-2 backdrop-blur" aria-label="Golden Essence mobile navigation">
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#ad7d30]/55 bg-[#011013]/96 px-2 py-2 shadow-[0_-10px_30px_rgba(0,0,0,.24)] backdrop-blur" aria-label="Golden Essence mobile navigation">
         <div className="mx-auto grid max-w-md grid-cols-5 gap-1">
           {navItems.map(([id, label]) => (
-            <button key={id} type="button" onClick={() => scrollTo(id)} className="rounded-xl px-1 py-2.5 text-[9px] font-bold uppercase tracking-[0.05em] text-[#e8b75d] active:bg-[#17383a]">{label}</button>
+            <button key={id} type="button" onClick={() => scrollTo(id)} className="rounded-xl px-1 py-2.5 text-[9px] font-bold uppercase tracking-[0.05em] text-[#e6b45a] active:bg-[#15383a]">{label}</button>
           ))}
         </div>
       </nav>
