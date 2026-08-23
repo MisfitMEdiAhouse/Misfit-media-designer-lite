@@ -113,9 +113,9 @@ function ContactFormOverlay() {
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  const common = 'absolute z-30 border-0 px-[1.1%] text-[#18363a] outline-none focus:ring-2 focus:ring-[#c68a2f]';
+  const common = 'pointer-events-auto absolute z-30 border-0 px-[1.1%] text-[#18363a] outline-none focus:ring-2 focus:ring-[#c68a2f]';
   return (
-    <form onSubmit={submit} className="absolute inset-0 z-30" aria-label="Golden Essence contact form">
+    <form onSubmit={submit} className="pointer-events-none absolute inset-0 z-30" aria-label="Golden Essence contact form">
       <input required aria-label="Full name" value={form.name} onChange={update('name')} className={common} style={{ left: '32.1%', top: '41.4%', width: '33.5%', height: '2.9%', ...fieldStyle(form.name), fontSize: 'clamp(8px,1.15vw,15px)' }} />
       <input required type="email" aria-label="Email address" value={form.email} onChange={update('email')} className={common} style={{ left: '32.1%', top: '45.8%', width: '33.5%', height: '2.9%', ...fieldStyle(form.email), fontSize: 'clamp(8px,1.15vw,15px)' }} />
       <input type="tel" aria-label="Phone number" value={form.phone} onChange={update('phone')} className={common} style={{ left: '32.1%', top: '50.2%', width: '33.5%', height: '2.9%', ...fieldStyle(form.phone), fontSize: 'clamp(8px,1.15vw,15px)' }} />
@@ -127,9 +127,9 @@ function ContactFormOverlay() {
         <option>Other question</option>
       </select>
       <textarea required aria-label="Message" value={form.message} onChange={update('message')} className={`${common} resize-none py-[1%]`} style={{ left: '32.1%', top: '59.0%', width: '33.5%', height: '7.7%', ...fieldStyle(form.message), fontSize: 'clamp(8px,1.15vw,15px)' }} />
-      <button type="submit" aria-label="Send message" className="absolute z-40 cursor-pointer bg-transparent" style={{ left: '32.1%', top: '67.7%', width: '33.5%', height: '3.25%' }} />
-      <a href={`tel:${PHONE}`} aria-label="Call Golden Essence" className="absolute z-40" style={{ left: '7.5%', top: '39.2%', width: '22%', height: '5%' }} />
-      <a href={`mailto:${EMAIL}`} aria-label="Email Golden Essence" className="absolute z-40" style={{ left: '7.5%', top: '44.2%', width: '23%', height: '5%' }} />
+      <button type="submit" aria-label="Send message" className="pointer-events-auto absolute z-40 cursor-pointer bg-transparent" style={{ left: '32.1%', top: '67.7%', width: '33.5%', height: '3.25%' }} />
+      <a href={`tel:${PHONE}`} aria-label="Call Golden Essence" className="pointer-events-auto absolute z-40" style={{ left: '7.5%', top: '39.2%', width: '22%', height: '5%' }} />
+      <a href={`mailto:${EMAIL}`} aria-label="Email Golden Essence" className="pointer-events-auto absolute z-40" style={{ left: '7.5%', top: '44.2%', width: '23%', height: '5%' }} />
     </form>
   );
 }
