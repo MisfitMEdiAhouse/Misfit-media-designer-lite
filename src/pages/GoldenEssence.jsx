@@ -49,6 +49,13 @@ const pages = {
   },
 };
 
+const desktopMaskLeft = {
+  home: 38,
+  about: 31,
+  services: 34,
+  contact: 37,
+};
+
 function routeKey(pathname) {
   if (pathname.endsWith('/about')) return 'about';
   if (pathname.endsWith('/services')) return 'services';
@@ -57,13 +64,13 @@ function routeKey(pathname) {
   return 'home';
 }
 
-function Hotspot({ left, top, width, height, label, onClick, className = '' }) {
+function Hotspot({ left, top, width, height, label, onClick }) {
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`absolute z-30 cursor-pointer rounded-sm bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${className}`}
+      className="absolute z-30 cursor-pointer rounded-sm bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
       style={{ left: `${left}%`, top: `${top}%`, width: `${width}%`, height: `${height}%` }}
     />
   );
@@ -71,13 +78,14 @@ function Hotspot({ left, top, width, height, label, onClick, className = '' }) {
 
 function DesktopHeaderCleanup({ pageKey, go }) {
   if (pageKey === 'policies') return null;
-  const landscape = pageKey === 'about';
-  const desktopMask = landscape
-    ? { left: '31%', top: '0%', width: '69%', height: '9.0%' }
-    : { left: '38%', top: '0%', width: '62%', height: '7.75%' };
+  const left = desktopMaskLeft[pageKey] ?? 38;
+  const height = pageKey === 'about' ? 9 : 7.75;
 
   return (
-    <div className="absolute z-20 hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:block" style={desktopMask}>
+    <div
+      className="absolute z-20 hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:block"
+      style={{ left: `${left}%`, top: 0, width: `${100 - left}%`, height: `${height}%` }}
+    >
       <div className="flex h-full items-center justify-end gap-[2%] px-[2%]">
         {pageOrder.map((key) => (
           <button
@@ -117,7 +125,12 @@ function PoliciesDesktopNav({ go }) {
 function MobileBrandStrip({ go }) {
   return (
     <div className="relative h-[58px] overflow-hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:hidden">
-      <button type="button" onClick={() => go('home')} aria-label="Golden Essence home" className="absolute inset-y-0 left-0 w-[45%] overflow-hidden text-left">
+      <button
+        type="button"
+        onClick={() => go('home')}
+        aria-label="Golden Essence home"
+        className="absolute inset-y-0 left-0 w-[40%] overflow-hidden text-left"
+      >
         <img
           src={pages.home.src}
           alt="Golden Essence Therapeutics"
@@ -232,6 +245,8 @@ function MobileCroppedArtwork({ pageKey, go }) {
 
 function ArtworkPage({ pageKey, go, mobile = false }) {
   const page = pages[pageKey];
+  const showMobileBrand = mobile && pageKey !== 'policies';
+
   return (
     <section
       id={`golden-${pageKey}`}
@@ -239,10 +254,9 @@ function ArtworkPage({ pageKey, go, mobile = false }) {
       style={{ maxWidth: mobile ? '100%' : `${page.width}px` }}
       aria-label={`Golden Essence ${pageKey}`}
     >
-      {mobile && <MobileBrandStrip go={go} />}
+      {showMobileBrand && <MobileBrandStrip go={go} />}
       {pageKey === 'policies' && !mobile && <PoliciesDesktopNav go={go} />}
       {mobile ? <MobileCroppedArtwork pageKey={pageKey} go={go} /> : <FullArtwork pageKey={pageKey} go={go} desktop />}
-      {mobile && pageKey !== 'contact' && <div className="h-1 border-y border-[#b77d2b]/35 bg-[#021719]" aria-hidden="true" />}
     </section>
   );
 }
