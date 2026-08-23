@@ -80,4 +80,12 @@
     color: #ffd985 !important;
     text-shadow: 0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,.9);
   }
+
+  body:has(nav[aria-label="Golden Essence navigation"]) a[href^="mailto:"] .break-all {
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    font-size: clamp(10.5px, 3vw, 12px) !important;
+    letter-spacing: -0.035em !important;
+  }
 }
