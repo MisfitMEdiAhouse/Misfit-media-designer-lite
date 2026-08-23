@@ -31,6 +31,7 @@
     { "source": "/portfolio/golden-essence/services", "destination": "/" },
     { "source": "/portfolio/golden-essence/policies", "destination": "/" },
     { "source": "/portfolio/golden-essence/contact", "destination": "/" },
+    { "source": "/portfolio/golden-essence-mobile", "destination": "/" },
     { "source": "/agents", "destination": "/" },
     { "source": "/heir", "destination": "/" },
     { "source": "/shopify-ai-audit", "destination": "/" },
