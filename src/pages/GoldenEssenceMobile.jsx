@@ -46,6 +46,29 @@ const services = [
   },
 ];
 
+const aboutCards = [
+  [
+    'My Why',
+    'My journey into massage therapy became especially meaningful after experiencing firsthand how much therapeutic touch can support the body during times of pain, stress, and recovery. That experience inspired me to create a business centered around compassionate, personalized care.',
+  ],
+  [
+    'Personalized Care',
+    'I believe massage should be more than just an appointment — it should be a moment where you can slow down, breathe, and focus on yourself. Every session is tailored to your individual needs, whether you’re looking for relaxation, relief from everyday muscle tension, or simply time to recharge.',
+  ],
+  [
+    'Comfort & Convenience',
+    'As a mobile massage therapist, I bring the experience directly to you, allowing you to enjoy your massage in the comfort and privacy of your own space without having to worry about driving afterward.',
+  ],
+  [
+    'You Matter Here',
+    'At Golden Essence Therapeutics, my goal is simple: to create an environment where you feel comfortable, respected, cared for, and heard.',
+  ],
+  [
+    'Holistic Approach',
+    'Healing is more than physical. Each session supports your body, mind, and spirit — helping you feel balanced, renewed, and your best.',
+  ],
+];
+
 const policies = [
   ['Appointments & Booking', 'Massage sessions are by appointment only. Full payment is required 12 hours before the appointment to secure the time. Same-day booking inside that 12-hour window is not available.'],
   ['No Show or Cancellation', 'If you cancel, reschedule, or do not show for your appointment, the full price of the scheduled massage is charged. This policy protects time reserved specifically for you.'],
@@ -64,11 +87,17 @@ const policies = [
 
 function LotusMark({ small = false }) {
   return (
-    <div className={`relative flex items-center justify-center ${small ? 'h-11 w-11' : 'h-16 w-16'}`} aria-hidden="true">
-      <span className="absolute h-[62%] w-[35%] rotate-45 rounded-[80%_0_80%_0] border border-[#d8a243]" />
-      <span className="absolute h-[62%] w-[35%] -rotate-45 rounded-[0_80%_0_80%] border border-[#d8a243]" />
-      <span className="absolute h-[65%] w-[32%] rounded-[70%_70%_45%_45%] border border-[#efbd64]" />
-      <span className="absolute bottom-1 h-[28%] w-[70%] rounded-[50%] border-b border-[#d8a243]" />
+    <div className={`flex shrink-0 items-center justify-center ${small ? 'h-12 w-12' : 'h-16 w-16'}`} aria-hidden="true">
+      <svg viewBox="0 0 84 64" className="h-full w-full" fill="none" stroke="#dfa94c" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M42 51C34 41 34 26 42 10C50 26 50 41 42 51Z" />
+        <path d="M39 51C29 44 25 31 29 17C38 27 42 39 39 51Z" />
+        <path d="M45 51C55 44 59 31 55 17C46 27 42 39 45 51Z" />
+        <path d="M35 52C23 49 15 40 14 27C27 31 35 39 35 52Z" />
+        <path d="M49 52C61 49 69 40 70 27C57 31 49 39 49 52Z" />
+        <path d="M30 54C18 54 10 48 7 38C20 39 28 44 30 54Z" />
+        <path d="M54 54C66 54 74 48 77 38C64 39 56 44 54 54Z" />
+        <path d="M11 48C20 58 31 61 42 61C53 61 64 58 73 48" />
+      </svg>
     </div>
   );
 }
@@ -82,11 +111,10 @@ function scrollToId(id) {
 }
 
 export default function GoldenEssenceMobile() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: 'General question', message: '' });
 
   useEffect(() => {
-    document.title = 'Golden Essence Therapeutics | Mobile Preview';
+    document.title = 'Golden Essence Therapeutics';
   }, []);
 
   const mailto = useMemo(() => {
@@ -99,29 +127,15 @@ export default function GoldenEssenceMobile() {
   return (
     <main className="min-h-screen bg-[#011013] text-[#f5efe5] selection:bg-[#d9a548] selection:text-[#011013]">
       <header className="sticky top-0 z-50 border-b border-[#a7782e]/55 bg-[#011013]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <button type="button" onClick={() => scrollToId('home')} className="flex items-center gap-2 text-left" aria-label="Golden Essence home">
-            <LotusMark small />
-            <div>
-              <div className="font-serif text-[15px] leading-none tracking-[0.08em] text-[#e4af4f] sm:text-lg">GOLDEN ESSENCE</div>
-              <div className="mt-1 font-serif text-[8px] tracking-[0.32em] text-[#efe4d0] sm:text-[9px]">THERAPEUTICS</div>
-              <div className="font-serif text-[10px] italic text-[#d7b26b] sm:text-xs">Where Healing Comes Home.</div>
-            </div>
+        <div className="mx-auto grid max-w-5xl grid-cols-[52px_1fr_52px] items-center gap-2 px-3 py-3">
+          <LotusMark small />
+          <button type="button" onClick={() => scrollToId('home')} className="min-w-0 text-center" aria-label="Golden Essence home">
+            <div className="font-serif text-[18px] font-semibold leading-none tracking-[0.08em] text-[#e4af4f] sm:text-xl">GOLDEN ESSENCE</div>
+            <div className="mt-1 font-serif text-[9px] tracking-[0.30em] text-[#efe4d0]">THERAPEUTICS</div>
+            <div className="mt-0.5 font-serif text-[10px] tracking-[0.08em] text-[#d7b26b] sm:text-xs">Where Healing Comes Home.</div>
           </button>
-          <button type="button" onClick={() => setMenuOpen((open) => !open)} className="grid h-11 w-11 place-items-center rounded-full border border-[#b58534]/45 text-[#efc268] md:hidden" aria-expanded={menuOpen} aria-label="Open navigation">
-            <span className="text-xl">☰</span>
-          </button>
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Golden Essence navigation">
-            {navItems.map(([id, label]) => <button key={id} onClick={() => scrollToId(id)} className="text-xs uppercase tracking-[0.12em] text-[#efe4d0]/85 transition hover:text-[#efbd64]">{label}</button>)}
-          </nav>
+          <LotusMark small />
         </div>
-        {menuOpen && (
-          <nav className="grid grid-cols-5 border-t border-[#a7782e]/35 px-2 py-2 md:hidden" aria-label="Golden Essence mobile navigation">
-            {navItems.map(([id, label]) => (
-              <button key={id} type="button" onClick={() => { setMenuOpen(false); scrollToId(id); }} className="px-1 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#e9bb61]">{label}</button>
-            ))}
-          </nav>
-        )}
       </header>
 
       <section id="home" className="scroll-mt-24">
@@ -160,13 +174,8 @@ export default function GoldenEssenceMobile() {
               <img src={ABOUT_ART} alt="Golden Essence waterfall and spa artwork" className="aspect-[4/3] w-full object-cover object-[70%_22%]" />
             </div>
           </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ['My Why', 'Therapeutic touch can support the body during pain, stress, and recovery. That experience inspired a compassionate approach to care.'],
-              ['Personalized Care', 'Every body is unique. Each session is designed around individual needs, whether the goal is relaxation, tension relief, or time to recharge.'],
-              ['Comfort & Convenience', 'The mobile model brings the massage experience to your home, office, or chosen space so you can relax without driving afterward.'],
-              ['Holistic Approach', 'Healing is more than physical. The experience supports body, mind, and emotional well-being.'],
-            ].map(([title, body]) => (
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {aboutCards.map(([title, body]) => (
               <article key={title} className="rounded-2xl border border-[#bd8c39]/24 bg-[#062427] p-5">
                 <div className="mb-3 text-xl text-[#e5ad4b]">✦</div>
                 <h3 className="font-serif text-xl text-[#f2c36a]">{title}</h3>
@@ -288,8 +297,8 @@ export default function GoldenEssenceMobile() {
         <div className="mx-auto flex max-w-xl flex-col items-center">
           <LotusMark />
           <div className="mt-2 font-serif text-xl tracking-[0.12em] text-[#e6ad4c]">GOLDEN ESSENCE THERAPEUTICS</div>
-          <div className="mt-1 font-serif italic text-[#d4aa64]">Where Healing Comes Home.</div>
-          <p className="mt-4 text-xs leading-5 text-[#d5ccbd]/60">Mobile-first portfolio preview · Built by Misfit Mediahouse</p>
+          <div className="mt-1 font-serif text-[#d4aa64]">Where Healing Comes Home.</div>
+          <p className="mt-4 text-xs leading-5 text-[#d5ccbd]/60">Portfolio preview · Built by Misfit Mediahouse</p>
           <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="mt-6 rounded-full border border-[#f2c85d] bg-[#f2c85d] px-6 py-3 text-sm font-bold text-[#08272a]">Activate this site · $297</a>
         </div>
       </footer>
