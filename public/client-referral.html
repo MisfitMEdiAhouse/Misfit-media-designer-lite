@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#041819" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Client Referral Center | Misfit Mediahouse</title>
+  <style>
+    :root{color-scheme:dark;--bg:#031516;--card:#072426;--line:rgba(231,180,91,.28);--gold:#e8b45a;--cream:#fff7e9;--muted:#aebdbc;--cyan:#7ee7ef}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,rgba(232,180,90,.08),transparent 35%),radial-gradient(circle at 100% 25%,rgba(126,231,239,.07),transparent 32%),var(--bg);color:var(--cream);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.shell{width:min(820px,100%);margin:0 auto;padding:22px 16px 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.brand{font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--gold)}.back{color:var(--cream);text-decoration:none;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px 13px;font-size:11px}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(7,36,38,.97),rgba(2,20,21,.98));border-radius:28px;padding:24px;box-shadow:0 28px 85px rgba(0,0,0,.45)}.eyebrow{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}h1{font-family:Georgia,serif;font-size:clamp(38px,10vw,62px);line-height:.98;margin:10px 0 0;font-weight:500}p{line-height:1.65;color:#dce3df}.grid{display:grid;gap:16px;margin-top:22px}.qrWrap{background:#fffaf1;border-radius:24px;padding:18px;display:grid;place-items:center}.qrWrap img{width:min(360px,100%);height:auto;display:block}.shareUrl{margin-top:12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:#021112;padding:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.5;color:#dce9e7;word-break:break-all}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.btn{border:0;border-radius:999px;min-height:48px;padding:0 16px;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center}.primary{background:var(--gold);color:#082526}.secondary{background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.16)}.info{border:1px solid rgba(255,255,255,.09);border-radius:19px;padding:17px;background:rgba(255,255,255,.025)}.info strong{color:#fff}.mini{font-size:12px;color:var(--muted);line-height:1.6}.services{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.service{border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:13px;background:rgba(0,0,0,.16);font-size:12px}.commission{border:1px solid rgba(126,231,239,.18);background:rgba(126,231,239,.035);border-radius:18px;padding:15px;color:#d8eeee;font-size:12px;line-height:1.6}.loading{padding:50px 0;text-align:center;color:var(--muted)}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#fff7e9;color:#082526;border-radius:999px;padding:11px 16px;font-size:11px;font-weight:900;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}@media(min-width:700px){.card{padding:34px}.grid{grid-template-columns:.9fr 1.1fr;align-items:start}.actions{grid-template-columns:repeat(3,1fr)}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top"><div class="brand">MISFIT × CLIENT REFERRALS</div><a id="back" class="back" href="/">Back to site</a></div>
+    <section class="card">
+      <div id="loading" class="loading">Loading your referral center…</div>
+      <div id="content" hidden>
+        <div class="eyebrow">Client Referral Center</div>
+        <h1><span id="clientName">Your business</span><br><span style="color:var(--gold)">Referral QR</span></h1>
+        <p>Someone asks who built your website or says they need a website, AI receptionist, chat agent, booking flow, or business automation? Send them this link or let them scan your QR.</p>
+        <div class="grid">
+          <div>
+            <div class="qrWrap"><img id="qr" alt="Misfit Mediahouse referral QR code" /></div>
+            <div id="shareUrl" class="shareUrl"></div>
+            <div class="actions">
+              <button id="copy" class="btn primary" type="button">Copy link</button>
+              <button id="share" class="btn secondary" type="button">Share</button>
+              <a id="openAgency" class="btn secondary" target="_blank" rel="noopener noreferrer">Open Misfit</a>
+            </div>
+          </div>
+          <div>
+            <div class="info">
+              <strong>What can you refer?</strong>
+              <div class="services">
+                <div class="service">Web design + launches</div><div class="service">AI voice receptionists</div>
+                <div class="service">AI chat + intake</div><div class="service">Booking + payments</div>
+                <div class="service">Lead follow-up</div><div class="service">Growth + custom systems</div>
+              </div>
+            </div>
+            <div class="info" style="margin-top:10px">
+              <strong>How it works</strong>
+              <div class="mini" style="margin-top:8px">1. Share your link or QR.<br>2. Misfit remembers your referral code.<br>3. If they become a paid Misfit client, Stripe attributes the purchase back to your referral record.<br>4. Eligible commission is handled under your active referral terms.</div>
+            </div>
+            <div class="commission" style="margin-top:10px"><strong>Commission tracking:</strong> <span id="commission"></span></div>
+            <div class="info" style="margin-top:10px">
+              <strong>Easy text to send</strong>
+              <div id="shareCopy" class="mini" style="margin-top:8px"></div>
+              <button id="copyText" class="btn secondary" style="width:100%;margin-top:12px" type="button">Copy message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast">Copied</div>
+<script>
+(() => {
+  const API = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/client-referral';
+  const params = new URLSearchParams(location.search);
+  const site = (params.get('site') || 'golden-essence').trim().toLowerCase();
+  const qs = (s) => document.querySelector(s);
+  const toast = (text) => { const el = qs('#toast'); el.textContent = text; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1600); };
+  const copy = async (text) => { try { await navigator.clipboard.writeText(text); toast('Copied'); } catch { prompt('Copy this:', text); } };
+
+  fetch(`${API}/profile?site=${encodeURIComponent(site)}`, { cache:'no-store' })
+    .then(async (r) => { const data = await r.json(); if (!r.ok) throw new Error(data.error || 'Referral center unavailable'); return data; })
+    .then((profile) => {
+      const shareText = `Need a website or AI receptionist? Misfit Mediahouse built my site. Check them out here: ${profile.share_url}`;
+      qs('#clientName').textContent = profile.display_name;
+      qs('#shareUrl').textContent = profile.share_url;
+      qs('#qr').src = `${API}/qr?site=${encodeURIComponent(profile.site_key)}`;
+      qs('#openAgency').href = profile.share_url;
+      qs('#commission').textContent = profile.commission_label;
+      qs('#shareCopy').textContent = shareText;
+      qs('#copy').onclick = () => copy(profile.share_url);
+      qs('#copyText').onclick = () => copy(shareText);
+      qs('#share').onclick = async () => {
+        if (navigator.share) {
+          try { await navigator.share({ title:'Misfit Mediahouse', text:'Misfit Mediahouse built my site — websites, AI voice, chat and business systems.', url:profile.share_url }); } catch (_) {}
+        } else copy(profile.share_url);
+      };
+      if (site === 'golden-essence') qs('#back').href = '/portfolio/golden-essence';
+      qs('#loading').hidden = true;
+      qs('#content').hidden = false;
+      document.title = `${profile.display_name} Referral Center | Misfit Mediahouse`;
+    })
+    .catch((error) => { qs('#loading').textContent = error.message || 'Referral center unavailable.'; });
+})();
+</script>
+</body>
+</html>
