@@ -4,7 +4,7 @@
 
   const STATUS_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation/status?site=golden-essence';
   const CHECKOUT_URL = 'https://buy.stripe.com/9B6cN5caS66q4ym1wY8ww0y';
-  const ACTIVATION_URL = '/golden-activate.html';
+  const ACTIVATION_URL = '/golden-activate-v2.html';
   const processingReturn = new URLSearchParams(window.location.search).get('activation') === 'processing';
   let lastStatus = null;
   let countdownTick = null;
