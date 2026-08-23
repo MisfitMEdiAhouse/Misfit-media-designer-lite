@@ -63,6 +63,13 @@
     "url": "https://weber-junk-rescue-v9.vercel.app/"
   },
   {
+    "id": "golden-essence",
+    "title": "Golden Essence Therapeutics",
+    "type": "Mobile massage therapy website",
+    "summary": "A five-page branded local-service site for mobile massage therapy with services and pricing, policies, direct contact, mobile booking paths, and a one-time activation checkout.",
+    "url": "/portfolio/golden-essence"
+  },
+  {
     "id": "off-grid-water",
     "title": "Off-Grid Water",
     "type": "Digital commerce",
