@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import RouteMeta from './components/RouteMeta.jsx';
 import Home from './pages/Home.jsx';
@@ -26,6 +27,37 @@ import CoffeeLaunchConsole from './pages/CoffeeLaunchConsole.jsx';
 import GoldenEssence from './pages/GoldenEssence.jsx';
 import GoldenEssenceMobile from './pages/GoldenEssenceMobile.jsx';
 
+const goldenEssenceSections = new Set(['about', 'services', 'policies', 'contact']);
+
+function ResponsiveGoldenEssence() {
+  const location = useLocation();
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const sync = (event) => setIsMobile(event.matches);
+    setIsMobile(media.matches);
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const segment = location.pathname.split('/').filter(Boolean).at(-1);
+    const section = goldenEssenceSections.has(segment) ? segment : 'home';
+
+    const timer = window.setTimeout(() => {
+      document.title = 'Golden Essence Therapeutics';
+      document.getElementById(section)?.scrollIntoView({ block: 'start' });
+    }, 40);
+
+    return () => window.clearTimeout(timer);
+  }, [isMobile, location.pathname]);
+
+  return isMobile ? <GoldenEssenceMobile /> : <GoldenEssence />;
+}
+
 export default function App() {
   return (
     <Router>
@@ -42,11 +74,11 @@ export default function App() {
         <Route path="/field-notes/:slug" element={<FieldNotes />} />
         <Route path="/portfolio" element={<ProofPage />} />
         <Route path="/portfolio/ials-turbine-command" element={<IALSTurbineCommand />} />
-        <Route path="/portfolio/golden-essence" element={<GoldenEssence />} />
-        <Route path="/portfolio/golden-essence/about" element={<GoldenEssence />} />
-        <Route path="/portfolio/golden-essence/services" element={<GoldenEssence />} />
-        <Route path="/portfolio/golden-essence/policies" element={<GoldenEssence />} />
-        <Route path="/portfolio/golden-essence/contact" element={<GoldenEssence />} />
+        <Route path="/portfolio/golden-essence" element={<ResponsiveGoldenEssence />} />
+        <Route path="/portfolio/golden-essence/about" element={<ResponsiveGoldenEssence />} />
+        <Route path="/portfolio/golden-essence/services" element={<ResponsiveGoldenEssence />} />
+        <Route path="/portfolio/golden-essence/policies" element={<ResponsiveGoldenEssence />} />
+        <Route path="/portfolio/golden-essence/contact" element={<ResponsiveGoldenEssence />} />
         <Route path="/portfolio/golden-essence-mobile" element={<GoldenEssenceMobile />} />
         <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
