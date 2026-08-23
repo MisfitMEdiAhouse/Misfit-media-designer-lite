@@ -24,6 +24,7 @@ import IALSTurbineCommand from './pages/IALSTurbineCommand.jsx';
 import FieldNotes from './pages/FieldNotes.jsx';
 import CoffeeLaunchConsole from './pages/CoffeeLaunchConsole.jsx';
 import GoldenEssence from './pages/GoldenEssence.jsx';
+import GoldenEssenceMobile from './pages/GoldenEssenceMobile.jsx';
 
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="/portfolio/golden-essence/services" element={<GoldenEssence />} />
         <Route path="/portfolio/golden-essence/policies" element={<GoldenEssence />} />
         <Route path="/portfolio/golden-essence/contact" element={<GoldenEssence />} />
+        <Route path="/portfolio/golden-essence-mobile" element={<GoldenEssenceMobile />} />
         <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
