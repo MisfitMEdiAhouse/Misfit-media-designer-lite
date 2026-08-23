@@ -4,6 +4,7 @@
 
   const STATUS_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation/status?site=golden-essence';
   const CHECKOUT_URL = 'https://buy.stripe.com/9B6cN5caS66q4ym1wY8ww0y';
+  const ACTIVATION_URL = '/golden-activate.html';
   const processingReturn = new URLSearchParams(window.location.search).get('activation') === 'processing';
   let lastStatus = null;
   let countdownTick = null;
@@ -23,7 +24,7 @@
   const activationButton = () => {
     const footer = document.querySelector('footer');
     if (!footer) return null;
-    return footer.querySelector(`a[href="${CHECKOUT_URL}"]`) || footer.querySelector('a[href*="buy.stripe.com"]');
+    return footer.querySelector(`a[href="${ACTIVATION_URL}"]`) || footer.querySelector(`a[href="${CHECKOUT_URL}"]`) || footer.querySelector('a[href*="buy.stripe.com"]');
   };
 
   const ensureFinePrint = () => {
@@ -108,7 +109,7 @@
     });
 
     const body = document.createElement('p');
-    body.textContent = 'Activate the site for $297 to restore it permanently and move it to your preferred custom domain.';
+    body.textContent = 'Activate the site for $297 to restore it permanently. No domain account or technical setup is required before payment.';
     Object.assign(body.style, {
       margin: '20px auto 0',
       maxWidth: '440px',
@@ -118,7 +119,7 @@
     });
 
     const buy = document.createElement('a');
-    buy.href = CHECKOUT_URL;
+    buy.href = ACTIVATION_URL;
     buy.textContent = 'Activate Site · $297';
     Object.assign(buy.style, {
       display: 'inline-flex',
@@ -136,7 +137,7 @@
     });
 
     const fine = document.createElement('p');
-    fine.textContent = 'One-time activation includes custom-domain setup and launch. Enter the domain you want at checkout. Domain registration and renewal are billed at cost unless otherwise agreed.';
+    fine.textContent = 'The $297 is a one-time website activation. Ownership, domain choices, existing-site transfer, and access are handled clearly on the next page.';
     Object.assign(fine.style, {
       margin: '15px auto 0',
       maxWidth: '460px',
@@ -175,7 +176,7 @@
     title.textContent = 'Payment received.';
     Object.assign(title.style, { fontFamily: 'Georgia, serif', fontSize: '42px', color: '#f1bd5d' });
     const copy = document.createElement('p');
-    copy.textContent = 'Activating the site and saving your custom-domain request…';
+    copy.textContent = 'Activating the site…';
     Object.assign(copy.style, { fontSize: '15px', lineHeight: '1.6', color: 'rgba(255,246,231,.82)' });
     box.append(title, copy);
     overlay.append(box);
@@ -187,25 +188,33 @@
     const ui = ensureFinePrint();
     if (ui) {
       if (state.status === 'active') {
-        ui.button.textContent = state.custom_domain ? `Activated · ${state.custom_domain}` : 'Site Activated · Domain Setup';
-        ui.button.removeAttribute('href');
-        ui.button.setAttribute('aria-disabled', 'true');
-        ui.button.style.pointerEvents = 'none';
-        ui.button.style.opacity = '.82';
-        ui.note.textContent = state.custom_domain
-          ? `Activation paid. Custom-domain setup requested for ${state.custom_domain}.`
-          : 'Activation paid. Custom-domain setup is now in progress.';
+        const handoffDone = ['submitted', 'domain_review', 'delegate_access', 'dns_setup', 'handoff_ready', 'complete'].includes(state.launch_status);
+        if (handoffDone) {
+          ui.button.textContent = 'Paid · Launch Handoff Received';
+          ui.button.removeAttribute('href');
+          ui.button.setAttribute('aria-disabled', 'true');
+          ui.button.style.pointerEvents = 'none';
+          ui.button.style.opacity = '.82';
+          ui.note.textContent = 'Payment received. Misfit has the domain/site handoff information and is handling the launch path.';
+        } else {
+          ui.button.textContent = 'Paid · Finish Launch Setup';
+          ui.button.href = ACTIVATION_URL;
+          ui.button.removeAttribute('aria-disabled');
+          ui.button.style.pointerEvents = '';
+          ui.button.style.opacity = '';
+          ui.note.textContent = 'Payment received. Tap once to tell Misfit whether you need a domain, already own one, already have a site, or want us to guide you.';
+        }
       } else if (state.status === 'preview') {
         ui.button.textContent = 'Activate this site · $297';
-        ui.button.href = CHECKOUT_URL;
+        ui.button.href = ACTIVATION_URL;
         ui.button.removeAttribute('aria-disabled');
         ui.button.style.pointerEvents = '';
         ui.button.style.opacity = '';
-        ui.note.textContent = `48-hour live preview · ${formatRemaining(state.seconds_remaining)} remaining. $297 one-time activation keeps the site live and includes custom-domain setup + launch. Enter the domain you want at checkout. Domain registration/renewal is billed at cost unless otherwise agreed.`;
+        ui.note.textContent = `48-hour live preview · ${formatRemaining(state.seconds_remaining)} remaining. $297 one-time activation buys the finished site and launch. No GoDaddy account or domain choice is required before payment.`;
       } else {
         ui.button.textContent = 'Preview Expired · Activate $297';
-        ui.button.href = CHECKOUT_URL;
-        ui.note.textContent = 'This 48-hour preview has ended. Activate once for $297 to restore it and launch it on your preferred custom domain.';
+        ui.button.href = ACTIVATION_URL;
+        ui.note.textContent = 'This 48-hour preview has ended. Activate once for $297. Misfit handles the domain/site handoff after payment.';
       }
     }
 
