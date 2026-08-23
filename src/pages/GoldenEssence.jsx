@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const PAYMENT_URL = 'https://buy.stripe.com/9B6cN5caS66q4ym1wY8ww0y';
 const EMAIL = 'goldenessencetherapeutics@gmail.com';
 const PHONE = '+14357604808';
-
 const pageOrder = ['home', 'about', 'services', 'policies', 'contact'];
 
 const pages = {
@@ -27,7 +26,7 @@ const pages = {
     src: 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-services.jpg?v=1787457091',
     width: 1024,
     height: 1536,
-    title: 'Golden Essence Therapeutics | Services & Pricing',
+    title: 'Golden Essence Therapeutics | Services',
   },
   policies: {
     path: '/portfolio/golden-essence/policies',
@@ -53,66 +52,86 @@ function routeKey(pathname) {
   return 'home';
 }
 
-// Each artwork has a slightly different header. These hit zones follow the actual supplied mockups.
-const hotspotSets = {
-  home: [
-    ['home', 42.5, 2.5, 5.8, 4.7],
-    ['about', 49.7, 2.5, 6.0, 4.7],
-    ['services', 57.2, 2.5, 7.0, 4.7],
-    ['services', 65.4, 2.5, 6.6, 4.7], // Pricing
-    ['contact', 73.2, 2.5, 9.2, 4.7], // Book now
-    ['contact', 86.4, 2.0, 12.2, 5.2], // gold button
-  ],
-  about: [
-    ['home', 33.0, 2.0, 5.2, 5.5],
-    ['about', 39.2, 2.0, 5.6, 5.5],
-    ['services', 45.6, 2.0, 6.5, 5.5],
-    ['services', 52.6, 2.0, 6.1, 5.5], // Pricing
-    ['contact', 59.5, 2.0, 8.0, 5.5], // Book now
-    ['contact', 68.6, 2.0, 7.0, 5.5],
-    ['contact', 79.2, 1.4, 18.5, 6.4], // gold button
-  ],
-  services: [
-    ['home', 36.0, 1.6, 5.5, 5.2],
-    ['about', 42.3, 1.6, 5.8, 5.2],
-    ['services', 48.8, 1.6, 7.0, 5.2],
-    ['services', 56.3, 1.6, 6.2, 5.2], // Pricing
-    ['contact', 63.3, 1.6, 8.2, 5.2], // Book now
-    ['contact', 71.9, 1.6, 7.2, 5.2],
-    ['contact', 81.0, 1.2, 17.0, 6.0], // gold button
-  ],
-  policies: [],
-  contact: [
-    ['home', 38.7, 1.6, 5.3, 5.1],
-    ['about', 44.7, 1.6, 5.8, 5.1],
-    ['services', 51.2, 1.6, 7.0, 5.1],
-    ['services', 58.7, 1.6, 6.2, 5.1], // Pricing
-    ['contact', 65.7, 1.6, 8.0, 5.1], // Book now
-    ['contact', 73.9, 1.6, 7.4, 5.1],
-    ['contact', 82.0, 1.1, 16.0, 6.0], // gold button
-  ],
-};
-
-function Hotspot({ left, top, width, height, label, onClick }) {
+function Hotspot({ left, top, width, height, label, onClick, className = '' }) {
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="absolute z-20 cursor-pointer rounded-sm bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+      className={`absolute z-30 cursor-pointer rounded-sm bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${className}`}
       style={{ left: `${left}%`, top: `${top}%`, width: `${width}%`, height: `${height}%` }}
     />
   );
 }
 
-function NavigationHotspots({ pageKey, go }) {
+function HeaderCleanup({ pageKey, go }) {
+  if (pageKey === 'policies') return null;
+  const landscape = pageKey === 'about';
+  const style = landscape
+    ? { left: '31%', top: '0%', width: '69%', height: '9.2%' }
+    : { left: '34%', top: '0%', width: '66%', height: '8.1%' };
+
   return (
-    <>
-      <Hotspot left={1} top={0.5} width={pageKey === 'about' ? 29 : 34} height={pageKey === 'about' ? 8 : 6.5} label="Golden Essence home" onClick={() => go('home')} />
-      {(hotspotSets[pageKey] || []).map(([target, left, top, width, height], i) => (
-        <Hotspot key={`${pageKey}-${target}-${i}`} left={left} top={top} width={width} height={height} label={`Open ${target}`} onClick={() => go(target)} />
-      ))}
-    </>
+    <div className="absolute z-20 border-b border-[#b77d2b]/70 bg-[#031d20]" style={style}>
+      <div className="hidden h-full items-center justify-end gap-[2.1%] px-[2.2%] md:flex">
+        {pageOrder.map((key) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => go(key)}
+            className="whitespace-nowrap border-b border-transparent pb-1 font-serif text-[clamp(9px,1.05vw,14px)] uppercase tracking-[0.04em] text-[#f7eee0] transition hover:border-[#e2ad45] hover:text-[#e7b44d]"
+          >
+            {key}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PoliciesDesktopNav({ go }) {
+  return (
+    <nav className="hidden border-b border-[#b77d2b]/70 bg-[#031d20] text-[#f7eee0] md:block" aria-label="Golden Essence desktop navigation">
+      <div className="mx-auto flex max-w-[1024px] items-center justify-between gap-6 px-6 py-4">
+        <button type="button" onClick={() => go('home')} className="text-left">
+          <div className="font-serif text-lg tracking-[0.08em] text-[#e7b44d]">GOLDEN ESSENCE</div>
+          <div className="font-serif text-[10px] tracking-[0.28em] text-[#f7eee0]/80">THERAPEUTICS</div>
+        </button>
+        <div className="flex items-center gap-6">
+          {pageOrder.map((key) => (
+            <button key={key} type="button" onClick={() => go(key)} className="font-serif text-xs uppercase tracking-[0.06em] hover:text-[#e7b44d]">
+              {key}
+            </button>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function HomeContactCTA({ go }) {
+  return (
+    <button
+      type="button"
+      onClick={() => go('contact')}
+      className="absolute z-40 flex items-center justify-center rounded-[4px] border border-[#e3ae43] bg-gradient-to-b from-[#f1c86e] to-[#d8932f] font-serif font-semibold uppercase tracking-[0.03em] text-[#092c2e] shadow-lg"
+      style={{ left: '34%', top: '52.55%', width: '31.8%', height: '5.95%', fontSize: 'clamp(9px,2.3vw,24px)' }}
+      aria-label="Contact Golden Essence"
+    >
+      Contact / Questions
+    </button>
+  );
+}
+
+function ContactQuestionCleanup() {
+  return (
+    <div
+      className="absolute z-20 flex flex-col justify-center rounded-md bg-[#f7f1e8] px-[1.4%] text-[#18363a]"
+      style={{ left: '70.0%', top: '50.9%', width: '24.5%', height: '8.2%', fontSize: 'clamp(8px,1.15vw,14px)' }}
+    >
+      <div className="font-serif font-semibold">Have a Question?</div>
+      <div className="mt-1 leading-snug">Send a message and I’ll get back to you as soon as I can.</div>
+    </div>
   );
 }
 
@@ -138,7 +157,7 @@ function ContactFormOverlay() {
         <option value="">Select a topic</option>
         <option>New client question</option>
         <option>Help choosing a service</option>
-        <option>Booking request</option>
+        <option>School / business information</option>
         <option>Other question</option>
       </select>
       <textarea required aria-label="Message" value={form.message} onChange={update('message')} className={`${common} resize-none py-[1%]`} style={{ left: '32.1%', top: '59.0%', width: '33.5%', height: '7.7%', ...fieldStyle(form.message), fontSize: 'clamp(10px,1.15vw,15px)' }} />
@@ -158,6 +177,7 @@ function ArtworkPage({ pageKey, go, mobile = false }) {
       style={{ maxWidth: mobile ? '100%' : `${page.width}px` }}
       aria-label={`Golden Essence ${pageKey}`}
     >
+      {pageKey === 'policies' && !mobile && <PoliciesDesktopNav go={go} />}
       <div className="relative w-full" style={{ aspectRatio: `${page.width} / ${page.height}` }}>
         <img
           src={page.src}
@@ -167,10 +187,12 @@ function ArtworkPage({ pageKey, go, mobile = false }) {
           className="block h-auto w-full select-none"
           draggable="false"
         />
-        <NavigationHotspots pageKey={pageKey} go={go} />
-        {pageKey === 'home' && (
-          <Hotspot left={34.0} top={52.7} width={31.5} height={5.8} label="Book your session" onClick={() => go('contact')} />
+        <HeaderCleanup pageKey={pageKey} go={go} />
+        {pageKey !== 'policies' && (
+          <Hotspot left={1} top={0.4} width={pageKey === 'about' ? 29 : 33} height={pageKey === 'about' ? 8 : 6.5} label="Golden Essence home" onClick={() => go('home')} />
         )}
+        {pageKey === 'home' && <HomeContactCTA go={go} />}
+        {pageKey === 'contact' && <ContactQuestionCleanup />}
         {pageKey === 'contact' && <ContactFormOverlay />}
       </div>
     </section>
