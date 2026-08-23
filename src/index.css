@@ -72,14 +72,15 @@ section[id^="golden-"] {
     background-color: var(--golden-essence-header) !important;
   }
 
-  /* Client-requested desktop Home hierarchy: tagline in header, business name at waterfall. */
+  /* Client-requested desktop Home hierarchy: tagline in header, business name at waterfall,
+     with the lotus motif on both ends of the tagline. */
   #golden-home > div:first-of-type::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: url('https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-home-desktop-swapped.jpg?v=1787460928');
+    background-image: url('https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-home-desktop-lotus-both-sides.jpg?v=1787461287');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -87,5 +88,11 @@ section[id^="golden-"] {
 
   #golden-home > div:first-of-type > img {
     opacity: 0;
+  }
+
+  /* Keep the replacement nav clear of the tagline + right-side lotus. */
+  #golden-home > div:first-of-type > div.absolute.z-20.hidden {
+    left: 43% !important;
+    width: 57% !important;
   }
 }
