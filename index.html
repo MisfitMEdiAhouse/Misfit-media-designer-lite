@@ -71,6 +71,21 @@
         };
       })();
     </script>
+    <script>
+      (() => {
+        const goldenPaths = ['/portfolio/golden-essence', '/golden-essence', '/golden-essence-mobile'];
+        const path = location.pathname.replace(/\/+$/, '') || '/';
+        if (!goldenPaths.includes(path)) return;
+        const oldCheckout = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation/create-checkout';
+        const trackedCheckout = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation-checkout';
+        const nativeFetch = window.fetch.bind(window);
+        window.fetch = (input, init = {}) => {
+          const url = typeof input === 'string' ? input : input?.url;
+          if (url === oldCheckout) return nativeFetch(trackedCheckout, init);
+          return nativeFetch(input, init);
+        };
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
     <script defer src="/golden-activation-wizard.js"></script>
     <script defer src="/golden-preview-runtime.js"></script>
