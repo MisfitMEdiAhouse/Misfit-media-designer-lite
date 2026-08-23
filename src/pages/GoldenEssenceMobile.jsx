@@ -5,11 +5,11 @@ const EMAIL = 'goldenessencetherapeutics@gmail.com';
 const PHONE_DISPLAY = '435-760-4808';
 const PHONE = '+14357604808';
 
-const HOME_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-home-spa.jpg?v=1787463302';
-const ABOUT_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-about-spa.jpg?v=1787463311';
-const SERVICES_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-services-spa.jpg?v=1787463320';
-const POLICIES_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-policies-spa.jpg?v=1787463330';
-const CONTACT_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-contact-spa.jpg?v=1787463340';
+const HOME_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-home-v2.jpg?v=1787463986';
+const ABOUT_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-about-v2.jpg?v=1787463997';
+const SERVICES_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-services-v2.jpg?v=1787464004';
+const POLICIES_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-policies-v2.jpg?v=1787464012';
+const CONTACT_BG = 'https://cdn.shopify.com/s/files/1/0714/0068/5750/files/golden-essence-mobile-contact-v2.jpg?v=1787464027';
 
 const navItems = [
   ['home', 'Home'],
@@ -70,31 +70,49 @@ function scrollTo(id) {
 
 function BrandHeader() {
   return (
-    <button type="button" onClick={() => scrollTo('home')} className="grid w-full grid-cols-[48px_1fr_48px] items-center gap-2 px-4 py-3 text-[#e9b95a]" aria-label="Golden Essence home">
-      <Lotus className="h-10 w-10 justify-self-start" />
+    <button type="button" onClick={() => scrollTo('home')} className="grid w-full grid-cols-[44px_1fr_44px] items-center gap-2 px-4 py-2.5 text-[#e9b95a]" aria-label="Golden Essence home">
+      <Lotus className="h-9 w-9 justify-self-start" />
       <span className="text-center">
-        <span className="block font-serif text-[17px] font-semibold tracking-[0.13em]">GOLDEN ESSENCE</span>
+        <span className="block font-serif text-[16px] font-semibold tracking-[0.13em]">GOLDEN ESSENCE</span>
         <span className="mt-0.5 block font-serif text-[9px] tracking-[0.30em] text-[#f1e5d0]">THERAPEUTICS</span>
-        <span className="mt-1 block font-serif text-[10px] italic tracking-[0.06em] text-[#d8ad63]">Where Healing Comes Home.</span>
+        <span className="mt-0.5 block font-serif text-[10px] italic tracking-[0.05em] text-[#d8ad63]">Where Healing Comes Home.</span>
       </span>
-      <Lotus className="h-10 w-10 justify-self-end" />
+      <Lotus className="h-9 w-9 justify-self-end" />
     </button>
   );
 }
 
-function SectionHero({ id, image, eyebrow, title, subtitle, children, position = 'center' }) {
+function HeaderNav() {
   return (
-    <section id={id} className="scroll-mt-24">
+    <nav className="border-t border-[#b78535]/35 px-2 py-1.5" aria-label="Golden Essence navigation">
+      <div className="mx-auto grid max-w-xl grid-cols-5 gap-1">
+        {navItems.map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            onClick={() => scrollTo(id)}
+            className="rounded-lg border border-transparent px-1 py-2 text-[9px] font-bold uppercase tracking-[0.05em] text-[#e7b65d] transition active:border-[#b78535]/60 active:bg-[#123638]"
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function SectionHero({ id, image, eyebrow, title, subtitle, position = 'center' }) {
+  return (
+    <section id={id} className="scroll-mt-[118px]">
       <div className="relative isolate min-h-[430px] overflow-hidden border-y border-[#b78535]/35">
         <img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: position }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#011013]/32 via-[#011013]/52 to-[#011013]/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#011013]/68 via-[#011013]/22 to-[#011013]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-[#011013]/20 to-[#011013]/72" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#011013]/58 via-transparent to-[#011013]/18" />
         <div className="relative mx-auto flex min-h-[430px] max-w-xl flex-col justify-end px-5 pb-8 pt-12">
-          <div className="rounded-[28px] border border-[#d3a14b]/35 bg-[#011013]/72 p-6 shadow-2xl backdrop-blur-[2px]">
-            <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#e5b55b]">{eyebrow}</div>
-            <h2 className="mt-3 font-serif text-[42px] leading-[0.98] text-[#fff9ed]">{title}</h2>
-            {subtitle && <p className="mt-4 text-base leading-7 text-[#eee5d8]/88">{subtitle}</p>}
-            {children}
+          <div className="rounded-[28px] border border-[#d3a14b]/45 bg-[#001315]/90 p-6 shadow-[0_20px_60px_rgba(0,0,0,.48)] backdrop-blur-[3px]">
+            <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#f0bc5c]">{eyebrow}</div>
+            <h2 className="mt-3 font-serif text-[40px] leading-[1.01] text-[#fff9ed] drop-shadow-[0_2px_12px_rgba(0,0,0,.8)]">{title}</h2>
+            {subtitle && <p className="mt-4 text-base leading-7 text-[#fff8eb]/90">{subtitle}</p>}
           </div>
         </div>
       </div>
@@ -115,24 +133,25 @@ export default function GoldenEssenceMobile() {
   const update = (key) => (event) => setForm((current) => ({ ...current, [key]: event.target.value }));
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#011013] pb-20 text-[#f6efe3]">
-      <header className="sticky top-0 z-50 border-b border-[#b78535]/55 bg-[#011013]/98 shadow-[0_8px_24px_rgba(0,0,0,.3)] backdrop-blur">
+    <main className="min-h-screen overflow-x-hidden bg-[#011013] text-[#f6efe3]">
+      <header className="sticky top-0 z-50 border-b border-[#b78535]/55 bg-[#011013]/98 shadow-[0_8px_24px_rgba(0,0,0,.35)] backdrop-blur-md">
         <BrandHeader />
+        <HeaderNav />
       </header>
 
-      <section id="home" className="scroll-mt-24">
-        <div className="relative isolate min-h-[78svh] overflow-hidden">
-          <img src={HOME_BG} alt="Waterfall, candles, lotus and spa setting" className="absolute inset-0 h-full w-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#011013]/18 via-[#011013]/34 to-[#011013]/94" />
-          <div className="relative mx-auto flex min-h-[78svh] max-w-xl flex-col justify-end px-5 pb-10 pt-24 text-center">
-            <div className="rounded-[30px] border border-[#d4a24a]/40 bg-[#011013]/72 p-6 shadow-2xl backdrop-blur-[2px]">
-              <div className="text-[10px] font-bold uppercase tracking-[0.23em] text-[#e3b25a]">Mobile Massage Therapy · Cache County</div>
-              <h1 className="mt-4 font-serif text-[48px] leading-[0.95] text-[#fff9ef]">Golden Essence <span className="text-[#e4ad4f]">Therapeutics</span></h1>
+      <section id="home" className="scroll-mt-[118px]">
+        <div className="relative isolate min-h-[74svh] overflow-hidden">
+          <img src={HOME_BG} alt="Waterfall, candles, lotus and spa setting" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: '52% 46%' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#011013]/10 via-[#011013]/24 to-[#011013]/82" />
+          <div className="relative mx-auto flex min-h-[74svh] max-w-xl flex-col justify-end px-5 pb-10 pt-16 text-center">
+            <div className="rounded-[30px] border border-[#d4a24a]/45 bg-[#001315]/88 p-6 shadow-[0_24px_60px_rgba(0,0,0,.52)] backdrop-blur-[3px]">
+              <div className="text-[10px] font-bold uppercase tracking-[0.23em] text-[#efbb5c]">Mobile Massage Therapy · Cache County</div>
+              <h1 className="mt-4 font-serif text-[46px] leading-[0.96] text-[#fff9ef]">Golden Essence <span className="text-[#e7ae4f]">Therapeutics</span></h1>
               <p className="mt-4 font-serif text-2xl italic text-[#f0c26d]">Where Healing Comes Home.</p>
-              <p className="mt-5 text-base leading-7 text-[#eee5d8]/90">Professional, personalized mobile massage therapy serving Cache County and surrounding areas in Utah.</p>
+              <p className="mt-5 text-base leading-7 text-[#fff8eb]/90">Professional, personalized mobile massage therapy serving Cache County and surrounding areas in Utah.</p>
               <div className="mt-7 grid gap-3">
                 <button onClick={() => scrollTo('services')} className="rounded-full bg-[#e2a53c] px-5 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#06292c]">View Services & Pricing</button>
-                <button onClick={() => scrollTo('contact')} className="rounded-full border border-[#d6a24a]/65 bg-[#011013]/65 px-5 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#efc26d]">Contact / Questions</button>
+                <button onClick={() => scrollTo('contact')} className="rounded-full border border-[#e2b45e]/75 bg-[#001315]/80 px-5 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#f3c66e]">Contact / Questions</button>
               </div>
             </div>
           </div>
@@ -140,14 +159,14 @@ export default function GoldenEssenceMobile() {
         <div className="border-y border-[#b78535]/35 bg-[#031c1f] px-5 py-8 text-center">
           <Lotus className="mx-auto h-12 w-12 text-[#d7a64a]" />
           <div className="mt-2 font-serif text-xl tracking-[0.12em] text-[#e5b45b]">RELAX · RESTORE · RENEW</div>
-          <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#ded6c8]/78">Bringing healing, relaxation, and balance into your life — so you can feel your best, wherever you are.</p>
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#f1eadf]/80">Bringing healing, relaxation, and balance into your life — so you can feel your best, wherever you are.</p>
         </div>
       </section>
 
-      <SectionHero id="about" image={ABOUT_BG} eyebrow="About" title="Care that feels personal, calm, and close to home." subtitle="Golden Essence Therapeutics was created from a passion for helping people feel better in their bodies and giving them a safe space to relax, restore, and renew." position="52% 38%" />
+      <SectionHero id="about" image={ABOUT_BG} eyebrow="About" title="Care that feels personal, calm, and close to home." subtitle="Golden Essence Therapeutics was created from a passion for helping people feel better in their bodies and giving them a safe space to relax, restore, and renew." position="48% 45%" />
       <section className="px-5 py-10">
         <div className="mx-auto max-w-xl">
-          <p className="text-base leading-7 text-[#ddd5c8]/84">The experience is built around compassionate, personalized care — not a rushed appointment. The goal is to create space to slow down, breathe, and focus on what your body needs.</p>
+          <p className="text-base leading-7 text-[#eee5d8]/88">The experience is built around compassionate, personalized care — not a rushed appointment. The goal is to create space to slow down, breathe, and focus on what your body needs.</p>
           <div className="mt-7 space-y-3">
             {aboutCards.map(([title, body], index) => (
               <details key={title} className="group overflow-hidden rounded-2xl border border-[#b88738]/30 bg-[#052629]" open={index === 0}>
@@ -155,14 +174,14 @@ export default function GoldenEssenceMobile() {
                   <span className="font-serif text-[23px] text-[#efbd63]">{title}</span>
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d4a34c]/45 text-xl text-[#dca94d] transition group-open:rotate-45">＋</span>
                 </summary>
-                <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/82">{body}</p>
+                <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#eee5d8]/84">{body}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <SectionHero id="services" image={SERVICES_BG} eyebrow="Services & Pricing" title="Massage therapy designed around you." subtitle="Relax. Restore. Renew. Clear pricing, personalized care, and a calm mobile experience." position="50% 44%" />
+      <SectionHero id="services" image={SERVICES_BG} eyebrow="Services & Pricing" title="Massage therapy designed around you." subtitle="Relax. Restore. Renew. Clear pricing, personalized care, and a calm mobile experience." position="50% 50%" />
       <section className="bg-[#f5eee2] px-5 py-10 text-[#12383b]">
         <div className="mx-auto max-w-xl">
           <p className="text-base leading-7 text-[#36595c]">All sessions are customized to your needs. Prices reflect massage time only. Travel fees apply to all mobile appointments.</p>
@@ -210,7 +229,7 @@ export default function GoldenEssenceMobile() {
         </div>
       </section>
 
-      <SectionHero id="policies" image={POLICIES_BG} eyebrow="Policies" title="Professional care. Clear expectations. Peace of mind." subtitle="Tap any policy below to read the full details." position="52% 44%" />
+      <SectionHero id="policies" image={POLICIES_BG} eyebrow="Policies" title="Professional care. Clear expectations. Peace of mind." subtitle="Tap any policy below to read the full details." position="58% 45%" />
       <section className="px-5 py-10">
         <div className="mx-auto max-w-xl space-y-3">
           {policies.map(([title, body], index) => (
@@ -219,13 +238,13 @@ export default function GoldenEssenceMobile() {
                 <span className="font-serif text-[21px] text-[#efbd63]">{title}</span>
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d4a34c]/45 text-xl text-[#dca94d] transition group-open:rotate-45">＋</span>
               </summary>
-              <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#e3dacd]/82">{body}</p>
+              <p className="border-t border-[#b88738]/18 px-5 pb-6 pt-4 text-[15px] leading-7 text-[#eee5d8]/84">{body}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <SectionHero id="contact" image={CONTACT_BG} eyebrow="Contact" title="Questions? Reach out anytime." subtitle="Booking will be connected later. For now, future clients can learn about Golden Essence and get in touch directly." position="50% 44%" />
+      <SectionHero id="contact" image={CONTACT_BG} eyebrow="Contact" title="Questions? Reach out anytime." subtitle="Booking will be connected later. For now, future clients can learn about Golden Essence and get in touch directly." position="46% 50%" />
       <section className="bg-[#f5eee2] px-5 py-10 text-[#153639]">
         <div className="mx-auto max-w-xl">
           <div className="space-y-3">
@@ -265,14 +284,6 @@ export default function GoldenEssenceMobile() {
         <p className="mt-4 text-xs leading-5 text-[#d5ccbd]/60">Mobile portfolio preview · Built by Misfit Mediahouse</p>
         <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex rounded-full border border-[#f2c85d] bg-[#f2c85d] px-6 py-3 text-sm font-bold text-[#08272a]">Activate this site · $297</a>
       </footer>
-
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[#a7782e]/55 bg-[#011013]/96 px-2 py-2 backdrop-blur" aria-label="Golden Essence mobile navigation">
-        <div className="mx-auto grid max-w-md grid-cols-5 gap-1">
-          {navItems.map(([id, label]) => (
-            <button key={id} type="button" onClick={() => scrollTo(id)} className="rounded-xl px-1 py-2 text-[9px] font-bold uppercase tracking-[0.05em] text-[#e5b65c] active:bg-[#17383a]">{label}</button>
-          ))}
-        </div>
-      </nav>
     </main>
   );
 }
