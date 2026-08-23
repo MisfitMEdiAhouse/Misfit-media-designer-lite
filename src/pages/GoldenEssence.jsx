@@ -67,25 +67,31 @@ function Hotspot({ left, top, width, height, label, onClick, className = '' }) {
 function HeaderCleanup({ pageKey, go }) {
   if (pageKey === 'policies') return null;
   const landscape = pageKey === 'about';
-  const style = landscape
-    ? { left: '31%', top: '0%', width: '69%', height: '9.2%' }
-    : { left: '34%', top: '0%', width: '66%', height: '8.1%' };
+  const mobileMask = landscape
+    ? { left: '31%', top: '0%', width: '69%', height: '9.0%' }
+    : { left: '40%', top: '0%', width: '60%', height: '7.75%' };
+  const desktopMask = landscape
+    ? { left: '31%', top: '0%', width: '69%', height: '9.0%' }
+    : { left: '38%', top: '0%', width: '62%', height: '7.75%' };
 
   return (
-    <div className="absolute z-20 border-b border-[#b77d2b]/70 bg-[#031d20]" style={style}>
-      <div className="hidden h-full items-center justify-end gap-[2.1%] px-[2.2%] md:flex">
-        {pageOrder.map((key) => (
-          <button
-            key={key}
-            type="button"
-            onClick={() => go(key)}
-            className="whitespace-nowrap border-b border-transparent pb-1 font-serif text-[clamp(9px,1.05vw,14px)] uppercase tracking-[0.04em] text-[#f7eee0] transition hover:border-[#e2ad45] hover:text-[#e7b44d]"
-          >
-            {key}
-          </button>
-        ))}
+    <>
+      <div className="absolute z-20 border-b border-[#b77d2b]/70 bg-[#031d20] md:hidden" style={mobileMask} />
+      <div className="absolute z-20 hidden border-b border-[#b77d2b]/70 bg-[#031d20] md:block" style={desktopMask}>
+        <div className="flex h-full items-center justify-end gap-[2%] px-[2%]">
+          {pageOrder.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => go(key)}
+              className="whitespace-nowrap border-b border-transparent pb-1 font-serif text-[clamp(9px,1vw,14px)] uppercase tracking-[0.04em] text-[#f7eee0] transition hover:border-[#e2ad45] hover:text-[#e7b44d]"
+            >
+              {key}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -173,7 +179,7 @@ function ArtworkPage({ pageKey, go, mobile = false }) {
   return (
     <section
       id={`golden-${pageKey}`}
-      className="relative mx-auto w-full scroll-mt-16 bg-[#031d20]"
+      className="relative mx-auto w-full scroll-mt-[52px] overflow-hidden bg-[#031d20] md:scroll-mt-0"
       style={{ maxWidth: mobile ? '100%' : `${page.width}px` }}
       aria-label={`Golden Essence ${pageKey}`}
     >
@@ -189,32 +195,49 @@ function ArtworkPage({ pageKey, go, mobile = false }) {
         />
         <HeaderCleanup pageKey={pageKey} go={go} />
         {pageKey !== 'policies' && (
-          <Hotspot left={1} top={0.4} width={pageKey === 'about' ? 29 : 33} height={pageKey === 'about' ? 8 : 6.5} label="Golden Essence home" onClick={() => go('home')} />
+          <Hotspot left={1} top={0.4} width={pageKey === 'about' ? 29 : 38} height={pageKey === 'about' ? 8.5 : 7.2} label="Golden Essence home" onClick={() => go('home')} />
         )}
         {pageKey === 'home' && <HomeContactCTA go={go} />}
         {pageKey === 'contact' && <ContactQuestionCleanup />}
         {pageKey === 'contact' && <ContactFormOverlay />}
       </div>
+      {mobile && pageKey !== 'contact' && <div className="h-2 border-y border-[#b77d2b]/30 bg-[#021719]" aria-hidden="true" />}
     </section>
   );
 }
 
 function MobileNav({ go }) {
   return (
-    <nav className="sticky top-0 z-[70] border-b border-[#b77d2b]/50 bg-[#031d20]/95 px-2 py-2 backdrop-blur md:hidden" aria-label="Golden Essence mobile navigation">
-      <div className="flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <nav className="sticky top-0 z-[70] border-b border-[#b77d2b]/60 bg-[#031d20] px-1.5 py-1.5 shadow-lg shadow-black/20 md:hidden" aria-label="Golden Essence mobile navigation">
+      <div className="grid grid-cols-5 gap-1">
         {pageOrder.map((key) => (
           <button
             key={key}
             type="button"
             onClick={() => go(key)}
-            className="shrink-0 rounded-full border border-[#c79339]/40 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#f0c466] active:bg-[#c79339] active:text-[#031d20]"
+            className="min-w-0 rounded-md border border-[#c79339]/35 px-0.5 py-2.5 text-[9px] font-semibold uppercase tracking-[0.035em] text-[#f0c466] active:bg-[#c79339] active:text-[#031d20]"
           >
             {key}
           </button>
         ))}
       </div>
     </nav>
+  );
+}
+
+function MobileActivation() {
+  return (
+    <div className="border-t border-[#b77d2b]/50 bg-[#031d20] px-5 py-7 text-center md:hidden">
+      <div className="mb-3 text-xs uppercase tracking-[0.12em] text-white/55">Misfit Mediahouse portfolio preview</div>
+      <a
+        href={PAYMENT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex rounded-full border border-[#f2c85d] bg-[#f2c85d] px-6 py-3 text-sm font-bold text-[#08272a] shadow-xl shadow-black/30"
+      >
+        Activate this site · $297
+      </a>
+    </div>
   );
 }
 
@@ -236,16 +259,17 @@ export default function GoldenEssence() {
   useEffect(() => {
     document.title = pages[key].title;
     if (window.matchMedia('(max-width: 767px)').matches && key !== 'home') {
-      const timer = window.setTimeout(() => document.getElementById(`golden-${key}`)?.scrollIntoView({ block: 'start' }), 80);
+      const timer = window.setTimeout(() => document.getElementById(`golden-${key}`)?.scrollIntoView({ block: 'start' }), 100);
       return () => window.clearTimeout(timer);
     }
   }, [key]);
 
   return (
-    <main className="min-h-screen bg-[#031d20]">
+    <main className="min-h-screen overflow-x-hidden bg-[#031d20]">
       <div className="md:hidden">
         <MobileNav go={go} />
         {pageOrder.map((pageKey) => <ArtworkPage key={pageKey} pageKey={pageKey} go={go} mobile />)}
+        <MobileActivation />
       </div>
 
       <div className="hidden md:block">
@@ -256,7 +280,7 @@ export default function GoldenEssence() {
         href={PAYMENT_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-3 right-3 z-[90] rounded-full border border-[#f2c85d] bg-[#f2c85d] px-3 py-2 text-[11px] font-bold text-[#08272a] shadow-2xl shadow-black/40 transition hover:bg-white sm:bottom-4 sm:right-4 sm:px-5 sm:py-3 sm:text-sm"
+        className="fixed bottom-4 right-4 z-[90] hidden rounded-full border border-[#f2c85d] bg-[#f2c85d] px-5 py-3 text-sm font-bold text-[#08272a] shadow-2xl shadow-black/40 transition hover:bg-white md:block"
       >
         Activate site · $297
       </a>
