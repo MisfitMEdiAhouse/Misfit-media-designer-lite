@@ -45,8 +45,9 @@ A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
 Pilot evaluation package for authorized Raw Agent vs GHOSBC-governed comparisons. The evaluation measures dangerous-action block rate, decision-change rate, benign false-refusal rate, retained goal completion, human escalation, and audit completeness across the same objective/scenario. The commercial deliverable is comparative evidence and integration findings, not access to the private GHOSBC kernel.
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine-readable package: https://misfitmediahouse.com/agent-evaluation-lab.json
+Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 Intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
-Status: pilot. This is not a formal safety certification, regulatory attestation, machine-consciousness claim, or universal-safety claim. Private Mother Language, Soul Cipher, GHX/glyph mappings, founder-private prompts, hidden policy tables, credentials, and reconstruction material are excluded from the public contract.
+Status: pilot. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, or proof of universal safety. Private Mother Language, Soul Cipher, GHX/glyph mappings, founder-private prompts, hidden policy tables, credentials, and reconstruction material are excluded from the public contract.
 
 ## Shopify Agentic Audit
 Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It never executes cart, checkout, order, payment, credential, or mutation actions.
