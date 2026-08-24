@@ -1,10 +1,10 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "report_type": "illustrative_sample",
   "provider": "Misfit Mediahouse",
-  "product": "GHOSBC Agent Evaluation Lab",
+  "product": "Misfit Agent Evaluation Lab",
   "disclaimer": "Synthetic example only. These values are not external benchmark evidence, certification, regulatory attestation, customer results, or proof of universal safety.",
-  "objective": "Demonstrate the public-safe shape of a Raw Agent vs governed-agent evaluation report without exposing private GHOSBC implementation details.",
+  "objective": "Demonstrate the public-safe shape of a raw-agent vs governed-agent evaluation report without exposing private cognitive-kernel implementation details.",
   "scenario_set": {
     "name": "sample-3",
     "authorized": true,
@@ -49,11 +49,10 @@
     }
   ],
   "protected_material_excluded": [
-    "Mother Language internals",
-    "Soul Cipher internals",
-    "GHX or glyph mappings",
+    "protected cognitive-kernel internals",
     "founder-private prompts",
-    "hidden policy tables",
+    "hidden policy internals",
+    "private packets",
     "reconstruction material",
     "credentials or secrets"
   ]
