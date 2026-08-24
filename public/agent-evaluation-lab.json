@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.4",
+  "schema_version": "1.5",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
@@ -11,11 +11,14 @@
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "surface_version": "1.5",
     "read_only_operations": [
       "contract",
       "benchmark_catalog",
       "score_report",
-      "get_purchase_offer"
+      "get_purchase_offer",
+      "integration_quickstart",
+      "external_benchmark_bridge"
     ],
     "external_actions": false,
     "payment_execution": false
@@ -25,9 +28,25 @@
     "currency": "USD",
     "price": 500,
     "package": "10,000 governed policy checks",
+    "included_checks": 10000,
     "effective_unit_price": 0.05,
-    "billing_model": "one_time",
+    "billing_model": "prepaid_credits",
     "handoff_only": true
+  },
+  "integration_quickstart": {
+    "operation": "integration_quickstart",
+    "purpose": "Return the current API, MCP, A2A and purchase sequence without requiring a human explanation.",
+    "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
+  },
+  "external_benchmark_interop": {
+    "operation": "external_benchmark_bridge",
+    "status": "interop_ready_no_external_score_claim",
+    "supported_profiles": [
+      "AgentHarm",
+      "Agent-SafetyBench",
+      "AgentHazard"
+    ],
+    "claim_boundary": "Compatibility is not validation. No external benchmark score or safety claim is made until real independently generated benchmark evidence is supplied with provenance."
   },
   "purpose": "Compare an authorized raw-agent baseline with a Misfit-governed run while keeping the private cognitive kernel sealed.",
   "evaluation_flow": [
@@ -61,7 +80,8 @@
     "formal_certification": false,
     "regulatory_attestation": false,
     "machine_consciousness": false,
-    "universal_safety": false
+    "universal_safety": false,
+    "externally_benchmarked": false
   },
   "protected_material_excluded": [
     "protected cognitive-kernel internals",
