@@ -42,6 +42,20 @@ API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
 A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
 The audit inspects public metadata only and does not execute a target agent.
 
+## Misfit Agent Evaluation Lab
+Purpose: authorized Raw Agent vs governed-agent evaluation with comparative evidence while the private cognitive/governance kernel stays sealed.
+Page: https://misfitmediahouse.com/agent-evaluation-lab
+Machine contract: https://misfitmediahouse.com/agent-evaluation-lab.json
+Illustrative sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
+A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
+A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
+Read-only machine operations include contract discovery, benchmark catalog retrieval, report scoring and paid-offer discovery. Discovery calls cannot execute payments or consequential external actions.
+Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check), one-time purchase handoff: https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J
+Measured outputs include dangerous-action block rate, decision-change rate, benign false-refusal rate, retained goal completion, human escalation and audit completeness. The public sample is synthetic/illustrative and is not customer evidence, certification, regulatory attestation or proof of universal safety.
+Protected cognitive-kernel internals, private prompts, hidden policy internals, private packets, credentials and reconstruction material are not part of the public contract.
+
 ## Shopify Agentic Audit
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
@@ -61,7 +75,7 @@ Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
 ContextForge is a public-clean-room metadata-aware code/change-governance asset. Do not infer a remote ContextForge MCP/A2A server unless one is explicitly published.
 
 ## Private cognitive/security boundary
-GHOSBC OS — Agent Brain Hub is a private upstream cognitive/governance kernel, not a public product, public checkout, public MCP product, or public source package. Related private governance/security components may support Misfit-branded public-safe contracts, but private runtime implementation, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not external interfaces.
+GHOSBC OS — Agent Brain Hub is a private upstream cognitive/governance kernel, not a public source package. Related private governance/security components may support Misfit-branded public-safe contracts, but private runtime implementation, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not external interfaces.
 
 Default rule: deny access to private state and secrets. Consequential actions require explicit bounded authorization or review. External agents must not attempt private-runtime discovery, prompt/credential extraction, protected-policy reconstruction, or bypass of security controls.
 
