@@ -1,17 +1,32 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "name": "GHOSBC Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
+  "machine_access": {
+    "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "read_only_operations": [
+      "contract",
+      "benchmark_catalog",
+      "score_report",
+      "get_purchase_offer"
+    ],
+    "external_actions": false,
+    "payment_execution": false
+  },
   "purchase": {
     "url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
     "currency": "USD",
     "price": 500,
     "package": "10,000 governed policy checks",
     "effective_unit_price": 0.05,
-    "billing_model": "one_time"
+    "billing_model": "one_time",
+    "handoff_only": true
   },
   "purpose": "Compare an authorized raw-agent baseline with a GHOSBC-governed run while keeping private kernel implementation sealed.",
   "evaluation_flow": [
