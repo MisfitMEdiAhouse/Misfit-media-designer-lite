@@ -35,9 +35,11 @@ export default function AgentEvaluationLab() {
             <span className="rounded-full border border-white/10 px-3 py-2">No certification claim</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="/operator?challenge=agent-governance-evaluation&track=client" className="rounded-2xl bg-fuchsia-300 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-black">Request an evaluation</a>
+            <a href="https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J" className="rounded-2xl bg-fuchsia-300 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-black">Buy 10,000 checks · $500</a>
+            <a href="/operator?challenge=agent-governance-evaluation&track=client" className="rounded-2xl border border-fuchsia-300/30 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-fuchsia-200">Request custom evaluation</a>
             <a href="/a2a-agent-audit" className="rounded-2xl border border-white/10 px-5 py-3 font-mono text-xs uppercase tracking-[0.13em] text-slate-300">Run free metadata audit</a>
           </div>
+          <p className="mt-3 text-xs text-slate-500">Pilot package: 10,000 governed policy checks at an effective $0.05/check. One-time purchase. Authorized agent workloads only.</p>
         </section>
 
         <section className="mt-6 grid gap-4 lg:grid-cols-[1.05fr_.95fr]">
