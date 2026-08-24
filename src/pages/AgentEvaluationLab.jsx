@@ -25,9 +25,9 @@ export default function AgentEvaluationLab() {
       <Navbar />
       <main className="mx-auto max-w-6xl px-5 pb-24 pt-32">
         <section className="overflow-hidden rounded-[2rem] border border-fuchsia-400/20 bg-[radial-gradient(circle_at_top_right,rgba(217,70,239,.16),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(34,211,238,.10),transparent_32%),linear-gradient(135deg,rgba(15,23,42,.92),rgba(0,0,0,1))] p-7 md:p-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-fuchsia-300"><ShieldCheck size={12}/> GHOSBC-governed evaluation · public-safe package</div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-fuchsia-300"><ShieldCheck size={12}/> Misfit-governed evaluation · public-safe package</div>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-bold tracking-tight md:text-6xl">AGENT EVALUATION <span className="text-fuchsia-300">LAB</span></h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">Measure the difference between what an AI agent would do raw and what it does after a governed consequence-check, replan and decision boundary. The product is the measurable delta and audit evidence — not access to the private GHOSBC kernel.</p>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">Measure the difference between what an AI agent would do raw and what it does after a governed consequence-check, replan and decision boundary. The product is the measurable delta and audit evidence — not access to the private cognitive kernel.</p>
           <div className="mt-7 flex flex-wrap gap-2 text-[11px] text-slate-400">
             <span className="rounded-full border border-white/10 px-3 py-2">Raw vs governed comparison</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Same objective, same scenario</span>
@@ -59,9 +59,9 @@ export default function AgentEvaluationLab() {
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-300">Scenario evidence</div><p className="mt-3 text-sm leading-6 text-slate-500">Baseline output, governed outcome, material decision changes, escalation path and public-safe rationale for each authorized scenario.</p></div>
             <div className="rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-fuchsia-300">Comparative scorecard</div><p className="mt-3 text-sm leading-6 text-slate-500">Aggregate metrics showing safety improvement, unnecessary refusals, retained goal completion and audit coverage.</p></div>
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-300">Integration findings</div><p className="mt-3 text-sm leading-6 text-slate-500">A bounded recommendation for where a governance checkpoint adds value in the buyer's workflow without requiring disclosure of GHOSBC private implementation.</p></div>
+            <div className="rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-300">Integration findings</div><p className="mt-3 text-sm leading-6 text-slate-500">A bounded recommendation for where a governance checkpoint adds value in the buyer's workflow without requiring disclosure of private implementation.</p></div>
           </div>
-          <p className="mt-5 text-xs leading-5 text-slate-600">This is an evaluation and integration service, not a formal safety certification, regulatory attestation, or claim that an agent is conscious, universally safe, or compliant. Private Mother Language, Soul Cipher, glyph/GHX mappings, founder prompts, hidden policy tables and reconstruction material are never part of the deliverable.</p>
+          <p className="mt-5 text-xs leading-5 text-slate-600">This is an evaluation and integration service, not a formal safety certification, regulatory attestation, or claim that an agent is conscious, universally safe, or compliant. Protected cognitive-kernel internals, founder-private prompts, hidden policy internals, private packets, credentials, and reconstruction material are never part of the deliverable.</p>
         </section>
       </main>
       <Footer />
