@@ -1,10 +1,18 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "GHOSBC Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
+  "purchase": {
+    "url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "currency": "USD",
+    "price": 500,
+    "package": "10,000 governed policy checks",
+    "effective_unit_price": 0.05,
+    "billing_model": "one_time"
+  },
   "purpose": "Compare an authorized raw-agent baseline with a GHOSBC-governed run while keeping private kernel implementation sealed.",
   "evaluation_flow": [
     "baseline",
