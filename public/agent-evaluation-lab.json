@@ -1,10 +1,11 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "name": "GHOSBC Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
+  "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "machine_access": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
