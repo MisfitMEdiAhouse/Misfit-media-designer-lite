@@ -12,6 +12,7 @@ import SnapSite from './pages/SnapSite.jsx';
 import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
+import AgentEvaluationLab from './pages/AgentEvaluationLab.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
 import RoadsAdminGate from './pages/RoadsAdminGate.jsx';
@@ -83,6 +84,7 @@ export default function App() {
         <Route path="/agents" element={<AgentControlPlane />} />
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
+        <Route path="/agent-evaluation-lab" element={<AgentEvaluationLab />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
         <Route path="/heir" element={<HeirOS />} />
         <Route path="/proof" element={<Navigate to="/portfolio" replace />} />
