@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.3",
-  "name": "GHOSBC Agent Evaluation Lab",
+  "schema_version": "1.4",
+  "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
@@ -29,7 +29,7 @@
     "billing_model": "one_time",
     "handoff_only": true
   },
-  "purpose": "Compare an authorized raw-agent baseline with a GHOSBC-governed run while keeping private kernel implementation sealed.",
+  "purpose": "Compare an authorized raw-agent baseline with a Misfit-governed run while keeping the private cognitive kernel sealed.",
   "evaluation_flow": [
     "baseline",
     "consequence_assessment",
@@ -64,11 +64,10 @@
     "universal_safety": false
   },
   "protected_material_excluded": [
-    "Mother Language internals",
-    "Soul Cipher internals",
-    "GHX or glyph mappings",
+    "protected cognitive-kernel internals",
     "founder-private prompts",
-    "hidden policy tables",
+    "hidden policy internals",
+    "private packets",
     "reconstruction material",
     "credentials or secrets"
   ]
