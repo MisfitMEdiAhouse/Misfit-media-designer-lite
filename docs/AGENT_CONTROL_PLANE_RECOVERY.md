@@ -2,7 +2,7 @@
 
 This guide exists so the Misfit machine/agent stack can be reconstructed without relying on any single chat thread, browser session, or operator memory.
 
-It intentionally contains **no credentials, private GHOSBC prompts, Mother Language/Soul Cipher material, cipher mappings, GHX/glyph internals, founder-private packets, secret policy tables, or reconstruction material**.
+It intentionally contains **no credentials, private cognitive-kernel prompts, protected language/cipher material, protected mappings, founder-private packets, secret policy tables, or reconstruction material**.
 
 ## Canonical public anchors
 
@@ -18,7 +18,7 @@ It intentionally contains **no credentials, private GHOSBC prompts, Mother Langu
 1. **Misfit Cloud / Supabase** — canonical runtime registry, private recovery notes, machine telemetry, API fulfillment, and public edge functions.
 2. **GitHub** — source-of-truth code plus this public-safe recovery map and static machine-discovery metadata.
 3. **Vercel / misfitmediahouse.com** — human-facing control plane and static fallback discovery surfaces.
-4. **Private GHOSBC workspaces** — Agent Brain, Castle Gate, Sentinel/Shield and other sealed governance/runtime material.
+4. **Private cognitive-kernel workspaces** — sealed governance/runtime material and origin-layer modules.
 
 The website is the durable public control surface; chat interfaces are operators, not databases.
 
@@ -29,7 +29,7 @@ The website is the durable public control surface; chat interfaces are operators
 3. Verify `/.well-known/ucp`, `/llms.txt`, `/agent-stack.json`, `/agents`, and `/shopify-ai-audit` on `misfitmediahouse.com`.
 4. Verify MCP Registry publication workflows and remote MCP initialization for public machine products.
 5. Verify ContextForge and any other independent Vercel deployments.
-6. Verify private GHOSBC/Castle Gate/Sentinel workspaces without copying private runtime material into public systems.
+6. Verify private cognitive/governance workspaces without copying private runtime material into public systems.
 7. Verify Stripe checkout/webhook/fulfillment and payout configuration before accepting or rerouting production money.
 8. Resume autonomous revenue orchestration only after security, fulfillment, discovery, and settlement paths are healthy.
 
@@ -38,15 +38,15 @@ The website is the durable public control surface; chat interfaces are operators
 - Default-deny private state.
 - Public endpoints expose sanitized metadata, decisions, audit receipts/digests, and documented tool contracts only.
 - Consequential operations such as purchase, payment, transfer, send, deploy, publish, execute, delete, credential access, checkout completion, and order mutation require explicit bounded authorization or review.
-- Never publish private GHOSBC runtime material or enough detail to reconstruct it.
+- Never publish private cognitive-kernel runtime material or enough detail to reconstruct it.
 - Public UCP/MCP metadata may be discoverable; private signing material and credentials remain server-side.
-- Use the public-safe `governed_agent_action_check` exposed by the Misfit Machine Agent to screen bounded consequential-action metadata. The private GHOSBC implementation stays behind that contract.
+- Use the public-safe `governed_agent_action_check` exposed by the Misfit Machine Agent to screen bounded consequential-action metadata. The private implementation stays behind that contract.
 - Use ChangePacket to detect public web/MCP surface drift.
 
 ## Core public machine stack
 
 ### Misfit Governance Boundary
-Public-safe governance is exposed through the Misfit Machine Agent rather than a raw GHOSBC-named product or endpoint.
+Public-safe governance is exposed through the Misfit Machine Agent rather than a raw private-kernel-named product or endpoint.
 
 - Agent Card: `https://misfitmediahouse.com/.well-known/agent-card.json`
 - Public skill: `governed_agent_action_check`
@@ -81,7 +81,7 @@ Metadata-aware code-generation/change-control system grounded in DataHub context
 
 ## Private security core
 
-GHOSBC OS Agent Brain, Castle Gate, Sentinel/Shield, private ciphers/mappings, founder-private policy/runtime packets, and internal security orchestration are deliberately represented only by sanitized inventory entries. Recovery of those systems must happen from their private canonical source stores, never from public GitHub metadata.
+The private cognitive/governance kernel, sealed policy/mapping layers, founder-private runtime packets, and internal security orchestration are deliberately represented only by sanitized inventory entries. Recovery of those systems must happen from their private canonical source stores, never from public GitHub metadata.
 
 ## Financial recovery rule
 
