@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "name": "Misfit Agent Evaluation Lab Integration Kit",
   "status": "pilot",
   "purpose": "One-file machine handoff for integrating the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals.",
@@ -7,6 +7,7 @@
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+  "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "endpoints": {
@@ -28,17 +29,23 @@
     },
     {
       "step": 3,
+      "operation": "validate_request",
+      "description": "Validate the score_report payload against the published request JSON Schema before submitting.",
+      "schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json"
+    },
+    {
+      "step": 4,
       "operation": "score_report",
       "description": "Submit observable Raw Agent and governed-agent result rows for comparative scoring."
     },
     {
-      "step": 4,
+      "step": 5,
       "operation": "validate_report",
       "description": "Validate the returned report document against the published JSON Schema before ingesting it into another system.",
       "schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json"
     },
     {
-      "step": 5,
+      "step": 6,
       "operation": "offer",
       "description": "Read the current commercial package and purchase handoff when paid volume is needed."
     }
@@ -47,8 +54,11 @@
     "method": "POST",
     "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "content_type": "application/json",
+    "schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "body": {
       "op": "score_report",
+      "benchmark_version": "ae100-v1",
+      "evidence_provenance": "caller_supplied_unverified",
       "results": [
         {
           "scenario_id": "AE001",
