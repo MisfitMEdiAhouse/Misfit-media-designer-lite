@@ -6,6 +6,7 @@ const primaryItems = [
   ['/', 'Scanner'],
   ['/agency', 'Agency'],
   ['/portfolio', 'Portfolio'],
+  ['/competitions', 'Competitions'],
   ['/operator', 'Hire + Partner'],
 ];
 
@@ -31,7 +32,7 @@ export default function Navbar() {
           MISFIT<span className="text-cyan-400">.</span>
         </Link>
 
-        <div className="hidden items-center gap-7 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-400 md:flex">
+        <div className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.13em] text-slate-400 md:flex">
           <Link to="/" className={active('/') ? 'text-cyan-300' : 'transition hover:text-white'}>Scanner</Link>
           <div className="group relative py-2">
             <Link to="/explore" className={`inline-flex items-center gap-1.5 transition hover:text-white ${exploreActive ? 'text-cyan-300' : ''}`}>
