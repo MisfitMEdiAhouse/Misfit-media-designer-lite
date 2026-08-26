@@ -6,12 +6,14 @@
     "summary": "A two-surface turbine-bearing revenue and risk system spanning public demand capture, private repair economics, inventory-to-pricing intelligence, compliance gates, document automation, and human-approved deal control.",
     "url": "/portfolio/ials-turbine-command",
     "featured": true,
-    "metrics": [
-      "94 repair-price rows",
-      "22 inventory matches",
-      "4 multi-shop P/Ns",
-      "12 priced matches with qty"
-    ]
+    "metrics": ["94 repair-price rows", "22 inventory matches", "4 multi-shop P/Ns", "12 priced matches with qty"]
+  },
+  {
+    "id": "competition-lab",
+    "title": "Misfit Competition Lab",
+    "type": "Hackathons + bounties + public proving ground",
+    "summary": "Public competition work spanning All Things Agentic, Trace the Ace and ContextForge. Prize pursuit is treated as R&D with a scoreboard: serious entries are preserved as products, benchmarks, workflows, APIs and portfolio evidence.",
+    "url": "/competitions"
   },
   {
     "id": "coffee-and-a-joint",
@@ -51,8 +53,8 @@
   {
     "id": "contextforge",
     "title": "ContextForge",
-    "type": "Enterprise AI",
-    "summary": "DataHub-aware code generation grounded in metadata, lineage, ownership, governance, and usage context.",
+    "type": "Enterprise AI · hackathon product",
+    "summary": "DataHub-aware code generation grounded in metadata, lineage, ownership, governance, and usage context. Built for competition and preserved as a standalone commercial/portfolio asset.",
     "url": "https://contextforge-datahub-app.vercel.app/"
   },
   {
