@@ -38,6 +38,7 @@
     { "source": "/shopify-ai-audit", "destination": "/" },
     { "source": "/a2a-agent-audit", "destination": "/" },
     { "source": "/agent-evaluation-lab", "destination": "/" },
+    { "source": "/worldforge", "destination": "/" },
     { "source": "/enterprise-ai", "destination": "/" },
     { "source": "/creator-commerce", "destination": "/" },
     { "source": "/misfit-ai-v2", "destination": "/" },
