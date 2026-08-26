@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+  "title": "Misfit Agent Evaluation Lab Report Schema",
+  "description": "Public-safe validation schema for agent-evaluation-report-v1.3. This validates report shape only and does not certify safety, prove third-party validation, or expose protected GHOSBC internals.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "report_schema_version",
+    "benchmark_version",
+    "tests_submitted",
+    "tests_scored",
+    "comparative_summary",
+    "evidence_rows",
+    "evidence_provenance",
+    "evidence_boundary",
+    "claims_boundary"
+  ],
+  "properties": {
+    "contract_version": { "const": "agent-evaluation-lab-v1" },
+    "report_schema_version": { "const": "agent-evaluation-report-v1.3" },
+    "benchmark_version": { "type": "string", "minLength": 1 },
+    "tests_submitted": { "type": "integer", "minimum": 0 },
+    "tests_scored": { "type": "integer", "minimum": 0 },
+    "comparative_summary": {
+      "type": "object",
+      "required": ["raw_agent", "governed_agent"],
+      "properties": {
+        "raw_agent": { "$ref": "#/$defs/dangerousPassSummary" },
+        "governed_agent": { "$ref": "#/$defs/dangerousPassSummary" },
+        "dangerous_action_pass_rate_delta": { "$ref": "#/$defs/rateOrNull" },
+        "constructive_decision_change_rate": { "$ref": "#/$defs/rateOrNull" },
+        "goal_completion_rate": { "$ref": "#/$defs/rateOrNull" },
+        "consequence_improvement_rate": { "$ref": "#/$defs/rateOrNull" },
+        "consequence_non_regression_rate": { "$ref": "#/$defs/rateOrNull" }
+      },
+      "additionalProperties": true
+    },
+    "expected_decision_match_rate": { "$ref": "#/$defs/rateOrNull" },
+    "dangerous_action_block_rate": { "$ref": "#/$defs/rateOrNull" },
+    "raw_dangerous_action_pass_rate": { "$ref": "#/$defs/rateOrNull" },
+    "governed_dangerous_action_pass_rate": { "$ref": "#/$defs/rateOrNull" },
+    "constructive_decision_change_rate": { "$ref": "#/$defs/rateOrNull" },
+    "benign_false_refusal_rate": { "$ref": "#/$defs/rateOrNull" },
+    "goal_completion_rate": { "$ref": "#/$defs/rateOrNull" },
+    "human_escalation_rate": { "$ref": "#/$defs/rateOrNull" },
+    "audit_completeness_rate": { "$ref": "#/$defs/rateOrNull" },
+    "audit_memory_completeness_rate": { "$ref": "#/$defs/rateOrNull" },
+    "average_center_reset_cycles": { "type": ["number", "null"], "minimum": 0 },
+    "consequence_assessment_coverage_rate": { "$ref": "#/$defs/rateOrNull" },
+    "consequence_improvement_rate": { "$ref": "#/$defs/rateOrNull" },
+    "consequence_non_regression_rate": { "$ref": "#/$defs/rateOrNull" },
+    "evidence_rows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidenceRow" }
+    },
+    "evidence_provenance": {
+      "type": "object",
+      "required": ["classification", "externally_validated", "interpretation"],
+      "properties": {
+        "classification": { "type": "string", "minLength": 1 },
+        "externally_validated": { "type": "boolean" },
+        "interpretation": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "evidence_boundary": { "type": "string", "minLength": 1 },
+    "claims_boundary": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "rateOrNull": {
+      "type": ["number", "null"],
+      "minimum": -1,
+      "maximum": 1
+    },
+    "dangerousPassSummary": {
+      "type": "object",
+      "properties": {
+        "dangerous_action_pass_rate": { "$ref": "#/$defs/rateOrNull" }
+      },
+      "additionalProperties": true
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["ALLOW", "REPLAN", "HOLD", "BLOCK", "ESCALATE_HUMAN", "UNKNOWN"]
+    },
+    "consequence": {
+      "type": "string",
+      "enum": ["SAFE", "BOUNDED", "UNCERTAIN", "EXTERNAL_EFFECT", "IRREVERSIBLE_RISK", "HARMFUL", "UNKNOWN"]
+    },
+    "evidenceRow": {
+      "type": "object",
+      "required": [
+        "scenario_id",
+        "category",
+        "title",
+        "raw_decision",
+        "governed_decision",
+        "castle_gate_decision",
+        "decision_changed",
+        "expected_governed_result_met",
+        "raw_consequence_assessment",
+        "governed_consequence_assessment",
+        "goal_completion",
+        "human_escalation",
+        "center_reset_cycles",
+        "audit_memory_complete"
+      ],
+      "properties": {
+        "scenario_id": { "type": "string", "pattern": "^AE[0-9]{3}$" },
+        "category": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "raw_decision": { "$ref": "#/$defs/decision" },
+        "governed_decision": { "$ref": "#/$defs/decision" },
+        "castle_gate_decision": { "$ref": "#/$defs/decision" },
+        "decision_changed": { "type": "boolean" },
+        "expected_governed_result_met": { "type": "boolean" },
+        "raw_consequence_assessment": { "$ref": "#/$defs/consequence" },
+        "governed_consequence_assessment": { "$ref": "#/$defs/consequence" },
+        "consequence_improved": { "type": ["boolean", "null"] },
+        "goal_completion": { "type": "boolean" },
+        "human_escalation": { "type": "boolean" },
+        "center_reset_cycles": { "type": "number", "minimum": 0 },
+        "audit_complete": { "type": "boolean" },
+        "audit_memory_complete": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "x-misfit-claims-boundary": "Schema validation confirms document structure only. It is not a formal certification, regulatory attestation, third-party validation, universal-safety claim, or machine-consciousness claim.",
+  "x-misfit-privacy-boundary": "No protected GHOSBC kernel internals, Mother Language, Soul Cipher, glyph/GHX mappings, hidden prompts, credentials, private packets, or reconstruction material are represented by this schema."
+}
