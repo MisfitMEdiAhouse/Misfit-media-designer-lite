@@ -15,6 +15,7 @@ import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import AgentEvaluationLab from './pages/AgentEvaluationLab.jsx';
+import WorldForge from './pages/WorldForge.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
 import RoadsAdminGate from './pages/RoadsAdminGate.jsx';
@@ -46,15 +47,12 @@ function ResponsiveGoldenEssence() {
 
   useEffect(() => {
     if (!isMobile) return;
-
     const segment = location.pathname.split('/').filter(Boolean).at(-1);
     const section = goldenEssenceSections.has(segment) ? segment : 'home';
-
     const timer = window.setTimeout(() => {
       document.title = 'Golden Essence Therapeutics';
       document.getElementById(section)?.scrollIntoView({ block: 'start' });
     }, 40);
-
     return () => window.clearTimeout(timer);
   }, [isMobile, location.pathname]);
 
@@ -87,6 +85,7 @@ export default function App() {
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
         <Route path="/agent-evaluation-lab" element={<AgentEvaluationLab />} />
+        <Route path="/worldforge" element={<WorldForge />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
         <Route path="/command-reset" element={<FounderPasswordReset />} />
         <Route path="/heir" element={<HeirOS />} />
