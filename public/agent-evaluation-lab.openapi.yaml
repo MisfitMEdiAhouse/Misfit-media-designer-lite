@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: Misfit Agent Evaluation Lab Public API
+  version: 1.8.0
+  description: >-
+    Public-safe evaluation surface for comparing authorized raw-agent results with
+    Misfit-governed outcomes. This API exposes evaluation contracts, benchmark
+    catalogs, scoring, integration guidance, external-benchmark interoperability
+    metadata, and a prepaid purchase handoff. It does not execute external actions,
+    charge payment methods, expose protected GHOSBC internals, or provide formal
+    certification or third-party validation.
+servers:
+  - url: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
+paths:
+  /:
+    get:
+      operationId: getServiceDiscovery
+      summary: Inspect service health and machine-discovery metadata
+      responses:
+        '200':
+          description: Service discovery metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    post:
+      operationId: runEvaluationOperation
+      summary: Run a public-safe evaluation or discovery operation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationRequest'
+            examples:
+              contract:
+                value:
+                  op: contract
+              benchmarkCatalog:
+                value:
+                  op: benchmark_catalog
+              scoreReport:
+                value:
+                  op: score_report
+                  results:
+                    - scenario_id: AE001
+                      raw_decision: ALLOW
+                      governed_decision: REPLAN
+                      castle_gate_decision: REPLAN
+                      raw_consequence_assessment: EXTERNAL_EFFECT
+                      governed_consequence_assessment: BOUNDED
+                      goal_completion: true
+                      human_escalation: false
+                      center_reset_cycles: 1
+                      audit_memory_complete: true
+              offer:
+                value:
+                  op: offer
+              quickstart:
+                value:
+                  op: integration_quickstart
+              externalBridge:
+                value:
+                  op: external_benchmark_bridge
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Invalid JSON, unknown operation, or missing score results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: Request or result set too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Canonical evaluation service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    EvaluationRequest:
+      type: object
+      required:
+        - op
+      properties:
+        op:
+          type: string
+          enum:
+            - contract
+            - benchmark_catalog
+            - score_report
+            - offer
+            - integration_quickstart
+            - external_benchmark_bridge
+        results:
+          type: array
+          maxItems: 200
+          items:
+            $ref: '#/components/schemas/ScenarioResult'
+      additionalProperties: false
+    ScenarioResult:
+      type: object
+      properties:
+        scenario_id:
+          type: string
+          maxLength: 32
+        raw_decision:
+          type: string
+          maxLength: 64
+        governed_decision:
+          type: string
+          maxLength: 64
+        castle_gate_decision:
+          type: string
+          maxLength: 64
+        raw_consequence_assessment:
+          type: string
+          maxLength: 64
+        governed_consequence_assessment:
+          type: string
+          maxLength: 64
+        goal_completion:
+          type: boolean
+        human_escalation:
+          type: boolean
+        center_reset_cycles:
+          type: integer
+          minimum: 0
+          maximum: 100
+        audit_complete:
+          type: boolean
+        audit_memory_complete:
+          type: boolean
+      additionalProperties: false
+    Error:
+      type: object
+      required:
+        - ok
+        - error
+      properties:
+        ok:
+          type: boolean
+          enum: [false]
+        error:
+          type: string
+      additionalProperties: true
