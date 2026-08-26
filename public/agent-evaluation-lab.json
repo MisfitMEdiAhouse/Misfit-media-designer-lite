@@ -1,27 +1,31 @@
 {
-  "schema_version": "1.8",
+  "schema_version": "1.10",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
-  "status": "pilot",
+  "status": "production",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+  "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "machine_access": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+    "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-    "surface_version": "1.9.0",
+    "surface_version": "1.10.0",
     "read_only_operations": [
       "contract",
       "benchmark_catalog",
+      "validate_request",
       "score_report",
+      "validate_report",
       "offer",
       "integration_quickstart",
       "external_benchmark_bridge"
@@ -42,8 +46,9 @@
   "integration_quickstart": {
     "operation": "integration_quickstart",
     "kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+    "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-    "purpose": "Return the current API, OpenAPI, MCP, A2A, report-validation and purchase sequence without requiring a human explanation.",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A, deterministic request/report validation and purchase sequence without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
