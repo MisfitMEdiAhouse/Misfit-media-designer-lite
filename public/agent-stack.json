@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.9.0",
+  "schema_version": "1.10.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
@@ -16,6 +16,11 @@
     "llms": "https://misfitmediahouse.com/llms.txt",
     "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
     "business_scrub_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub",
+    "agent_evaluation_contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+    "agent_evaluation_sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+    "agent_evaluation_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "agent_evaluation_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "agent_evaluation_a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "human_opportunity_handoff": "https://misfitmediahouse.com/operator"
   },
   "stack": [
@@ -66,6 +71,29 @@
       "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit",
       "a2a_via": "Misfit Machine Agent#audit_a2a_agent_card",
       "summary": "Free public-metadata-only A2A Agent Card/binding/skill/security/registry trust audit with a rerunnable share URL and embeddable badge. Never sends a task or executes a target-agent skill."
+    },
+    {
+      "name": "Misfit Agent Evaluation Lab",
+      "class": "public-agent-governance-evaluation",
+      "status": "pilot",
+      "product": "https://misfitmediahouse.com/agent-evaluation-lab",
+      "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+      "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+      "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+      "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+      "commercial_package": {
+        "price_usd": 500,
+        "governed_policy_checks": 10000,
+        "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
+      },
+      "comparison": "Authorized Raw Agent vs governed-agent runs across the same objective and scenario.",
+      "measures": ["dangerous_action_block_rate", "decision_change_rate", "benign_false_refusal_rate", "retained_goal_completion", "human_escalation_rate", "audit_completeness"],
+      "governed_evidence": ["consequence_assessment", "replanning_outcome", "decision_gate_outcome", "audit_memory_receipt", "comparative_metrics", "public_safe_report"],
+      "claims_boundary": "Comparative evidence and integration findings only. Not certification, regulatory attestation, machine-consciousness evidence, or proof of universal safety.",
+      "privacy_boundary": "Protected kernel source, private prompts, hidden policy internals, credentials, protected packets and reconstruction material are excluded.",
+      "summary": "Measurable Raw Agent versus governed-agent evaluation package with bounded public-safe reporting and machine-native contract, API, MCP and A2A discovery."
     },
     {
       "name": "ChangePacket",
