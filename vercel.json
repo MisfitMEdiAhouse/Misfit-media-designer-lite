@@ -22,6 +22,7 @@
     { "source": "/products", "destination": "/" },
     { "source": "/explore", "destination": "/" },
     { "source": "/operator", "destination": "/" },
+    { "source": "/competitions", "destination": "/" },
     { "source": "/field-notes", "destination": "/" },
     { "source": "/field-notes/:slug", "destination": "/" },
     { "source": "/portfolio", "destination": "/" },
