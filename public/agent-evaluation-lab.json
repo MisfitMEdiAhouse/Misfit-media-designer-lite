@@ -1,22 +1,24 @@
 {
-  "schema_version": "1.5",
+  "schema_version": "1.6",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "pilot",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+  "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "machine_access": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-    "surface_version": "1.5",
+    "surface_version": "1.8.0",
     "read_only_operations": [
       "contract",
       "benchmark_catalog",
       "score_report",
-      "get_purchase_offer",
+      "offer",
       "integration_quickstart",
       "external_benchmark_bridge"
     ],
@@ -35,7 +37,7 @@
   },
   "integration_quickstart": {
     "operation": "integration_quickstart",
-    "purpose": "Return the current API, MCP, A2A and purchase sequence without requiring a human explanation.",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A and purchase sequence without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
