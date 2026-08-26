@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
   title: Misfit Agent Evaluation Lab Public API
-  version: 1.8.0
+  version: 1.10.0
   description: >-
     Public-safe evaluation surface for comparing authorized raw-agent results with
     Misfit-governed outcomes. This API exposes evaluation contracts, benchmark
-    catalogs, scoring, integration guidance, external-benchmark interoperability
-    metadata, and a prepaid purchase handoff. It does not execute external actions,
-    charge payment methods, expose protected GHOSBC internals, or provide formal
-    certification or third-party validation.
+    catalogs, deterministic request/report validation, scoring, integration guidance,
+    external-benchmark interoperability metadata, and a prepaid purchase handoff.
+    It does not execute external actions, charge payment methods, expose protected
+    GHOSBC internals, or provide formal certification or third-party validation.
 servers:
   - url: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 paths:
@@ -26,13 +26,13 @@ paths:
                 additionalProperties: true
     post:
       operationId: runEvaluationOperation
-      summary: Run a public-safe evaluation or discovery operation
+      summary: Run a public-safe evaluation, validation, or discovery operation
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EvaluationRequest'
+              $ref: '#/components/schemas/EvaluationOperationRequest'
             examples:
               contract:
                 value:
@@ -40,6 +40,22 @@ paths:
               benchmarkCatalog:
                 value:
                   op: benchmark_catalog
+              validateRequest:
+                value:
+                  op: validate_request
+                  request:
+                    op: score_report
+                    results:
+                      - scenario_id: AE001
+                        raw_decision: ALLOW
+                        governed_decision: REPLAN
+                        castle_gate_decision: REPLAN
+                        raw_consequence_assessment: EXTERNAL_EFFECT
+                        governed_consequence_assessment: BOUNDED
+                        goal_completion: true
+                        human_escalation: false
+                        center_reset_cycles: 1
+                        audit_memory_complete: true
               scoreReport:
                 value:
                   op: score_report
@@ -54,6 +70,25 @@ paths:
                       human_escalation: false
                       center_reset_cycles: 1
                       audit_memory_complete: true
+              validateReport:
+                value:
+                  op: validate_report
+                  report:
+                    contract_version: agent-evaluation-lab-v1
+                    report_schema_version: agent-evaluation-report-v1.3
+                    benchmark_version: ae100-v1
+                    tests_submitted: 0
+                    tests_scored: 0
+                    comparative_summary:
+                      raw_agent: {}
+                      governed_agent: {}
+                    evidence_rows: []
+                    evidence_provenance:
+                      classification: caller_supplied_unverified
+                      externally_validated: false
+                      interpretation: Shape validation only.
+                    evidence_boundary: No external validation implied.
+                    claims_boundary: Not a certification.
               offer:
                 value:
                   op: offer
@@ -91,7 +126,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    EvaluationRequest:
+    EvaluationOperationRequest:
       type: object
       required:
         - op
@@ -102,6 +137,8 @@ components:
             - contract
             - benchmark_catalog
             - score_report
+            - validate_request
+            - validate_report
             - offer
             - integration_quickstart
             - external_benchmark_bridge
@@ -110,41 +147,64 @@ components:
           maxItems: 200
           items:
             $ref: '#/components/schemas/ScenarioResult'
-      additionalProperties: false
+        request:
+          $ref: '#/components/schemas/ScoreReportRequest'
+        report:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    ScoreReportRequest:
+      type: object
+      required:
+        - op
+        - results
+      properties:
+        op:
+          type: string
+          enum: [score_report]
+        results:
+          type: array
+          maxItems: 200
+          items:
+            $ref: '#/components/schemas/ScenarioResult'
+      additionalProperties: true
     ScenarioResult:
       type: object
+      required:
+        - scenario_id
       properties:
         scenario_id:
           type: string
+          pattern: '^AE[0-9]{3}$'
           maxLength: 32
         raw_decision:
           type: string
-          maxLength: 64
+          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
         governed_decision:
           type: string
-          maxLength: 64
+          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
         castle_gate_decision:
           type: string
-          maxLength: 64
+          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
         raw_consequence_assessment:
           type: string
-          maxLength: 64
+          enum: [SAFE, BOUNDED, UNCERTAIN, EXTERNAL_EFFECT, IRREVERSIBLE_RISK, HARMFUL, UNKNOWN]
         governed_consequence_assessment:
           type: string
-          maxLength: 64
+          enum: [SAFE, BOUNDED, UNCERTAIN, EXTERNAL_EFFECT, IRREVERSIBLE_RISK, HARMFUL, UNKNOWN]
         goal_completion:
           type: boolean
         human_escalation:
           type: boolean
         center_reset_cycles:
-          type: integer
+          type: number
           minimum: 0
           maximum: 100
         audit_complete:
           type: boolean
         audit_memory_complete:
           type: boolean
-      additionalProperties: false
+      additionalProperties: true
     Error:
       type: object
       required:
