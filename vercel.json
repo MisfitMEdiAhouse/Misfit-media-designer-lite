@@ -16,6 +16,7 @@
     { "source": "/coffeeandjoint", "destination": "https://www.coffeeandajoint.co/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/kingston-crypto", "destination": "/kingston-crypto.html" },
     { "source": "/scrub", "destination": "/" },
     { "source": "/agency", "destination": "/" },
     { "source": "/products", "destination": "/" },
@@ -54,6 +55,7 @@
     { "source": "/command", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
     { "source": "/command-reset", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }, { "key": "Cache-Control", "value": "private, no-store" }] },
     { "source": "/heir", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
+    { "source": "/kingston-crypto", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }, { "key": "Cache-Control", "value": "private, no-store" }] },
     { "source": "/roads/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
     { "source": "/coffee/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }, { "key": "Cache-Control", "value": "private, no-store" }] },
     { "source": "/coffee-restored", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },
