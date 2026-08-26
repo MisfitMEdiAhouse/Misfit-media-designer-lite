@@ -1,11 +1,12 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "name": "Misfit Agent Evaluation Lab Integration Kit",
   "status": "pilot",
   "purpose": "One-file machine handoff for integrating the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals.",
   "product_page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+  "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "endpoints": {
@@ -23,7 +24,7 @@
     {
       "step": 2,
       "operation": "benchmark_catalog",
-      "description": "Fetch the AE100 public-safe scenario catalog."
+      "description": "Fetch the AE100 public-safe scenario catalog. Machines that prefer a cacheable static artifact may use https://misfitmediahouse.com/agent-evaluation-ae100.json."
     },
     {
       "step": 3,
