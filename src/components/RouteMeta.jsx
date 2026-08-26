@@ -6,7 +6,8 @@ const publicMeta = {
   '/': ['/', 'Run a free Shopify store and business website health scan. Find storefront, conversion, site-health, trust, and AI-readiness leaks.'],
   '/scrub': ['/scrub', 'Scan a Shopify store or business website and get a public-signal health score with prioritized fixes.'],
   '/agency': ['/agency', 'Misfit Mediahouse builds websites, AI intake, commerce, custom software, and managed growth systems.'],
-  '/portfolio': ['/portfolio', 'Open the canonical public portfolio of live products, client deployments, commerce builds, and business systems from Misfit Mediahouse.'],
+  '/portfolio': ['/portfolio', 'Open the canonical public portfolio of live products, client deployments, commerce builds, competition work, and business systems from Misfit Mediahouse.'],
+  '/competitions': ['/competitions', 'Track Misfit Mediahouse hackathons, bounties and public competitions, including prize targets, current submissions, measurable proof, and how competition builds become reusable products.'],
   '/portfolio/ials-turbine-command': ['/portfolio/ials-turbine-command', 'Inspect how Misfit Mediahouse built the IALS aerospace aftermarket operating system across inventory intelligence, repair economics, compliance workflow, document automation, and human-gated deal control.'],
   '/products': ['/products', 'Misfit Business Health Scanner, QuoteLink, Misfit AI V2, Shopify Agentic Audit, and ContextForge.'],
   '/explore': ['/explore', 'Explore Misfit Cloud, Misfit Engines, Misfit Governance, Misfit AI-to-AI, and the protected GHOSBC OS API Brain.'],
@@ -32,6 +33,7 @@ const publicTitles = {
   '/scrub': 'Shopify & Business Health Scan | Misfit Mediahouse',
   '/agency': 'Shopify Growth & AI Revenue Agency | Misfit Mediahouse',
   '/portfolio': 'Shipped Work | Misfit Mediahouse',
+  '/competitions': 'Competitions, Hackathons & Bounties | Misfit Mediahouse',
   '/portfolio/ials-turbine-command': 'IALS Turbine Command | Misfit Mediahouse',
   '/products': 'Products & Revenue Engines | Misfit Mediahouse',
   '/explore': 'Explore Misfit | Misfit Mediahouse',
@@ -75,9 +77,7 @@ export default function RouteMeta() {
 
   useEffect(() => {
     const fieldNote = pathname.startsWith('/field-notes/') ? findFieldNote(pathname.replace('/field-notes/', '')) : null;
-    const route = fieldNote
-      ? [pathname, fieldNote.description]
-      : publicMeta[pathname];
+    const route = fieldNote ? [pathname, fieldNote.description] : publicMeta[pathname];
     const isPrivate = privatePaths.has(pathname);
     const canonicalPath = route?.[0] || '/';
     const title = fieldNote ? `${fieldNote.title} | Misfit Mediahouse` : publicTitles[pathname] || 'Misfit Mediahouse';
