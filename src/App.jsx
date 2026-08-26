@@ -1,3 +1,4 @@
+// Founder Command production refresh — force current owner cockpit bundle onto canonical site.
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
