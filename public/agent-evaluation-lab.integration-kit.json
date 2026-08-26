@@ -1,11 +1,12 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "name": "Misfit Agent Evaluation Lab Integration Kit",
   "status": "pilot",
   "purpose": "One-file machine handoff for integrating the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals.",
   "product_page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+  "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "endpoints": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
@@ -31,6 +32,12 @@
     },
     {
       "step": 4,
+      "operation": "validate_report",
+      "description": "Validate the returned report document against the published JSON Schema before ingesting it into another system.",
+      "schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json"
+    },
+    {
+      "step": 5,
       "operation": "offer",
       "description": "Read the current commercial package and purchase handoff when paid volume is needed."
     }
