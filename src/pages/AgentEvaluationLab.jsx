@@ -1,6 +1,11 @@
-import { BarChart3, CheckCircle2, GitCompareArrows, ShieldCheck, Workflow } from 'lucide-react';
+import { BarChart3, CheckCircle2, ExternalLink, GitCompareArrows, Network, ShieldCheck, Workflow } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+
+const API='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public';
+const MCP='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp';
+const A2A='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a';
+const BUY='https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
 
 const metrics = [
   ['Dangerous-action block rate', 'How often a governed run stops or redirects a scenario that the baseline would execute unsafely.'],
@@ -19,6 +24,12 @@ const flow = [
   ['5', 'Audit Memory', 'Package the comparative evidence and metrics into a public-safe evaluation report.'],
 ];
 
+const integrations = [
+  ['API', API, 'Browser-readable discovery plus POST evaluation protocol.'],
+  ['MCP', MCP, 'Machine-native tool discovery and governed evaluation workflow.'],
+  ['A2A', A2A, 'Agent-to-agent capability discovery and evaluation handoff.'],
+];
+
 export default function AgentEvaluationLab() {
   return (
     <div className="min-h-screen bg-black text-white">
@@ -31,11 +42,11 @@ export default function AgentEvaluationLab() {
           <div className="mt-7 flex flex-wrap gap-2 text-[11px] text-slate-400">
             <span className="rounded-full border border-white/10 px-3 py-2">Raw vs governed comparison</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Same objective, same scenario</span>
-            <span className="rounded-full border border-white/10 px-3 py-2">Public-safe evidence package</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">Report schema v1.3</span>
             <span className="rounded-full border border-white/10 px-3 py-2">No certification claim</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J" className="rounded-2xl bg-fuchsia-300 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-black">Buy 10,000 checks · $500</a>
+            <a href={BUY} className="rounded-2xl bg-fuchsia-300 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-black">Buy 10,000 checks · $500</a>
             <a href="/operator?challenge=agent-governance-evaluation&track=client" className="rounded-2xl border border-fuchsia-300/30 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-fuchsia-200">Request custom evaluation</a>
             <a href="/a2a-agent-audit" className="rounded-2xl border border-white/10 px-5 py-3 font-mono text-xs uppercase tracking-[0.13em] text-slate-300">Run free metadata audit</a>
           </div>
@@ -52,6 +63,19 @@ export default function AgentEvaluationLab() {
             <div className="flex items-center gap-3"><BarChart3 className="text-fuchsia-300"/><h2 className="font-display text-2xl font-semibold">Comparative metrics</h2></div>
             <div className="mt-5 space-y-3">{metrics.map(([title, body]) => <div key={title} className="rounded-2xl border border-white/8 bg-black/30 p-4"><div className="flex items-start gap-3"><CheckCircle2 size={16} className="mt-0.5 shrink-0 text-emerald-300"/><div><div className="text-sm font-semibold">{title}</div><div className="mt-1 text-xs leading-5 text-slate-500">{body}</div></div></div></div>)}</div>
           </div>
+        </section>
+
+        <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-6 md:p-7">
+          <div className="flex items-center gap-3"><Network className="text-cyan-300"/><h2 className="font-display text-2xl font-semibold">Machine integration</h2></div>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. These are public wrappers around governed outcomes and measurable reports; they do not expose the private GHOSBC kernel.</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">{integrations.map(([name,url,body])=><a key={name} href={url} className="group rounded-2xl border border-white/10 bg-black/30 p-5 transition hover:border-cyan-300/30"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-cyan-300">{name}</span><ExternalLink size={14} className="text-slate-600 group-hover:text-cyan-300"/></div><p className="mt-3 text-sm leading-6 text-slate-500">{body}</p><div className="mt-3 truncate font-mono text-[10px] text-slate-700">{url}</div></a>)}</div>
+        </section>
+
+        <section className="mt-6 rounded-3xl border border-amber-300/20 bg-amber-300/[0.035] p-6 md:p-7">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-amber-300">External benchmark provenance</div>
+          <h2 className="mt-2 font-display text-2xl font-semibold">Bridge-ready. Independent score not claimed.</h2>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-400">The public contract can map evidence from AgentHarm, Agent-SafetyBench and AgentHazard into the same report schema. No third-party benchmark score is published until a real external evaluator run completes against an authenticated target/runtime. Compatibility is not validation.</p>
+          <div className="mt-4 flex flex-wrap gap-2 font-mono text-[10px] text-slate-500"><span className="rounded-full border border-white/10 px-3 py-2">AgentHarm · compatible</span><span className="rounded-full border border-white/10 px-3 py-2">Agent-SafetyBench · compatible</span><span className="rounded-full border border-white/10 px-3 py-2">AgentHazard · compatible</span><span className="rounded-full border border-white/10 px-3 py-2">External validation · pending evidence</span></div>
         </section>
 
         <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-6 md:p-7">
