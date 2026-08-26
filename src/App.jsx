@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop.jsx';
 import RouteMeta from './components/RouteMeta.jsx';
 import Home from './pages/Home.jsx';
 import OwnerCommandCenter from './pages/OwnerCommandCenter.jsx';
+import FounderPasswordReset from './pages/FounderPasswordReset.jsx';
 import ProofPage from './pages/ProofPage.jsx';
 import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
@@ -87,6 +88,7 @@ export default function App() {
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
         <Route path="/agent-evaluation-lab" element={<AgentEvaluationLab />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
+        <Route path="/command-reset" element={<FounderPasswordReset />} />
         <Route path="/heir" element={<HeirOS />} />
         <Route path="/proof" element={<Navigate to="/portfolio" replace />} />
         <Route path="/enterprise-ai" element={<EnterpriseAI />} />
