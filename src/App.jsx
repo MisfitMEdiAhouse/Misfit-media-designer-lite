@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx';
 import OwnerCommandCenter from './pages/OwnerCommandCenter.jsx';
 import FounderPasswordReset from './pages/FounderPasswordReset.jsx';
 import ProofPage from './pages/ProofPage.jsx';
+import Competitions from './pages/Competitions.jsx';
 import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
 import MisfitAIV2 from './pages/MisfitAIV2.jsx';
@@ -74,6 +75,8 @@ export default function App() {
         <Route path="/field-notes" element={<FieldNotes />} />
         <Route path="/field-notes/:slug" element={<FieldNotes />} />
         <Route path="/portfolio" element={<ProofPage />} />
+        <Route path="/competitions" element={<Competitions />} />
+        <Route path="/portfolio/competitions" element={<Navigate to="/competitions" replace />} />
         <Route path="/portfolio/ials-turbine-command" element={<IALSTurbineCommand />} />
         <Route path="/portfolio/golden-essence" element={<ResponsiveGoldenEssence />} />
         <Route path="/portfolio/golden-essence/about" element={<ResponsiveGoldenEssence />} />
