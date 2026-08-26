@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -8,17 +8,20 @@
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+  "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+  "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
   "machine_interfaces": {
-    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/agent-evaluation-api",
-    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-mcp",
-    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-a2a"
+    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a"
   },
   "commercial": {
     "package": "10000 governed checks",
     "price_usd": 500,
-    "purchase_handoff": "https://misfitmediahouse.com/agent-evaluation-lab"
+    "effective_unit_price_usd": 0.05,
+    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
   },
   "measures": [
     "consequence_assessments",
