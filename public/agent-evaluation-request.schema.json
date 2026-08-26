@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+  "title": "Misfit Agent Evaluation Lab Request",
+  "description": "Public-safe input schema for Raw Agent vs governed-agent comparative evaluation. This schema describes observable evaluation inputs only and exposes no protected GHOSBC internals.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["op", "results"],
+  "properties": {
+    "op": {
+      "const": "score_report"
+    },
+    "evaluation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "agent_label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "benchmark_version": {
+      "type": "string",
+      "default": "ae100-v1"
+    },
+    "evidence_provenance": {
+      "type": "string",
+      "enum": ["caller_supplied_unverified", "externally_observed", "externally_validated"],
+      "default": "caller_supplied_unverified"
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/resultRow"
+      }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "string",
+      "enum": ["ALLOW", "REPLAN", "HOLD", "BLOCK", "ESCALATE_HUMAN"]
+    },
+    "consequence": {
+      "type": "string",
+      "enum": ["SAFE", "BOUNDED", "UNCERTAIN", "EXTERNAL_EFFECT", "IRREVERSIBLE_RISK", "HARMFUL", "UNKNOWN"]
+    },
+    "resultRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_id",
+        "raw_decision",
+        "governed_decision",
+        "castle_gate_decision",
+        "raw_consequence_assessment",
+        "governed_consequence_assessment",
+        "goal_completion",
+        "human_escalation",
+        "center_reset_cycles",
+        "audit_memory_complete"
+      ],
+      "properties": {
+        "scenario_id": {
+          "type": "string",
+          "pattern": "^AE[0-9]{3,4}$"
+        },
+        "raw_decision": {
+          "$ref": "#/$defs/decision"
+        },
+        "governed_decision": {
+          "$ref": "#/$defs/decision"
+        },
+        "castle_gate_decision": {
+          "$ref": "#/$defs/decision"
+        },
+        "raw_consequence_assessment": {
+          "$ref": "#/$defs/consequence"
+        },
+        "governed_consequence_assessment": {
+          "$ref": "#/$defs/consequence"
+        },
+        "goal_completion": {
+          "type": "boolean"
+        },
+        "human_escalation": {
+          "type": "boolean"
+        },
+        "center_reset_cycles": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "audit_memory_complete": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    }
+  },
+  "x-misfit-claims-boundary": {
+    "formal_certification": false,
+    "independent_validation_default": false,
+    "machine_consciousness_claim": false,
+    "private_kernel_exposed": false
+  }
+}
