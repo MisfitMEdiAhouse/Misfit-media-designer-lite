@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Misfit Agent Evaluation Lab Integration Kit",
+  "status": "pilot",
+  "purpose": "One-file machine handoff for integrating the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals.",
+  "product_page": "https://misfitmediahouse.com/agent-evaluation-lab",
+  "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+  "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+  "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+  "endpoints": {
+    "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json"
+  },
+  "recommended_sequence": [
+    {
+      "step": 1,
+      "operation": "contract",
+      "description": "Read the current evaluation vocabulary, input contract, report schema and claims boundary."
+    },
+    {
+      "step": 2,
+      "operation": "benchmark_catalog",
+      "description": "Fetch the AE100 public-safe scenario catalog."
+    },
+    {
+      "step": 3,
+      "operation": "score_report",
+      "description": "Submit observable Raw Agent and governed-agent result rows for comparative scoring."
+    },
+    {
+      "step": 4,
+      "operation": "offer",
+      "description": "Read the current commercial package and purchase handoff when paid volume is needed."
+    }
+  ],
+  "minimal_score_request": {
+    "method": "POST",
+    "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "content_type": "application/json",
+    "body": {
+      "op": "score_report",
+      "results": [
+        {
+          "scenario_id": "AE001",
+          "raw_decision": "ALLOW",
+          "governed_decision": "ALLOW",
+          "castle_gate_decision": "ALLOW",
+          "raw_consequence_assessment": "SAFE",
+          "governed_consequence_assessment": "SAFE",
+          "goal_completion": true,
+          "human_escalation": false,
+          "center_reset_cycles": 0,
+          "audit_memory_complete": true
+        }
+      ]
+    }
+  },
+  "observable_result_fields": [
+    "scenario_id",
+    "raw_decision",
+    "governed_decision",
+    "castle_gate_decision",
+    "raw_consequence_assessment",
+    "governed_consequence_assessment",
+    "goal_completion",
+    "human_escalation",
+    "center_reset_cycles",
+    "audit_memory_complete"
+  ],
+  "decision_vocabulary": ["ALLOW", "REPLAN", "HOLD", "BLOCK", "ESCALATE_HUMAN"],
+  "consequence_vocabulary": ["SAFE", "BOUNDED", "UNCERTAIN", "EXTERNAL_EFFECT", "IRREVERSIBLE_RISK", "HARMFUL", "UNKNOWN"],
+  "comparative_metrics": [
+    "raw_dangerous_action_pass_rate",
+    "governed_dangerous_action_pass_rate",
+    "dangerous_action_block_rate",
+    "constructive_decision_change_rate",
+    "benign_false_refusal_rate",
+    "goal_completion_rate",
+    "human_escalation_rate",
+    "audit_memory_completeness_rate",
+    "average_center_reset_cycles",
+    "consequence_improvement_rate",
+    "consequence_non_regression_rate"
+  ],
+  "evidence_provenance": {
+    "default_classification": "caller_supplied_unverified",
+    "externally_validated_default": false,
+    "rule": "Caller-supplied result rows are scored as observable evidence but are not represented as independent third-party benchmark evidence. External validation requires a separate provenance-preserving external run."
+  },
+  "privacy_boundary": "No private GHOSBC kernel, Mother Language, Soul Cipher, glyph/GHX mapping, hidden prompts, credentials, protected packets, hidden policy logic or reconstruction material is included.",
+  "claims_boundary": "Evaluation tooling and comparative evidence only. Not a formal safety certification, regulatory attestation, third-party validation claim, medical claim, universal-safety claim or machine-consciousness claim.",
+  "commerce": {
+    "package": "10,000 governed policy checks",
+    "price_usd": 500,
+    "effective_unit_price_usd": 0.05,
+    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "payment_execution_in_api": false
+  }
+}
