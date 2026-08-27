@@ -1,8 +1,12 @@
 {
-  "schema": "misfit.agent-provider-scorecard.v1",
+  "schema": "misfit.agent-provider-scorecard.v1.1",
   "name": "Misfit Agent Provider Procurement Scorecard",
   "purpose": "Rank eligible AI agents, tools, MCP servers, A2A providers, APIs, and internal capabilities against an explicit objective using evidence rather than popularity.",
   "status": "active",
+  "human_ui": "https://misfitmediahouse.com/agent-provider-scorecard",
+  "router_endpoint": "https://misfitmediahouse.com/api/provider-router",
+  "router_method": "POST",
+  "execution_enabled": false,
   "selection_rule": "Choose the highest-scoring eligible provider after all hard constraints pass. Popularity is not a selection criterion by itself.",
   "hard_constraints": [
     "required capability and protocol compatibility",
@@ -28,20 +32,34 @@
     "third-party registry evidence",
     "self-published claim"
   ],
-  "inputs": {
-    "required": ["objective", "candidates"],
-    "candidate_fields": [
-      "capabilities",
-      "protocols",
-      "evidence",
-      "price",
-      "latency_ms",
-      "reliability",
-      "safety",
-      "policy_fit",
-      "availability"
-    ],
-    "optional": ["weights", "hard_constraints", "price_ceiling"]
+  "request_shape": {
+    "objective": {
+      "required_protocol": "API",
+      "required_capability": "agent governance",
+      "price_ceiling": 0.10,
+      "requires_human_gate_compatibility": true
+    },
+    "candidates": [
+      {
+        "name": "Example Provider",
+        "protocols": ["API"],
+        "capabilities": ["agent governance"],
+        "available": true,
+        "policy_fit": true,
+        "human_gate_compatible": true,
+        "price": 0.05,
+        "scores": {
+          "capability_fit": 90,
+          "verified_quality": 80,
+          "cost_efficiency": 85,
+          "reliability": 90,
+          "latency": 80,
+          "safety_governance": 95,
+          "reputation": 60
+        },
+        "evidence": ["reproducible test", "uptime telemetry"]
+      }
+    ]
   },
   "outputs": [
     "ranked_candidates",
@@ -51,7 +69,7 @@
     "confidence",
     "evidence_gaps"
   ],
-  "routing_boundary": "The scorecard may auto-route only when the selected downstream capability is autonomous-eligible and all hard constraints pass. Consequential actions still follow their own human-gate policy.",
+  "routing_boundary": "The public runtime is recommendation-only and cannot execute payments, messages, wallet actions, account changes, or other consequential external actions. Consequential actions still follow their own human-gate policy.",
   "privacy_boundary": "Public-safe capability and evidence metadata only. No private GHOSBC kernel material, hidden policies, credentials, or reconstruction material.",
   "misfit_positioning": {
     "goal": "Make Misfit objectively competitive in machine procurement by publishing capabilities, prices, protocols, evidence, reliability and governance properties in machine-readable form.",
