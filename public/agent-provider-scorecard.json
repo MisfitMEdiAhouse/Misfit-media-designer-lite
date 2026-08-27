@@ -1,22 +1,29 @@
 {
-  "schema": "misfit.agent-provider-scorecard.v1.2",
+  "schema": "misfit.agent-provider-scorecard.v1.3",
   "name": "Misfit Agent Provider Procurement Scorecard",
   "purpose": "Discover and rank eligible AI agents, tools, MCP servers, A2A providers, APIs, and internal capabilities against an explicit objective using evidence rather than popularity.",
   "status": "active",
   "human_ui": "https://misfitmediahouse.com/agent-provider-scorecard",
   "router_endpoint": "https://misfitmediahouse.com/api/agentic-governance",
   "router_method": "POST",
-  "operations": ["discover_candidates", "rank_providers", "discover_and_rank"],
+  "api_version": "0.4.0",
+  "operations": ["evaluate_action", "discover_candidates", "discover_external_candidates", "rank_providers", "discover_and_rank"],
   "execution_enabled": false,
-  "discovery_sources": ["Misfit public machine contracts", "Misfit Agent Control Plane public manifest"],
-  "external_registry_ingestion": "next",
+  "discovery_sources": ["Misfit public machine contracts", "A2A Registry public search", "Official MCP Registry public search"],
+  "external_registry_ingestion": "live_best_effort",
+  "external_registry_rules": {
+    "a2a": "Public search only; no registry token required by this integration.",
+    "mcp": "Official MCP Registry public server search.",
+    "failure_mode": "Registry timeout or outage does not disable local Misfit discovery.",
+    "trust_boundary": "Registry presence is discovery evidence, not proof of safe execution, quality, price, reliability, or human-gate compatibility."
+  },
   "selection_rule": "Choose the highest-scoring eligible provider after all hard constraints pass. Popularity is not a selection criterion by itself.",
-  "hard_constraints": ["required capability and protocol compatibility", "policy and safety fit", "availability", "risk and human-gate compatibility", "price ceiling when supplied"],
+  "hard_constraints": ["required capability and protocol compatibility", "policy and safety fit", "availability", "verified human-gate compatibility when required", "price ceiling when supplied"],
   "default_weights": {"capability_fit":0.30,"verified_quality":0.20,"cost_efficiency":0.15,"reliability":0.10,"latency":0.10,"safety_governance":0.10,"reputation":0.05},
   "evidence_priority": ["verified settlement or customer outcome", "independent benchmark", "reproducible test", "uptime and reliability telemetry", "third-party registry evidence", "self-published claim"],
-  "discover_and_rank_request": {"operation":"discover_and_rank","objective":{"required_protocol":"API","required_capability":"agent governance","price_ceiling":0.10,"requires_human_gate_compatibility":true}},
-  "outputs": ["discovery source and candidate count", "ranked_candidates", "score_breakdown", "hard_constraint_failures", "recommended_provider", "confidence", "evidence_sources", "evidence_class", "evidence_gaps"],
+  "discover_and_rank_request": {"operation":"discover_and_rank","include_external":true,"objective":{"required_protocol":"API","required_capability":"agent governance","price_ceiling":0.10,"requires_human_gate_compatibility":true}},
+  "outputs": ["local/external discovery counts and source health", "ranked_candidates", "source_registry", "score_breakdown", "hard_constraint_failures", "recommended_provider", "confidence", "evidence_sources", "evidence_class", "evidence_gaps"],
   "routing_boundary": "The public runtime is recommendation-only and cannot execute payments, messages, wallet actions, account changes, or other consequential external actions. Consequential actions still follow their own human-gate policy.",
   "privacy_boundary": "Public-safe capability and evidence metadata only. No private GHOSBC kernel material, hidden policies, credentials, private prompts, or reconstruction material.",
-  "anti_gaming": "First-party and self-published evidence is labeled and receives lower confidence than independently reproducible, third-party, benchmark, or settlement-backed evidence."
+  "anti_gaming": "First-party and self-published evidence is labeled and receives lower confidence than independently reproducible, third-party, benchmark, telemetry, or settlement-backed evidence."
 }
