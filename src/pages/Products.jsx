@@ -47,11 +47,11 @@ const products = [
     href: 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed',
   },
   {
-    name: 'Misfit Governance Integration',
+    name: 'Misfit Governed Agent Fleet',
     type: 'Governed agent infrastructure',
-    price: 'Scoped engagement',
-    copy: 'Put bounded action checks, human gates, dependency review, and audit receipts around consequential automation. The protected GHOSBC kernel stays private.',
-    href: '/agency',
+    price: '$500 evaluation · $1,500 integration',
+    copy: 'Put deterministic allow/review/block checks, Gemini explanations, human gates, and audit evidence in front of consequential agent actions. Live proof is public; private GHOSBC internals remain sealed.',
+    href: '/agentic-governed-fleet',
   },
   {
     name: 'ContextForge',
