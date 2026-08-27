@@ -1,8 +1,12 @@
 {
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
+  "surface_version": "1.10.0",
+  "request_schema_version": "agent-evaluation-request-v1.0",
+  "report_schema_version": "agent-evaluation-report-v1.3",
+  "benchmark_version": "ae100-v1",
   "description": "Public-safe Raw Agent vs governed-agent evaluation with measurable consequence assessment, replanning, governed decisions, audit evidence and comparative metrics.",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
@@ -16,9 +20,19 @@
   "machine_interfaces": {
     "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a"
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json"
   },
+  "operations": [
+    "contract",
+    "benchmark_catalog",
+    "validate_request",
+    "score_report",
+    "validate_report",
+    "offer"
+  ],
   "commercial": {
+    "offer_key": "misfit_agent_evaluation_10k",
     "package": "10000 governed checks",
     "price_usd": 500,
     "effective_unit_price_usd": 0.05,
@@ -34,6 +48,11 @@
     "human_escalation",
     "raw_vs_governed_comparison"
   ],
+  "evidence_boundary": {
+    "default_provenance": "caller_supplied_unverified",
+    "external_benchmark_compatibility": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
+    "external_benchmark_score_claimed": false
+  },
   "claims_boundary": {
     "formal_certification": false,
     "independent_third_party_validation": false,
