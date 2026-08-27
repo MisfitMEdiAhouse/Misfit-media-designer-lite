@@ -14,9 +14,9 @@ A consequential AI action is evaluated before execution through a bounded govern
 
 The live demo intentionally does **not** execute payments, send messages, mutate accounts, move money, change credentials, or perform irreversible external actions.
 
-## Google ADK
+## Google ADK + Gemini
 
-The ADK package lives in `hackathon/governed_fleet/` and defines `root_agent` with Gemini plus the deterministic `score_action` tool.
+The ADK package lives in `hackathon/governed_fleet/` and defines `root_agent` with **Gemini 3.5 Flash** plus the deterministic `score_action` tool.
 
 Install and run locally:
 
@@ -36,7 +36,15 @@ The Vercel application exposes:
 - `/agentic-governed-fleet` — interactive UI
 - `/api/agentic-governance` — bounded governance API
 
-The API has a deterministic fallback so judges can inspect the decision pipeline even if Gemini credentials are not present in a given preview environment. When `GEMINI_API_KEY` is configured, Gemini 2.5 Flash is used only to explain the deterministic decision; it cannot override policy.
+The API has a deterministic fallback so judges can inspect the decision pipeline even if Gemini credentials are not present in a given preview environment. When `GEMINI_API_KEY` is configured, **Gemini 3.5 Flash** is used only to explain the deterministic decision; it cannot override policy.
+
+## Google Cloud requirement
+
+The hackathon also requires at least one Google Cloud infrastructure service. This clean-room branch is prepared for that step, but **does not claim a Google Cloud deployment until one is actually provisioned and verified**. The intended deployment target is Cloud Run (or another permitted Google Cloud runtime) after the existing owner/account authorization gate is satisfied.
+
+The Vercel demo is useful for public review but does **not** by itself satisfy the mandatory Google Cloud infrastructure requirement.
+
+See `hackathon/SUBMISSION_READINESS.md` for the exact readiness/gate state.
 
 ## Claim boundary
 
