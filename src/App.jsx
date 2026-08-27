@@ -9,6 +9,7 @@ import FounderPasswordReset from './pages/FounderPasswordReset.jsx';
 import ProofPage from './pages/ProofPage.jsx';
 import Competitions from './pages/Competitions.jsx';
 import AgenticGovernedFleet from './pages/AgenticGovernedFleet.jsx';
+import AgentProviderScorecard from './pages/AgentProviderScorecard.jsx';
 import EnterpriseAI from './pages/EnterpriseAI.jsx';
 import CreatorCommerce from './pages/CreatorCommerce.jsx';
 import MisfitAIV2 from './pages/MisfitAIV2.jsx';
@@ -79,6 +80,7 @@ export default function App() {
         <Route path="/competitions" element={<Competitions />} />
         <Route path="/portfolio/competitions" element={<Navigate to="/competitions" replace />} />
         <Route path="/agentic-governed-fleet" element={<AgenticGovernedFleet />} />
+        <Route path="/agent-provider-scorecard" element={<AgentProviderScorecard />} />
         <Route path="/portfolio/ials-turbine-command" element={<IALSTurbineCommand />} />
         <Route path="/portfolio/golden-essence" element={<ResponsiveGoldenEssence />} />
         <Route path="/portfolio/golden-essence/about" element={<ResponsiveGoldenEssence />} />
