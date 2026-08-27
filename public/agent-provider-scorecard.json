@@ -4,75 +4,17 @@
   "purpose": "Rank eligible AI agents, tools, MCP servers, A2A providers, APIs, and internal capabilities against an explicit objective using evidence rather than popularity.",
   "status": "active",
   "human_ui": "https://misfitmediahouse.com/agent-provider-scorecard",
-  "router_endpoint": "https://misfitmediahouse.com/api/provider-router",
+  "router_endpoint": "https://misfitmediahouse.com/api/agentic-governance",
   "router_method": "POST",
+  "router_operation": "rank_providers",
   "execution_enabled": false,
   "selection_rule": "Choose the highest-scoring eligible provider after all hard constraints pass. Popularity is not a selection criterion by itself.",
-  "hard_constraints": [
-    "required capability and protocol compatibility",
-    "policy and safety fit",
-    "availability",
-    "risk and human-gate compatibility",
-    "price ceiling when supplied"
-  ],
-  "default_weights": {
-    "capability_fit": 0.30,
-    "verified_quality": 0.20,
-    "cost_efficiency": 0.15,
-    "reliability": 0.10,
-    "latency": 0.10,
-    "safety_governance": 0.10,
-    "reputation": 0.05
-  },
-  "evidence_priority": [
-    "verified settlement or customer outcome",
-    "independent benchmark",
-    "reproducible test",
-    "uptime and reliability telemetry",
-    "third-party registry evidence",
-    "self-published claim"
-  ],
-  "request_shape": {
-    "objective": {
-      "required_protocol": "API",
-      "required_capability": "agent governance",
-      "price_ceiling": 0.10,
-      "requires_human_gate_compatibility": true
-    },
-    "candidates": [
-      {
-        "name": "Example Provider",
-        "protocols": ["API"],
-        "capabilities": ["agent governance"],
-        "available": true,
-        "policy_fit": true,
-        "human_gate_compatible": true,
-        "price": 0.05,
-        "scores": {
-          "capability_fit": 90,
-          "verified_quality": 80,
-          "cost_efficiency": 85,
-          "reliability": 90,
-          "latency": 80,
-          "safety_governance": 95,
-          "reputation": 60
-        },
-        "evidence": ["reproducible test", "uptime telemetry"]
-      }
-    ]
-  },
-  "outputs": [
-    "ranked_candidates",
-    "score_breakdown",
-    "hard_constraint_failures",
-    "recommended_provider",
-    "confidence",
-    "evidence_gaps"
-  ],
+  "hard_constraints": ["required capability and protocol compatibility","policy and safety fit","availability","risk and human-gate compatibility","price ceiling when supplied"],
+  "default_weights": {"capability_fit":0.30,"verified_quality":0.20,"cost_efficiency":0.15,"reliability":0.10,"latency":0.10,"safety_governance":0.10,"reputation":0.05},
+  "evidence_priority": ["verified settlement or customer outcome","independent benchmark","reproducible test","uptime and reliability telemetry","third-party registry evidence","self-published claim"],
+  "request_shape": {"operation":"rank_providers","objective":{"required_protocol":"API","required_capability":"agent governance","price_ceiling":0.10,"requires_human_gate_compatibility":true},"candidates":[{"name":"Example Provider","protocols":["API"],"capabilities":["agent governance"],"available":true,"policy_fit":true,"human_gate_compatible":true,"price":0.05,"scores":{"capability_fit":90,"verified_quality":80,"cost_efficiency":85,"reliability":90,"latency":80,"safety_governance":95,"reputation":60},"evidence":["reproducible test","uptime telemetry"]}]},
+  "outputs": ["ranked_candidates","score_breakdown","hard_constraint_failures","recommended_provider","confidence","evidence_gaps"],
   "routing_boundary": "The public runtime is recommendation-only and cannot execute payments, messages, wallet actions, account changes, or other consequential external actions. Consequential actions still follow their own human-gate policy.",
   "privacy_boundary": "Public-safe capability and evidence metadata only. No private GHOSBC kernel material, hidden policies, credentials, or reconstruction material.",
-  "misfit_positioning": {
-    "goal": "Make Misfit objectively competitive in machine procurement by publishing capabilities, prices, protocols, evidence, reliability and governance properties in machine-readable form.",
-    "anti_gaming": "Self-claims receive lower confidence than independently reproducible or settlement-backed evidence."
-  }
+  "misfit_positioning": {"goal":"Make Misfit objectively competitive in machine procurement by publishing capabilities, prices, protocols, evidence, reliability and governance properties in machine-readable form.","anti_gaming":"Self-claims receive lower confidence than independently reproducible or settlement-backed evidence."}
 }
