@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "name": "Misfit Governed Agent Fleet",
+  "status": "live",
+  "public_url": "https://misfitmediahouse.com/agentic-governed-fleet",
+  "api": {
+    "endpoint": "https://misfitmediahouse.com/api/agentic-governance",
+    "method": "POST",
+    "mode": "public-safe proof and integration surface",
+    "operations": ["evaluate_action"],
+    "decision_values": ["allow", "review", "block"],
+    "consequential_action_execution": false
+  },
+  "capabilities": [
+    "intent capture",
+    "deterministic risk scoring",
+    "allow/review/block policy routing",
+    "Gemini-backed decision explanation with graceful model fallback",
+    "human-approval signal handling",
+    "audit evidence generation"
+  ],
+  "offers": [
+    {
+      "name": "Agent Governance Evaluation",
+      "price_usd": 500,
+      "billing_model": "prepaid",
+      "included_checks": 10000,
+      "purchase_url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
+    },
+    {
+      "name": "Governed Agent Fleet Integration",
+      "price_usd": 1500,
+      "billing_model": "one_time_implementation",
+      "scope": "one existing agent workflow",
+      "purchase_url": "https://buy.stripe.com/5kQ28r2AigL42qeb7y8ww0K"
+    }
+  ],
+  "claim_boundary": {
+    "private_kernel_exposed": false,
+    "excluded": [
+      "Mother Language",
+      "Soul Cipher",
+      "GHX/glyph mappings",
+      "hidden policy tables",
+      "private prompts",
+      "credentials",
+      "private GHOSBC reconstruction material"
+    ]
+  },
+  "competition_origin": "All Things Agentic Hackathon clean-room build",
+  "commercial_status": "live_revenue_enabled"
+}
