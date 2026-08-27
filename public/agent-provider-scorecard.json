@@ -1,0 +1,60 @@
+{
+  "schema": "misfit.agent-provider-scorecard.v1",
+  "name": "Misfit Agent Provider Procurement Scorecard",
+  "purpose": "Rank eligible AI agents, tools, MCP servers, A2A providers, APIs, and internal capabilities against an explicit objective using evidence rather than popularity.",
+  "status": "active",
+  "selection_rule": "Choose the highest-scoring eligible provider after all hard constraints pass. Popularity is not a selection criterion by itself.",
+  "hard_constraints": [
+    "required capability and protocol compatibility",
+    "policy and safety fit",
+    "availability",
+    "risk and human-gate compatibility",
+    "price ceiling when supplied"
+  ],
+  "default_weights": {
+    "capability_fit": 0.30,
+    "verified_quality": 0.20,
+    "cost_efficiency": 0.15,
+    "reliability": 0.10,
+    "latency": 0.10,
+    "safety_governance": 0.10,
+    "reputation": 0.05
+  },
+  "evidence_priority": [
+    "verified settlement or customer outcome",
+    "independent benchmark",
+    "reproducible test",
+    "uptime and reliability telemetry",
+    "third-party registry evidence",
+    "self-published claim"
+  ],
+  "inputs": {
+    "required": ["objective", "candidates"],
+    "candidate_fields": [
+      "capabilities",
+      "protocols",
+      "evidence",
+      "price",
+      "latency_ms",
+      "reliability",
+      "safety",
+      "policy_fit",
+      "availability"
+    ],
+    "optional": ["weights", "hard_constraints", "price_ceiling"]
+  },
+  "outputs": [
+    "ranked_candidates",
+    "score_breakdown",
+    "hard_constraint_failures",
+    "recommended_provider",
+    "confidence",
+    "evidence_gaps"
+  ],
+  "routing_boundary": "The scorecard may auto-route only when the selected downstream capability is autonomous-eligible and all hard constraints pass. Consequential actions still follow their own human-gate policy.",
+  "privacy_boundary": "Public-safe capability and evidence metadata only. No private GHOSBC kernel material, hidden policies, credentials, or reconstruction material.",
+  "misfit_positioning": {
+    "goal": "Make Misfit objectively competitive in machine procurement by publishing capabilities, prices, protocols, evidence, reliability and governance properties in machine-readable form.",
+    "anti_gaming": "Self-claims receive lower confidence than independently reproducible or settlement-backed evidence."
+  }
+}
