@@ -56,6 +56,8 @@
   ],
   "headers": [
     { "source": "/.well-known/ucp", "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }] },
+    { "source": "/.well-known/api-catalog", "headers": [{ "key": "Content-Type", "value": "application/linkset+json; profile=\"https://www.rfc-editor.org/info/rfc9727\"; charset=utf-8" }, { "key": "Cache-Control", "value": "public, max-age=300" }] },
+    { "source": "/agent-evaluation-lab", "headers": [{ "key": "Link", "value": "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\", </agent-evaluation-lab.openapi.yaml>; rel=\"service-desc\"; type=\"application/yaml\", </.well-known/agent-evaluation-lab.json>; rel=\"service-meta\"; type=\"application/json\"" }] },
     { "source": "/command", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
     { "source": "/command-reset", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }, { "key": "Cache-Control", "value": "private, no-store" }] },
     { "source": "/heir", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" }] },
