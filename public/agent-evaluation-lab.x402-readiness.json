@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "status": "prepared_not_payment_activated",
   "provider": "Misfit Mediahouse",
   "product": "Misfit Agent Evaluation Lab",
@@ -13,6 +13,50 @@
     "mime_type": "application/json",
     "service_name": "Misfit Agent Evaluation Lab",
     "tags": ["agent-evaluation", "governance", "safety", "benchmark"],
+    "derived_unit_economics": {
+      "source": "existing prepaid commercial package only",
+      "package_usd": 500,
+      "included_checks": 10000,
+      "effective_price_per_check_usd": 0.05,
+      "usdc_decimals": 6,
+      "effective_price_per_check_usdc_atomic": "50000",
+      "note": "This is a derived reference price, not an activated x402 charge or a new commercial promise."
+    },
+    "unsigned_payment_required_template": {
+      "x402Version": 2,
+      "error": "PAYMENT_REQUIRED",
+      "resource": {
+        "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+        "description": "One bounded public-safe Agent Evaluation Lab governed check.",
+        "mimeType": "application/json"
+      },
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "50000",
+          "asset": "USDC_ON_BASE_ADDRESS_TO_BE_FILLED_FROM_APPROVED_FACILITATOR_CONFIG",
+          "payTo": "__OWNER_APPROVED_BASE_USDC_RECEIVE_ADDRESS__",
+          "maxTimeoutSeconds": 300,
+          "extra": {
+            "name": "USDC",
+            "version": "2"
+          }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "method": "POST",
+            "bodyType": "json",
+            "description": "Run a bounded public-safe Raw Agent vs governed-agent evaluation and return measurable comparative evidence.",
+            "inputSchema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+            "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+            "outputExample": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json"
+          }
+        }
+      }
+    },
     "bazaar_extension": {
       "info": {
         "method": "POST",
@@ -44,7 +88,9 @@
   },
   "activation_requirements": [
     "Use an owner-approved Base/USDC receive address; do not create or select a wallet autonomously.",
+    "Resolve the canonical Base USDC asset address from the approved facilitator/configuration at activation time; do not guess or hard-code it from memory.",
     "Configure the approved x402 facilitator and exact per-call price without changing Stripe payout settings.",
+    "Replace only the explicit payTo/asset placeholders in the unsigned template after owner approval.",
     "Return x402 v2 PaymentRequired metadata with extensions.bazaar on the protected public endpoint.",
     "Confirm a real external paid settlement before claiming Bazaar or Agentic.Market indexing. Self-tests are never revenue or traction."
   ],
