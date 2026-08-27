@@ -35,6 +35,7 @@
     { "source": "/portfolio/golden-essence-mobile", "destination": "/" },
     { "source": "/portfolio/agentic-governed-fleet", "destination": "/" },
     { "source": "/agentic-governed-fleet", "destination": "/" },
+    { "source": "/agent-provider-scorecard", "destination": "/" },
     { "source": "/agents", "destination": "/" },
     { "source": "/command", "destination": "/" },
     { "source": "/command-reset", "destination": "/" },
