@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -12,6 +12,7 @@
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+  "x402_readiness": "https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json",
   "machine_interfaces": {
     "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
@@ -37,6 +38,9 @@
     "formal_certification": false,
     "independent_third_party_validation": false,
     "machine_consciousness_claim": false,
-    "private_governance_kernel_exposed": false
+    "private_governance_kernel_exposed": false,
+    "x402_payment_live": false,
+    "bazaar_indexed": false,
+    "agentic_market_indexed": false
   }
 }
