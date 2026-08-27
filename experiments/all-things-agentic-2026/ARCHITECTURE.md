@@ -4,7 +4,7 @@
 User / synthetic scenario
         |
         v
-Gemini 3.7 Flash + Google ADK coordinator
+Gemini 3.5 Flash + Google ADK coordinator
         |
         +--> consequence assessment
         |       |
@@ -21,7 +21,9 @@ Public-safe comparative report
 
 ## Intended Google Cloud path
 
-Prototype locally with ADK, then deploy to Cloud Run or Google Agent Runtime after an authorized Google Cloud project is available. No Cloud resource is provisioned from this scaffold.
+Prototype locally with ADK, then deploy to Cloud Run or another permitted Google Cloud runtime after an authorized Google Cloud project is available. No Google Cloud resource is provisioned or claimed by this scaffold yet.
+
+The public Vercel demo is a review surface only; it is not represented as satisfying the hackathon's mandatory Google Cloud infrastructure requirement.
 
 ## Evaluation contract
 
