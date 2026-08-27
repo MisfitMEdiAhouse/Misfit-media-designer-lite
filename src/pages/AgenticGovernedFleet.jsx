@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
+const evaluationUrl = 'https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
+const integrationUrl = 'https://buy.stripe.com/5kQ28r2AigL42qeb7y8ww0K';
+
 const initial = {
   requested_action: 'Send a customer refund of $850 after an AI support agent detects a duplicate charge.',
   data_sensitivity: 'medium',
@@ -28,7 +31,7 @@ export default function AgenticGovernedFleet() {
   async function run() {
     setLoading(true); setError('');
     try {
-      const response = await fetch('/api/agentic-governance', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const response = await fetch('/api/agentic-governance', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(form) });
       const data = await response.json();
       if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`);
       setResult(data);
@@ -40,11 +43,16 @@ export default function AgenticGovernedFleet() {
     <main style={{ minHeight:'100vh', padding:'clamp(104px,12vw,132px) 20px 80px' }}>
       <div style={{ width:'min(1120px,100%)', margin:'0 auto' }}>
         <div style={{ display:'flex', flexWrap:'wrap', gap:10, alignItems:'center', marginBottom:16 }}>
-          <div style={{ color:'#67e8f9', letterSpacing:'.2em', fontSize:12 }}>ALL THINGS AGENTIC · CLEAN-ROOM BUILD</div>
+          <div style={{ color:'#67e8f9', letterSpacing:'.2em', fontSize:12 }}>ALL THINGS AGENTIC · LIVE PRODUCT BUILD</div>
           <a href="/competitions" style={{ color:'#9fb0bf', border:'1px solid rgba(255,255,255,.12)', borderRadius:999, padding:'6px 10px', fontSize:11, textDecoration:'none' }}>View competition portfolio →</a>
+          <a href="/governed-agent-fleet.json" style={{ color:'#9fb0bf', border:'1px solid rgba(255,255,255,.12)', borderRadius:999, padding:'6px 10px', fontSize:11, textDecoration:'none' }}>Machine contract →</a>
         </div>
         <h1 style={{ fontSize:'clamp(44px,8vw,86px)', lineHeight:.92, margin:0, maxWidth:980 }}>Govern the fleet before the fleet acts.</h1>
-        <p style={{ color:'#9fb0bf', fontSize:19, lineHeight:1.65, maxWidth:820, margin:'26px 0 38px' }}>A public-safe multi-agent governance layer for consequential AI actions. Intent is parsed, risk is scored, policy is applied, Gemini can explain the decision, and an audit artifact is returned before any external action is eligible to execute.</p>
+        <p style={{ color:'#9fb0bf', fontSize:19, lineHeight:1.65, maxWidth:820, margin:'26px 0 20px' }}>A public-safe governance layer for consequential AI actions. Intent is captured, risk is scored deterministically, policy is applied, Gemini explains the decision, and audit evidence is returned before any external action is eligible to execute.</p>
+        <div style={{ display:'flex', flexWrap:'wrap', gap:12, marginBottom:38 }}>
+          <a href={evaluationUrl} target="_blank" rel="noreferrer" style={{ textDecoration:'none', background:'#67e8f9', color:'#031019', fontWeight:900, borderRadius:14, padding:'14px 18px' }}>BUY EVALUATION · $500</a>
+          <a href={integrationUrl} target="_blank" rel="noreferrer" style={{ textDecoration:'none', border:'1px solid rgba(103,232,249,.35)', color:'#e8fbff', fontWeight:800, borderRadius:14, padding:'14px 18px' }}>DEPLOY INTO MY AGENT · $1,500</a>
+        </div>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:18 }}>
           <section style={panel}>
             <div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>ACTION UNDER REVIEW</div>
@@ -61,10 +69,18 @@ export default function AgenticGovernedFleet() {
           </section>
           <section style={panel}>
             <div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>FLEET DECISION</div>
-            {!result ? <p style={{ color:'#718191', lineHeight:1.6 }}>Run an action through the fleet. No payment, message, transfer, credential change, or external action is executed by this demo.</p> : <><div style={{ display:'flex', alignItems:'end', justifyContent:'space-between', gap:12, marginTop:20 }}><strong style={{ fontSize:46, textTransform:'uppercase' }}>{result.decision}</strong><div style={{ color:'#9fb0bf' }}>Risk <strong style={{ color:'#fff', fontSize:26 }}>{result.risk_score}</strong>/100</div></div><div style={{ marginTop:18, display:'grid', gap:10 }}>{result.agents?.map((agent)=><div key={agent.name} style={{ border:'1px solid #1d2a34', borderRadius:14, padding:14, background:'#04070b' }}><div style={{ display:'flex', justifyContent:'space-between', gap:12 }}><strong>{agent.name}</strong><span style={{ color:'#67e8f9' }}>{agent.status}</span></div><pre style={{ whiteSpace:'pre-wrap', wordBreak:'break-word', color:'#94a3b8', fontSize:12, marginBottom:0 }}>{JSON.stringify(agent.output,null,2)}</pre></div>)}</div><div style={{ color:'#718191', marginTop:14, fontSize:12 }}>Audit ID: {result.audit_id}</div></>}
+            {!result ? <p style={{ color:'#718191', lineHeight:1.6 }}>Run an action through the fleet. No payment, message, transfer, credential change, or external action is executed by this public proof surface.</p> : <><div style={{ display:'flex', alignItems:'end', justifyContent:'space-between', gap:12, marginTop:20 }}><strong style={{ fontSize:46, textTransform:'uppercase' }}>{result.decision}</strong><div style={{ color:'#9fb0bf' }}>Risk <strong style={{ color:'#fff', fontSize:26 }}>{result.risk_score}</strong>/100</div></div><div style={{ marginTop:18, display:'grid', gap:10 }}>{result.agents?.map((agent)=><div key={agent.name} style={{ border:'1px solid #1d2a34', borderRadius:14, padding:14, background:'#04070b' }}><div style={{ display:'flex', justifyContent:'space-between', gap:12 }}><strong>{agent.name}</strong><span style={{ color:'#67e8f9' }}>{agent.status}</span></div><pre style={{ whiteSpace:'pre-wrap', wordBreak:'break-word', color:'#94a3b8', fontSize:12, marginBottom:0 }}>{JSON.stringify(agent.output,null,2)}</pre></div>)}</div><div style={{ color:'#718191', marginTop:14, fontSize:12 }}>Audit ID: {result.audit_id}</div></>}
           </section>
         </div>
-        <section style={{ ...panel, marginTop:18 }}><div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>CLAIM BOUNDARY</div><p style={{ color:'#a9b8c5', lineHeight:1.7, marginBottom:0 }}>This competition build is a new clean-room project. It demonstrates a bounded governance pattern and does not publish Mother Language, Soul Cipher, GHX/glyph mappings, hidden policy tables, private prompts, credentials, or private GHOSBC reconstruction material.</p></section>
+        <section style={{ ...panel, marginTop:18 }}>
+          <div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>FROM HACKATHON PROOF TO PRODUCTION OFFER</div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))', gap:14, marginTop:16 }}>
+            <div><strong style={{ fontSize:22 }}>$500 · Evaluate</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>10,000 governed checks plus comparative evidence and integration findings. Use this to test whether the control layer fits your agent before implementation.</p><a href={evaluationUrl} target="_blank" rel="noreferrer" style={{ color:'#67e8f9', fontWeight:800 }}>Buy evaluation →</a></div>
+            <div><strong style={{ fontSize:22 }}>$1,500 · Integrate</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>One existing agent workflow gets deterministic allow/review/block routing, Gemini-backed explanations, human-gate hooks, and audit evidence.</p><a href={integrationUrl} target="_blank" rel="noreferrer" style={{ color:'#67e8f9', fontWeight:800 }}>Buy integration →</a></div>
+            <div><strong style={{ fontSize:22 }}>API / MCP / A2A next</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>The same bounded governance primitive is being packaged for machine-native invocation and prepaid or usage-based billing rather than forcing every buyer into custom consulting.</p></div>
+          </div>
+        </section>
+        <section style={{ ...panel, marginTop:18 }}><div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>CLAIM BOUNDARY</div><p style={{ color:'#a9b8c5', lineHeight:1.7, marginBottom:0 }}>The public product exposes the governance pattern and evidence, not the protected cognitive kernel. Mother Language, Soul Cipher, GHX/glyph mappings, hidden policy tables, private prompts, credentials, and reconstruction material remain excluded.</p></section>
       </div>
     </main>
     <Footer />
