@@ -1,0 +1,4 @@
+name: misfit-governed-fleet
+agent_directory: governed_fleet
+create_params:
+  deployment_target: cloud_run
