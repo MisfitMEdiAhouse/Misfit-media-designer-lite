@@ -1,0 +1,47 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://misfitmediahouse.com/agent-evaluation-lab",
+      "service-desc": [
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+          "type": "application/yaml"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-lab",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://misfitmediahouse.com/.well-known/agent-evaluation-lab.json",
+          "type": "application/json"
+        },
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+          "type": "application/json"
+        },
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+          "type": "application/schema+json"
+        },
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+          "type": "application/schema+json"
+        },
+        {
+          "href": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}
