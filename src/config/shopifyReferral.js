@@ -1,4 +1,4 @@
 export const SHOPIFY_REFERRAL_URL = import.meta.env.VITE_SHOPIFY_AFFILIATE_URL
-  || 'https://www.shopify.com/free-trial?utm_source=misfitmediahouse&utm_medium=referral&utm_campaign=shopify_scanner';
+  || 'https://shopify.pxf.io/QYx1v3';
 
-export const SHOPIFY_AFFILIATE_ACTIVE = Boolean(import.meta.env.VITE_SHOPIFY_AFFILIATE_URL);
+export const SHOPIFY_AFFILIATE_ACTIVE = true;
