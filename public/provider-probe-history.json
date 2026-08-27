@@ -1,0 +1,9 @@
+{
+  "schema": "misfit.provider-probe-history.v1",
+  "status": "initialized",
+  "history_window": "last 50 probe samples per provider",
+  "sample_count": 0,
+  "providers": [],
+  "last_run": null,
+  "boundary": "Metadata-only HTTPS probe history. No credentials, request bodies, purchases, messages, wallet actions, private GHOSBC material, or target-agent skill execution."
+}
