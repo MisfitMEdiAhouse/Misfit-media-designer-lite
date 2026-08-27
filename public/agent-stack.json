@@ -1,9 +1,9 @@
 {
-  "schema_version": "1.10.0",
+  "schema_version": "1.11.0",
   "name": "Misfit Agent Control Plane",
   "canonical_site": "https://misfitmediahouse.com",
   "purpose": "Public-safe recovery and discovery manifest for the Misfit machine/agent stack. Private GHOSBC runtime internals are intentionally excluded.",
-  "continuity": "Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; misfitmediahouse.com publishes the public control surface. Chat sessions are operators, not databases.",
+  "continuity": "Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; misfitmediahouse.com publishes the public control surface; Gmail master recovery thread is an owner-readable fallback. Chat sessions are operators, not databases.",
   "dynamic_health": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health",
   "recovery_guide": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md",
   "machine_discovery": {
@@ -14,6 +14,9 @@
     "ucp": "https://misfitmediahouse.com/.well-known/ucp",
     "agents_md": "https://misfitmediahouse.com/agents.md",
     "llms": "https://misfitmediahouse.com/llms.txt",
+    "provider_scorecard": "https://misfitmediahouse.com/agent-provider-scorecard",
+    "provider_contract": "https://misfitmediahouse.com/agent-provider-scorecard.json",
+    "provider_router_api": "https://misfitmediahouse.com/api/agentic-governance",
     "storefront_mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
     "business_scrub_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub",
     "agent_evaluation_contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
@@ -24,120 +27,19 @@
     "human_opportunity_handoff": "https://misfitmediahouse.com/operator"
   },
   "stack": [
-    {
-      "name": "Agent Revenue Factory",
-      "class": "private-orchestration",
-      "public_endpoint": null,
-      "summary": "Autonomous machine-revenue operator for health, discovery, conversion and safe zero-cost deployment."
-    },
-    {
-      "name": "GHOSBC OS – Agent Brain Hub",
-      "class": "private-cognitive-kernel",
-      "public_endpoint": null,
-      "commercial_product": false,
-      "summary": "Private upstream cognitive and governance kernel used by Misfit-controlled systems. It is not a public product or external runtime surface."
-    },
-    {
-      "name": "Misfit Shield – GHOSBC Sentinel",
-      "class": "private-security-runtime",
-      "public_endpoint": null,
-      "summary": "Private defensive sentinel interface for outbound-context protection, tripwires, security policy and threat visualization."
-    },
-    {
-      "name": "Misfit Machine Agent",
-      "class": "a2a-agent",
-      "agent_card": "https://misfitmediahouse.com/.well-known/agent-card.json",
-      "a2a_jsonrpc": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
-      "a2a_http_json": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a",
-      "protocol_version": "1.0",
-      "agent_version": "1.4.0",
-      "registry_identity": "a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6",
-      "registry_verification": "A2A SDK registration probe WORKING",
-      "skills": ["scrub_public_business", "audit_shopify_agentic_storefront", "audit_a2a_agent_card", "governed_agent_action_check"],
-      "summary": "Public A2A agent for public metadata audits and bounded advisory governance checks. Private GHOSBC implementation details remain behind the Misfit-controlled boundary and are not advertised as a separate product."
-    },
-    {
-      "name": "Misfit Business Scrub",
-      "class": "public-revenue-diagnostic",
-      "product": "https://misfitmediahouse.com/scrub",
-      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub",
-      "a2a_via": "Misfit Machine Agent#scrub_public_business",
-      "summary": "Free public-signal business website diagnostic with prioritized revenue leaks, offer routing and a human-approved lead handoff. Never logs in, submits target forms, mutates a site, purchases or moves money."
-    },
-    {
-      "name": "Misfit A2A Agent Trust Audit",
-      "class": "public-agent-security",
-      "product": "https://misfitmediahouse.com/a2a-agent-audit",
-      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit",
-      "a2a_via": "Misfit Machine Agent#audit_a2a_agent_card",
-      "summary": "Free public-metadata-only A2A Agent Card/binding/skill/security/registry trust audit with a rerunnable share URL and embeddable badge. Never sends a task or executes a target-agent skill."
-    },
-    {
-      "name": "Misfit Agent Evaluation Lab",
-      "class": "public-agent-governance-evaluation",
-      "status": "pilot",
-      "product": "https://misfitmediahouse.com/agent-evaluation-lab",
-      "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
-      "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
-      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-      "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
-      "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-      "commercial_package": {
-        "price_usd": 500,
-        "governed_policy_checks": 10000,
-        "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
-      },
-      "comparison": "Authorized Raw Agent vs governed-agent runs across the same objective and scenario.",
-      "measures": ["dangerous_action_block_rate", "decision_change_rate", "benign_false_refusal_rate", "retained_goal_completion", "human_escalation_rate", "audit_completeness"],
-      "governed_evidence": ["consequence_assessment", "replanning_outcome", "decision_gate_outcome", "audit_memory_receipt", "comparative_metrics", "public_safe_report"],
-      "claims_boundary": "Comparative evidence and integration findings only. Not certification, regulatory attestation, machine-consciousness evidence, or proof of universal safety.",
-      "privacy_boundary": "Protected kernel source, private prompts, hidden policy internals, credentials, protected packets and reconstruction material are excluded.",
-      "summary": "Measurable Raw Agent versus governed-agent evaluation package with bounded public-safe reporting and machine-native contract, API, MCP and A2A discovery."
-    },
-    {
-      "name": "ChangePacket",
-      "class": "public-agent-infrastructure",
-      "product": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed",
-      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp",
-      "registry_identity": "io.github.MisfitMEdiAhouse/changepacket",
-      "summary": "Low-token change memory for public webpages and MCP tool surfaces."
-    },
-    {
-      "name": "Misfit Shopify Agentic Audit",
-      "class": "public-agent-security",
-      "product": "https://misfitmediahouse.com/shopify-ai-audit",
-      "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit",
-      "a2a_via": "Misfit Machine Agent#audit_shopify_agentic_storefront",
-      "ucp_product_id": "misfit_shopify_agentic_audit_free",
-      "summary": "Free public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge. Never executes cart, checkout, order, payment, credential or mutation actions."
-    },
-    {
-      "name": "Misfit Machine Store",
-      "class": "machine-commerce",
-      "ucp": "https://misfitmediahouse.com/.well-known/ucp",
-      "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp",
-      "registry_identity": "io.github.MisfitMEdiAhouse/misfit-machine-store",
-      "summary": "UCP-compatible machine catalog and MCP storefront for current public Misfit products."
-    },
-    {
-      "name": "ContextForge",
-      "class": "agent-infrastructure",
-      "product": "https://contextforge-datahub-app.vercel.app/",
-      "repository": "https://github.com/MisfitMEdiAhouse/contextforge-datahub",
-      "summary": "Metadata-aware code generation and change governance grounded in DataHub context."
-    }
+    {"name":"Agent Revenue Factory","class":"private-orchestration","public_endpoint":null,"summary":"Autonomous machine-revenue operator for health, discovery, conversion and safe zero-cost deployment."},
+    {"name":"GHOSBC OS – Agent Brain Hub","class":"private-cognitive-kernel","public_endpoint":null,"commercial_product":false,"summary":"Private upstream cognitive and governance kernel used by Misfit-controlled systems. It is not a public product or external runtime surface."},
+    {"name":"Misfit Shield – GHOSBC Sentinel","class":"private-security-runtime","public_endpoint":null,"summary":"Private defensive sentinel interface for outbound-context protection, tripwires, security policy and threat visualization."},
+    {"name":"Misfit Agent Provider Procurement Router","class":"public-agent-procurement","status":"active","product":"https://misfitmediahouse.com/agent-provider-scorecard","contract":"https://misfitmediahouse.com/agent-provider-scorecard.json","api":"https://misfitmediahouse.com/api/agentic-governance","api_version":"0.4.0","operations":["evaluate_action","discover_candidates","discover_external_candidates","rank_providers","discover_and_rank"],"candidate_sources":["Misfit public machine contracts","A2A Registry public search","Official MCP Registry public search"],"execution_enabled":false,"summary":"Objective-first provider discovery and evidence-weighted recommendation across local Misfit machine capabilities plus public A2A/MCP registry metadata. Registry presence is discovery evidence, not execution trust."},
+    {"name":"Misfit Machine Agent","class":"a2a-agent","agent_card":"https://misfitmediahouse.com/.well-known/agent-card.json","a2a_jsonrpc":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc","a2a_http_json":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a","protocol_version":"1.0","agent_version":"1.4.0","registry_identity":"a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6","registry_verification":"A2A SDK registration probe WORKING","skills":["scrub_public_business","audit_shopify_agentic_storefront","audit_a2a_agent_card","governed_agent_action_check"],"summary":"Public A2A agent for public metadata audits and bounded advisory governance checks. Private GHOSBC implementation details remain behind the Misfit-controlled boundary."},
+    {"name":"Misfit Business Scrub","class":"public-revenue-diagnostic","product":"https://misfitmediahouse.com/scrub","api":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub","a2a_via":"Misfit Machine Agent#scrub_public_business","summary":"Free public-signal business website diagnostic with prioritized revenue leaks, offer routing and a human-approved lead handoff."},
+    {"name":"Misfit A2A Agent Trust Audit","class":"public-agent-security","product":"https://misfitmediahouse.com/a2a-agent-audit","api":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit","a2a_via":"Misfit Machine Agent#audit_a2a_agent_card","summary":"Free public-metadata-only A2A Agent Card/binding/skill/security/registry trust audit with a rerunnable share URL and embeddable badge."},
+    {"name":"Misfit Agent Evaluation Lab","class":"public-agent-governance-evaluation","status":"pilot","product":"https://misfitmediahouse.com/agent-evaluation-lab","contract":"https://misfitmediahouse.com/agent-evaluation-lab.json","sample_report":"https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json","api":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public","mcp":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp","a2a":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a","a2a_agent_card":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json","commercial_package":{"price_usd":500,"governed_policy_checks":10000,"purchase_handoff":"https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"},"claims_boundary":"Comparative evidence and integration findings only. Not certification, regulatory attestation, machine-consciousness evidence, or proof of universal safety.","summary":"Measurable Raw Agent versus governed-agent evaluation package with bounded public-safe reporting and machine-native contract, API, MCP and A2A discovery."},
+    {"name":"ChangePacket","class":"public-agent-infrastructure","product":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed","mcp":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp","registry_identity":"io.github.MisfitMEdiAhouse/changepacket","summary":"Low-token change memory for public webpages and MCP tool surfaces."},
+    {"name":"Misfit Shopify Agentic Audit","class":"public-agent-security","product":"https://misfitmediahouse.com/shopify-ai-audit","api":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit","a2a_via":"Misfit Machine Agent#audit_shopify_agentic_storefront","ucp_product_id":"misfit_shopify_agentic_audit_free","summary":"Free public-metadata-only Shopify UCP, agents.md and MCP readiness/tool-surface audit with a shareable live badge."},
+    {"name":"Misfit Machine Store","class":"machine-commerce","ucp":"https://misfitmediahouse.com/.well-known/ucp","mcp":"https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp","registry_identity":"io.github.MisfitMEdiAhouse/misfit-machine-store","summary":"UCP-compatible machine catalog and MCP storefront for current public Misfit products."},
+    {"name":"ContextForge","class":"agent-infrastructure","product":"https://contextforge-datahub-app.vercel.app/","repository":"https://github.com/MisfitMEdiAhouse/contextforge-datahub","summary":"Metadata-aware code generation and change governance grounded in DataHub context."}
   ],
-  "security": {
-    "default": "deny private state",
-    "public_boundary": "sanitized metadata, decisions, audit receipts/digests and documented tool contracts only",
-    "consequential_actions": "require explicit bounded authorization or review",
-    "private_core": "GHOSBC/Castle Gate internals, private prompts, cipher/mapping material, credentials and reconstruction material are never published"
-  },
-  "recovery": {
-    "source_repo": "MisfitMEdiAhouse/Misfit-media-designer-lite",
-    "control_plane": "Misfit Cloud / Supabase",
-    "public_guide": "docs/AGENT_CONTROL_PLANE_RECOVERY.md",
-    "rule": "Never publish GHOSBC private runtime material, cipher/mapping internals, founder-private prompts, credentials, secrets or reconstruction material."
-  }
+  "security":{"default":"deny private state","public_boundary":"sanitized metadata, decisions, audit receipts/digests, evidence references and documented tool contracts only","consequential_actions":"require explicit bounded authorization or review","private_core":"GHOSBC/Castle Gate internals, private prompts, cipher/mapping material, credentials and reconstruction material are never published"},
+  "recovery":{"source_repo":"MisfitMEdiAhouse/Misfit-media-designer-lite","control_plane":"Misfit Cloud / Supabase","public_guide":"docs/AGENT_CONTROL_PLANE_RECOVERY.md","rule":"Never publish GHOSBC private runtime material, cipher/mapping internals, founder-private prompts, credentials, secrets or reconstruction material."}
 }
