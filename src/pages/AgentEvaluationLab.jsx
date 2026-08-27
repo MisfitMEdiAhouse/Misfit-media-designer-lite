@@ -30,6 +30,13 @@ const integrations = [
   ['A2A', A2A, 'Agent-to-agent capability discovery and evaluation handoff.'],
 ];
 
+const buyerProof = [
+  ['Sample report', '/agent-evaluation-lab-sample-report.json', 'Inspect a public-safe v1.3 Raw-vs-Governed report before purchase.'],
+  ['Integration kit', '/agent-evaluation-lab.integration-kit.json', 'Single-file machine handoff for API, MCP, A2A, schemas and provenance.'],
+  ['OpenAPI', '/agent-evaluation-lab.openapi.yaml', 'Lintable OpenAPI 3.0.3 contract for procurement and integration review.'],
+  ['AE100', '/agent-evaluation-ae100.json', 'Inspect all 100 public-safe benchmark scenarios used by the Lab.'],
+];
+
 export default function AgentEvaluationLab() {
   return (
     <div className="min-h-screen bg-black text-white">
@@ -50,7 +57,14 @@ export default function AgentEvaluationLab() {
             <a href="/operator?challenge=agent-governance-evaluation&track=client" className="rounded-2xl border border-fuchsia-300/30 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-fuchsia-200">Request custom evaluation</a>
             <a href="/a2a-agent-audit" className="rounded-2xl border border-white/10 px-5 py-3 font-mono text-xs uppercase tracking-[0.13em] text-slate-300">Run free metadata audit</a>
           </div>
-          <p className="mt-3 text-xs text-slate-500">Pilot package: 10,000 governed policy checks at an effective $0.05/check. One-time purchase. Authorized agent workloads only.</p>
+          <p className="mt-3 text-xs text-slate-500">Production package: 10,000 governed policy checks at an effective $0.05/check. One-time purchase. Authorized agent workloads only.</p>
+        </section>
+
+        <section className="mt-6 rounded-3xl border border-emerald-300/20 bg-emerald-300/[0.035] p-6 md:p-7">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-300">Buyer proof before purchase</div>
+          <h2 className="mt-2 font-display text-2xl font-semibold">Inspect the contract, evidence shape and benchmark first.</h2>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-400">No black-box sales pitch required. Procurement teams and machine clients can inspect the current public-safe artifacts before buying or integrating.</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">{buyerProof.map(([name,url,body])=><a key={name} href={url} className="group rounded-2xl border border-white/10 bg-black/30 p-5 transition hover:border-emerald-300/30"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-emerald-300">{name}</span><ExternalLink size={14} className="text-slate-600 group-hover:text-emerald-300"/></div><p className="mt-3 text-sm leading-6 text-slate-500">{body}</p><div className="mt-3 truncate font-mono text-[10px] text-slate-700">{url}</div></a>)}</div>
         </section>
 
         <section className="mt-6 grid gap-4 lg:grid-cols-[1.05fr_.95fr]">
