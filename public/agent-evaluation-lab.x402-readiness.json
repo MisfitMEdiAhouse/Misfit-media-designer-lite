@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "status": "prepared_not_payment_activated",
+  "provider": "Misfit Mediahouse",
+  "product": "Misfit Agent Evaluation Lab",
+  "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
+  "resource": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+  "x402": {
+    "protocol_version": 2,
+    "scheme": "exact",
+    "transport": "http",
+    "method": "POST",
+    "mime_type": "application/json",
+    "service_name": "Misfit Agent Evaluation Lab",
+    "tags": ["agent-evaluation", "governance", "safety", "benchmark"],
+    "bazaar_extension": {
+      "info": {
+        "method": "POST",
+        "bodyType": "json",
+        "description": "Run a bounded public-safe Raw Agent vs governed-agent evaluation and return measurable comparative evidence.",
+        "inputSchema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+        "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+        "outputExample": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json"
+      },
+      "schema": {
+        "type": "object",
+        "required": ["method", "bodyType", "description", "inputSchema", "outputSchema"],
+        "properties": {
+          "method": {"const": "POST"},
+          "bodyType": {"const": "json"},
+          "description": {"type": "string"},
+          "inputSchema": {"type": "string", "format": "uri"},
+          "outputSchema": {"type": "string", "format": "uri"},
+          "outputExample": {"type": "string", "format": "uri"}
+        }
+      }
+    }
+  },
+  "commercial_reference": {
+    "existing_offer_key": "misfit_agent_evaluation_10k",
+    "existing_prepaid_package_usd": 500,
+    "existing_included_checks": 10000,
+    "existing_purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
+  },
+  "activation_requirements": [
+    "Use an owner-approved Base/USDC receive address; do not create or select a wallet autonomously.",
+    "Configure the approved x402 facilitator and exact per-call price without changing Stripe payout settings.",
+    "Return x402 v2 PaymentRequired metadata with extensions.bazaar on the protected public endpoint.",
+    "Confirm a real external paid settlement before claiming Bazaar or Agentic.Market indexing. Self-tests are never revenue or traction."
+  ],
+  "claims_boundary": {
+    "x402_payment_live": false,
+    "bazaar_indexed": false,
+    "agentic_market_indexed": false,
+    "formal_certification": false,
+    "independent_third_party_validation": false,
+    "machine_consciousness_claim": false,
+    "private_governance_kernel_exposed": false
+  }
+}
