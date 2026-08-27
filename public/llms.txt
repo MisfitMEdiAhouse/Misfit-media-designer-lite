@@ -9,7 +9,7 @@ Canonical agent-facing business map: https://misfitmediahouse.com/agents.md
 Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
 Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md
-Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface. Chat sessions are operators, not databases.
+Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface; the Gmail master recovery thread is an owner-readable fallback. Chat sessions are operators, not databases.
 
 Private cognitive-kernel runtime details are intentionally not exposed through public surfaces. The private upstream cognitive/governance kernel is internal infrastructure, not a public source package.
 
@@ -31,8 +31,12 @@ Catalog search and lookup are advertised. Purchase handoff uses each public prod
 Human-readable scorecard: https://misfitmediahouse.com/agent-provider-scorecard
 Machine contract: https://misfitmediahouse.com/agent-provider-scorecard.json
 Shared API: https://misfitmediahouse.com/api/agentic-governance
-POST JSON operation: `rank_providers`
-Purpose: rank internal capabilities, APIs, MCP servers, A2A providers and other eligible agents against an explicit objective after hard constraints pass. Default evidence-weighted factors are capability fit, verified quality, cost efficiency, reliability, latency, safety/governance and reputation. Popularity alone is not a selection criterion.
+API version: 0.4.0
+Operations: `evaluate_action`, `discover_candidates`, `discover_external_candidates`, `rank_providers`, `discover_and_rank`.
+Discovery sources: Misfit public machine contracts, A2A Registry public search, and Official MCP Registry public search. External registry discovery is best-effort; a registry outage does not disable local Misfit discovery.
+Recommended machine call: POST `{ "operation":"discover_and_rank", "include_external":true, "objective":{...} }`.
+Purpose: discover and rank internal capabilities, APIs, MCP servers, A2A providers and other eligible agents against an explicit objective after hard constraints pass. Default evidence-weighted factors are capability fit, verified quality, cost efficiency, reliability, latency, safety/governance and reputation. Popularity alone is not a selection criterion.
+Trust boundary: registry presence is discovery evidence, not proof of safe execution, quality, price, reliability, or human-gate compatibility. Unknown external human-gate compatibility fails objectives that require verified human-gate compatibility.
 Routing boundary: recommendation-only. The public router cannot execute payments, messages, wallet actions, account mutations or other consequential external actions, and a high score never bypasses downstream human-gate policy.
 
 ## Misfit Business Scrub
