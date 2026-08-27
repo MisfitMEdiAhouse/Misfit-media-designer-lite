@@ -54,6 +54,37 @@ const publicTitles = {
   '/coffee/admin': 'Coffee & A Joint Launch Console — Private',
 };
 
+const agentEvaluationProductJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://misfitmediahouse.com/agent-evaluation-lab#product',
+  name: 'Misfit Agent Evaluation Lab — 10,000 Governed Checks',
+  description: 'Raw Agent versus governed-agent evaluation with consequence assessment, replanning, governed decisions, Audit Memory, comparative metrics, and public-safe reports.',
+  url: 'https://misfitmediahouse.com/agent-evaluation-lab',
+  brand: {
+    '@type': 'Brand',
+    name: 'Misfit Mediahouse',
+  },
+  manufacturer: {
+    '@id': 'https://misfitmediahouse.com/#organization',
+  },
+  offers: {
+    '@type': 'Offer',
+    url: 'https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J',
+    priceCurrency: 'USD',
+    price: '500.00',
+    availability: 'https://schema.org/InStock',
+    category: 'One-time production package',
+  },
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Included governed checks', value: '10000' },
+    { '@type': 'PropertyValue', name: 'Effective unit price', value: '$0.05/check' },
+    { '@type': 'PropertyValue', name: 'Report schema', value: 'agent-evaluation-report-v1.3' },
+    { '@type': 'PropertyValue', name: 'Benchmark catalog', value: 'AE100 v1' },
+    { '@type': 'PropertyValue', name: 'Formal certification', value: 'No' },
+  ],
+};
+
 function upsertMeta(name, content) {
   let node = document.querySelector(`meta[name="${name}"]`);
   if (!node) {
@@ -74,6 +105,21 @@ function upsertProperty(property, content) {
   node.setAttribute('content', content);
 }
 
+function syncRouteJsonLd(pathname) {
+  const id = 'misfit-route-jsonld';
+  const current = document.getElementById(id);
+  if (pathname !== '/agent-evaluation-lab') {
+    current?.remove();
+    return;
+  }
+
+  const node = current || document.createElement('script');
+  node.id = id;
+  node.type = 'application/ld+json';
+  node.textContent = JSON.stringify(agentEvaluationProductJsonLd);
+  if (!current) document.head.appendChild(node);
+}
+
 export default function RouteMeta() {
   const { pathname } = useLocation();
 
@@ -92,6 +138,7 @@ export default function RouteMeta() {
     upsertProperty('og:description', route?.[1] || publicMeta['/'][1]);
     upsertProperty('og:url', `https://misfitmediahouse.com${canonicalPath}`);
     upsertProperty('og:type', fieldNote ? 'article' : 'website');
+    syncRouteJsonLd(pathname);
   }, [pathname]);
 
   return null;
