@@ -33,6 +33,8 @@
     { "source": "/portfolio/golden-essence/policies", "destination": "/" },
     { "source": "/portfolio/golden-essence/contact", "destination": "/" },
     { "source": "/portfolio/golden-essence-mobile", "destination": "/" },
+    { "source": "/portfolio/agentic-governed-fleet", "destination": "/" },
+    { "source": "/agentic-governed-fleet", "destination": "/" },
     { "source": "/agents", "destination": "/" },
     { "source": "/command", "destination": "/" },
     { "source": "/command-reset", "destination": "/" },
