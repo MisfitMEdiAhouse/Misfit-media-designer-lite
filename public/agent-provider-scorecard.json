@@ -1,11 +1,12 @@
 {
-  "schema": "misfit.agent-provider-scorecard.v1.6",
+  "schema": "misfit.agent-provider-scorecard.v1.7",
   "name": "Misfit Agent Provider Procurement Scorecard",
   "purpose": "Discover, actively verify, and rank eligible AI agents, tools, MCP servers, A2A providers, APIs, and internal capabilities against an explicit objective using evidence rather than popularity.",
   "status": "active",
   "human_ui": "https://misfitmediahouse.com/agent-provider-scorecard",
   "router_endpoint": "https://misfitmediahouse.com/api/agentic-governance",
   "router_method": "POST",
+  "public_evidence_endpoint": "https://misfitmediahouse.com/api/provider-evidence-summary",
   "api_version": "0.7.0",
   "router_schema": "misfit.provider-router.v1.5",
   "operations": ["evaluate_action", "discover_candidates", "discover_external_candidates", "probe_candidates", "rank_providers", "discover_and_rank", "discover_probe_rank", "outcome_evidence_summary"],
@@ -22,7 +23,9 @@
     "replay_schedule": "every 6 hours",
     "harvest_schedule": "every 10 minutes",
     "history_window_days": 30,
-    "public_rpc": "provider_probe_evidence_summary",
+    "public_summary": "https://misfitmediahouse.com/api/provider-evidence-summary?kind=probe",
+    "privileged_rpc": "provider_probe_evidence_summary",
+    "privileged_rpc_access": "service_role_only",
     "scoring_fields": ["reliability", "latency", "verified_quality", "reputation"],
     "sample_confidence_curve": "0.85 * (1 - exp(-samples/12))",
     "max_historical_blend": 0.85,
@@ -31,7 +34,9 @@
   "verified_outcome_evidence": {
     "system_of_record": "Misfit Cloud",
     "table": "provider_outcome_evidence",
-    "public_rpc": "provider_outcome_evidence_summary",
+    "public_summary": "https://misfitmediahouse.com/api/provider-evidence-summary?kind=outcome",
+    "privileged_rpc": "provider_outcome_evidence_summary",
+    "privileged_rpc_access": "service_role_only",
     "router_operation": "outcome_evidence_summary",
     "history_window_days": 365,
     "accepted_only_when_verified": true,
@@ -55,5 +60,6 @@
   "outputs": ["local/external discovery counts and source health", "active_evidence", "historical_evidence", "verified_outcome_evidence", "probe_status", "probe_summary", "ranked_candidates", "score_breakdown", "outcome_evidence", "recommended_provider", "confidence", "evidence_gaps"],
   "routing_boundary": "The public runtime is recommendation-only and cannot execute payments, messages, wallet actions, account changes, target-agent skills, or other consequential external actions.",
   "privacy_boundary": "Public-safe aggregate evidence only. No customer identifiers, private GHOSBC kernel material, hidden policies, credentials, private prompts, or reconstruction material.",
+  "security_boundary": "Privileged evidence aggregation RPCs are not callable by anon/authenticated clients; public access is mediated through the bounded server-side summary endpoint.",
   "anti_gaming": "Only verified outcome records can affect the outcome overlay. First-party and self-published claims alone cannot manufacture settlement-backed reputation."
 }
