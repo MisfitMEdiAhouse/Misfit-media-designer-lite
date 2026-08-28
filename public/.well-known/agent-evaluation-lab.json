@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3.1",
+  "schema_version": "1.3.2",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -11,6 +11,7 @@
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+  "postman_collection": "https://misfitmediahouse.com/agent-evaluation-lab.postman_collection.json",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "llms_context": "https://misfitmediahouse.com/agent-evaluation-lab.llms.txt",
   "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
