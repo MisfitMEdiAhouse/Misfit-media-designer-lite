@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3.4",
+  "schema_version": "1.3.5",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -18,6 +18,7 @@
   "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+  "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
   "x402_readiness": "https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json",
@@ -56,6 +57,7 @@
     "default_provenance": "caller_supplied_unverified",
     "external_benchmark_compatibility": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
     "external_benchmark_evidence_receipt_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+    "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "external_benchmark_score_claimed": false,
     "schema_validity_is_external_validation": false
   },
