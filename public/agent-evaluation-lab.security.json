@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Misfit Agent Evaluation Lab Security & Data Handling Brief",
+  "provider": "Misfit Mediahouse",
+  "status": "production",
+  "canonical_product": "https://misfitmediahouse.com/agent-evaluation-lab",
+  "security_contact": "jp@misfitmediahouse.com",
+  "scope": "Public-safe Agent Evaluation Lab interfaces and machine-distribution telemetry only. This brief does not describe or expose the protected GHOSBC kernel.",
+  "public_interfaces": {
+    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a"
+  },
+  "data_handling": {
+    "evaluation_inputs": "Caller-supplied evaluation inputs are processed only through the bounded public evaluation surface needed to produce requested evaluation outputs. Do not submit credentials, secrets, private keys, regulated data, or protected GHOSBC reconstruction material.",
+    "machine_discovery_telemetry": "Discovery telemetry is separated from revenue and synthetic/self-test traffic. Current canonical telemetry is limited to operational attribution such as channel, operation, matched product IDs and bounded attribution metadata; it is not treated as customer payment evidence.",
+    "privacy_boundary": "Protected GHOSBC/Mother Language/Soul Cipher/GHX/glyph mappings, private prompts, hidden policy tables, credentials, reconstruction material and Castle Gate internals are excluded from public outputs.",
+    "retention_commitment": "No public retention-period commitment is asserted by this brief. Contractual or customer-specific retention requirements require explicit agreement."
+  },
+  "security_controls": {
+    "private_kernel_exposed": false,
+    "public_machine_surfaces_bounded": true,
+    "revenue_requires_verified_settlement": true,
+    "synthetic_activity_counted_as_revenue": false,
+    "consequential_external_execution_enabled": false,
+    "formal_certification_claimed": false,
+    "independent_third_party_validation_claimed": false,
+    "machine_consciousness_claimed": false
+  },
+  "buyer_due_diligence": {
+    "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+    "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+    "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+    "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+    "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml"
+  },
+  "claims_boundary": "This is a product security/data-handling brief for integration diligence, not a SOC 2 report, penetration-test attestation, regulatory certification, formal safety certification, or independent benchmark validation."
+}
