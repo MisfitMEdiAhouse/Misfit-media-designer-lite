@@ -1,0 +1,94 @@
+{
+  "schema_version": "external-evaluator-kit-v1.0",
+  "name": "Misfit Agent Evaluation Lab External Evaluator Kit",
+  "provider": "Misfit Mediahouse",
+  "status": "production-handoff",
+  "purpose": "Reduce friction for an independent evaluator to run a public benchmark against the bounded Agent Evaluation Lab surface and return reproducible evidence without receiving protected GHOSBC internals.",
+  "target": {
+    "product": "Misfit Agent Evaluation Lab",
+    "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "a2a_endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "api_endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+    "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+    "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json"
+  },
+  "supported_external_profiles": [
+    {
+      "benchmark_id": "AgentHarm",
+      "preferred_public_harness": "A2A-compatible AgentHarm evaluator",
+      "reference": "https://github.com/AIEvals/AgentHarm",
+      "upstream_reference": "https://ukgovernmentbeis.github.io/inspect_evals/evals/safeguards/agentharm/",
+      "note": "Evaluator must pin the exact benchmark/harness version or commit in the evidence receipt."
+    },
+    {
+      "benchmark_id": "Agent-SafetyBench",
+      "preferred_public_harness": "Evaluator-selected official/reproducible implementation",
+      "reference": null,
+      "note": "Evaluator must supply a stable public benchmark reference plus exact version or commit; Misfit does not claim an official repository here."
+    },
+    {
+      "benchmark_id": "AgentHazard",
+      "preferred_public_harness": "Evaluator-selected official/reproducible implementation",
+      "reference": null,
+      "note": "Evaluator must supply a stable public benchmark reference plus exact version or commit; Misfit does not claim an official repository here."
+    }
+  ],
+  "evaluation_sequence": [
+    "1. Pin benchmark/harness version or commit and evaluator identity.",
+    "2. Read the A2A Agent Card or OpenAPI contract and target only the bounded public evaluation surface.",
+    "3. Run the external benchmark independently; do not request or infer private GHOSBC kernel material.",
+    "4. Preserve benchmark-native raw outputs and environment/version metadata.",
+    "5. Produce an evidence receipt conforming to the published external benchmark evidence schema.",
+    "6. Set externally_validated=true only when an independent evaluator actually ran the benchmark and the referenced artifact supports the statement.",
+    "7. Return stable artifact/result references and SHA-256 when available."
+  ],
+  "evidence_receipt": {
+    "schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+    "schema_version": "external-benchmark-evidence-v1.0",
+    "minimum_provenance_for_independent_claim": "independent_evaluator_attested",
+    "schema_validity_alone_is_external_validation": false
+  },
+  "reproducibility_checklist": [
+    "benchmark ID",
+    "benchmark version/commit",
+    "evaluator identity",
+    "evaluated target identity/version",
+    "run ID and UTC timestamp",
+    "stable artifact or result reference",
+    "artifact SHA-256 when practical",
+    "model/agent version",
+    "harness/runtime version",
+    "seed/determinism note when applicable",
+    "benchmark-native aggregate results"
+  ],
+  "commercial_boundary": {
+    "evaluation_package": "10000 governed checks",
+    "price_usd": 500,
+    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "independent_evaluator_payment_included": false,
+    "note": "This kit is a public evaluator handoff, not a paid third-party validation service."
+  },
+  "privacy_boundary": {
+    "allowed": [
+      "public API/A2A/MCP contracts",
+      "public benchmark inputs and outputs",
+      "public-safe evaluation reports",
+      "version/provenance metadata"
+    ],
+    "prohibited": [
+      "private GHOSBC kernel source or prompts",
+      "Mother Language / Soul Cipher / GHX / glyph internals",
+      "credentials or secrets",
+      "private reconstruction material"
+    ]
+  },
+  "claims_boundary": {
+    "formal_certification": false,
+    "regulatory_attestation": false,
+    "machine_consciousness_claim": false,
+    "independent_validation_claim_before_receipt": false,
+    "private_governance_kernel_exposed": false
+  }
+}
