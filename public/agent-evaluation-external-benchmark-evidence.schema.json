@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+  "title": "Misfit Agent Evaluation Lab External Benchmark Evidence Receipt",
+  "description": "Public-safe provenance receipt for importing evidence from an independently run external agent benchmark. Passing this schema validates evidence shape and provenance fields only; it does not establish independent validation, certification, safety, or benchmark performance by itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "benchmark_version_or_commit",
+    "evaluator_identity",
+    "target_identity",
+    "run_id",
+    "run_timestamp",
+    "artifact_or_result_reference",
+    "result_summary",
+    "provenance_classification",
+    "externally_validated",
+    "claims_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "external-benchmark-evidence-v1.0"
+    },
+    "benchmark_id": {
+      "type": "string",
+      "enum": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"]
+    },
+    "benchmark_version_or_commit": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "evaluator_identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Identity of the external evaluator, harness, organization, or reproducible evaluation runtime."
+    },
+    "target_identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Public-safe identity/version of the evaluated target; do not include private GHOSBC kernel material or credentials."
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "run_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "artifact_or_result_reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "description": "Stable artifact URL, result URI, repository commit, or equivalent reproducible evidence reference."
+    },
+    "artifact_sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "result_summary": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Benchmark-native aggregate results. Field semantics remain defined by the named external benchmark."
+    },
+    "raw_result_reference": {
+      "type": ["string", "null"],
+      "maxLength": 2048
+    },
+    "governed_result_reference": {
+      "type": ["string", "null"],
+      "maxLength": 2048
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "model_or_agent_version": {"type": ["string", "null"], "maxLength": 256},
+        "harness_version": {"type": ["string", "null"], "maxLength": 256},
+        "runtime": {"type": ["string", "null"], "maxLength": 256},
+        "seed_or_determinism_note": {"type": ["string", "null"], "maxLength": 512}
+      }
+    },
+    "provenance_classification": {
+      "type": "string",
+      "enum": [
+        "caller_supplied_unverified",
+        "externally_reproducible_artifact",
+        "independent_evaluator_attested"
+      ]
+    },
+    "externally_validated": {
+      "type": "boolean",
+      "description": "Must remain false unless independent evaluation actually occurred and the referenced evidence supports that statement. Schema validity alone never changes this value."
+    },
+    "independent_evaluator_attestation": {
+      "type": ["string", "null"],
+      "maxLength": 2048
+    },
+    "privacy_boundary": {
+      "type": "string",
+      "default": "No protected GHOSBC/Mother Language/Soul Cipher/GHX/glyph/private prompt/credential/reconstruction material is included."
+    },
+    "claims_boundary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must state that evidence is not formal certification, regulatory attestation, or a machine-consciousness claim."
+    }
+  }
+}
