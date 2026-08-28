@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BarChart3, CheckCircle2, ExternalLink, GitCompareArrows, Network, ShieldCheck, Workflow } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
@@ -6,6 +7,72 @@ const API='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-ev
 const MCP='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp';
 const A2A='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a';
 const BUY='https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
+
+async function runEvaluationOperation(payload, signal) {
+  const response = await fetch(API, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(payload),
+    signal,
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data?.error || `evaluation_${response.status}`);
+  return data;
+}
+
+function useAgentEvaluationWebMcp() {
+  useEffect(() => {
+    const modelContext = document?.modelContext || (typeof navigator !== 'undefined' ? navigator.modelContext : null);
+    if (!modelContext?.registerTool) return undefined;
+
+    const controller = new AbortController();
+    const annotations = { readOnlyHint: true, untrustedContentHint: false };
+    const register = (tool) => Promise.resolve(modelContext.registerTool(tool, { signal: controller.signal })).catch(() => undefined);
+
+    register({
+      name: 'misfit_agent_evaluation_contract',
+      description: 'Inspect the public-safe Misfit Agent Evaluation Lab contract, schemas, benchmark version and claims boundaries. No external action is executed.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      annotations,
+      execute: async () => runEvaluationOperation({ op: 'contract' }, controller.signal),
+    });
+    register({
+      name: 'misfit_agent_evaluation_benchmark_catalog',
+      description: 'Read the AE100 public-safe benchmark catalog used for Raw Agent versus governed-agent evaluation.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      annotations,
+      execute: async () => runEvaluationOperation({ op: 'benchmark_catalog' }, controller.signal),
+    });
+    register({
+      name: 'misfit_agent_evaluation_score_report',
+      description: 'Score caller-supplied authorized scenario results into a public-safe comparative Raw Agent versus governed-agent report. This is evaluation evidence, not certification.',
+      inputSchema: {
+        type: 'object',
+        required: ['results'],
+        properties: {
+          results: {
+            type: 'array',
+            minItems: 1,
+            maxItems: 200,
+            items: { type: 'object', required: ['scenario_id'], additionalProperties: true },
+          },
+        },
+        additionalProperties: false,
+      },
+      annotations,
+      execute: async ({ results }) => runEvaluationOperation({ op: 'score_report', results }, controller.signal),
+    });
+    register({
+      name: 'misfit_agent_evaluation_offer',
+      description: 'Inspect the current prepaid Agent Evaluation Lab offer and machine handoff. This tool does not charge a payment method or move funds.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      annotations,
+      execute: async () => runEvaluationOperation({ op: 'offer' }, controller.signal),
+    });
+
+    return () => controller.abort();
+  }, []);
+}
 
 const metrics = [
   ['Dangerous-action block rate', 'How often a governed run stops or redirects a scenario that the baseline would execute unsafely.'],
@@ -38,6 +105,7 @@ const buyerProof = [
 ];
 
 export default function AgentEvaluationLab() {
+  useAgentEvaluationWebMcp();
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -50,6 +118,7 @@ export default function AgentEvaluationLab() {
             <span className="rounded-full border border-white/10 px-3 py-2">Raw vs governed comparison</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Same objective, same scenario</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Report schema v1.3</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">WebMCP site tools</span>
             <span className="rounded-full border border-white/10 px-3 py-2">No certification claim</span>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -81,7 +150,7 @@ export default function AgentEvaluationLab() {
 
         <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-6 md:p-7">
           <div className="flex items-center gap-3"><Network className="text-cyan-300"/><h2 className="font-display text-2xl font-semibold">Machine integration</h2></div>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. These are public wrappers around governed outcomes and measurable reports; they do not expose the private GHOSBC kernel.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route also registers read-only WebMCP tools for contract inspection, AE100 discovery, comparative scoring and offer inspection. These public wrappers do not expose the private GHOSBC kernel.</p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">{integrations.map(([name,url,body])=><a key={name} href={url} className="group rounded-2xl border border-white/10 bg-black/30 p-5 transition hover:border-cyan-300/30"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-cyan-300">{name}</span><ExternalLink size={14} className="text-slate-600 group-hover:text-cyan-300"/></div><p className="mt-3 text-sm leading-6 text-slate-500">{body}</p><div className="mt-3 truncate font-mono text-[10px] text-slate-700">{url}</div></a>)}</div>
         </section>
 
