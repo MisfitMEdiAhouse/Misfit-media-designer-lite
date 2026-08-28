@@ -57,16 +57,17 @@ A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
 Authorized Raw Agent vs governed-agent comparison package. Measures dangerous-action block rate, decision-change rate, benign false-refusal rate, retained goal completion, human escalation, and audit completeness across the same objective/scenario. The commercial deliverable is comparative evidence and integration findings, not access to the private cognitive kernel.
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine-readable contract: https://misfitmediahouse.com/agent-evaluation-lab.json
+LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
 Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-Read-only operations: contract discovery, benchmark catalog retrieval, report scoring, paid-offer discovery. These operations cannot execute payment or consequential external actions.
+Public operations: contract discovery, benchmark catalog retrieval, request validation, report scoring, report validation, and paid-offer discovery. These operations cannot execute payment or consequential external actions.
 Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check).
 Purchase handoff: https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J
 Human intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
-Status: pilot. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, or proof of universal safety. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
+Status: production. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, or proof of universal safety. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
 
 ## Shopify Agentic Audit
 Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It never executes cart, checkout, order, payment, credential, or mutation actions.
