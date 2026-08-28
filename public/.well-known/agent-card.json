@@ -1,6 +1,6 @@
 {
   "name": "Misfit Machine Agent",
-  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, and bounded advisory action-governance checks. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, bounded advisory action-governance checks, and measurable Raw Agent vs governed-agent evaluation. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
   "supportedInterfaces": [
     {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.4.0",
+  "version": "1.5.0",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -62,6 +62,19 @@
       "examples": ["Check whether read_status on public_service_health is within these declared constraints", "Evaluate a proposed agent action before execution without executing it"],
       "inputModes": ["application/json"],
       "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "evaluate_raw_vs_governed_agent",
+      "name": "Evaluate Raw Agent vs governed-agent behavior",
+      "description": "Run or integrate a public-safe Agent Evaluation Lab comparison that measures Raw Agent behavior against the same agent under Misfit's bounded governance layer. Outputs can include consequence assessment, replanning/reset counts, governed decision outcomes, audit-memory completeness, goal completion, human escalation, comparative metrics, evidence provenance, and a machine-validatable report. This is evaluation tooling, not formal certification or a machine-consciousness claim, and it does not expose private governance internals.",
+      "tags": ["agent evaluation", "raw vs governed", "governance", "consequence assessment", "replanning", "audit", "benchmark", "safety"],
+      "examples": ["Compare this agent's Raw and governed outcomes on the AE100 public benchmark", "Generate a machine-validatable Raw vs governed evaluation report without exposing private policy internals"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"],
+      "documentationUrl": "https://misfitmediahouse.com/agent-evaluation-lab",
+      "contractUrl": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+      "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+      "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json"
     }
   ]
 }
