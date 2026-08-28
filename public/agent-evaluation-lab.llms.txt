@@ -1,0 +1,46 @@
+# Misfit Agent Evaluation Lab — machine integration brief
+
+Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
+Status: production
+Surface version: 1.10.0
+Request schema: agent-evaluation-request-v1.0
+Report schema: agent-evaluation-report-v1.3
+Benchmark: ae100-v1
+
+## Purpose
+Measure the same agent/objective in Raw Agent and governed-agent modes and return public-safe comparative evidence. The product measures consequence assessments, decision changes, Center Reset/replanning cycles, governed decision outcomes, Audit Memory completeness, goal completion, human escalation, and Raw-vs-Governed comparative metrics.
+
+## Machine contracts
+Discovery card: https://misfitmediahouse.com/.well-known/agent-evaluation-lab.json
+Product contract: https://misfitmediahouse.com/agent-evaluation-lab.json
+OpenAPI 3.0.3: https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml
+Integration kit: https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json
+Request JSON Schema: https://misfitmediahouse.com/agent-evaluation-request.schema.json
+Report JSON Schema: https://misfitmediahouse.com/agent-evaluation-report.schema.json
+Sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
+AE100 catalog: https://misfitmediahouse.com/agent-evaluation-ae100.json
+x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
+
+## Live interfaces
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
+A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
+A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
+
+Supported public operations: contract, benchmark_catalog, validate_request, score_report, validate_report, offer.
+
+Recommended flow: discover -> read contract and schemas -> validate_request -> score_report -> validate_report -> purchase higher-volume checks if useful.
+
+## Commercial handoff
+Offer key: misfit_agent_evaluation_10k
+Package: 10,000 governed checks
+Price: $500 USD
+Effective unit price: $0.05/check
+Purchase handoff: https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J
+
+## Evidence and claims boundary
+Caller-supplied evidence defaults to caller_supplied_unverified. AgentHarm, Agent-SafetyBench, and AgentHazard are interoperability profiles only until an actual provenance-preserving external run exists. No external benchmark score is claimed by default.
+
+This product is comparative evaluation and integration evidence. It is not formal certification, regulatory attestation, independent third-party validation, proof of universal safety, or a machine-consciousness claim. Private GHOSBC governance kernel source, prompts, mappings, Mother Language/Soul Cipher/GHX/glyph internals, hidden policy logic, credentials, protected packets, and reconstruction material are excluded from the public contract.
+
+x402 payment is not live. Bazaar and Agentic.Market indexing are not claimed.
