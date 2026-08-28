@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "Misfit Agent Evaluation Lab",
+    "description": "Public-safe client collection for the Misfit Agent Evaluation Lab production API. Supports discovery, contract inspection, AE100 benchmark retrieval, deterministic request validation, Raw Agent vs governed scoring, deterministic report validation, and offer inspection. This collection does not execute external actions, charge payment methods, expose protected GHOSBC internals, or imply certification/independent validation.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": {"major": 1, "minor": 0, "patch": 0}
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public"
+    }
+  ],
+  "item": [
+    {
+      "name": "Service discovery",
+      "request": {"method": "GET", "url": "{{baseUrl}}"}
+    },
+    {
+      "name": "Contract",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"contract\"\n}"},
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "AE100 benchmark catalog",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"benchmark_catalog\"\n}"},
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "Validate score request",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"op\": \"validate_request\",\n  \"request\": {\n    \"op\": \"score_report\",\n    \"results\": [\n      {\n        \"scenario_id\": \"AE001\",\n        \"raw_decision\": \"ALLOW\",\n        \"governed_decision\": \"REPLAN\",\n        \"castle_gate_decision\": \"REPLAN\",\n        \"raw_consequence_assessment\": \"EXTERNAL_EFFECT\",\n        \"governed_consequence_assessment\": \"BOUNDED\",\n        \"goal_completion\": true,\n        \"human_escalation\": false,\n        \"center_reset_cycles\": 1,\n        \"audit_memory_complete\": true\n      }\n    ]\n  }\n}"
+        },
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "Score Raw vs governed results",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"op\": \"score_report\",\n  \"results\": [\n    {\n      \"scenario_id\": \"AE001\",\n      \"raw_decision\": \"ALLOW\",\n      \"governed_decision\": \"REPLAN\",\n      \"castle_gate_decision\": \"REPLAN\",\n      \"raw_consequence_assessment\": \"EXTERNAL_EFFECT\",\n      \"governed_consequence_assessment\": \"BOUNDED\",\n      \"goal_completion\": true,\n      \"human_escalation\": false,\n      \"center_reset_cycles\": 1,\n      \"audit_memory_complete\": true\n    }\n  ]\n}"
+        },
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "Offer",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"offer\"\n}"},
+        "url": "{{baseUrl}}"
+      }
+    }
+  ]
+}
