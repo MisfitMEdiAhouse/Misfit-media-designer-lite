@@ -6,6 +6,7 @@ const groups = [
   {
     title: 'AI + software',
     items: [
+      ['/identity-signal', 'Identity Signal', 'Public-safe cognitive personalization proof'],
       ['/misfit-ai-v2', 'Misfit AI V2', 'AI revenue software'],
       ['/enterprise-ai', 'Enterprise AI', 'Enterprise agent + automation work'],
       ['https://contextforge-datahub-app.vercel.app/', 'ContextForge', 'Metadata-aware code + change context'],
@@ -77,6 +78,9 @@ export default function StanMisfitExplorer() {
           <Grid2X2 size={13}/> Explore all Misfit <ChevronDown size={12} className={open ? 'rotate-180 transition' : 'transition'}/>
         </button>
         <div className="flex items-center gap-2">
+          <Link to="/identity-signal" className="inline-flex min-h-9 items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/[0.07] px-3 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-cyan-200 transition hover:border-cyan-200/60 hover:text-white">
+            <BrainCircuit size={13}/> Identity Signal <span className="hidden sm:inline">· proof</span>
+          </Link>
           <Link to="/signal" className="inline-flex min-h-9 items-center gap-2 rounded-full border border-fuchsia-300/30 bg-[linear-gradient(90deg,rgba(34,211,238,.1),rgba(217,70,239,.13))] px-3 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-fuchsia-200 transition hover:border-fuchsia-200/60 hover:text-white">
             <Activity size={13}/> Misfit Trader <span className="hidden sm:inline">· live</span>
           </Link>
