@@ -13,7 +13,13 @@ for (const file of parts) {
 }
 
 const chunks = parts.map((file, i) => {
-  const text = fs.readFileSync(file, 'utf8').trim();
+  let text = fs.readFileSync(file, 'utf8').trim();
+  // GitHub text transport added two trailing characters to part 2. Strip only that
+  // known transport artifact, then verify the reconstructed binary by exact SHA.
+  if (i === 2 && text.length === expectedPartLength + 2 && text.endsWith('qv')) {
+    text = text.slice(0, -2);
+    console.log('Trimmed known 2-character transport artifact from Trader background chunk 2');
+  }
   if (text.length !== expectedPartLength) throw new Error(`Trader background chunk ${i} length ${text.length}; expected ${expectedPartLength}`);
   return text;
 });
