@@ -2,8 +2,6 @@
   const path = location.pathname.replace(/\/+$/, '') || '/';
   if (path !== '/signal') return;
 
-  const AUDIO_URL = 'https://www.aidocmaker.com/g0/audio?name=5d41950d4abd4af5a725588a7238caa0';
-
   const style = document.createElement('style');
   style.textContent = `
     body[data-misfit-trader] { background:#020304 !important; }
@@ -20,8 +18,7 @@
     #trader-butler-guide .title { margin-top:6px; font:800 16px/1.25 Inter,sans-serif; color:#fff; }
     #trader-butler-guide .copy { margin-top:5px; max-width:620px; font:400 12px/1.55 Inter,sans-serif; color:#aeb8c8; }
     #trader-butler-guide .controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:11px; }
-    #trader-butler-guide button { min-height:46px; border-radius:12px; padding:0 14px; border:1px solid rgba(103,232,249,.32); background:#67e8f9; color:#020617; font:800 10px/1 'JetBrains Mono',monospace; letter-spacing:.04em; cursor:pointer; }
-    #trader-butler-guide button.secondary { background:rgba(0,0,0,.45); color:#cbd5e1; border-color:rgba(255,255,255,.13); }
+    #trader-butler-guide button { min-height:46px; border-radius:12px; padding:0 14px; border:1px solid rgba(255,255,255,.13); background:rgba(0,0,0,.45); color:#94a3b8; font:800 10px/1 'JetBrains Mono',monospace; letter-spacing:.04em; cursor:not-allowed; }
     #trader-butler-guide .status { margin-top:8px; font:500 9px/1.4 'JetBrains Mono',monospace; color:#64748b; text-transform:uppercase; letter-spacing:.08em; }
     @media (min-width:768px) { #misfit-trader-brand-bg .photo { background-position:center top; } #trader-butler-guide { padding:16px 18px; } }
     @media (max-width:420px) { #misfit-trader-brand-bg .photo { background-position:61% top; } #trader-butler-guide button { width:100%; } }
@@ -38,47 +35,6 @@
     document.body.prepend(bg);
   }
 
-  const audio = new Audio(AUDIO_URL);
-  audio.preload = 'metadata';
-  let card, play, restart, status;
-
-  const update = (forced) => {
-    if (!play || !status) return;
-    const active = !audio.paused && !audio.ended;
-    play.textContent = active ? '❚❚  PAUSE BUTLER MODE' : '▶  HOLD MY HAND · VOICE GUIDE';
-    status.textContent = forced || 'DEEP BRITISH BUTLER VOICE · USER-INITIATED · NO ROBOT FALLBACK';
-  };
-
-  const toggle = async () => {
-    if (!audio.paused && !audio.ended) {
-      audio.pause();
-      update();
-      return;
-    }
-    try {
-      await audio.play();
-      update();
-    } catch {
-      update('BUTLER AUDIO UNAVAILABLE · TRY AGAIN');
-    }
-  };
-
-  const restartGuide = async () => {
-    audio.pause();
-    audio.currentTime = 0;
-    try {
-      await audio.play();
-      update();
-    } catch {
-      update('BUTLER AUDIO UNAVAILABLE · TRY AGAIN');
-    }
-  };
-
-  audio.addEventListener('play', () => update());
-  audio.addEventListener('pause', () => update());
-  audio.addEventListener('ended', () => update('GUIDE COMPLETE · REPLAY ANY TIME'));
-  audio.addEventListener('error', () => update('BUTLER AUDIO UNAVAILABLE · NO DEVICE ROBOT SUBSTITUTE'));
-
   let attempts = 0;
   const mount = () => {
     const main = document.querySelector('#root main');
@@ -89,23 +45,17 @@
     }
     if (document.getElementById('trader-butler-guide')) return;
 
-    card = document.createElement('div');
+    const card = document.createElement('div');
     card.id = 'trader-butler-guide';
     card.innerHTML = `
       <div class="eyebrow">BUTLER MODE · AI HAND-HOLD GUIDE</div>
       <div class="title">NO FUCKING CLUE WHAT YOU'RE LOOKING AT?</div>
-      <div class="copy">Want me to hold your hand? Tap once. A deeper, older-school British-butler voice walks you through the crowd signal, candles, paper lab, prediction markets and why real money is still gated.</div>
-      <div class="controls"><button type="button" data-play>▶  HOLD MY HAND · VOICE GUIDE</button><button type="button" class="secondary" data-restart>↻  START OVER</button></div>
-      <div class="status">DEEP BRITISH BUTLER VOICE · USER-INITIATED · NO ROBOT FALLBACK</div>`;
+      <div class="copy">Deep older British male voice is being cast. The wrong female/robot fallback has been removed rather than left live.</div>
+      <div class="controls"><button type="button" disabled>VOICE CASTING · HOLD</button></div>
+      <div class="status">MALE BRITISH VOICE REQUIRED · NO DEVICE ROBOT FALLBACK</div>`;
 
     const actionRow = hero.querySelector('.mt-6.flex');
     if (actionRow) hero.insertBefore(card,actionRow); else hero.appendChild(card);
-    play = card.querySelector('[data-play]');
-    restart = card.querySelector('[data-restart]');
-    status = card.querySelector('.status');
-    play.addEventListener('click',toggle);
-    restart.addEventListener('click',restartGuide);
-    update();
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mount,{once:true}); else mount();
