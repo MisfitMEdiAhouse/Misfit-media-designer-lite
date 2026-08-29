@@ -18,7 +18,7 @@ import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import AgentEvaluationLab from './pages/AgentEvaluationLab.jsx';
-import IdentitySignal from './pages/IdentitySignal.jsx';
+import IdentitySignal from './pages/IdentitySignalPublic.jsx';
 import WorldForge from './pages/WorldForge.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
