@@ -25,6 +25,23 @@
   if (typeof NativeAudio !== 'function') return;
 
   const mediaSrc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'src');
+  const activeAudio = new Set();
+
+  function register(audio) {
+    activeAudio.add(audio);
+    audio.addEventListener('ended', () => activeAudio.delete(audio), { once: true });
+    audio.addEventListener('error', () => activeAudio.delete(audio), { once: true });
+    return audio;
+  }
+
+  function stopAll() {
+    for (const audio of [...activeAudio]) {
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+      } catch (_) {}
+    }
+  }
 
   function patchAudioElement(audio) {
     if (!audio || !mediaSrc?.get || !mediaSrc?.set) return audio;
@@ -41,7 +58,7 @@
     if (nativeSetAttribute) {
       audio.setAttribute = (name, value) => nativeSetAttribute(name, String(name).toLowerCase() === 'src' ? remap(value) : value);
     }
-    return audio;
+    return register(audio);
   }
 
   function AudioProxy(src) {
@@ -53,6 +70,7 @@
   try { Object.setPrototypeOf(AudioProxy, NativeAudio); } catch (_) {}
   window.Audio = AudioProxy;
 
+  window.__MISFIT_STAN_AUDIO__ = Object.freeze({ stopAll });
   window.__MISFIT_STAN_VOICE__ = Object.freeze({
     provider: 'AI Voice Generator',
     profile: 'fancy',
