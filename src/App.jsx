@@ -18,6 +18,7 @@ import AgentControlPlane from './pages/AgentControlPlane.jsx';
 import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import AgentEvaluationLab from './pages/AgentEvaluationLab.jsx';
+import IdentitySignal from './pages/IdentitySignal.jsx';
 import WorldForge from './pages/WorldForge.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
@@ -93,6 +94,7 @@ export default function App() {
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
         <Route path="/agent-evaluation-lab" element={<AgentEvaluationLab />} />
+        <Route path="/identity-signal" element={<IdentitySignal />} />
         <Route path="/stan-hansen" element={<StanHansenEgnyte />} />
         <Route path="/egnyte" element={<Navigate to="/stan-hansen" replace />} />
         <Route path="/signal" element={<WorldForge />} />
