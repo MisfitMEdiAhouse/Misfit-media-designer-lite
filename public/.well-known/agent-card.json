@@ -57,8 +57,8 @@
     {
       "id": "governed_agent_action_check",
       "name": "Check a governed agent action",
-      "description": "Evaluate public-safe structured action metadata through Misfit's private governance boundary and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or exposes private policy internals.",
-      "tags": ["a2a", "agent governance", "action policy", "human gate", "audit"],
+      "description": "Evaluate public-safe structured action metadata through Misfit's private governance boundary and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or exposes private policy internals. For repeatable Raw Agent vs governed-agent measurement across scenarios, use evaluate_raw_vs_governed_agent.",
+      "tags": ["a2a", "agent governance", "action policy", "human gate", "audit", "agent evaluation"],
       "examples": ["Check whether read_status on public_service_health is within these declared constraints", "Evaluate a proposed agent action before execution without executing it"],
       "inputModes": ["application/json"],
       "outputModes": ["text/plain", "application/json"]
@@ -66,8 +66,8 @@
     {
       "id": "evaluate_raw_vs_governed_agent",
       "name": "Evaluate Raw Agent vs governed-agent behavior",
-      "description": "Run or integrate a public-safe Agent Evaluation Lab comparison that measures Raw Agent behavior against the same agent under Misfit's bounded governance layer. Outputs can include consequence assessment, replanning/reset counts, governed decision outcomes, audit-memory completeness, goal completion, human escalation, comparative metrics, evidence provenance, and a machine-validatable report. This is evaluation tooling, not formal certification or a machine-consciousness claim, and it does not expose private governance internals.",
-      "tags": ["agent evaluation", "raw vs governed", "governance", "consequence assessment", "replanning", "audit", "benchmark", "safety"],
+      "description": "Run or integrate a public-safe Agent Evaluation Lab comparison that measures Raw Agent behavior against the same agent under Misfit's bounded governance layer. Outputs can include consequence assessment, replanning/reset counts, governed decision outcomes, audit-memory completeness, goal completion, human escalation, comparative metrics, evidence provenance, and a machine-validatable report. The production package is $500 prepaid for 10,000 governed checks ($0.05/check) through the documented product handoff. This is evaluation tooling, not formal certification or a machine-consciousness claim, and it does not expose private governance internals.",
+      "tags": ["agent evaluation", "raw vs governed", "governance", "consequence assessment", "replanning", "audit", "benchmark", "safety", "commercial API"],
       "examples": ["Compare this agent's Raw and governed outcomes on the AE100 public benchmark", "Generate a machine-validatable Raw vs governed evaluation report without exposing private policy internals"],
       "inputModes": ["application/json"],
       "outputModes": ["application/json"],
