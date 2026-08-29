@@ -18,6 +18,7 @@ const groups = [
   {
     title: 'Governance + agents',
     items: [
+      ['/developer-test-drive', 'Developer Test Drive', 'Guided live proof across three systems'],
       ['/agent-evaluation-lab', 'Agent Evaluation Lab', 'Raw vs governed agent testing'],
       ['/agentic-governed-fleet', 'Governed Agent Fleet', 'Bounded agent execution'],
       ['/agents', 'Agent Control Plane', 'A2A + MCP + machine surfaces'],
@@ -62,7 +63,7 @@ const groups = [
 ];
 
 const egnytePicks = [
-  ['/identity-signal', 'Identity Signal', 'PROOF', 'Personalization without changing authority'],
+  ['/developer-test-drive', 'Developer Test Drive', 'LIVE PROOF', 'Guided consequence gate + provider verification + personalization'],
   ['/agentic-governed-fleet', 'Governed Agent Fleet', 'LIVE', 'Hands-on consequence / authority test drive'],
   ['/agent-evaluation-lab', 'Agent Evaluation Lab', 'LIVE', 'Contracts, benchmarks + raw-vs-governed evidence'],
   ['/frontier', 'Frontier Technology Map', 'MIXED', 'Machine reconsideration, GHX/glyphs, robotics + ML maturity'],
