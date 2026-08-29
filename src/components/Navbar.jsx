@@ -29,8 +29,8 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/85 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <Link to="/" className="font-display text-lg font-bold text-white" onClick={() => setMobileOpen(false)}>
+      <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between px-4 py-2.5 sm:px-5">
+        <Link to="/" className="inline-flex min-h-11 items-center font-display text-lg font-bold text-white" onClick={() => setMobileOpen(false)}>
           MISFIT<span className="text-cyan-400">.</span>
         </Link>
 
@@ -60,12 +60,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        <Link to="/" className="hidden rounded-full border border-cyan-300/40 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black md:inline-flex">
+        <Link to="/" className="hidden min-h-11 items-center rounded-full border border-cyan-300/40 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black md:inline-flex">
           Scan a site
         </Link>
         <button
           type="button"
-          className="text-slate-200 md:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-200 transition hover:border-cyan-300/30 hover:text-cyan-200 md:hidden"
           aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((value) => !value)}
@@ -77,23 +77,23 @@ export default function Navbar() {
       {stanTour && <StanMisfitExplorer />}
 
       {mobileOpen && (
-        <div className="max-h-[calc(100svh-65px)] overflow-y-auto border-t border-white/10 bg-black/95 px-5 py-4 md:hidden">
+        <div className="max-h-[calc(100svh-64px)] overflow-y-auto border-t border-white/10 bg-black/95 px-4 py-4 sm:px-5 md:hidden">
           <div className="font-mono text-xs uppercase tracking-[0.14em] text-slate-300">
-            <Link to="/" onClick={() => setMobileOpen(false)} className={`block rounded-xl px-3 py-3 ${active('/') ? 'bg-cyan-300/10 text-cyan-300' : 'hover:bg-white/5'}`}>Scanner</Link>
+            <Link to="/" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center rounded-xl px-3 py-3 ${active('/') ? 'bg-cyan-300/10 text-cyan-300' : 'hover:bg-white/5'}`}>Scanner</Link>
             <div className="mt-2 rounded-2xl border border-white/10 bg-white/[0.025] p-2">
-              <Link to="/explore" onClick={() => setMobileOpen(false)} className={`flex items-center justify-between rounded-xl px-3 py-3 ${exploreActive ? 'text-cyan-300' : 'text-white'}`}>
+              <Link to="/explore" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center justify-between rounded-xl px-3 py-3 ${exploreActive ? 'text-cyan-300' : 'text-white'}`}>
                 Explore Misfit <span aria-hidden="true">→</span>
               </Link>
               <div className="grid grid-cols-2 gap-1 border-t border-white/5 pt-2">
                 {misfitFamilies.map(({ href, label, icon: Icon }, index) => (
-                  <a key={href} href={href} onClick={() => setMobileOpen(false)} className={`flex min-h-[74px] flex-col justify-between rounded-xl p-3 text-[9px] leading-4 text-slate-400 hover:bg-white/5 hover:text-cyan-300 ${index === 4 ? 'col-span-2 min-h-0 flex-row items-center' : ''}`}>
-                    <Icon size={15} className="text-cyan-300" /><span className={index === 4 ? 'ml-3 flex-1' : 'mt-3'}>{label}</span>
+                  <a key={href} href={href} onClick={() => setMobileOpen(false)} className={`flex min-h-[74px] flex-col justify-between rounded-xl p-3 text-[9px] leading-4 text-slate-400 hover:bg-white/5 hover:text-cyan-300 ${index === 4 ? 'col-span-2 min-h-11 flex-row items-center' : ''}`}>
+                    <Icon size={15} className="shrink-0 text-cyan-300" /><span className={index === 4 ? 'ml-3 flex-1' : 'mt-3'}>{label}</span>
                   </a>
                 ))}
               </div>
             </div>
             {primaryItems.slice(1).map(([href, label]) => (
-              <Link key={href} to={href} onClick={() => setMobileOpen(false)} className={`mt-2 block rounded-xl px-3 py-3 ${active(href) ? 'bg-cyan-300/10 text-cyan-300' : 'hover:bg-white/5'}`}>{label}</Link>
+              <Link key={href} to={href} onClick={() => setMobileOpen(false)} className={`mt-2 flex min-h-11 items-center rounded-xl px-3 py-3 ${active(href) ? 'bg-cyan-300/10 text-cyan-300' : 'hover:bg-white/5'}`}>{label}</Link>
             ))}
           </div>
         </div>
