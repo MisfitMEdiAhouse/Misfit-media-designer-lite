@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "status": "render_pending_heygen_tts_minutes",
+  "voice": {
+    "provider": "HeyGen",
+    "name": "Derya - Lifelike - Broadcaster",
+    "voice_id": "04d0ae1d0af2489ca7d3bb402a39a890",
+    "speed": 0.86,
+    "locale": "en-GB",
+    "style": "warm British broadcaster; intelligent, confident, natural, lower-key; never nasal, chirpy, breathy, theatrical, or robotic"
+  },
+  "pronunciation": {
+    "written_brand": "GHOSBC OS",
+    "spoken_brand": "Ghost BC OS",
+    "rule": "Never insert periods or isolated letter pauses into BC OS. Speak Ghost BC OS as one natural phrase. Written UI copy must remain GHOSBC OS."
+  },
+  "cadence": {
+    "sentence_style": "short conversational clauses",
+    "pause_between_sentences_ms": 260,
+    "pause_between_sections_ms": 420,
+    "avoid": [
+      "ellipsis pauses",
+      "periods between acronym letters",
+      "long comma chains",
+      "dramatic word-by-word emphasis",
+      "mid-sentence speed ramps"
+    ]
+  },
+  "render_policy": {
+    "all_clips_same_voice_id": true,
+    "all_clips_same_speed": true,
+    "all_clips_same_locale": true,
+    "browser_tts_fallback": false,
+    "partial_voice_mix_allowed": false,
+    "require_full_rerender_before_swap": true
+  },
+  "tour_audio_scripts": [
+    {
+      "step": 1,
+      "title": "Why this tour exists",
+      "text": "Stan, Egnyte already has a strong enterprise content and permission layer. This tour is not about replacing that. It asks one more question. Once an agent has legitimate access, what should it actually be allowed to do next?"
+    },
+    {
+      "step": 2,
+      "title": "What GHOSBC could add",
+      "text": "Ghost BC OS adds consequence-aware routing after access is granted. It can tell the difference between an action that is technically available and one that is appropriate in context. It can preserve the goal, replan a weak action, escalate when needed, and return a bounded audit receipt."
+    },
+    {
+      "step": 3,
+      "title": "The combined architecture",
+      "text": "Egnyte stays the trusted content and identity boundary. ContextForge adds system context. Castle Gate checks consequences before execution. Sentinel watches the runtime. Ghost BC OS stays protected behind those interfaces and returns only bounded decisions."
+    },
+    {
+      "step": 4,
+      "title": "Why ContextForge matters",
+      "text": "Egnyte is already moving toward an AI-native software development lifecycle. ContextForge matters because a coding agent needs more than source text. It can ground a proposed change in metadata, ownership, lineage, and architecture before that change reaches Castle Gate."
+    },
+    {
+      "step": 5,
+      "title": "Try the decision boundary",
+      "text": "This preflight teaches the architecture. The live proof directly below it goes further. Choose a bounded read, an external message, or an out-of-mandate delete. Misfit sends the real action envelope through the published governance boundary and shows the returned decision and reasons."
+    },
+    {
+      "step": 6,
+      "title": "Why this matches Egnyte now",
+      "text": "Egnyte's current hiring lines up with this architecture. The company is investing in developer ecosystem, integrations, MCP, agentic AI, professional services, and AI-assisted engineering. This is the kind of layer those teams can actually test."
+    },
+    {
+      "step": 7,
+      "title": "How Misfit protects the IP",
+      "text": "The private kernel stays private. Developers can inspect contracts, input and output shapes, public decisions, audit evidence, and benchmark behavior. They do not need private policy maps, prompts, symbolic mappings, or reconstruction material to integrate with the system."
+    },
+    {
+      "step": "outro",
+      "title": "Guided tour complete",
+      "text": "That completes the guided tour. Egnyte keeps the trusted content and identity layer. Misfit adds context, consequence-aware execution, runtime watch, and measurable governance around agent actions. Ghost BC OS stays protected behind those interfaces. A clean next step is simple. Pick one bounded Egnyte workflow, run it raw and governed, compare the evidence, and expand only if the difference is real."
+    }
+  ]
+}
