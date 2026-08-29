@@ -44,6 +44,33 @@ function useAgentEvaluationWebMcp() {
       execute: async () => runEvaluationOperation({ op: 'benchmark_catalog' }, controller.signal),
     });
     register({
+      name: 'misfit_agent_evaluation_validate_request',
+      description: 'Deterministically validate a caller-supplied score_report request against the public Agent Evaluation Lab request contract before scoring. Shape validation is not certification.',
+      inputSchema: {
+        type: 'object',
+        required: ['request'],
+        properties: {
+          request: {
+            type: 'object',
+            required: ['op', 'results'],
+            properties: {
+              op: { type: 'string', enum: ['score_report'] },
+              results: {
+                type: 'array',
+                minItems: 1,
+                maxItems: 200,
+                items: { type: 'object', required: ['scenario_id'], additionalProperties: true },
+              },
+            },
+            additionalProperties: true,
+          },
+        },
+        additionalProperties: false,
+      },
+      annotations,
+      execute: async ({ request }) => runEvaluationOperation({ op: 'validate_request', request }, controller.signal),
+    });
+    register({
       name: 'misfit_agent_evaluation_score_report',
       description: 'Score caller-supplied authorized scenario results into a public-safe comparative Raw Agent versus governed-agent report. This is evaluation evidence, not certification.',
       inputSchema: {
@@ -61,6 +88,20 @@ function useAgentEvaluationWebMcp() {
       },
       annotations,
       execute: async ({ results }) => runEvaluationOperation({ op: 'score_report', results }, controller.signal),
+    });
+    register({
+      name: 'misfit_agent_evaluation_validate_report',
+      description: 'Deterministically validate a caller-supplied Agent Evaluation Lab report against report schema v1.3. Structural validity does not imply external validation or certification.',
+      inputSchema: {
+        type: 'object',
+        required: ['report'],
+        properties: {
+          report: { type: 'object', additionalProperties: true },
+        },
+        additionalProperties: false,
+      },
+      annotations,
+      execute: async ({ report }) => runEvaluationOperation({ op: 'validate_report', report }, controller.signal),
     });
     register({
       name: 'misfit_agent_evaluation_offer',
@@ -150,7 +191,7 @@ export default function AgentEvaluationLab() {
 
         <section className="mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-6 md:p-7">
           <div className="flex items-center gap-3"><Network className="text-cyan-300"/><h2 className="font-display text-2xl font-semibold">Machine integration</h2></div>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route also registers read-only WebMCP tools for contract inspection, AE100 discovery, comparative scoring and offer inspection. These public wrappers do not expose the private GHOSBC kernel.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route registers read-only WebMCP tools for contract inspection, AE100 discovery, deterministic request validation, comparative scoring, deterministic report validation and offer inspection. These public wrappers do not expose the private GHOSBC kernel.</p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">{integrations.map(([name,url,body])=><a key={name} href={url} className="group rounded-2xl border border-white/10 bg-black/30 p-5 transition hover:border-cyan-300/30"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-cyan-300">{name}</span><ExternalLink size={14} className="text-slate-600 group-hover:text-cyan-300"/></div><p className="mt-3 text-sm leading-6 text-slate-500">{body}</p><div className="mt-3 truncate font-mono text-[10px] text-slate-700">{url}</div></a>)}</div>
         </section>
 
