@@ -33,6 +33,7 @@ import FieldNotes from './pages/FieldNotes.jsx';
 import CoffeeLaunchConsole from './pages/CoffeeLaunchConsole.jsx';
 import GoldenEssence from './pages/GoldenEssence.jsx';
 import GoldenEssenceMobile from './pages/GoldenEssenceMobile.jsx';
+import StanHansenEgnyte from './pages/StanHansenEgnyte.jsx';
 
 const goldenEssenceSections = new Set(['about', 'services', 'policies', 'contact']);
 
@@ -92,6 +93,8 @@ export default function App() {
         <Route path="/shopify-ai-audit" element={<ShopifyAgenticAudit />} />
         <Route path="/a2a-agent-audit" element={<A2AAgentAudit />} />
         <Route path="/agent-evaluation-lab" element={<AgentEvaluationLab />} />
+        <Route path="/stan-hansen" element={<StanHansenEgnyte />} />
+        <Route path="/egnyte" element={<Navigate to="/stan-hansen" replace />} />
         <Route path="/signal" element={<WorldForge />} />
         <Route path="/worldforge" element={<Navigate to="/signal" replace />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
