@@ -36,6 +36,7 @@
     { "source": "/portfolio/golden-essence/contact", "destination": "/" },
     { "source": "/portfolio/golden-essence-mobile", "destination": "/" },
     { "source": "/portfolio/agentic-governed-fleet", "destination": "/" },
+    { "source": "/developer-test-drive", "destination": "/" },
     { "source": "/agentic-governed-fleet", "destination": "/" },
     { "source": "/agent-provider-scorecard", "destination": "/" },
     { "source": "/agents", "destination": "/" },
