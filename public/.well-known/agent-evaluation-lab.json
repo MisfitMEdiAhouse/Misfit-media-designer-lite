@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3.5",
+  "schema_version": "1.3.6",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -26,7 +26,21 @@
     "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
-    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json"
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "webmcp": {
+      "route": "https://misfitmediahouse.com/agent-evaluation-lab",
+      "mode": "browser_native_read_only",
+      "tools": [
+        "misfit_agent_evaluation_contract",
+        "misfit_agent_evaluation_benchmark_catalog",
+        "misfit_agent_evaluation_validate_request",
+        "misfit_agent_evaluation_score_report",
+        "misfit_agent_evaluation_validate_report",
+        "misfit_agent_evaluation_offer"
+      ],
+      "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
+      "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json"
+    }
   },
   "operations": [
     "contract",
