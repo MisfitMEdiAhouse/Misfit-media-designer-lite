@@ -3,6 +3,8 @@
     "id": "stan-egnyte-governed-agent-tour",
     "title": "Egnyte × Misfit — Governed Agent Technical Tour",
     "type": "Enterprise AI governance · live technical experience",
+    "status": "LIVE",
+    "evidence": "LIVE GOVERNANCE PROOF · PUBLIC-SAFE",
     "summary": "A guided, voice-narrated technical tour showing how ContextForge, Castle Gate, Sentinel and the protected GHOSBC OS boundary can wrap authorized agent actions with consequence-aware preflight, runtime watch, live public-safe governance checks, and raw-vs-governed evidence without exposing the private kernel.",
     "url": "/stan-hansen",
     "featured": true,
@@ -12,6 +14,8 @@
     "id": "ials-turbine-command",
     "title": "IALS Turbine Command",
     "type": "Aerospace aftermarket operating system",
+    "status": "LIVE",
+    "evidence": "PUBLIC + ADMIN OPERATING SURFACES",
     "summary": "A two-surface turbine-bearing revenue and risk system spanning public demand capture, private repair economics, inventory-to-pricing intelligence, compliance gates, document automation, and human-approved deal control.",
     "url": "/portfolio/ials-turbine-command",
     "featured": true,
@@ -21,6 +25,8 @@
     "id": "competition-lab",
     "title": "Misfit Competition Lab",
     "type": "Hackathons + bounties + public proving ground",
+    "status": "PROOF",
+    "evidence": "PUBLIC COMPETITION EVIDENCE",
     "summary": "Public competition work spanning All Things Agentic, Trace the Ace and ContextForge. Prize pursuit is treated as R&D with a scoreboard: serious entries are preserved as products, benchmarks, workflows, APIs and portfolio evidence.",
     "url": "/competitions"
   },
@@ -28,6 +34,8 @@
     "id": "coffee-and-a-joint",
     "title": "Coffee & A Joint",
     "type": "Ecommerce brand",
+    "status": "LIVE",
+    "evidence": "LIVE STOREFRONT + CHECKOUT",
     "summary": "A direct-to-consumer headwear storefront with live products, checkout, affiliate attribution, and a distinct brand system.",
     "url": "https://www.coffeeandajoint.co/"
   },
@@ -35,6 +43,8 @@
     "id": "iron-network",
     "title": "Iron Network — Equipment Rental",
     "type": "Equipment rental marketplace",
+    "status": "BETA",
+    "evidence": "WORKING MARKETPLACE SURFACE",
     "summary": "The canonical equipment network build: inventory, rental requests, owner connections, checkout, evidence, and settlement workflows.",
     "url": "https://misfit-equipment-network.vercel.app/"
   },
@@ -42,13 +52,17 @@
     "id": "misfit-ai-v2",
     "title": "Misfit AI V2",
     "type": "AI revenue software",
-    "summary": "Lead intake, response, qualification, follow-up, revival, booking, and revenue operations in one flagship product.",
+    "status": "BETA",
+    "evidence": "LIVE PRODUCT SURFACE · FINAL PARITY GATES REMAIN",
+    "summary": "Lead intake, response, qualification, follow-up, revival, booking, and revenue operations in one flagship product. The product is usable while final authenticated/provider parity work remains before replacement cutover is considered complete.",
     "url": "https://misfit-ai-v2.vercel.app/"
   },
   {
     "id": "home-efficiency-pros",
     "title": "Home Efficiency Pros",
     "type": "Dealer lead system",
+    "status": "LIVE",
+    "evidence": "CUSTOMER DEPLOYED",
     "summary": "A live dealer site with product education, AI intake, quote requests, appointment booking, and installation coordination.",
     "url": "https://www.homeefficiencypros.com/"
   },
@@ -56,6 +70,8 @@
     "id": "nexgrid-energy",
     "title": "NexGrid Energy",
     "type": "Energy lead generation",
+    "status": "LIVE",
+    "evidence": "PUBLIC DEPLOYMENT",
     "summary": "A customer-acquisition and home backup-power experience built around energy resilience and qualified next steps.",
     "url": "https://nexgridenergy.net/"
   },
@@ -63,6 +79,8 @@
     "id": "contextforge",
     "title": "ContextForge",
     "type": "Enterprise AI · hackathon product",
+    "status": "PROOF",
+    "evidence": "WORKING HACKATHON PRODUCT",
     "summary": "DataHub-aware code generation grounded in metadata, lineage, ownership, governance, and usage context. Built for competition and preserved as a standalone commercial/portfolio asset.",
     "url": "https://contextforge-datahub-app.vercel.app/"
   },
@@ -70,20 +88,26 @@
     "id": "weber-junk-rescue",
     "title": "Weber Junk Rescue",
     "type": "Local service conversion",
+    "status": "LIVE",
+    "evidence": "MOBILE CONVERSION FLOW",
     "summary": "The canonical v9 local-service build with a mobile-first quote, intake, deposit, and booking path.",
     "url": "https://weber-junk-rescue-v9.vercel.app/"
   },
   {
     "id": "golden-essence",
     "title": "Golden Essence Therapeutics",
-    "type": "Mobile massage therapy website",
-    "summary": "A five-page branded local-service site for mobile massage therapy with services and pricing, policies, direct contact, mobile booking paths, and a one-time activation checkout.",
+    "type": "Productized local-service website",
+    "status": "LIVE",
+    "evidence": "SELLABLE DEMO BUILD",
+    "summary": "A five-page branded mobile massage-therapy site with services and pricing, policies, direct contact, mobile booking paths, and a one-time activation checkout. Built as a productized demo that can be sold and activated for a new operator.",
     "url": "/portfolio/golden-essence"
   },
   {
     "id": "off-grid-water",
     "title": "Off-Grid Water",
     "type": "Digital commerce",
+    "status": "BETA",
+    "evidence": "WORKING CALCULATORS + COMMERCE FLOW",
     "summary": "A ram-pump property test, calculators, personalized blueprint flow, paid guides, and checkout experience.",
     "url": "https://misfit-media-house-off-grid-water.vercel.app/"
   },
@@ -91,6 +115,8 @@
     "id": "misfit-rig-radar",
     "title": "Misfit Rig Radar",
     "type": "Automotive + overland utility suite",
+    "status": "BETA",
+    "evidence": "WORKING TOOLKIT",
     "summary": "A working vehicle toolkit for power estimates, metric and flotation tire math, corrected speed, axle gearing, crawl ratio, saved vehicle profiles, field kits, vehicle power, comms, and tracked merch conversion.",
     "url": "/rig-radar"
   },
@@ -98,6 +124,8 @@
     "id": "tyler-ward",
     "title": "Tyler Ward Contractor",
     "type": "Contractor lead system",
+    "status": "LIVE",
+    "evidence": "LIVE INTAKE + CONTACT ROUTING",
     "summary": "A mobile-first contractor site with project intake, scheduling context, service selection, and direct call or text paths.",
     "url": "/tyler-ward"
   },
@@ -105,6 +133,8 @@
     "id": "misfit-quotelink",
     "title": "Misfit QuoteLink",
     "type": "Conversion product",
+    "status": "LIVE",
+    "evidence": "HOSTED PRODUCT + QR FLOW",
     "summary": "A focused hosted quote, call, text, and QR lead page that local service businesses can launch without a full rebuild.",
     "url": "/quotelink"
   }
