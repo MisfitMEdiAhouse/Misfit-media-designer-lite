@@ -1,5 +1,14 @@
 [
   {
+    "id": "stan-egnyte-governed-agent-tour",
+    "title": "Egnyte × Misfit — Governed Agent Technical Tour",
+    "type": "Enterprise AI governance · live technical experience",
+    "summary": "A guided, voice-narrated technical tour showing how ContextForge, Castle Gate, Sentinel and the protected GHOSBC OS boundary can wrap authorized agent actions with consequence-aware preflight, runtime watch, live public-safe governance checks, and raw-vs-governed evidence without exposing the private kernel.",
+    "url": "/stan-hansen",
+    "featured": true,
+    "metrics": ["7-step guided tour", "Live ALLOW / REVIEW / BLOCK proof", "Protected kernel boundary", "Built entirely from a phone"]
+  },
+  {
     "id": "ials-turbine-command",
     "title": "IALS Turbine Command",
     "type": "Aerospace aftermarket operating system",
