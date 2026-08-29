@@ -1,38 +1,27 @@
 {
-  "version": "1.0.0",
-  "status": "render_pending_heygen_tts_minutes",
+  "version": "2.0.0",
+  "status": "active_shipped_voice",
   "voice": {
-    "provider": "HeyGen",
-    "name": "Derya - Lifelike - Broadcaster",
-    "voice_id": "04d0ae1d0af2489ca7d3bb402a39a890",
-    "speed": 0.86,
-    "locale": "en-GB",
-    "style": "warm British broadcaster; intelligent, confident, natural, lower-key; never nasal, chirpy, breathy, theatrical, or robotic"
+    "provider": "AI Voice Generator",
+    "name": "Refined Fancy Neural Voice",
+    "profile": "fancy",
+    "playback_rate": 1,
+    "pitch_processing": false,
+    "style": "refined, polished, human-sounding enterprise narrator; consistent delivery across every tour step"
   },
   "pronunciation": {
     "written_brand": "GHOSBC OS",
     "spoken_brand": "Ghost BC OS",
     "rule": "Never insert periods or isolated letter pauses into BC OS. Speak Ghost BC OS as one natural phrase. Written UI copy must remain GHOSBC OS."
   },
-  "cadence": {
-    "sentence_style": "short conversational clauses",
-    "pause_between_sentences_ms": 260,
-    "pause_between_sections_ms": 420,
-    "avoid": [
-      "ellipsis pauses",
-      "periods between acronym letters",
-      "long comma chains",
-      "dramatic word-by-word emphasis",
-      "mid-sentence speed ramps"
-    ]
-  },
   "render_policy": {
-    "all_clips_same_voice_id": true,
-    "all_clips_same_speed": true,
-    "all_clips_same_locale": true,
+    "all_clips_same_provider": true,
+    "all_clips_same_profile": true,
+    "playback_rate_manipulation": false,
+    "pitch_manipulation": false,
     "browser_tts_fallback": false,
     "partial_voice_mix_allowed": false,
-    "require_full_rerender_before_swap": true
+    "direct_playable_mp3_sources": true
   },
   "tour_audio_scripts": [
     {
