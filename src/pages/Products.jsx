@@ -12,6 +12,11 @@ const products = [
     copy: 'Public-signal scan for storefront, conversion, site health, discoverability, trust, and AI readiness.', href: '/',
   },
   {
+    name: 'Developer Test Drive', status: 'PROOF',
+    type: 'Agent systems lab', price: 'Free public proof',
+    copy: 'Run consequence gating, live provider discovery and verification, and Identity Signal personalization in one bounded developer flow. No consequential external action is executed.', href: '/developer-test-drive',
+  },
+  {
     name: 'Misfit QuoteLink', status: 'LIVE',
     type: 'Conversion tool', price: '$49 once',
     copy: 'A focused mobile quote, call, text, and QR lead page for local service businesses.', href: '/quotelink',
