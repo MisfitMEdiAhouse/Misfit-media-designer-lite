@@ -2,30 +2,7 @@
   const path = location.pathname.replace(/\/+$/, '') || '/';
   if (path !== '/signal') return;
 
-  const AUDIO_URL = 'https://www.aidocmaker.com/g0/audio?name=d682c35c675b4aa9b4fb46640a5ce731';
-  const transcript = `Welcome to Misfit Trader. If you have absolutely no idea what you are looking at, splendid. That is exactly why I am here. Think of me as the calm voice in the room while the market behaves like a caffeinated raccoon with a credit card.
-
-Start at the top. Misfit Trader does three things for you. It reads the market field, it teaches you what the candles mean, and it lets you practice with paper money before you give real capital any authority.
-
-First, look at Field Emotion. This is not a prophecy. It is a compact read of the current crowd environment. Fear, greed, breadth, momentum, and volatility are blended into a state so you can see whether the market is behaving defensively, euphorically, or somewhere in between. Treat it as context, not a command.
-
-Next, open the Candle Cheat Lab. Pick Bitcoin, Ethereum, Solana, or another available market. The chart is real OHLC data: open, high, low, and close. Each candle is simply a record of what price did during one time slice. Green generally means price closed above where it opened. Red means it closed below. The wicks show how far price traveled before it settled.
-
-When Misfit labels a Doji, Hammer, Engulfing candle, Inside Bar, or another pattern, it will also tell you what traders usually look for next. The important word is usually. A pattern is evidence, not permission to do something stupid.
-
-Now look at the Signal Interpretation panel. This is where Misfit translates the market state into plain English. Defensive means confirmation matters more and position size should usually be smaller. Mixed means the evidence is conflicted. Risk-on means the crowd is leaning into momentum. Euphoria risk means enthusiasm itself may have become a hazard.
-
-The autonomous paper leaderboard is the laboratory. Four virtual bankrolls run the same strategy at different sizes. No real money moves. The point is to accumulate evidence: returns, drawdown, trade count, and whether the strategy survives different conditions.
-
-The Manual Paper Lab is where you learn by touching the controls yourself. Choose an asset, enter a virtual dollar amount, and place a paper buy or paper sell. You are not buying crypto. You are recording a simulated decision so you can compare your thesis with what happens next.
-
-Prediction-market and sports overlays are additional context. They are not betting instructions. They are there because markets often reveal what groups of people collectively believe will happen.
-
-If you want founding access, the ten-dollar purchase unlocks the founding-member entitlement for the beta. It does not enable real-money trading. Real-money execution remains deliberately gated behind position limits, loss limits, kill switches, audit rules, and explicit authorization.
-
-The simplest way to use Misfit Trader is this: read the crowd, inspect the candle, form a thesis, paper trade the thesis, and then check whether reality agreed with you. Repeat until the chart stops looking like sorcery.
-
-And if at any point you are tempted to treat one bright green candle as divine revelation, kindly resist the urge. I would hate to have to explain that to the insurance company.`;
+  const AUDIO_URL = 'https://www.aidocmaker.com/g0/audio?name=5d41950d4abd4af5a725588a7238caa0';
 
   const style = document.createElement('style');
   style.textContent = `
@@ -63,62 +40,44 @@ And if at any point you are tempted to treat one bright green candle as divine r
 
   const audio = new Audio(AUDIO_URL);
   audio.preload = 'metadata';
-  let speaking = false;
-  let usingFallback = false;
-  let utterance = null;
-
-  const stopSpeech = () => {
-    if ('speechSynthesis' in window) speechSynthesis.cancel();
-    speaking = false;
-  };
-  const fallbackSpeak = () => {
-    if (!('speechSynthesis' in window)) return false;
-    stopSpeech();
-    utterance = new SpeechSynthesisUtterance(transcript);
-    utterance.lang = 'en-GB';
-    utterance.rate = .92;
-    utterance.pitch = .88;
-    const voices = speechSynthesis.getVoices();
-    const british = voices.find(v => /en-GB/i.test(v.lang)) || voices.find(v => /British|UK/i.test(v.name)) || voices.find(v => /^en/i.test(v.lang));
-    if (british) utterance.voice = british;
-    utterance.onend = () => { speaking = false; update(); };
-    utterance.onerror = () => { speaking = false; update('VOICE GUIDE UNAVAILABLE'); };
-    usingFallback = true;
-    speaking = true;
-    speechSynthesis.speak(utterance);
-    return true;
-  };
-
   let card, play, restart, status;
+
   const update = (forced) => {
     if (!play || !status) return;
-    const active = (!audio.paused && !audio.ended) || speaking;
+    const active = !audio.paused && !audio.ended;
     play.textContent = active ? '❚❚  PAUSE BUTLER MODE' : '▶  HOLD MY HAND · VOICE GUIDE';
-    status.textContent = forced || (usingFallback ? 'BRITISH VOICE FALLBACK · USER-INITIATED · NO AUTOPLAY' : 'AI BUTLER GUIDE · USER-INITIATED · NO AUTOPLAY');
+    status.textContent = forced || 'DEEP BRITISH BUTLER VOICE · USER-INITIATED · NO ROBOT FALLBACK';
   };
+
   const toggle = async () => {
-    if (speaking) { stopSpeech(); update(); return; }
-    if (!audio.paused && !audio.ended) { audio.pause(); update(); return; }
+    if (!audio.paused && !audio.ended) {
+      audio.pause();
+      update();
+      return;
+    }
     try {
-      usingFallback = false;
       await audio.play();
       update();
     } catch {
-      if (!fallbackSpeak()) update('VOICE GUIDE UNAVAILABLE');
-      else update();
+      update('BUTLER AUDIO UNAVAILABLE · TRY AGAIN');
     }
   };
+
   const restartGuide = async () => {
-    stopSpeech();
-    usingFallback = false;
     audio.pause();
     audio.currentTime = 0;
-    try { await audio.play(); update(); } catch { if (!fallbackSpeak()) update('VOICE GUIDE UNAVAILABLE'); }
+    try {
+      await audio.play();
+      update();
+    } catch {
+      update('BUTLER AUDIO UNAVAILABLE · TRY AGAIN');
+    }
   };
+
   audio.addEventListener('play', () => update());
   audio.addEventListener('pause', () => update());
   audio.addEventListener('ended', () => update('GUIDE COMPLETE · REPLAY ANY TIME'));
-  audio.addEventListener('error', () => { if (!speaking) update('AI AUDIO BLOCKED · TAP PLAY FOR DEVICE VOICE FALLBACK'); });
+  audio.addEventListener('error', () => update('BUTLER AUDIO UNAVAILABLE · NO DEVICE ROBOT SUBSTITUTE'));
 
   let attempts = 0;
   const mount = () => {
@@ -129,14 +88,16 @@ And if at any point you are tempted to treat one bright green candle as divine r
       return;
     }
     if (document.getElementById('trader-butler-guide')) return;
+
     card = document.createElement('div');
     card.id = 'trader-butler-guide';
     card.innerHTML = `
       <div class="eyebrow">BUTLER MODE · AI HAND-HOLD GUIDE</div>
       <div class="title">NO FUCKING CLUE WHAT YOU'RE LOOKING AT?</div>
-      <div class="copy">Want me to hold your hand? Tap once. A calm British-butler guide walks you through the crowd signal, candles, paper lab, prediction markets and why real money is still gated.</div>
+      <div class="copy">Want me to hold your hand? Tap once. A deeper, older-school British-butler voice walks you through the crowd signal, candles, paper lab, prediction markets and why real money is still gated.</div>
       <div class="controls"><button type="button" data-play>▶  HOLD MY HAND · VOICE GUIDE</button><button type="button" class="secondary" data-restart>↻  START OVER</button></div>
-      <div class="status">AI BUTLER GUIDE · USER-INITIATED · NO AUTOPLAY</div>`;
+      <div class="status">DEEP BRITISH BUTLER VOICE · USER-INITIATED · NO ROBOT FALLBACK</div>`;
+
     const actionRow = hero.querySelector('.mt-6.flex');
     if (actionRow) hero.insertBefore(card,actionRow); else hero.appendChild(card);
     play = card.querySelector('[data-play]');
@@ -146,5 +107,6 @@ And if at any point you are tempted to treat one bright green candle as divine r
     restart.addEventListener('click',restartGuide);
     update();
   };
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mount,{once:true}); else mount();
 })();
