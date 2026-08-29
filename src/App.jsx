@@ -19,6 +19,7 @@ import ShopifyAgenticAudit from './pages/ShopifyAgenticAudit.jsx';
 import A2AAgentAudit from './pages/A2AAgentAudit.jsx';
 import AgentEvaluationLab from './pages/AgentEvaluationLab.jsx';
 import IdentitySignal from './pages/IdentitySignalPublic.jsx';
+import FrontierMap from './pages/FrontierMap.jsx';
 import WorldForge from './pages/WorldForge.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
@@ -75,6 +76,7 @@ export default function App() {
         <Route path="/agency" element={<Agency />} />
         <Route path="/products" element={<Products />} />
         <Route path="/explore" element={<ExploreMisfit />} />
+        <Route path="/frontier" element={<FrontierMap />} />
         <Route path="/operator" element={<Operator />} />
         <Route path="/field-notes" element={<FieldNotes />} />
         <Route path="/field-notes/:slug" element={<FieldNotes />} />
