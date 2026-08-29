@@ -1,6 +1,7 @@
 import { BrainCircuit, ChevronDown, Cloud, Cpu, Menu, Network, ShieldCheck, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import StanMisfitExplorer from './StanMisfitExplorer.jsx';
 
 const primaryItems = [
   ['/', 'Scanner'],
@@ -24,6 +25,7 @@ export default function Navbar() {
 
   const active = (href) => href === '/' ? pathname === '/' || pathname === '/scrub' : pathname.startsWith(href);
   const exploreActive = pathname === '/explore' || pathname === '/products' || pathname === '/agents' || pathname === '/a2a-agent-audit' || pathname === '/shopify-ai-audit';
+  const stanTour = pathname === '/stan-hansen' || pathname === '/egnyte';
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/85 backdrop-blur-xl">
@@ -71,6 +73,8 @@ export default function Navbar() {
           {mobileOpen ? <X size={23} /> : <Menu size={23} />}
         </button>
       </nav>
+
+      {stanTour && <StanMisfitExplorer />}
 
       {mobileOpen && (
         <div className="max-h-[calc(100svh-65px)] overflow-y-auto border-t border-white/10 bg-black/95 px-5 py-4 md:hidden">
