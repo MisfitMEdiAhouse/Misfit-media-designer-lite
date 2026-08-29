@@ -40,6 +40,8 @@
     ],
   ]);
 
+  const FINAL_NARRATION = Array.from(clips.keys()).at(-1);
+
   const OUTRO_AUDIO = 'https://resource2.heygen.ai/text_to_speech/254fc751702744ee9e2726b8a79ebad1/4d7fe569a30a42c0b213d788aa0dd411/id=77a56f17-dfd3-4814-a2b2-232185ea1d54.wav';
   const A2A_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/message:send';
 
@@ -104,7 +106,14 @@
       }
     };
     player.onended = () => {
+      const completedFinalStep = text === FINAL_NARRATION;
       if (activeUtterance === utterance) finishUtterance('end');
+      if (completedFinalStep) {
+        window.setTimeout(() => {
+          const panel = findGuidePanel();
+          if (panel) showCompletion(panel);
+        }, 650);
+      }
     };
     player.onerror = () => {
       if (activeUtterance === utterance) finishUtterance('error');
