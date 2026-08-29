@@ -18,6 +18,7 @@ const publicMeta = {
   '/shopify-ai-audit': ['/shopify-ai-audit', 'Audit the public agentic-commerce readiness of a Shopify storefront.'],
   '/a2a-agent-audit': ['/a2a-agent-audit', 'Audit the public trust and readiness signals declared by an A2A agent.'],
   '/agent-evaluation-lab': ['/agent-evaluation-lab', 'Measure Raw Agent versus governed-agent behavior with consequence assessment, replanning, governed decisions, Audit Memory, comparative metrics, and public-safe reports.'],
+  '/stan-hansen': ['/stan-hansen', 'A private-link, public-safe Egnyte engineering tour showing Misfit A2A, agent evaluation, consequence gating, audit evidence, change memory, and the protected GHOSBC boundary.'],
   '/agents': ['/agents', 'Public-safe machine and agent discovery for Misfit Mediahouse.'],
   '/enterprise-ai': ['/enterprise-ai', 'ContextForge enterprise AI and metadata-aware change governance by Misfit Mediahouse.'],
   '/creator-commerce': ['/creator-commerce', 'Creator commerce, campaign attribution, and tracked conversion systems by Misfit Mediahouse.'],
@@ -27,7 +28,7 @@ const publicMeta = {
   '/coffee/admin': ['/coffee/admin', 'Private owner launch console for Coffee & A Joint revenue, fulfillment, launch-proof, and product-quality gates.'],
 };
 
-const privatePaths = new Set(['/command', '/heir', '/roads/admin', '/coffee/admin']);
+const privatePaths = new Set(['/command', '/heir', '/roads/admin', '/coffee/admin', '/stan-hansen']);
 
 const publicTitles = {
   '/': 'Misfit Mediahouse | Shopify Store Health Scanner',
@@ -45,6 +46,7 @@ const publicTitles = {
   '/shopify-ai-audit': 'Shopify Agentic Audit | Misfit Mediahouse',
   '/a2a-agent-audit': 'A2A Agent Audit | Misfit Mediahouse',
   '/agent-evaluation-lab': 'Agent Evaluation Lab | Misfit Mediahouse',
+  '/stan-hansen': 'Stan Hansen × Misfit | Egnyte Engineering Tour',
   '/agents': 'Misfit Agent Network',
   '/enterprise-ai': 'ContextForge Enterprise AI | Misfit Mediahouse',
   '/creator-commerce': 'Creator Commerce | Misfit Mediahouse',
