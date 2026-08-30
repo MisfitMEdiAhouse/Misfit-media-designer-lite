@@ -65,7 +65,7 @@ A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluati
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
 Public operations: contract discovery, benchmark catalog retrieval, request validation, report scoring, report validation, and paid-offer discovery. These operations cannot execute payment or consequential external actions.
 Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check).
-Purchase handoff: https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J
+Purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=llms_txt
 Human intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
 Status: production. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, or proof of universal safety. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
 
