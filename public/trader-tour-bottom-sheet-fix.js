@@ -4,20 +4,22 @@
 
   const style=document.createElement('style');
   style.textContent=`
-    #trader-guide:not(.running) button[data-a=start]{
-      min-height:54px!important;
-      border-color:rgba(103,232,249,.96)!important;
-      background:linear-gradient(135deg,#0891b2,#2563eb)!important;
-      color:#fff!important;
-      -webkit-text-fill-color:#fff!important;
+    #trader-guide:not(.running) button[data-a=start],
+    body>#trader-guide.running button[data-a=next]{
+      min-height:56px!important;
+      border-color:#67e8f9!important;
+      background:#67e8f9!important;
+      color:#020304!important;
+      -webkit-text-fill-color:#020304!important;
       opacity:1!important;
       font-weight:900!important;
       font-size:11px!important;
       letter-spacing:.08em!important;
-      text-shadow:0 1px 2px rgba(0,0,0,.45)!important;
-      box-shadow:0 0 0 1px rgba(103,232,249,.28),0 0 28px rgba(34,211,238,.18)!important;
+      text-shadow:none!important;
+      box-shadow:0 0 0 1px rgba(103,232,249,.38),0 0 30px rgba(103,232,249,.22)!important;
     }
-    #trader-guide:not(.running) button[data-a=start]:active{transform:translateY(1px)}
+    #trader-guide:not(.running) button[data-a=start]:active,
+    body>#trader-guide.running button[data-a=next]:active{transform:translateY(1px)}
     body>#trader-guide.running{
       position:fixed!important;
       z-index:10020!important;
@@ -40,10 +42,6 @@
       padding-top:10px;
       padding-bottom:2px;
       background:linear-gradient(to bottom,rgba(8,8,16,0),rgba(8,8,16,.96) 26%,rgba(8,8,16,.99));
-    }
-    body>#trader-guide.running button[data-a=next]{
-      min-height:56px!important;
-      box-shadow:0 0 0 1px rgba(103,232,249,.25),0 0 34px rgba(34,211,238,.2)!important;
     }
     .misfit-tour-secondary{
       position:relative!important;
@@ -126,8 +124,6 @@
       },delay);
     }
 
-    // Replace the original Start click boundary so the obsolete welcome/audio state never lingers.
-    // We run the original engine exactly once, then synchronously advance to the first actionable step.
     const originalStartHandler=start.onclick;
     start.onclick=null;
     start.addEventListener('click',event=>{
@@ -164,7 +160,7 @@
     window.addEventListener('resize',()=>{if(card.classList.contains('running'))scrollTarget(50);},{passive:true});
     window.addEventListener('orientationchange',()=>{if(card.classList.contains('running'))scrollTarget(180);},{passive:true});
 
-    window.__MISFIT_TRADER_BOTTOM_SHEET_FIX__=Object.freeze({version:'2026-08-30-v2-direct-step1',dock,scrollTarget});
+    window.__MISFIT_TRADER_BOTTOM_SHEET_FIX__=Object.freeze({version:'2026-08-30-v3-candle-cyan',dock,scrollTarget});
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
