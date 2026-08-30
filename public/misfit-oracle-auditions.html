@@ -15,6 +15,8 @@
     h1{font-size:clamp(34px,8vw,66px);line-height:.95;letter-spacing:-.05em;margin:10px 0 14px}
     .lead{max-width:720px;color:#a7b0bf;font-size:15px;line-height:1.65;margin-bottom:24px}
     .note{border:1px solid rgba(103,232,249,.22);background:rgba(4,13,18,.76);border-radius:16px;padding:14px 16px;color:#cbd5e1;font-size:13px;line-height:1.55;margin-bottom:22px}
+    .section-title{margin:30px 0 12px;font:850 13px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:#e2e8f0;display:flex;align-items:center;gap:10px}
+    .section-title:after{content:"";height:1px;flex:1;background:rgba(255,255,255,.10)}
     .grid{display:grid;gap:12px}
     .card{border:1px solid rgba(255,255,255,.11);background:linear-gradient(135deg,rgba(8,13,17,.91),rgba(12,7,16,.86));border-radius:18px;padding:16px;box-shadow:0 16px 44px rgba(0,0,0,.25)}
     .row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -23,72 +25,145 @@
     audio{width:100%;margin-top:13px;min-height:46px}
     .baseline{border-color:rgba(250,204,21,.28)}
     .baseline .lane{color:#fde047}
-    footer{margin-top:24px;color:#667085;font:600 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}
+    .benchmark{border-color:rgba(192,132,252,.42);box-shadow:0 18px 52px rgba(88,28,135,.16)}
+    .benchmark .lane{color:#d8b4fe}
+    .female-card .lane{color:#f0abfc}
+    .tag{display:inline-flex;align-items:center;min-height:28px;padding:0 9px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font:700 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#cbd5e1;background:rgba(255,255,255,.04)}
+    footer{margin-top:28px;color:#667085;font:600 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}
   </style>
 </head>
 <body>
 <main>
   <div class="brand">MISFIT<span>.</span></div>
-  <div class="kicker">Misfit Oracle · Male Voice Casting</div>
+  <div class="kicker">Misfit Oracle · Voice Casting Lab</div>
   <h1>PLAY THEM HERE.</h1>
-  <p class="lead">Browser-playable auditions only. No temporary signed links. No XML errors. No forced downloads. Every candidate below is male. Nothing here is live on Misfit Trader.</p>
-  <div class="note"><strong>Target:</strong> deep male, older, slow, intelligent, controlled, slightly ominous. Two lanes: cinematic philosopher / Morpheus-like gravity, and old-world British strategist / butler energy. Original Misfit identity — not an imitation of any actor.</div>
+  <p class="lead">Browser-playable auditions only. No temporary signed links. No XML errors. No forced downloads. Male and female candidates live on the same page. Nothing here changes the live Misfit Trader voice until you explicitly choose it.</p>
+  <div class="note"><strong>Male target:</strong> deep, older, slow, intelligent, controlled, slightly ominous — cinematic philosopher / Morpheus-like gravity or old-world British strategist / butler energy. <strong>Female target:</strong> polished, intelligent, cinematic, warm but authoritative, with the Stan/Egnyte tour guide as the known-good benchmark.</div>
+
+  <div class="section-title">Male candidates</div>
   <div class="grid">
     <section class="card baseline">
-      <div class="row"><div><div class="name">Reginald Hawke</div><div class="lane">Baseline · closest so far</div></div></div>
-      <div class="desc">The current quality floor. Refined male tone, but still not deep/cinematic enough.</div>
+      <div class="row"><div><div class="name">Reginald Hawke</div><div class="lane">Baseline · closest male so far</div></div><span class="tag">Male</span></div>
+      <div class="desc">Current male quality floor. Refined tone, but still not deep/cinematic enough for the final Misfit Oracle identity.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/XKUiPCDs2qm2T8KBAqLZpV.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Legendary Lawrence</div><div class="lane">Oracle lane</div>
+      <div class="row"><div><div class="name">Legendary Lawrence</div><div class="lane">Oracle lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Cinematic authority candidate. Listen for gravity and low-register presence.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/XFDJFbnHPi2qGEJNgYvjd9.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Solemn Scott</div><div class="lane">Oracle lane</div>
+      <div class="row"><div><div class="name">Solemn Scott</div><div class="lane">Oracle lane</div></div><span class="tag">Male</span></div>
       <div class="desc">More restrained and serious; candidate for slow philosophical delivery.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/m95i58wTq9P8F2XCQVCnfi.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Mr. Thunder</div><div class="lane">Deep authority lane</div>
+      <div class="row"><div><div class="name">Mr. Thunder</div><div class="lane">Deep authority lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Lower-impact voice candidate; checking for bass without cheesy announcer energy.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/Hv3zhvDrMpnauWjq4KcynH.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Gravelly Grant</div><div class="lane">Deep authority lane</div>
+      <div class="row"><div><div class="name">Gravelly Grant</div><div class="lane">Deep authority lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Rougher chest texture. Candidate if we want more menace and less polish.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/VaZoAAfGzahBQCeZMRAREH.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Gentleman George</div><div class="lane">British strategist lane</div>
+      <div class="row"><div><div class="name">Gentleman George</div><div class="lane">British strategist lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Old-world male voice candidate. Checking accent, composure and butler intelligence.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/qLrVtLyQaUh2WAKxXGX7yZ.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">James Hawthorne</div><div class="lane">British strategist lane</div>
+      <div class="row"><div><div class="name">James Hawthorne</div><div class="lane">British strategist lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Another polished male candidate for restrained English authority.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/EnmKgVjpYBqWpEdupA2VrY.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Elder Ambrose</div><div class="lane">Older strategist lane</div>
+      <div class="row"><div><div class="name">Elder Ambrose</div><div class="lane">Older strategist lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Older male timbre; checking wisdom and gravity without sounding theatrical.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/yfEhBLAvNUDUsrPJpQeHv4.mp3"></audio>
     </section>
 
     <section class="card">
-      <div class="name">Raspy Rupert</div><div class="lane">British texture lane</div>
+      <div class="row"><div><div class="name">Raspy Rupert</div><div class="lane">British texture lane</div></div><span class="tag">Male</span></div>
       <div class="desc">Lower, rougher texture candidate. Included only to test whether the rasp helps the Misfit identity.</div>
       <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/UvtY3GXxtFRFTiqz5P2ytj.mp3"></audio>
     </section>
   </div>
+
+  <div class="section-title">Female candidates</div>
+  <div class="grid">
+    <section class="card benchmark female-card">
+      <div class="row"><div><div class="name">Stan Hansen / Egnyte Tour Guide</div><div class="lane">Known-good benchmark · exact deployed voice source</div></div><span class="tag">Female · Fancy</span></div>
+      <div class="desc">This is the actual AI Voice Generator <strong>fancy</strong> voice source used on the Stan Hansen / Egnyte technical tour. Same deployed voice rail, not a recreation.</div>
+      <audio controls preload="none" src="https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/4eb1b2ca-5d08-403f-97e9-2a4e695488dc.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Pippa</div><div class="lane">British / refined candidate</div></div><span class="tag">Female</span></div>
+      <div class="desc">Candidate for a crisp British-adjacent guide voice with more personality than a generic corporate narrator.</div>
+      <audio controls preload="none" src="https://resource2.heygen.ai/voice_preview/5B8ZFyiIOi4POmPiRzi7.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Evelyn Harper</div><div class="lane">Polished narrator lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Clean, polished female narrator candidate for technical walkthroughs and premium demos.</div>
+      <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/XSoaXhDj3fq9PRr4uqmQWJ.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Vivian Hartley</div><div class="lane">Cinematic / composed lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">More mature, composed presence. Candidate if we want the female Misfit voice to feel less cheerful and more cinematic.</div>
+      <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/tFwt75mC2YDdo3EVdPhrP8.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Composed Carla</div><div class="lane">Controlled authority lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Measured, controlled female delivery candidate for governance, command and technical explanation.</div>
+      <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/mSJU23mShbCDXeAJGMHRXM.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Calm Eva</div><div class="lane">Warm intelligence lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Calm, accessible voice candidate for hand-hold guidance without sounding childish or overproduced.</div>
+      <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/xf5wKwEEDa3yKT49FNb3R4.mp3"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Georgia · Lifelike Soothing</div><div class="lane">Smooth guide lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Softer and more human-feeling candidate. Useful comparison against the stronger Stan benchmark.</div>
+      <audio controls preload="none" src="https://resource2.heygen.ai/text_to_speech/6825eafbb8004373baaa86a97bbb000d/0fe77e0eee104bc78469a57bbe1a6550/id=bbb9ce29-a9be-4395-84fb-d0eb3fa14a40.wav"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Derya · Lifelike Broadcaster</div><div class="lane">Broadcast authority lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Stronger projection and polish. Candidate for launches, demos and high-confidence system narration.</div>
+      <audio controls preload="none" src="https://resource2.heygen.ai/text_to_speech/6825eafbb8004373baaa86a97bbb000d/04d0ae1d0af2489ca7d3bb402a39a890/id=59cb8d4c-aba9-4ecd-ac05-4f3ce37ca204.wav"></audio>
+    </section>
+
+    <section class="card female-card">
+      <div class="row"><div><div class="name">Ann · Professional</div><div class="lane">Clean professional lane</div></div><span class="tag">Female</span></div>
+      <div class="desc">Straight professional benchmark to compare against more distinctive female voices.</div>
+      <audio controls preload="none" src="https://resource.heygen.ai/text_to_speech/locale=model=id=F4p3R5hsubUFeuPgcm49KK.mp3"></audio>
+    </section>
+  </div>
+
   <footer>Audition surface only · no Trader voice activation · user approval required before production</footer>
 </main>
+<script>
+  document.querySelectorAll('audio').forEach((audio) => {
+    audio.addEventListener('play', () => {
+      document.querySelectorAll('audio').forEach((other) => {
+        if (other !== audio && !other.paused) other.pause();
+      });
+    });
+  });
+</script>
 </body>
 </html>
