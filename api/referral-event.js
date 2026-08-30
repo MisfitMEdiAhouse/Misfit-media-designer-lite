@@ -2,6 +2,7 @@ const text = (value, max) => String(value ?? '').slice(0, max);
 
 const EVALUATION_OFFER_KEY = 'misfit_agent_evaluation_10k';
 const EVALUATION_CHECKOUT_URL = 'https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
+const DEFAULT_MACHINE_SOURCE = 'canonical_a2a_agent_card';
 
 function supabaseConfig() {
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://cibcxqrqiqvzpardbdrw.supabase.co';
@@ -47,12 +48,19 @@ async function sha256(value) {
   return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
+function machineSource(req) {
+  const raw = text(req.query?.source || DEFAULT_MACHINE_SOURCE, 64).toLowerCase();
+  const sanitized = raw.replace(/[^a-z0-9_-]/g, '_').replace(/^_+|_+$/g, '');
+  return sanitized || DEFAULT_MACHINE_SOURCE;
+}
+
 async function persistMachineCheckoutHandoff(req) {
   const { url, serviceKey } = supabaseConfig();
   if (!serviceKey) return { persisted: false, reason: 'service_key_unavailable' };
 
   const userAgent = text(req.headers['user-agent'], 500);
   const synthetic = /misfit|smoke|selftest|healthcheck|uptime/i.test(userAgent);
+  const source = machineSource(req);
   const response = await fetch(`${url}/rest/v1/machine_discovery_events`, {
     method: 'POST',
     headers: {
@@ -62,12 +70,12 @@ async function persistMachineCheckoutHandoff(req) {
       Prefer: 'return=minimal',
     },
     body: JSON.stringify({
-      channel: 'a2a_checkout_handoff',
-      platform_profile: 'misfit-agent-evaluation-checkout',
+      channel: 'agent_evaluation_checkout_handoff',
+      platform_profile: `misfit-agent-evaluation-checkout:${source}`,
       operation: 'checkout_handoff_opened',
       matched_product_ids: ['agent_governance_evaluation_report'],
       attribution: {
-        source: 'canonical_a2a_agent_card',
+        source,
         offer_key: EVALUATION_OFFER_KEY,
         price_usd: 500,
         included_checks: 10000,
@@ -96,7 +104,7 @@ export default async function handler(req, res) {
     try {
       await persistMachineCheckoutHandoff(req);
     } catch (error) {
-      console.error(JSON.stringify({ type: 'misfit_machine_checkout_handoff_persist_error', offerKey: EVALUATION_OFFER_KEY, message: String(error?.message || error) }));
+      console.error(JSON.stringify({ type: 'misfit_machine_checkout_handoff_persist_error', offerKey: EVALUATION_OFFER_KEY, source: machineSource(req), message: String(error?.message || error) }));
     }
 
     res.setHeader('Cache-Control', 'no-store');
