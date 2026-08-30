@@ -2,7 +2,7 @@
 
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
 Status: production
-Surface version: 1.10.0
+Surface version: 1.10.1
 Request schema: agent-evaluation-request-v1.0
 Report schema: agent-evaluation-report-v1.3
 Benchmark: ae100-v1
@@ -19,6 +19,11 @@ Request JSON Schema: https://misfitmediahouse.com/agent-evaluation-request.schem
 Report JSON Schema: https://misfitmediahouse.com/agent-evaluation-report.schema.json
 Sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 AE100 catalog: https://misfitmediahouse.com/agent-evaluation-ae100.json
+Security/data handling: https://misfitmediahouse.com/agent-evaluation-lab.security.json
+Postman collection: https://misfitmediahouse.com/agent-evaluation-lab.postman_collection.json
+External evaluator kit: https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json
+External benchmark run manifest: https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json
+External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
@@ -26,10 +31,15 @@ Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-e
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
+Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
 Supported public operations: contract, benchmark_catalog, validate_request, score_report, validate_report, offer.
 
+WebMCP tools: misfit_agent_evaluation_contract, misfit_agent_evaluation_benchmark_catalog, misfit_agent_evaluation_validate_request, misfit_agent_evaluation_score_report, misfit_agent_evaluation_validate_report, misfit_agent_evaluation_offer.
+
 Recommended flow: discover -> read contract and schemas -> validate_request -> score_report -> validate_report -> purchase higher-volume checks if useful.
+
+Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and receipt exist.
 
 ## Commercial handoff
 Offer key: misfit_agent_evaluation_10k
