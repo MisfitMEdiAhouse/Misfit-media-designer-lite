@@ -4,6 +4,20 @@
 
   const style=document.createElement('style');
   style.textContent=`
+    #trader-guide:not(.running) button[data-a=start]{
+      min-height:54px!important;
+      border-color:rgba(103,232,249,.96)!important;
+      background:linear-gradient(135deg,#0891b2,#2563eb)!important;
+      color:#fff!important;
+      -webkit-text-fill-color:#fff!important;
+      opacity:1!important;
+      font-weight:900!important;
+      font-size:11px!important;
+      letter-spacing:.08em!important;
+      text-shadow:0 1px 2px rgba(0,0,0,.45)!important;
+      box-shadow:0 0 0 1px rgba(103,232,249,.28),0 0 28px rgba(34,211,238,.18)!important;
+    }
+    #trader-guide:not(.running) button[data-a=start]:active{transform:translateY(1px)}
     body>#trader-guide.running{
       position:fixed!important;
       z-index:10020!important;
@@ -112,15 +126,19 @@
       },delay);
     }
 
-    // The old v3 tour contains a pre-start welcome step. Skip it immediately after Start,
-    // so the first spoken/visible active instruction is the actual market-selection task.
-    start.addEventListener('click',()=>{
-      queueMicrotask(()=>{
-        if(!card.classList.contains('running'))return;
-        dock();
-        if(/WELCOME TO MISFIT TRADER/i.test(title.textContent||''))next.click();
-        scrollTarget(160);
-      });
+    // Replace the original Start click boundary so the obsolete welcome/audio state never lingers.
+    // We run the original engine exactly once, then synchronously advance to the first actionable step.
+    const originalStartHandler=start.onclick;
+    start.onclick=null;
+    start.addEventListener('click',event=>{
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if(typeof originalStartHandler==='function')originalStartHandler.call(start,event);
+      if(card.classList.contains('running')&&/WELCOME TO MISFIT TRADER/i.test(title.textContent||'')){
+        next.click();
+      }
+      dock();
+      scrollTarget(120);
     },true);
 
     card.addEventListener('click',e=>{
@@ -136,8 +154,6 @@
       },0);
     });
 
-    // Auto-advance can change steps without a guide-button click. Watch only the title text;
-    // this observer never mutates the title, so it cannot form a feedback loop.
     const observer=new MutationObserver(()=>{
       if(!card.classList.contains('running'))return;
       dock();
@@ -148,7 +164,7 @@
     window.addEventListener('resize',()=>{if(card.classList.contains('running'))scrollTarget(50);},{passive:true});
     window.addEventListener('orientationchange',()=>{if(card.classList.contains('running'))scrollTarget(180);},{passive:true});
 
-    window.__MISFIT_TRADER_BOTTOM_SHEET_FIX__=Object.freeze({version:'2026-08-30-v1',dock,scrollTarget});
+    window.__MISFIT_TRADER_BOTTOM_SHEET_FIX__=Object.freeze({version:'2026-08-30-v2-direct-step1',dock,scrollTarget});
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
