@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.5.0",
+  "version": "1.5.1",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -74,7 +74,17 @@
       "documentationUrl": "https://misfitmediahouse.com/agent-evaluation-lab",
       "contractUrl": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
       "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-      "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json"
+      "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+      "commercialOffer": {
+        "offerKey": "misfit_agent_evaluation_10k",
+        "priceUsd": 500,
+        "includedChecks": 10000,
+        "effectiveUnitPriceUsd": 0.05,
+        "purchaseUrl": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k",
+        "paymentExecuted": false,
+        "formalCertification": false,
+        "independentValidationClaimed": false
+      }
     }
   ]
 }
