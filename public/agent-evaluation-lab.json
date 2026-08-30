@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.10",
+  "schema_version": "1.10.1",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -19,7 +19,7 @@
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-    "surface_version": "1.10.0",
+    "surface_version": "1.10.1",
     "read_only_operations": [
       "contract",
       "benchmark_catalog",
@@ -34,14 +34,16 @@
     "payment_execution": false
   },
   "purchase": {
-    "url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "url": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=product_contract",
+    "stripe_checkout_url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
     "currency": "USD",
     "price": 500,
     "package": "10,000 governed policy checks",
     "included_checks": 10000,
     "effective_unit_price": 0.05,
     "billing_model": "prepaid_credits",
-    "handoff_only": true
+    "handoff_only": true,
+    "attribution_note": "The same-origin handoff records a non-revenue checkout-intent event before redirecting to the existing Stripe Checkout. A handoff open is not a sale, settlement, or revenue event."
   },
   "integration_quickstart": {
     "operation": "integration_quickstart",
