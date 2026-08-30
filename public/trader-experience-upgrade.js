@@ -2,6 +2,8 @@
   const path = location.pathname.replace(/\/+$/, '') || '/';
   if (path !== '/signal') return;
 
+  const AUDIO_URL = 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f27a6c9b-ee77-4dfe-9012-9f93ebd2a8a1.mp3';
+
   const style = document.createElement('style');
   style.textContent = `
     body[data-misfit-trader] { background:#020304 !important; }
@@ -18,8 +20,10 @@
     #trader-butler-guide .title { margin-top:6px; font:800 16px/1.25 Inter,sans-serif; color:#fff; }
     #trader-butler-guide .copy { margin-top:5px; max-width:620px; font:400 12px/1.55 Inter,sans-serif; color:#aeb8c8; }
     #trader-butler-guide .controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:11px; }
-    #trader-butler-guide button { min-height:46px; border-radius:12px; padding:0 14px; border:1px solid rgba(255,255,255,.13); background:rgba(0,0,0,.45); color:#94a3b8; font:800 10px/1 'JetBrains Mono',monospace; letter-spacing:.04em; cursor:not-allowed; }
-    #trader-butler-guide .status { margin-top:8px; font:500 9px/1.4 'JetBrains Mono',monospace; color:#64748b; text-transform:uppercase; letter-spacing:.08em; }
+    #trader-butler-guide button { min-height:46px; border-radius:12px; padding:0 14px; border:1px solid rgba(103,232,249,.32); background:rgba(3,18,24,.72); color:#e6fbff; font:800 10px/1 'JetBrains Mono',monospace; letter-spacing:.04em; cursor:pointer; }
+    #trader-butler-guide button:hover { background:rgba(7,31,40,.88); border-color:rgba(103,232,249,.5); }
+    #trader-butler-guide button.secondary { border-color:rgba(255,255,255,.12); background:rgba(0,0,0,.34); color:#aeb8c8; }
+    #trader-butler-guide .status { margin-top:8px; font:500 9px/1.4 'JetBrains Mono',monospace; color:#7dd3fc; text-transform:uppercase; letter-spacing:.08em; }
     @media (min-width:768px) { #misfit-trader-brand-bg .photo { background-position:center top; } #trader-butler-guide { padding:16px 18px; } }
     @media (max-width:420px) { #misfit-trader-brand-bg .photo { background-position:61% top; } #trader-butler-guide button { width:100%; } }
     @media (prefers-reduced-motion:reduce) { #misfit-trader-brand-bg .photo { transform:none; } }
@@ -48,11 +52,49 @@
     const card = document.createElement('div');
     card.id = 'trader-butler-guide';
     card.innerHTML = `
-      <div class="eyebrow">BUTLER MODE · AI HAND-HOLD GUIDE</div>
+      <div class="eyebrow">MISFIT AI · HAND-HOLD GUIDE</div>
       <div class="title">NO FUCKING CLUE WHAT YOU'RE LOOKING AT?</div>
-      <div class="copy">Deep older British male voice is being cast. The wrong female/robot fallback has been removed rather than left live.</div>
-      <div class="controls"><button type="button" disabled>VOICE CASTING · HOLD</button></div>
-      <div class="status">MALE BRITISH VOICE REQUIRED · NO DEVICE ROBOT FALLBACK</div>`;
+      <div class="copy">Good. Tap play and the same female <strong>fancy</strong> voice used on Stan Hansen's Egnyte technical tour will walk you through the signal, candle, crowd and paper-trading logic.</div>
+      <div class="controls">
+        <button type="button" data-action="play">PLAY GUIDE</button>
+        <button type="button" class="secondary" data-action="stop">STOP</button>
+      </div>
+      <div class="status">STAN / EGNYTE FANCY VOICE · USER-TRIGGERED · NO DEVICE VOICE FALLBACK</div>`;
+
+    const audio = new Audio(AUDIO_URL);
+    audio.preload = 'metadata';
+    const play = card.querySelector('[data-action="play"]');
+    const stop = card.querySelector('[data-action="stop"]');
+
+    const setPlayLabel = (label) => { if (play) play.textContent = label; };
+    play?.addEventListener('click', async () => {
+      try {
+        if (!audio.paused) {
+          audio.pause();
+          setPlayLabel('RESUME GUIDE');
+          return;
+        }
+        await audio.play();
+        setPlayLabel('PAUSE GUIDE');
+      } catch (_) {
+        setPlayLabel('AUDIO UNAVAILABLE');
+      }
+    });
+    stop?.addEventListener('click', () => {
+      try { audio.pause(); audio.currentTime = 0; } catch (_) {}
+      setPlayLabel('PLAY GUIDE');
+    });
+    audio.addEventListener('ended', () => setPlayLabel('PLAY AGAIN'));
+    audio.addEventListener('error', () => setPlayLabel('AUDIO UNAVAILABLE'));
+
+    window.__MISFIT_TRADER_GUIDE__ = Object.freeze({
+      provider: 'AI Voice Generator',
+      profile: 'fancy',
+      benchmark: 'Stan Hansen / Egnyte tour voice',
+      autoplay: false,
+      deviceFallback: false,
+      stop: () => { try { audio.pause(); audio.currentTime = 0; } catch (_) {} },
+    });
 
     const actionRow = hero.querySelector('.mt-6.flex');
     if (actionRow) hero.insertBefore(card,actionRow); else hero.appendChild(card);
