@@ -43,32 +43,13 @@
     <script>
       (() => {
         if (!location.pathname.startsWith('/tyler')) return;
-
         const TYLER_LEAD_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/tyler-contractor-lead';
-        const serviceMap = {
-          'General construction': 'general_project',
-          'Remodel / renovation': 'general_project',
-          'Flooring / finish work': 'general_project',
-          'Repair / maintenance': 'property_maintenance',
-          'Outdoor build / hardscape': 'hardscape',
-          'Landscape / property work': 'landscaping',
-          'Snow removal': 'property_maintenance',
-          'Other': 'other'
-        };
-
+        const serviceMap = {'General construction':'general_project','Remodel / renovation':'general_project','Flooring / finish work':'general_project','Repair / maintenance':'property_maintenance','Outdoor build / hardscape':'hardscape','Landscape / property work':'landscaping','Snow removal':'property_maintenance','Other':'other'};
         const nativeFetch = window.fetch.bind(window);
         window.fetch = async (input, init = {}) => {
           const url = typeof input === 'string' ? input : input?.url;
           if (url === TYLER_LEAD_ENDPOINT && init?.body && typeof init.body === 'string') {
-            try {
-              const body = JSON.parse(init.body);
-              body.project_key = 'tyler-ward-contractor-site';
-              body.service = serviceMap[body.project_type] || body.service || 'general_project';
-              body.preferred_date = body.preferred_date || body.preferred_day || '';
-              delete body.project_type;
-              delete body.preferred_day;
-              init = { ...init, body: JSON.stringify(body) };
-            } catch (_) {}
+            try { const body = JSON.parse(init.body); body.project_key='tyler-ward-contractor-site'; body.service=serviceMap[body.project_type]||body.service||'general_project'; body.preferred_date=body.preferred_date||body.preferred_day||''; delete body.project_type; delete body.preferred_day; init={...init,body:JSON.stringify(body)} } catch (_) {}
           }
           return nativeFetch(input, init);
         };
@@ -79,14 +60,10 @@
         const goldenPaths = ['/portfolio/golden-essence', '/golden-essence', '/golden-essence-mobile'];
         const path = location.pathname.replace(/\/+$/, '') || '/';
         if (!goldenPaths.includes(path)) return;
-        const oldCheckout = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation/create-checkout';
-        const trackedCheckout = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation-checkout';
-        const nativeFetch = window.fetch.bind(window);
-        window.fetch = (input, init = {}) => {
-          const url = typeof input === 'string' ? input : input?.url;
-          if (url === oldCheckout) return nativeFetch(trackedCheckout, init);
-          return nativeFetch(input, init);
-        };
+        const oldCheckout='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation/create-checkout';
+        const trackedCheckout='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/site-activation-checkout';
+        const nativeFetch=window.fetch.bind(window);
+        window.fetch=(input,init={})=>{const url=typeof input==='string'?input:input?.url;if(url===oldCheckout)return nativeFetch(trackedCheckout,init);return nativeFetch(input,init)};
       })();
     </script>
     <script defer src="/stan-consistent-neural-voice.js"></script>
@@ -95,7 +72,9 @@
     <script type="module" src="/src/main.jsx"></script>
     <script defer src="/trader-tour-v4.js?v=20260830-manual-only-1"></script>
     <script defer src="/trader-experience-upgrade.js?v=20260830-never-trap-1"></script>
-    <script defer src="/trader-visual-learning.js?v=20260830-visual-markets-1"></script>
+    <script defer src="/trader-visual-learning.js?v=20260830-compact-markets-2"></script>
+    <script defer src="/trader-tour-scroll-sync.js?v=20260830-chart-target-1"></script>
+    <script defer src="/trader-public-performance.js?v=20260830-public-paper-1"></script>
     <script defer src="/misfit-referral-runtime.js"></script>
     <script defer src="/golden-wix-bridge.js"></script>
     <script defer src="/golden-activation-wizard.js"></script>
