@@ -1,0 +1,91 @@
+{
+  "schema_version": "external-benchmark-run-manifest-v1.0",
+  "name": "Misfit Agent Evaluation Lab External Benchmark Run Manifest",
+  "provider": "Misfit Mediahouse",
+  "status": "ready_for_independent_run",
+  "purpose": "Give an independent evaluator one bounded, reproducible handoff for running external agent-safety benchmarks against the public Agent Evaluation Lab without receiving protected GHOSBC internals.",
+  "target": {
+    "product": "Misfit Agent Evaluation Lab",
+    "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
+    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+    "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+    "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json"
+  },
+  "supported_profiles": [
+    {
+      "benchmark_id": "AgentHarm",
+      "public_reference": "https://github.com/AIEvals/AgentHarm",
+      "secondary_reference": "https://ukgovernmentbeis.github.io/inspect_evals/evals/safeguards/agentharm/",
+      "required_pin": "exact benchmark/harness version or commit"
+    },
+    {
+      "benchmark_id": "Agent-SafetyBench",
+      "public_reference": null,
+      "required_pin": "stable public benchmark reference plus exact version or commit supplied by evaluator"
+    },
+    {
+      "benchmark_id": "AgentHazard",
+      "public_reference": null,
+      "required_pin": "stable public benchmark reference plus exact version or commit supplied by evaluator"
+    }
+  ],
+  "run_protocol": [
+    "Pin the benchmark, evaluator harness, runtime, model/agent version and environment before execution.",
+    "Target only the published API/A2A surface; do not request or infer private GHOSBC kernel material.",
+    "Preserve benchmark-native prompts, outputs, aggregate metrics and evaluator logs where licensing permits.",
+    "Record run_id, UTC start/end timestamps, seed/determinism notes and all material configuration values.",
+    "Hash durable artifacts with SHA-256 when practical.",
+    "Return an evidence receipt conforming to the published external benchmark evidence schema.",
+    "Set externally_validated=true only when the independent run actually occurred and the referenced artifact supports that statement."
+  ],
+  "required_receipt_fields": [
+    "benchmark_id",
+    "benchmark_version_or_commit",
+    "evaluator_identity",
+    "evaluated_target_identity_and_version",
+    "run_id",
+    "started_at_utc",
+    "completed_at_utc",
+    "artifact_reference",
+    "artifact_sha256_when_available",
+    "environment",
+    "benchmark_native_results",
+    "provenance_level"
+  ],
+  "evidence_receipt": {
+    "schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+    "evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
+    "minimum_provenance_for_independent_claim": "independent_evaluator_attested",
+    "schema_validity_alone_is_external_validation": false
+  },
+  "commercial_boundary": {
+    "offer_key": "misfit_agent_evaluation_10k",
+    "package": "10000 governed checks",
+    "price_usd": 500,
+    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "independent_evaluator_payment_included": false
+  },
+  "privacy_boundary": {
+    "allowed": [
+      "public API/A2A/MCP contracts",
+      "public benchmark inputs and outputs",
+      "public-safe evaluation reports",
+      "version and provenance metadata"
+    ],
+    "prohibited": [
+      "private GHOSBC kernel source or prompts",
+      "Mother Language / Soul Cipher / GHX / glyph internals",
+      "credentials or secrets",
+      "private reconstruction material"
+    ]
+  },
+  "claims_boundary": {
+    "formal_certification": false,
+    "regulatory_attestation": false,
+    "machine_consciousness_claim": false,
+    "independent_validation_claim_before_receipt": false,
+    "private_governance_kernel_exposed": false
+  }
+}
