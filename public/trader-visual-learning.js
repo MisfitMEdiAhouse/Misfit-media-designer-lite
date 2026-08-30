@@ -1,0 +1,118 @@
+(()=>{
+  const path=location.pathname.replace(/\/+$/,'')||'/';
+  if(path!=='/signal')return;
+
+  const css=document.createElement('style');
+  css.textContent=`
+    #misfit-market-browser{margin-top:10px;border:1px solid rgba(103,232,249,.14);border-radius:14px;background:rgba(0,0,0,.34);padding:10px}
+    #misfit-market-browser .mb-row{display:flex;gap:7px;flex-wrap:wrap}
+    #misfit-market-browser input{width:100%;min-height:46px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:#020607;color:#fff;padding:0 13px;font:500 13px Inter,sans-serif;outline:none}
+    #misfit-market-browser input:focus{border-color:#67e8f9;box-shadow:0 0 0 3px rgba(103,232,249,.11)}
+    #misfit-market-browser .mb-chip{min-height:36px;border-radius:999px;border:1px solid rgba(103,232,249,.18);background:rgba(3,18,24,.8);padding:0 11px;color:#9bddea;font:700 9px 'JetBrains Mono',monospace;letter-spacing:.05em}
+    #misfit-market-browser .mb-chip.active{background:#67e8f9;color:#031014;border-color:#67e8f9}
+    #misfit-market-browser .mb-count{margin-top:8px;color:#64748b;font:600 9px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase}
+    #misfit-market-results{display:grid;gap:6px;margin-top:8px;max-height:260px;overflow:auto}
+    #misfit-market-results[hidden]{display:none}
+    #misfit-market-results button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.62);padding:8px 10px;color:#e5e7eb;text-align:left}
+    #misfit-market-results button:hover,#misfit-market-results button:focus{border-color:rgba(103,232,249,.5);background:rgba(103,232,249,.08)}
+    #misfit-market-results .kind{font:700 8px 'JetBrains Mono',monospace;color:#67e8f9;text-transform:uppercase;white-space:nowrap}
+    .misfit-candle-visual{width:106px;min-width:106px;height:70px;border-radius:12px;border:1px solid rgba(103,232,249,.18);background:linear-gradient(180deg,rgba(8,17,22,.95),rgba(1,5,7,.98));display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .misfit-candle-visual svg{display:block;width:100%;height:100%}
+    .misfit-pattern-visual-live{margin-top:10px;border-radius:12px;border:1px solid rgba(103,232,249,.13);background:rgba(0,0,0,.35);padding:6px}
+    .misfit-pattern-visual-live .misfit-candle-visual{width:100%;height:82px;border:0;background:transparent}
+    .misfit-visual-caption{margin-top:6px;color:#7dd3fc;font:600 8px/1.4 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
+    @media(max-width:520px){.misfit-candle-visual{width:94px;min-width:94px;height:66px}}
+  `;
+  document.head.appendChild(css);
+
+  const norm=v=>String(v||'').replace(/\s+/g,' ').trim().toUpperCase();
+  const visualKey=name=>{
+    const n=norm(name);
+    if(n.includes('BULLISH ENGULF'))return'bullish-engulfing';
+    if(n.includes('BEARISH ENGULF'))return'bearish-engulfing';
+    if(n.includes('ENGULF'))return'engulfing';
+    if(n.includes('SHOOTING STAR'))return'shooting-star';
+    if(n.includes('INSIDE BAR'))return'inside-bar';
+    if(n.includes('HAMMER'))return'hammer';
+    if(n.includes('DOJI'))return'doji';
+    return null;
+  };
+  const candle=(x,yTop,yBody,hBody,yBottom,color='#67e8f9',w=10)=>`<line x1="${x}" y1="${yTop}" x2="${x}" y2="${yBottom}" stroke="${color}" stroke-width="2"/><rect x="${x-w/2}" y="${yBody}" width="${w}" height="${Math.max(2,hBody)}" rx="1.5" fill="${color}"/>`;
+  function svg(type){
+    let body='';
+    if(type==='doji') body=`${candle(52,8,34,2,62,'#67e8f9',18)}<line x1="39" y1="35" x2="65" y2="35" stroke="#e5e7eb" stroke-width="2"/>`;
+    else if(type==='hammer') body=`${candle(52,8,15,18,63,'#6ee7b7',18)}<circle cx="52" cy="50" r="3" fill="#67e8f9" opacity=".55"/>`;
+    else if(type==='shooting-star') body=`${candle(52,7,39,17,63,'#fca5a5',18)}<circle cx="52" cy="17" r="3" fill="#67e8f9" opacity=".55"/>`;
+    else if(type==='bullish-engulfing'||type==='engulfing') body=`${candle(39,17,25,20,56,'#fca5a5',14)}${candle(61,9,15,35,61,'#6ee7b7',22)}<path d="M26 52 C34 62,68 62,78 50" fill="none" stroke="#67e8f9" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    else if(type==='bearish-engulfing') body=`${candle(39,16,25,20,57,'#6ee7b7',14)}${candle(61,8,15,36,62,'#fca5a5',22)}<path d="M26 14 C36 5,69 5,79 17" fill="none" stroke="#67e8f9" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    else if(type==='inside-bar') body=`${candle(40,8,18,34,62,'#94a3b8',22)}${candle(64,23,30,18,53,'#67e8f9',13)}<rect x="55" y="20" width="18" height="36" rx="3" fill="none" stroke="#67e8f9" stroke-width="1" stroke-dasharray="3 2"/>`;
+    else body=`${candle(38,17,24,24,58,'#fca5a5',15)}${candle(64,10,18,32,62,'#6ee7b7',18)}`;
+    return `<svg viewBox="0 0 104 70" role="img" aria-label="${type.replaceAll('-',' ')} candlestick example"><line x1="8" y1="58" x2="96" y2="58" stroke="rgba(148,163,184,.14)"/><line x1="8" y1="36" x2="96" y2="36" stroke="rgba(148,163,184,.09)"/>${body}</svg>`;
+  }
+  const captions={
+    doji:'Tiny body · open and close nearly equal',
+    hammer:'Small body up top · long lower wick',
+    'shooting-star':'Small body low · long upper wick',
+    engulfing:'Second body wraps the first body',
+    'bullish-engulfing':'Green body completely wraps prior red body',
+    'bearish-engulfing':'Red body completely wraps prior green body',
+    'inside-bar':'Small candle lives inside prior range'
+  };
+
+  function enhanceCheats(){
+    const lab=document.getElementById('candle-lab'); if(!lab)return;
+    const labels=[...lab.querySelectorAll('div.font-mono')];
+    labels.forEach(label=>{
+      const type=visualKey(label.textContent); if(!type)return;
+      const card=label.closest('.rounded-2xl'); if(!card||card.dataset.visualLesson==='1')return;
+      const row=label.parentElement?.parentElement; if(!row)return;
+      const old=row.firstElementChild;
+      const vis=document.createElement('div');vis.className='misfit-candle-visual';vis.innerHTML=svg(type);
+      if(old&&old!==label.parentElement)old.replaceWith(vis);else row.prepend(vis);
+      const cap=document.createElement('div');cap.className='misfit-visual-caption';cap.textContent=captions[type]||'Visual candlestick example';
+      label.parentElement?.appendChild(cap);card.dataset.visualLesson='1';
+    });
+
+    [...lab.querySelectorAll('b')].forEach(b=>{
+      const type=visualKey(b.textContent); if(!type)return;
+      const card=b.closest('.rounded-2xl'); if(!card||card.dataset.livePatternVisual==='1'||card.dataset.visualLesson==='1')return;
+      const wrap=document.createElement('div');wrap.className='misfit-pattern-visual-live';wrap.innerHTML=`<div class="misfit-candle-visual">${svg(type)}</div><div class="misfit-visual-caption">${captions[type]||'Visual candlestick example'}</div>`;
+      const p=card.querySelector('p');p?card.insertBefore(wrap,p):card.appendChild(wrap);card.dataset.livePatternVisual='1';
+    });
+  }
+
+  function mountBrowser(){
+    const lab=document.getElementById('candle-lab');const select=lab?.querySelector('select');if(!lab||!select||document.getElementById('misfit-market-browser'))return;
+    const browser=document.createElement('div');browser.id='misfit-market-browser';browser.innerHTML=`<input id="misfit-market-search" type="search" autocomplete="off" placeholder="Search BTC, Ethereum, NVIDIA, SPY…" aria-label="Search market universe"><div class="mb-row" style="margin-top:8px"><button class="mb-chip active" data-kind="all">ALL MARKETS</button><button class="mb-chip" data-kind="crypto">CRYPTO</button><button class="mb-chip" data-kind="stock">STOCKS + ETFs</button></div><div id="misfit-market-results" hidden></div><div class="mb-count"></div>`;
+    select.parentElement?.appendChild(browser);
+    const input=browser.querySelector('input'),results=browser.querySelector('#misfit-market-results'),count=browser.querySelector('.mb-count');
+    let kind='all';
+    const options=()=>[...select.options].map(o=>({value:o.value,text:o.textContent||o.value,kind:o.value.startsWith('stock:')?'stock':'crypto'}));
+    const updateCount=()=>{const opts=options(),c=opts.filter(o=>o.kind==='crypto').length,s=opts.filter(o=>o.kind==='stock').length;count.textContent=`${c} CRYPTO · ${s} STOCKS / ETFs · PAPER MODE`};
+    const render=()=>{
+      const q=norm(input.value),opts=options().filter(o=>(kind==='all'||o.kind===kind)&&(!q||norm(o.text).includes(q))).slice(0,18);
+      results.innerHTML='';
+      opts.forEach(o=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span>${o.text}</span><span class="kind">${o.kind==='crypto'?'CRYPTO':'STOCK / ETF'}</span>`;b.onclick=()=>{select.value=o.value;select.dispatchEvent(new Event('change',{bubbles:true}));input.value=o.text;results.hidden=true};results.appendChild(b)});
+      results.hidden=!opts.length;
+    };
+    input.addEventListener('focus',render);input.addEventListener('input',render);
+    browser.querySelectorAll('.mb-chip').forEach(ch=>ch.addEventListener('click',()=>{kind=ch.dataset.kind;browser.querySelectorAll('.mb-chip').forEach(x=>x.classList.toggle('active',x===ch));render()}));
+    document.addEventListener('pointerdown',e=>{if(!browser.contains(e.target))results.hidden=true},{passive:true});
+    updateCount();
+  }
+
+  function resetGuideScroll(){
+    const card=document.getElementById('trader-guide');if(!card)return;
+    card.scrollTop=0;
+    requestAnimationFrame(()=>{card.scrollTop=0});
+  }
+  document.addEventListener('click',e=>{
+    if(e.target.closest('#trader-guide button[data-a="next"],#trader-guide button[data-a="start"]'))setTimeout(resetGuideScroll,0);
+    if(e.target.closest('#candle-lab button')||e.target.closest('#misfit-market-results button')){setTimeout(enhanceCheats,350);setTimeout(enhanceCheats,1000)}
+  },true);
+  document.addEventListener('change',e=>{if(e.target.closest('#candle-lab')){setTimeout(enhanceCheats,350);setTimeout(enhanceCheats,1000)}},true);
+
+  let tries=0;
+  const boot=()=>{const lab=document.getElementById('candle-lab');if(!lab){if(++tries<100)setTimeout(boot,100);return}mountBrowser();enhanceCheats();setTimeout(enhanceCheats,800)};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
