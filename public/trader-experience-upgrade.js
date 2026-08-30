@@ -1,104 +1,60 @@
-(() => {
-  const path = location.pathname.replace(/\/+$/, '') || '/';
-  if (path !== '/signal') return;
-
-  const AUDIO_URL = 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f27a6c9b-ee77-4dfe-9012-9f93ebd2a8a1.mp3';
-
-  const style = document.createElement('style');
-  style.textContent = `
-    body[data-misfit-trader] { background:#020304 !important; }
-    body[data-misfit-trader] #root { position:relative; z-index:1; background:transparent !important; }
-    body[data-misfit-trader] #root > div.min-h-screen { background:transparent !important; }
-    #misfit-trader-brand-bg { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#020304; }
-    #misfit-trader-brand-bg .photo { position:absolute; inset:0; background-image:url('/misfit-trader-rig-bg.webp'); background-size:cover; background-repeat:no-repeat; background-position:58% top; transform:scale(1.015); }
-    #misfit-trader-brand-bg .shade { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.22) 0%,rgba(0,0,0,.52) 32%,rgba(0,0,0,.77) 70%,rgba(0,0,0,.91) 100%); }
-    #misfit-trader-brand-bg .brand-wash { position:absolute; inset:0; background:radial-gradient(circle at 16% 8%,rgba(34,211,238,.12),transparent 31%),radial-gradient(circle at 91% 22%,rgba(217,70,239,.10),transparent 32%); }
-    body[data-misfit-trader] main > section:first-of-type { background:linear-gradient(135deg,rgba(4,15,22,.73),rgba(5,4,12,.71)) !important; backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); box-shadow:0 26px 80px rgba(0,0,0,.38); }
-    body[data-misfit-trader] main > section:not(:first-of-type) { backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); }
-    #trader-butler-guide { margin-top:1.1rem; max-width:760px; border:1px solid rgba(125,211,252,.28); border-radius:1rem; background:linear-gradient(135deg,rgba(3,10,14,.82),rgba(14,6,19,.78)); box-shadow:0 18px 54px rgba(0,0,0,.32); padding:14px; }
-    #trader-butler-guide .eyebrow { font:600 10px/1.3 'JetBrains Mono',monospace; letter-spacing:.15em; color:#67e8f9; text-transform:uppercase; }
-    #trader-butler-guide .title { margin-top:6px; font:800 16px/1.25 Inter,sans-serif; color:#fff; }
-    #trader-butler-guide .copy { margin-top:5px; max-width:620px; font:400 12px/1.55 Inter,sans-serif; color:#aeb8c8; }
-    #trader-butler-guide .controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:11px; }
-    #trader-butler-guide button { min-height:46px; border-radius:12px; padding:0 14px; border:1px solid rgba(103,232,249,.32); background:rgba(3,18,24,.72); color:#e6fbff; font:800 10px/1 'JetBrains Mono',monospace; letter-spacing:.04em; cursor:pointer; }
-    #trader-butler-guide button:hover { background:rgba(7,31,40,.88); border-color:rgba(103,232,249,.5); }
-    #trader-butler-guide button.secondary { border-color:rgba(255,255,255,.12); background:rgba(0,0,0,.34); color:#aeb8c8; }
-    #trader-butler-guide .status { margin-top:8px; font:500 9px/1.4 'JetBrains Mono',monospace; color:#7dd3fc; text-transform:uppercase; letter-spacing:.08em; }
-    @media (min-width:768px) { #misfit-trader-brand-bg .photo { background-position:center top; } #trader-butler-guide { padding:16px 18px; } }
-    @media (max-width:420px) { #misfit-trader-brand-bg .photo { background-position:61% top; } #trader-butler-guide button { width:100%; } }
-    @media (prefers-reduced-motion:reduce) { #misfit-trader-brand-bg .photo { transform:none; } }
-  `;
-  document.head.appendChild(style);
-  document.body.dataset.misfitTrader = 'true';
-
-  if (!document.getElementById('misfit-trader-brand-bg')) {
-    const bg = document.createElement('div');
-    bg.id = 'misfit-trader-brand-bg';
-    bg.setAttribute('aria-hidden','true');
-    bg.innerHTML = '<div class="photo"></div><div class="shade"></div><div class="brand-wash"></div>';
-    document.body.prepend(bg);
-  }
-
-  let attempts = 0;
-  const mount = () => {
-    const main = document.querySelector('#root main');
-    const hero = main?.querySelector(':scope > section:first-of-type');
-    if (!main || !hero) {
-      if (++attempts < 60) setTimeout(mount,100);
-      return;
-    }
-    if (document.getElementById('trader-butler-guide')) return;
-
-    const card = document.createElement('div');
-    card.id = 'trader-butler-guide';
-    card.innerHTML = `
-      <div class="eyebrow">MISFIT AI · HAND-HOLD GUIDE</div>
-      <div class="title">NO FUCKING CLUE WHAT YOU'RE LOOKING AT?</div>
-      <div class="copy">Good. Tap play and the same female <strong>fancy</strong> voice used on Stan Hansen's Egnyte technical tour will walk you through the signal, candle, crowd and paper-trading logic.</div>
-      <div class="controls">
-        <button type="button" data-action="play">PLAY GUIDE</button>
-        <button type="button" class="secondary" data-action="stop">STOP</button>
-      </div>
-      <div class="status">STAN / EGNYTE FANCY VOICE · USER-TRIGGERED · NO DEVICE VOICE FALLBACK</div>`;
-
-    const audio = new Audio(AUDIO_URL);
-    audio.preload = 'metadata';
-    const play = card.querySelector('[data-action="play"]');
-    const stop = card.querySelector('[data-action="stop"]');
-
-    const setPlayLabel = (label) => { if (play) play.textContent = label; };
-    play?.addEventListener('click', async () => {
-      try {
-        if (!audio.paused) {
-          audio.pause();
-          setPlayLabel('RESUME GUIDE');
-          return;
-        }
-        await audio.play();
-        setPlayLabel('PAUSE GUIDE');
-      } catch (_) {
-        setPlayLabel('AUDIO UNAVAILABLE');
-      }
-    });
-    stop?.addEventListener('click', () => {
-      try { audio.pause(); audio.currentTime = 0; } catch (_) {}
-      setPlayLabel('PLAY GUIDE');
-    });
-    audio.addEventListener('ended', () => setPlayLabel('PLAY AGAIN'));
-    audio.addEventListener('error', () => setPlayLabel('AUDIO UNAVAILABLE'));
-
-    window.__MISFIT_TRADER_GUIDE__ = Object.freeze({
-      provider: 'AI Voice Generator',
-      profile: 'fancy',
-      benchmark: 'Stan Hansen / Egnyte tour voice',
-      autoplay: false,
-      deviceFallback: false,
-      stop: () => { try { audio.pause(); audio.currentTime = 0; } catch (_) {} },
-    });
-
-    const actionRow = hero.querySelector('.mt-6.flex');
-    if (actionRow) hero.insertBefore(card,actionRow); else hero.appendChild(card);
-  };
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mount,{once:true}); else mount();
+(()=>{
+const P=location.pathname.replace(/\/+$/,'')||'/';if(P!=='/signal')return;
+const A={
+ intro:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/287eef77-c500-4ccd-be7f-4cccc1ad7514.mp3',
+ market:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/180b0535-71bc-4850-99bb-ad6dceeac963.mp3',
+ candle:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/6164ede5-79e0-47ee-a859-5de1ec29b805.mp3',
+ crowd:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a4bfd59b-a998-4e02-8bb3-fd00d6da9087.mp3',
+ tape:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/07797f6a-05d4-4bf4-a513-2a760857c650.mp3',
+ amount:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/fe4d72d1-2421-4dcf-b3a2-30e23bf21a0a.mp3',
+ buy:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/3f6c8e11-6326-4778-b843-a561d853c9c1.mp3',
+ verify:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/bcfac9f7-1847-4bda-8f42-30cca9c20a5d.mp3',
+ finish:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/41b4d8c1-a413-4178-9c75-3a66052f7e11.mp3'};
+const css=document.createElement('style');css.textContent=`
+body[data-misfit-trader]{background:#020304!important}body[data-misfit-trader] #root{position:relative;z-index:1;background:transparent!important}body[data-misfit-trader] #root>div.min-h-screen{background:transparent!important}
+#misfit-trader-brand-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#020304}#misfit-trader-brand-bg .photo{position:absolute;inset:0;background:url('/misfit-trader-rig-bg.webp') 58% top/cover no-repeat;transform:scale(1.015)}#misfit-trader-brand-bg .shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.52) 32%,rgba(0,0,0,.77) 70%,rgba(0,0,0,.91))}#misfit-trader-brand-bg .brand-wash{position:absolute;inset:0;background:radial-gradient(circle at 16% 8%,rgba(34,211,238,.12),transparent 31%),radial-gradient(circle at 91% 22%,rgba(217,70,239,.10),transparent 32%)}
+body[data-misfit-trader] main>section:first-of-type{background:linear-gradient(135deg,rgba(4,15,22,.73),rgba(5,4,12,.71))!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 26px 80px rgba(0,0,0,.38)}body[data-misfit-trader] main>section:not(:first-of-type){backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+#trader-guide{margin-top:1.1rem;max-width:760px;border:1px solid rgba(125,211,252,.28);border-radius:1rem;background:linear-gradient(135deg,rgba(3,10,14,.94),rgba(14,6,19,.93));box-shadow:0 18px 54px rgba(0,0,0,.38);padding:14px}#trader-guide.running{position:fixed;z-index:10002;left:12px;right:12px;bottom:12px;margin:0;max-height:42vh;overflow:auto}#trader-guide .ey{font:600 10px/1.3 'JetBrains Mono',monospace;letter-spacing:.15em;color:#67e8f9;text-transform:uppercase}#trader-guide .ti{margin-top:6px;font:800 17px/1.25 Inter,sans-serif;color:#fff}#trader-guide .cp{margin-top:6px;font:400 13px/1.55 Inter,sans-serif;color:#b7c2d1}#trader-guide .bar{margin-top:11px;height:5px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.08)}#trader-guide .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#67e8f9,#e879f9);transition:width .25s}#trader-guide .step{margin-top:10px;border:1px solid rgba(103,232,249,.18);border-radius:12px;background:rgba(0,0,0,.28);padding:9px 10px;font:600 10px/1.5 'JetBrains Mono',monospace;color:#d9f8ff}#trader-guide .ctrl{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}#trader-guide button{min-height:46px;border-radius:12px;padding:0 14px;border:1px solid rgba(103,232,249,.32);background:rgba(3,18,24,.72);color:#e6fbff;font:800 10px/1 'JetBrains Mono',monospace;cursor:pointer}#trader-guide button.alt{border-color:rgba(255,255,255,.12);background:rgba(0,0,0,.34);color:#aeb8c8}#trader-guide button:disabled{opacity:.45;cursor:not-allowed}#trader-guide .st{margin-top:8px;font:500 9px/1.4 'JetBrains Mono',monospace;color:#7dd3fc;text-transform:uppercase;letter-spacing:.08em}
+.misfit-tour-target{position:relative!important;z-index:10001!important;outline:3px solid rgba(103,232,249,.95)!important;outline-offset:4px!important;box-shadow:0 0 0 8px rgba(103,232,249,.12),0 0 48px rgba(34,211,238,.35)!important;scroll-margin-top:105px;scroll-margin-bottom:260px}.misfit-tour-pulse{animation:mtp 1.2s ease-in-out infinite alternate}@keyframes mtp{to{filter:brightness(1.18)}}
+@media(min-width:768px){#misfit-trader-brand-bg .photo{background-position:center top}#trader-guide.running{left:auto;right:20px;bottom:20px;width:min(420px,calc(100vw - 40px));max-height:72vh}}@media(max-width:420px){#misfit-trader-brand-bg .photo{background-position:61% top}#trader-guide button{flex:1 1 calc(50% - 8px)}#trader-guide button[data-a=next]{flex-basis:100%}}@media(prefers-reduced-motion:reduce){#misfit-trader-brand-bg .photo{transform:none}.misfit-tour-pulse{animation:none}}`;
+document.head.appendChild(css);document.body.dataset.misfitTrader='true';
+if(!document.getElementById('misfit-trader-brand-bg')){const b=document.createElement('div');b.id='misfit-trader-brand-bg';b.setAttribute('aria-hidden','true');b.innerHTML='<div class="photo"></div><div class="shade"></div><div class="brand-wash"></div>';document.body.prepend(b)}
+const N=v=>String(v||'').replace(/\s+/g,' ').trim().toUpperCase(),ALL=(s,r=document)=>[...r.querySelectorAll(s)];
+const txt=(q,r=document)=>{q=N(q);return ALL('h1,h2,h3,h4,p,div,span,label',r).find(e=>{const t=N(e.textContent);return t===q||(t.includes(q)&&t.length<Math.max(180,q.length*5))})||null};
+const panel=e=>e?.closest('section,div.rounded-3xl,div.rounded-2xl,div.rounded-xl,div[class*="rounded"]')||e||null;
+const btn=(rx,ex=[])=>ALL('button',document.querySelector('#root main')||document).find(b=>{const t=N(b.textContent);return rx.test(t)&&!ex.some(x=>t.includes(N(x)))})||null;
+let boot=0;function mount(){const main=document.querySelector('#root main'),hero=main?.querySelector(':scope>section:first-of-type');if(!main||!hero){if(++boot<80)setTimeout(mount,100);return}if(document.getElementById('trader-guide'))return;
+ const card=document.createElement('div');card.id='trader-guide';card.innerHTML=`<div class="ey">MISFIT AI · GUIDED TRADING TOUR</div><div class="ti">NEW HERE? I'LL WALK YOU THROUGH IT.</div><div class="cp">Tap Start Tour. I'll point to the exact control, tell you what to do, and wait while you do it. By the end, you'll have placed and verified your first paper trade.</div><div class="bar"><span></span></div><div class="step" hidden></div><div class="ctrl"><button data-a="start">START TOUR</button><button class="alt" data-a="voice" hidden>REPLAY VOICE</button><button data-a="next" hidden>NEXT</button><button class="alt" data-a="exit" hidden>EXIT TOUR</button></div><div class="st">PAPER TRADING ONLY · REAL MONEY REMAINS LOCKED</div>`;
+ const row=hero.querySelector('.mt-6.flex');row?hero.insertBefore(card,row):hero.appendChild(card);
+ const ti=card.querySelector('.ti'),cp=card.querySelector('.cp'),bar=card.querySelector('.bar span'),box=card.querySelector('.step'),st=card.querySelector('.st'),start=card.querySelector('[data-a=start]'),voice=card.querySelector('[data-a=voice]'),next=card.querySelector('[data-a=next]'),exit=card.querySelector('[data-a=exit]');
+ const audio=new Audio();audio.preload='metadata';let i=-1,target=null,clean=[],run=false,beforeTrades=0;
+ const paperTrades=()=>{try{return(JSON.parse(localStorage.getItem('misfit-signal-paper-v3'))?.trades||[]).length}catch{return 0}};
+ const clear=()=>{clean.splice(0).forEach(f=>{try{f()}catch{}});if(target)target.classList.remove('misfit-tour-target','misfit-tour-pulse');target=null};
+ const stopVoice=()=>{try{audio.pause();audio.currentTime=0}catch{}voice.textContent='REPLAY VOICE'};
+ const play=async u=>{try{audio.pause();audio.src=u;audio.currentTime=0;await audio.play();voice.textContent='PAUSE VOICE'}catch{voice.textContent='VOICE UNAVAILABLE'}};
+ voice.onclick=async()=>{if(!run||i<0)return;if(!audio.paused){audio.pause();voice.textContent='RESUME VOICE';return}try{await audio.play();voice.textContent='PAUSE VOICE'}catch{voice.textContent='VOICE UNAVAILABLE'}};audio.onended=()=>{if(run)voice.textContent='REPLAY VOICE'};
+ const R={hero:()=>hero,candleControls:()=>document.querySelector('#candle-lab select')?.parentElement||document.getElementById('candle-lab'),candle:()=>document.getElementById('candle-lab'),crowd:()=>txt('FIELD EMOTION',main)?.closest('section')||txt('REGIME',main)?.closest('section')||panel(txt('FIELD EMOTION',main)),tape:()=>panel(txt('Market tape',main)),amount:()=>main.querySelector('input[type=number],input[inputmode=decimal],input'),buy:()=>btn(/(^|\s)(PAPER\s+)?BUY(\s|$)/i,['ACCESS']),verify:()=>txt('MANUAL EQUITY',main)?.closest('section')||txt('MANUAL EXPOSURE',main)?.closest('section')||panel(txt('MANUAL EQUITY',main)),finish:()=>txt('AUTONOMOUS',main)?.closest('section')||txt('PREDICTION',main)?.closest('section')||txt('PAPER AUTOPILOT',main)?.closest('section')||main.lastElementChild};
+ const S=[
+  ['WELCOME TO MISFIT TRADER','We are going to make one complete paper-trading pass together. Nothing here can move real money. Tap Next and I will take you to the first control.',A.intro,'hero','manual','GO TO STEP 1'],
+  ['STEP 1 · PICK A MARKET + TIMEFRAME','Tap the highlighted market selector and choose BTC, ETH, or SOL. Then tap a timeframe. Seven days is a good beginner view. I will wait until you touch both controls.',A.market,'candleControls','market-time','CHOOSE MARKET + TIMEFRAME'],
+  ['STEP 2 · READ THE CANDLE','Look at the chart and pattern cards. Misfit explains what the latest candle structure usually means. A pattern is evidence, not a prediction. When it makes sense, tap Next.',A.candle,'candle','manual','I READ IT · NEXT'],
+  ['STEP 3 · READ THE CROWD','Check Field Emotion and Regime. They describe the environment your trade would enter; they are not a buy signal. Read both, then continue.',A.crowd,'crowd','manual','CROWD CHECKED · NEXT'],
+  ['STEP 4 · CHOOSE THE ASSET','In Market Tape, tap the live row for the asset you want to practice with. That selection feeds the paper order. I will advance when you tap one.',A.tape,'tape','market-click','TAP A MARKET ROW'],
+  ['STEP 5 · SET YOUR PAPER AMOUNT','This is virtual money only. One thousand dollars is a fine first practice size. Change it if you want, or leave the default, then tap Amount Set.',A.amount,'amount','manual','AMOUNT SET · NEXT'],
+  ['STEP 6 · PLACE THE PAPER BUY','Tap the highlighted Buy button. Misfit will use the live price but only move virtual cash. I will wait for a confirmed paper trade before moving on.',A.buy,'buy','buy-click','TAP BUY TO CONTINUE'],
+  ['STEP 7 · VERIFY THE TRADE','Look at Manual Exposure, Manual Equity, your new position, and trade history. Your virtual cash changed and the position now moves with the live market. You just placed your first paper trade.',A.verify,'verify','manual','I SEE IT · NEXT'],
+  ['STEP 8 · USE THE OTHER SIGNALS','Autonomous paper portfolios and prediction-market intelligence are comparison tools. Use them to challenge your thesis, not blindly copy a trade. Tap Finish Tour when you are done looking.',A.finish,'finish','manual','FINISH TOUR']];
+ const enable=l=>{next.disabled=false;next.textContent=l||'NEXT'};
+ function bind(s,t){const mode=s[4];if(mode==='manual'){enable(s[5]);return}next.disabled=true;next.textContent=s[5];
+  if(mode==='market-time'){const sec=document.getElementById('candle-lab'),sel=sec?.querySelector('select'),times=ALL('button',sec||document).filter(b=>/^(24H|7D|14D|30D)$/.test(N(b.textContent)));let m=false,d=false;const chk=()=>{if(m&&d){st.textContent='MARKET + TIMEFRAME SET · READY FOR NEXT STEP';enable('NEXT → READ THE CANDLE')}};const om=()=>{m=true;chk()},od=()=>{d=true;chk()};sel?.addEventListener('change',om);sel?.addEventListener('pointerdown',om);times.forEach(b=>b.addEventListener('click',od));clean.push(()=>{sel?.removeEventListener('change',om);sel?.removeEventListener('pointerdown',om);times.forEach(b=>b.removeEventListener('click',od))});return}
+  if(mode==='market-click'){const bs=ALL('button',t).filter(b=>!/REFRESH|COMMAND|ACCESS/.test(N(b.textContent)));const pick=()=>{st.textContent='ASSET SELECTED · MOVING TO PAPER AMOUNT';bs.forEach(b=>b.removeEventListener('click',pick));setTimeout(()=>show(i+1),350)};bs.forEach(b=>b.addEventListener('click',pick,{once:true}));clean.push(()=>bs.forEach(b=>b.removeEventListener('click',pick)));if(!bs.length)enable('NEXT → PAPER AMOUNT');return}
+  if(mode==='buy-click'){const b=t?.tagName==='BUTTON'?t:btn(/(^|\s)(PAPER\s+)?BUY(\s|$)/i,['ACCESS']);if(!b){enable('NEXT → VERIFY');return}beforeTrades=paperTrades();const buy=()=>{st.textContent='CHECKING PAPER ORDER CONFIRMATION…';let tries=0;const poll=()=>{if(paperTrades()>beforeTrades){st.textContent='PAPER TRADE CONFIRMED · NICE WORK';setTimeout(()=>show(i+1),450)}else if(++tries<16)setTimeout(poll,200);else{st.textContent='NO PAPER TRADE CONFIRMED · CHECK THE MESSAGE AND TRY BUY AGAIN';b.addEventListener('click',buy,{once:true})}};setTimeout(poll,180)};b.addEventListener('click',buy,{once:true});clean.push(()=>b.removeEventListener('click',buy));}
+ }
+ function find(s,token,n=0){if(!run||token!==i)return;const t=R[s[3]]?.();if(t){target=t;t.classList.add('misfit-tour-target','misfit-tour-pulse');try{t.scrollIntoView({behavior:'smooth',block:'center'})}catch{t.scrollIntoView()}bind(s,t)}else if(n<36)setTimeout(()=>find(s,token,n+1),250);else{st.textContent='CONTROL STILL LOADING · CONTINUE MANUALLY';enable(s[5])}}
+ function show(n){clear();stopVoice();i=Math.max(0,Math.min(n,S.length-1));const s=S[i];card.classList.add('running');ti.textContent=s[0];cp.textContent=s[1];box.hidden=false;box.textContent=`STEP ${i+1} OF ${S.length} · FOLLOW THE CYAN HIGHLIGHT`;bar.style.width=`${(i+1)/S.length*100}%`;start.hidden=true;voice.hidden=false;next.hidden=false;exit.hidden=false;next.disabled=s[4]!=='manual';next.textContent=s[5];st.textContent=s[4]==='manual'?'LISTEN · LOOK · THEN TAP NEXT':'WAITING FOR THE HIGHLIGHTED ACTION';play(s[2]);find(s,i)}
+ function finish(){clear();stopVoice();run=false;i=-1;card.classList.remove('running');ti.textContent='YOU ARE PAPER TRADING.';cp.textContent='You picked a market, read the candle, checked the crowd, chose an asset, set a virtual amount, placed a paper buy, and verified the position. Keep practicing. Real-money trading stays locked.';box.hidden=false;box.textContent='FIRST PAPER-TRADE WALKTHROUGH COMPLETE';bar.style.width='100%';start.hidden=false;start.textContent='RUN TOUR AGAIN';voice.hidden=true;next.hidden=true;exit.hidden=false;exit.textContent='CLOSE GUIDE';st.textContent='PAPER MODE ACTIVE · REAL MONEY LOCKED'}
+ start.onclick=()=>{run=true;start.textContent='START TOUR';exit.textContent='EXIT TOUR';show(0)};next.onclick=()=>{if(!run)return;i>=S.length-1?finish():show(i+1)};exit.onclick=()=>{if(!run&&i===-1){card.style.display='none';return}clear();stopVoice();run=false;i=-1;card.classList.remove('running');ti.textContent="NEW HERE? I'LL WALK YOU THROUGH IT.";cp.textContent="Tap Start Tour. I'll point to the exact control, tell you what to do, and wait while you do it. By the end, you'll have placed and verified your first paper trade.";box.hidden=true;bar.style.width='0';start.hidden=false;voice.hidden=true;next.hidden=true;exit.hidden=true;st.textContent='PAPER TRADING ONLY · REAL MONEY REMAINS LOCKED'};
+ window.__MISFIT_TRADER_GUIDE__=Object.freeze({version:'guided-onboarding-v2',steps:S.length,autoplay:false,realMoney:false,start:()=>{if(!run)start.click()},stop:()=>{clear();stopVoice()}});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
