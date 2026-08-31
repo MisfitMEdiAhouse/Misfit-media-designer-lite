@@ -1,11 +1,12 @@
 {
-  "schema_version": "1.10.1",
+  "schema_version": "1.10.2",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+  "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
   "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
@@ -16,6 +17,7 @@
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+    "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
@@ -48,9 +50,10 @@
   "integration_quickstart": {
     "operation": "integration_quickstart",
     "kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+    "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-    "purpose": "Return the current API, OpenAPI, MCP, A2A, deterministic request/report validation and purchase sequence without requiring a human explanation.",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A, deterministic request/report validation, buyer proof and purchase sequence without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
