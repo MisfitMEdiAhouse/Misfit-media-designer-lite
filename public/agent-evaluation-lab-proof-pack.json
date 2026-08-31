@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "name": "Misfit Agent Evaluation Lab Buyer Proof Pack",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -9,6 +9,41 @@
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+  "zero_cost_verification_sequence": [
+    {
+      "step": 1,
+      "action": "fetch",
+      "url": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
+      "purpose": "Validate the request contract locally."
+    },
+    {
+      "step": 2,
+      "action": "compare",
+      "url": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+      "purpose": "Inspect the deterministic illustrative output shape and comparative metrics before purchase."
+    },
+    {
+      "step": 3,
+      "action": "invoke",
+      "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "operation": "validate_request",
+      "purpose": "Deterministically validate the proof request without executing external actions or moving money."
+    },
+    {
+      "step": 4,
+      "action": "invoke",
+      "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "operation": "score_report",
+      "purpose": "Generate the bounded Raw-vs-Governed comparative report for the supplied proof rows."
+    },
+    {
+      "step": 5,
+      "action": "invoke",
+      "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "operation": "validate_report",
+      "purpose": "Deterministically validate the returned report against agent-evaluation-report-v1.3."
+    }
+  ],
   "proof_request": {
     "op": "score_report",
     "evaluation_id": "buyer-proof-ae001-ae003",
