@@ -60,6 +60,7 @@ Machine-readable contract: https://misfitmediahouse.com/agent-evaluation-lab.jso
 LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
 Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
 External Evaluator Kit: https://misfitmediahouse.com/agent-evaluation-lab-external-evaluator-kit.json
+WebMCP browser-native package: https://misfitmediahouse.com/agent-evaluation-lab-webmcp.json
 Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
