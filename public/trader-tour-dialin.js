@@ -1,23 +1,29 @@
 (()=>{
   if((location.pathname.replace(/\/+$/,'')||'/')!=='/signal')return;
 
-  // Keep the tour on one audio player. The base tour already owns playback for
-  // every step; this shim only redirects the stale Step 3 source to the approved
-  // working Misfit voice asset. It never creates or starts a second Audio object.
-  const LEGACY_CROWD_AUDIO='https://www.aidocmaker.com/g0/audio?name=80a5480626d54517ab923d96569636f6';
-  const CANONICAL_CROWD_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8717c9f8-da95-4b95-b7ab-5b92b1015114.mp3';
-  if(!window.__MISFIT_TRADER_SINGLE_VOICE__){
-    const nativePlay=HTMLMediaElement.prototype.play;
-    HTMLMediaElement.prototype.play=function(...args){
-      try{
-        const src=String(this.currentSrc||this.src||'');
-        if(src===LEGACY_CROWD_AUDIO||src.includes('80a5480626d54517ab923d96569636f6')){
-          if(this.src!==CANONICAL_CROWD_AUDIO)this.src=CANONICAL_CROWD_AUDIO;
+  // ONE VOICE ONLY.
+  // The base tour owns the single Audio element, playback, pause/resume button,
+  // and all step narration. This file never creates or starts audio.
+  // It only maps the stale Step 3 URL to the fresh approved Misfit fancy voice
+  // before the base player receives the source.
+  const LEGACY_CROWD_TOKEN='80a5480626d54517ab923d96569636f6';
+  const CANONICAL_CROWD_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/bc5ee3e5-960c-4425-afce-fdc5332aafdc.mp3';
+
+  if(!window.__MISFIT_TRADER_CROWD_SOURCE_MAP__){
+    let owner=HTMLMediaElement.prototype;
+    while(owner&&!Object.prototype.hasOwnProperty.call(owner,'src'))owner=Object.getPrototypeOf(owner);
+    const desc=owner&&Object.getOwnPropertyDescriptor(owner,'src');
+    if(desc?.get&&desc?.set&&desc.configurable){
+      Object.defineProperty(owner,'src',{
+        ...desc,
+        set(value){
+          const raw=String(value||'');
+          const mapped=raw.includes(LEGACY_CROWD_TOKEN)?CANONICAL_CROWD_AUDIO:value;
+          return desc.set.call(this,mapped);
         }
-      }catch{}
-      return nativePlay.apply(this,args);
-    };
-    window.__MISFIT_TRADER_SINGLE_VOICE__=true;
+      });
+      window.__MISFIT_TRADER_CROWD_SOURCE_MAP__=true;
+    }
   }
 
   const norm=v=>String(v||'').replace(/\s+/g,' ').trim().toUpperCase();
@@ -75,10 +81,10 @@
   let tries=0;
   function boot(){
     const guide=document.getElementById('trader-guide');
-    if(!guide){if(++tries<160)setTimeout(boot,100);return;}
+    if(!guide){if(++tries<180)setTimeout(boot,100);return;}
     if(guide.dataset.dialin==='1')return;
     const title=guide.querySelector('.ti');
-    if(!title){if(++tries<160)setTimeout(boot,100);return;}
+    if(!title){if(++tries<180)setTimeout(boot,100);return;}
     guide.dataset.dialin='1';
 
     const sync=()=>{
@@ -95,7 +101,8 @@
       if(e.target.closest('#trader-guide [data-a="next"],#trader-guide [data-a="start"]'))setTimeout(sync,40);
     },true);
     sync();
-    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-4-single-voice',targetFor});
+    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-5-source-before-play',targetFor});
   }
+
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
