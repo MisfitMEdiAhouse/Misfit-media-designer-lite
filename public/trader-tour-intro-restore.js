@@ -3,10 +3,11 @@
 
   const INTRO_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/5fc79ec2-8133-4611-9872-6fd17919743c.mp3';
   let tries=0;
+  const retry=()=>{if(++tries<180)setTimeout(boot,100)};
 
   function boot(){
     const card=document.getElementById('trader-guide');
-    if(!card){if(++tries<140)setTimeout(boot,100);return;}
+    if(!card){retry();return;}
     if(card.dataset.introRestore==='1')return;
 
     const title=card.querySelector('.ti');
@@ -18,7 +19,10 @@
     const voice=card.querySelector('[data-a="voice"]');
     const next=card.querySelector('[data-a="next"]');
     const exit=card.querySelector('[data-a="exit"]');
-    if(!title||!copy||!bar||!stepBox||!status||!start||!voice||!next||!exit)return;
+    // trader-tour-v4 temporarily reserves #trader-guide with a hidden sentinel.
+    // Do not treat that placeholder as the mounted tour card; keep retrying until
+    // the real guide and all controls exist.
+    if(!title||!copy||!bar||!stepBox||!status||!start||!voice||!next||!exit){retry();return;}
 
     card.dataset.introRestore='1';
     const homeParent=card.parentNode;
@@ -97,7 +101,7 @@
     }
 
     start.onclick=launchIntro;
-    window.__MISFIT_TRADER_INTRO__=Object.freeze({version:'welcome-intro-v1',start:launchIntro});
+    window.__MISFIT_TRADER_INTRO__=Object.freeze({version:'welcome-intro-v2',start:launchIntro});
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
