@@ -6,7 +6,7 @@ import Footer from '../components/Footer.jsx';
 const API='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public';
 const MCP='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp';
 const A2A='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a';
-const BUY='https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
+const BUY='/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agent_evaluation_product_page';
 
 async function runEvaluationOperation(payload, signal) {
   const response = await fetch(API, {
