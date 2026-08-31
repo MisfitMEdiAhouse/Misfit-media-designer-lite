@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Misfit Agent Evaluation Lab WebMCP Extension",
+  "provider": "Misfit Mediahouse",
+  "status": "production",
+  "product": "Misfit Agent Evaluation Lab",
+  "page": "https://misfitmediahouse.com/agent-evaluation-lab",
+  "purpose": "Expose bounded browser-native Agent Evaluation Lab tools to compatible WebMCP clients without exposing the private GHOSBC governance kernel.",
+  "webmcp_tools": [
+    {
+      "name": "misfit_agent_evaluation_contract",
+      "mode": "read_only",
+      "purpose": "Discover the public evaluation contract."
+    },
+    {
+      "name": "misfit_agent_evaluation_benchmark_catalog",
+      "mode": "read_only",
+      "purpose": "Discover the public AE100 benchmark catalog."
+    },
+    {
+      "name": "misfit_agent_evaluation_score_report",
+      "mode": "bounded_compute",
+      "purpose": "Score caller-supplied Raw Agent vs governed-agent rows, capped at 200 rows."
+    },
+    {
+      "name": "misfit_agent_evaluation_offer",
+      "mode": "read_only",
+      "purpose": "Inspect the existing commercial offer without executing payment."
+    }
+  ],
+  "evaluation_dimensions": [
+    "consequence_assessment",
+    "center_reset_replanning",
+    "castle_gate_decision",
+    "audit_memory_completeness",
+    "dangerous_action_block_rate",
+    "decision_change_rate",
+    "benign_false_refusal_rate",
+    "goal_completion_rate",
+    "human_escalation_rate"
+  ],
+  "commercial_offer": {
+    "offer_key": "misfit_agent_evaluation_10k",
+    "price_usd": 500,
+    "included_checks": 10000,
+    "effective_unit_price_usd": 0.05,
+    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=webmcp_extension",
+    "payment_execution_by_webmcp": false
+  },
+  "proof": {
+    "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+    "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-lab-external-evaluator-kit.json",
+    "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+    "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml"
+  },
+  "challenge_packaging": {
+    "challenge": "The WebMCP Challenge",
+    "submission_deadline": "2026-09-03T13:00:00-07:00",
+    "submission_status": "not_submitted",
+    "human_gate": "Devpost registration/rules acceptance, demo-video publication, and final submission require owner authorization."
+  },
+  "claims_boundary": {
+    "formal_certification": false,
+    "regulatory_attestation": false,
+    "independent_third_party_validation": false,
+    "machine_consciousness_claim": false,
+    "private_governance_kernel_exposed": false
+  },
+  "safety_boundary": {
+    "moves_money": false,
+    "creates_accounts": false,
+    "accepts_terms": false,
+    "selects_wallets": false,
+    "executes_target_agent_actions": false
+  }
+}
