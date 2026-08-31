@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.5.1",
+  "version": "1.5.2",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -73,14 +73,18 @@
       "outputModes": ["application/json"],
       "documentationUrl": "https://misfitmediahouse.com/agent-evaluation-lab",
       "contractUrl": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+      "requestSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
       "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
       "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
+      "buyerProofPackUrl": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+      "integrationKitUrl": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+      "externalEvaluatorKitUrl": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
       "commercialOffer": {
         "offerKey": "misfit_agent_evaluation_10k",
         "priceUsd": 500,
         "includedChecks": 10000,
         "effectiveUnitPriceUsd": 0.05,
-        "purchaseUrl": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k",
+        "purchaseUrl": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=a2a_agent_card",
         "paymentExecuted": false,
         "formalCertification": false,
         "independentValidationClaimed": false
