@@ -12,7 +12,7 @@
   const AUDIO={
     market:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/180b0535-71bc-4850-99bb-ad6dceeac963.mp3',
     candle:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/6164ede5-79e0-47ee-a859-5de1ec29b805.mp3',
-    crowd:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a4bfd59b-a998-4e02-8bb3-fd00d6da9087.mp3',
+    crowd:'https://www.aidocmaker.com/g0/audio?name=80a5480626d54517ab923d96569636f6',
     tape:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/07797f6a-05d4-4bf4-a513-2a760857c650.mp3',
     amount:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/fe4d72d1-2421-4dcf-b3a2-30e23bf21a0a.mp3',
     buy:'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/3f6c8e11-6326-4778-b843-a561d853c9c1.mp3',
