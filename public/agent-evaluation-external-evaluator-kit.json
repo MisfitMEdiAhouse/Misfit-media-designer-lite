@@ -1,5 +1,5 @@
 {
-  "schema_version": "external-evaluator-kit-v1.0",
+  "schema_version": "external-evaluator-kit-v1.0.1",
   "name": "Misfit Agent Evaluation Lab External Evaluator Kit",
   "provider": "Misfit Mediahouse",
   "status": "production-handoff",
@@ -64,11 +64,15 @@
     "benchmark-native aggregate results"
   ],
   "commercial_boundary": {
+    "offer_key": "misfit_agent_evaluation_10k",
     "evaluation_package": "10000 governed checks",
     "price_usd": 500,
-    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "unit_price_usd": 0.05,
+    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=external_evaluator_kit",
+    "purchase_handoff_executes_payment": false,
+    "purchase_handoff_is_revenue": false,
     "independent_evaluator_payment_included": false,
-    "note": "This kit is a public evaluator handoff, not a paid third-party validation service."
+    "note": "This kit is a public evaluator handoff, not a paid third-party validation service. The tracked purchase handoff records bounded checkout intent before redirecting to the existing Stripe checkout; only verified settlement is revenue."
   },
   "privacy_boundary": {
     "allowed": [
