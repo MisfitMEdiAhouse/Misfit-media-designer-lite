@@ -58,6 +58,8 @@ Authorized Raw Agent vs governed-agent comparison package. Measures dangerous-ac
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine-readable contract: https://misfitmediahouse.com/agent-evaluation-lab.json
 LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
+Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
+External Evaluator Kit: https://misfitmediahouse.com/agent-evaluation-lab-external-evaluator-kit.json
 Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
