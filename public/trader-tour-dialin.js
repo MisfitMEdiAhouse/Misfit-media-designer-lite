@@ -57,7 +57,7 @@
     setTimeout(place,560);
   }
 
-  let crowdAudio=null,originalVoiceClick=null,currentTitle='';
+  let crowdAudio=null,originalVoiceClick=null,currentTitle='',crowdMode=false;
   const stopCrowd=()=>{if(crowdAudio){try{crowdAudio.pause();crowdAudio.currentTime=0}catch{}crowdAudio=null}};
   async function playCrowd(voice){
     stopCrowd();
@@ -83,15 +83,20 @@
     const title=guide.querySelector('.ti'),voice=guide.querySelector('[data-a="voice"]');
     if(!title||!voice){if(++tries<160)setTimeout(boot,100);return;}
     guide.dataset.dialin='1';
-    originalVoiceClick=voice.onclick;
 
     const sync=()=>{
       currentTitle=title.textContent||'';
       const crowd=norm(currentTitle).includes('READ THE CROWD');
-      if(!crowd){
+      if(crowd&&!crowdMode){
+        originalVoiceClick=voice.onclick;
+        crowdMode=true;
+      }
+      if(!crowd&&crowdMode){
         stopCrowd();
         voice.onclick=originalVoiceClick;
-      }else{
+        crowdMode=false;
+      }
+      if(crowd){
         voice.onclick=async()=>{
           if(crowdAudio&&!crowdAudio.paused){crowdAudio.pause();voice.textContent='RESUME VOICE';return}
           if(crowdAudio&&crowdAudio.paused){try{await crowdAudio.play();voice.textContent='PAUSE VOICE';return}catch{}}
@@ -112,7 +117,7 @@
       if(e.target.closest('#trader-guide [data-a="next"],#trader-guide [data-a="start"]'))setTimeout(sync,60);
     },true);
     sync();
-    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-1',targetFor});
+    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-2',targetFor});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
