@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.1.1",
   "status": "prepared_not_payment_activated",
   "provider": "Misfit Mediahouse",
   "product": "Misfit Agent Evaluation Lab",
@@ -84,7 +84,8 @@
     "existing_offer_key": "misfit_agent_evaluation_10k",
     "existing_prepaid_package_usd": 500,
     "existing_included_checks": 10000,
-    "existing_purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
+    "existing_purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=x402_readiness",
+    "handoff_behavior": "Records a non-revenue checkout-intent event before redirecting to the existing Stripe Checkout. Opening this handoff is not a sale or settlement."
   },
   "activation_requirements": [
     "Use an owner-approved Base/USDC receive address; do not create or select a wallet autonomously.",
