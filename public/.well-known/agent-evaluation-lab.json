@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3.8",
+  "schema_version": "1.3.9",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -13,6 +13,7 @@
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "postman_collection": "https://misfitmediahouse.com/agent-evaluation-lab.postman_collection.json",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+  "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
   "llms_context": "https://misfitmediahouse.com/agent-evaluation-lab.llms.txt",
   "security_brief": "https://misfitmediahouse.com/agent-evaluation-lab.security.json",
   "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
@@ -57,6 +58,7 @@
     "package": "10000 governed checks",
     "price_usd": 500,
     "effective_unit_price_usd": 0.05,
+    "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=well_known_discovery",
     "payment_execution_in_discovery": false
   },
@@ -72,6 +74,7 @@
   ],
   "evidence_boundary": {
     "default_provenance": "caller_supplied_unverified",
+    "buyer_proof_classification": "synthetic_illustrative_buyer_proof",
     "external_benchmark_compatibility": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
     "external_benchmark_evidence_receipt_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
     "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
