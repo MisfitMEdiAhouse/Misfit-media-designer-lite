@@ -1,10 +1,25 @@
 (()=>{
   if((location.pathname.replace(/\/+$/,'')||'/')!=='/signal')return;
 
-  const CROWD_AUDIO=[
-    'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8717c9f8-da95-4b95-b7ab-5b92b1015114.mp3',
-    'https://www.aidocmaker.com/g0/audio?name=80a5480626d54517ab923d96569636f6'
-  ];
+  // Keep the tour on one audio player. The base tour already owns playback for
+  // every step; this shim only redirects the stale Step 3 source to the approved
+  // working Misfit voice asset. It never creates or starts a second Audio object.
+  const LEGACY_CROWD_AUDIO='https://www.aidocmaker.com/g0/audio?name=80a5480626d54517ab923d96569636f6';
+  const CANONICAL_CROWD_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8717c9f8-da95-4b95-b7ab-5b92b1015114.mp3';
+  if(!window.__MISFIT_TRADER_SINGLE_VOICE__){
+    const nativePlay=HTMLMediaElement.prototype.play;
+    HTMLMediaElement.prototype.play=function(...args){
+      try{
+        const src=String(this.currentSrc||this.src||'');
+        if(src===LEGACY_CROWD_AUDIO||src.includes('80a5480626d54517ab923d96569636f6')){
+          if(this.src!==CANONICAL_CROWD_AUDIO)this.src=CANONICAL_CROWD_AUDIO;
+        }
+      }catch{}
+      return nativePlay.apply(this,args);
+    };
+    window.__MISFIT_TRADER_SINGLE_VOICE__=true;
+  }
+
   const norm=v=>String(v||'').replace(/\s+/g,' ').trim().toUpperCase();
   const main=()=>document.querySelector('#root main');
   const exact=(selector,text,root=main()||document)=>[...root.querySelectorAll(selector)].find(el=>norm(el.textContent)===norm(text))||null;
@@ -57,74 +72,17 @@
     setTimeout(place,560);
   }
 
-  let crowdAudio=null,originalVoiceClick=null,currentTitle='',crowdMode=false,crowdGuard=null;
-  const stopCrowd=()=>{
-    if(crowdGuard){clearInterval(crowdGuard);crowdGuard=null}
-    if(crowdAudio){try{crowdAudio.pause();crowdAudio.currentTime=0}catch{}crowdAudio=null}
-  };
-  const installCrowdVoiceHandler=voice=>{
-    voice.onclick=async()=>{
-      if(crowdAudio&&!crowdAudio.paused){crowdAudio.pause();voice.textContent='RESUME VOICE';return}
-      if(crowdAudio&&crowdAudio.paused){try{await crowdAudio.play();voice.textContent='PAUSE VOICE';return}catch{}}
-      await playCrowd(voice);
-    };
-  };
-  async function playCrowd(voice){
-    stopCrowd();
-    voice.textContent='LOADING VOICE…';
-    for(const src of CROWD_AUDIO){
-      const a=new Audio(src);a.preload='auto';
-      try{
-        await a.play();
-        crowdAudio=a;
-        voice.textContent='PAUSE VOICE';
-        crowdGuard=setInterval(()=>{
-          if(crowdMode&&crowdAudio&&!crowdAudio.paused&&!crowdAudio.ended)voice.textContent='PAUSE VOICE';
-        },120);
-        a.onended=()=>{
-          if(crowdGuard){clearInterval(crowdGuard);crowdGuard=null}
-          if(norm(currentTitle).includes('READ THE CROWD'))voice.textContent='REPLAY VOICE';
-        };
-        return true;
-      }catch{try{a.pause()}catch{}}
-    }
-    voice.textContent='VOICE UNAVAILABLE';
-    return false;
-  }
-
   let tries=0;
   function boot(){
     const guide=document.getElementById('trader-guide');
     if(!guide){if(++tries<160)setTimeout(boot,100);return;}
     if(guide.dataset.dialin==='1')return;
-    const title=guide.querySelector('.ti'),voice=guide.querySelector('[data-a="voice"]');
-    if(!title||!voice){if(++tries<160)setTimeout(boot,100);return;}
+    const title=guide.querySelector('.ti');
+    if(!title){if(++tries<160)setTimeout(boot,100);return;}
     guide.dataset.dialin='1';
 
-    const enterCrowd=()=>{
-      currentTitle='STEP 3 · READ THE CROWD';
-      if(!crowdMode){originalVoiceClick=voice.onclick;crowdMode=true}
-      installCrowdVoiceHandler(voice);
-      return playCrowd(voice);
-    };
-
     const sync=()=>{
-      currentTitle=title.textContent||currentTitle||'';
-      const crowd=norm(currentTitle).includes('READ THE CROWD');
-      if(crowd&&!crowdMode){
-        originalVoiceClick=voice.onclick;
-        crowdMode=true;
-      }
-      if(!crowd&&crowdMode){
-        stopCrowd();
-        voice.onclick=originalVoiceClick;
-        crowdMode=false;
-      }
-      if(crowd){
-        installCrowdVoiceHandler(voice);
-        if(!crowdAudio)setTimeout(()=>playCrowd(voice),30);
-      }
-      const target=targetFor(currentTitle);
+      const target=targetFor(title.textContent||'');
       if(target){
         setTimeout(()=>position(guide,target),80);
         setTimeout(()=>position(guide,target),420);
@@ -134,17 +92,10 @@
 
     new MutationObserver(sync).observe(title,{childList:true,subtree:true,characterData:true});
     document.addEventListener('click',e=>{
-      const next=e.target.closest('#trader-guide [data-a="next"]');
-      const start=e.target.closest('#trader-guide [data-a="start"]');
-      if(next&&norm(title.textContent).includes('READ THE CANDLE')){
-        // Start Step 3 audio while this trusted NEXT tap is still active so Chrome
-        // cannot reject it as a later autoplay attempt.
-        enterCrowd();
-      }
-      if(next||start)setTimeout(sync,40);
+      if(e.target.closest('#trader-guide [data-a="next"],#trader-guide [data-a="start"]'))setTimeout(sync,40);
     },true);
     sync();
-    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-3',targetFor});
+    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-4-single-voice',targetFor});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
