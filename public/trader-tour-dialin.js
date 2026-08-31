@@ -7,7 +7,7 @@
   // It only maps the stale Step 3 URL to the fresh approved Misfit fancy voice
   // before the base player receives the source.
   const LEGACY_CROWD_TOKEN='80a5480626d54517ab923d96569636f6';
-  const CANONICAL_CROWD_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/bc5ee3e5-960c-4425-afce-fdc5332aafdc.mp3';
+  const CANONICAL_CROWD_AUDIO='https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/348a28c0-5e15-4f0b-87f1-59d6ec81a941.mp3';
 
   if(!window.__MISFIT_TRADER_CROWD_SOURCE_MAP__){
     let owner=HTMLMediaElement.prototype;
@@ -101,7 +101,7 @@
       if(e.target.closest('#trader-guide [data-a="next"],#trader-guide [data-a="start"]'))setTimeout(sync,40);
     },true);
     sync();
-    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-5-source-before-play',targetFor});
+    window.__MISFIT_TRADER_TOUR_DIALIN__=Object.freeze({version:'dialin-20260831-6-step-three-label',targetFor});
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
