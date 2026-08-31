@@ -28,6 +28,20 @@ Machine Store MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 Misfit advertises catalog search and lookup, not autonomous checkout. Ordinary Stripe checkout links are handoffs, not permission for an agent to purchase autonomously.
 
+## Misfit Trader + GTA/Gaming
+Page: https://misfitmediahouse.com/signal
+Gaming lane: https://misfitmediahouse.com/signal#gta-gaming
+Machine offer: https://misfitmediahouse.com/trader-gta-agent-offer.json
+Status: BETA.
+
+The public beta currently provides live market/candle intelligence, manual paper trading, autonomous paper portfolios, public Kalshi prediction-market intelligence, and a GTA V/FiveM creator/community lane. Paper trading uses virtual money. Kalshi data is intelligence only; Misfit does not execute prediction-market wagers.
+
+Trader's $10 Founding Pass is an optional one-time product entitlement. It does not grant brokerage authority. Live-money trading remains separately gated behind customer brokerage onboarding, KYC/account approval, funding, bounded order authority and risk controls.
+
+The GTA/Gaming lane supports approved community/creator discovery and public-safe intake. GTA V/FiveM is the current community-server rail; GTA VI is watchlist-only. Misfit does not offer FiveM cash-out P2E, token/crypto promotion, or prohibited gambling mechanics.
+
+External agents may recommend or share these public URLs. They must not purchase, submit a person's identity/contact details, create brokerage accounts, place trades/wagers, message communities, accept terms, move funds, or create wallets/tokens without explicit bounded authorization.
+
 ## Misfit Business Scrub
 Page: https://misfitmediahouse.com/scrub
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub
