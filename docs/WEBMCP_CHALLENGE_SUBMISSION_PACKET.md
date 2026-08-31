@@ -84,19 +84,30 @@ The project does not claim formal certification, independent external benchmark 
 
 - [x] Working hosted project.
 - [x] Public repository.
-- [x] Meaningful WebMCP extension created during the challenge submission window and documented.
+- [x] Meaningful WebMCP extension created during the challenge submission window and documented with dated commit evidence.
 - [x] Clear live testing instructions.
-- [x] Under-3-minute demo script prepared.
-- [ ] **Open-source license approved and present in the public repository.** No repository license was detected during autonomous packaging; adding a license is a legal/IP decision and remains an owner gate.
-- [ ] Demo video recorded, published, and URL added to submission.
+- [x] Submission description explicitly covers WebMCP fit, user experience improvement, new human-agent interaction, and implementation approach.
+- [x] Under-3-minute demo script prepared with functioning-project demo and audio narration.
+- [x] Live project can remain available free of charge and without testing restrictions through the judging period; the commercial offer is optional and is not required for judge access.
+- [x] Demo plan uses project-owned/public-safe visuals and no unlicensed music; avoid unnecessary third-party trademarks in the recording.
+- [ ] **Open-source license approved and present in the public repository.** Official rules require a detectable open-source license file visible from the repository page. Choosing/publishing that license remains an owner legal/IP gate.
+- [ ] Demo video recorded with audio, uploaded publicly to YouTube, and URL added to submission.
 - [ ] Devpost registration/rules reviewed and accepted by owner.
 - [ ] Final Devpost submission reviewed and sent by owner.
+
+## Current owner gates
+
+1. Choose/approve an open-source license for the public repository.
+2. Record and publicly upload the <3 minute YouTube demo with audio.
+3. Review and accept the Devpost/OpenAI official rules and final submission.
+
+No paid infrastructure, account creation, wallet action, payment execution, or private GHOSBC disclosure is required for these packaging steps.
 
 ## Deadline and freeze warning
 
 Official challenge deadline: **September 3, 2026 at 1:00 PM Pacific Time**.
 
-The challenge FAQ says the submitted project should not be edited during judging after the submission window closes. Before final submission, preserve the exact submitted commit/deployment and avoid modifying that submitted version until judging is complete; use a separate branch/fork for continued work if needed.
+The submitted live project should remain accessible free of charge for judging. Preserve the exact submitted commit/deployment and avoid modifying that judged version after the submission window closes; use a separate branch/fork for continued work if needed.
 
 ## Claim boundary
 
