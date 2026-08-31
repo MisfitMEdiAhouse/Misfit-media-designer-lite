@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "name": "Misfit Agent Evaluation Lab WebMCP Extension",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -49,7 +49,7 @@
   },
   "proof": {
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
-    "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-lab-external-evaluator-kit.json",
+    "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml"
   },
