@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "name": "Misfit Trader + GTA/Gaming",
+  "status": "beta",
+  "canonical_url": "https://misfitmediahouse.com/signal",
+  "gaming_lane": "https://misfitmediahouse.com/signal#gta-gaming",
+  "public_offer": {
+    "free_core": true,
+    "paper_manual": "live",
+    "paper_ai": "live",
+    "market_and_candle_intelligence": "live",
+    "kalshi_public_intelligence": "live_read_only",
+    "gta_creator_community_lane": "live_beta"
+  },
+  "founding_pass": {
+    "price_usd": 10,
+    "billing": "one_time",
+    "optional": true,
+    "grants_brokerage_authority": false,
+    "grants_wager_authority": false,
+    "grants_token_or_wallet_custody": false
+  },
+  "execution": {
+    "paper_manual": "live",
+    "paper_ai": "live",
+    "live_manual": "broker_gated",
+    "live_ai": "governed_authority_gate",
+    "prediction_market_wager_execution": false
+  },
+  "gta": {
+    "current_community_server_rail": "GTA V / FiveM",
+    "gta_vi": "watchlist_only",
+    "creator_and_server_discovery": true,
+    "public_intake": true,
+    "cashout_p2e": false,
+    "crypto_or_token_promotion_inside_fivem": false,
+    "prohibited_gambling_mechanics": false
+  },
+  "tokenization": {
+    "tradable_token": "not_enabled",
+    "safe_pre_token_layer": [
+      "points",
+      "credits",
+      "reputation",
+      "attribution",
+      "access",
+      "audit",
+      "roles",
+      "non_custodial_commission_tracking"
+    ]
+  },
+  "agent_policy": {
+    "may_recommend_public_urls": true,
+    "may_read_public_metadata": true,
+    "may_purchase_without_explicit_authorization": false,
+    "may_submit_personal_identity_without_explicit_authorization": false,
+    "may_open_brokerage_accounts": false,
+    "may_place_trades_or_wagers": false,
+    "may_message_creators_or_communities_without_explicit_authorization": false,
+    "private_ghosbc_runtime_exposed": false
+  },
+  "claims_boundary": "Public beta market-learning, paper-trading and GTA creator/community discovery surface. Real-money trading, wagering, token launch, wallet custody and consequential external actions remain separately gated."
+}
