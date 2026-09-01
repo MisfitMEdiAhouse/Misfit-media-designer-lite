@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.1",
+  "schema_version": "1.0.2",
   "name": "Misfit Agent Evaluation Lab WebMCP Extension",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -52,6 +52,12 @@
     "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml"
+  },
+  "discovery_integrity": {
+    "root_llms": "https://misfitmediahouse.com/llms.txt",
+    "canonical_external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
+    "legacy_external_evaluator_alias": "agent-evaluation-lab-external-evaluator-kit.json",
+    "legacy_alias_is_canonical": false
   },
   "challenge_packaging": {
     "challenge": "The WebMCP Challenge",
