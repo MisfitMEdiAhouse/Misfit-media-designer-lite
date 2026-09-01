@@ -5,6 +5,8 @@ import StanMisfitExplorer from './StanMisfitExplorer.jsx';
 
 const primaryItems = [
   ['/', 'Scanner'],
+  ['/signal', 'Trader'],
+  ['/gta', 'GTA'],
   ['/agency', 'Agency'],
   ['/portfolio', 'Portfolio'],
   ['/competitions', 'Competitions'],
@@ -34,7 +36,7 @@ export default function Navbar() {
           MISFIT<span className="text-cyan-400">.</span>
         </Link>
 
-        <div className="hidden items-center gap-6 font-mono text-[10px] uppercase tracking-[0.13em] text-slate-400 md:flex">
+        <div className="hidden items-center gap-4 font-mono text-[9px] uppercase tracking-[0.12em] text-slate-400 lg:flex">
           <Link to="/" className={active('/') ? 'text-cyan-300' : 'transition hover:text-white'}>Scanner</Link>
           <div className="group relative py-2">
             <Link to="/explore" className={`inline-flex items-center gap-1.5 transition hover:text-white ${exploreActive ? 'text-cyan-300' : ''}`}>
@@ -60,12 +62,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        <Link to="/" className="hidden min-h-11 items-center rounded-full border border-cyan-300/40 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black md:inline-flex">
+        <Link to="/" className="hidden min-h-11 items-center rounded-full border border-cyan-300/40 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black lg:inline-flex">
           Scan a site
         </Link>
         <button
           type="button"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-200 transition hover:border-cyan-300/30 hover:text-cyan-200 md:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-200 transition hover:border-cyan-300/30 hover:text-cyan-200 lg:hidden"
           aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((value) => !value)}
@@ -77,7 +79,7 @@ export default function Navbar() {
       {stanTour && <StanMisfitExplorer />}
 
       {mobileOpen && (
-        <div className="max-h-[calc(100svh-64px)] overflow-y-auto border-t border-white/10 bg-black/95 px-4 py-4 sm:px-5 md:hidden">
+        <div className="max-h-[calc(100svh-64px)] overflow-y-auto border-t border-white/10 bg-black/95 px-4 py-4 sm:px-5 lg:hidden">
           <div className="font-mono text-xs uppercase tracking-[0.14em] text-slate-300">
             <Link to="/" onClick={() => setMobileOpen(false)} className={`flex min-h-11 items-center rounded-xl px-3 py-3 ${active('/') ? 'bg-cyan-300/10 text-cyan-300' : 'hover:bg-white/5'}`}>Scanner</Link>
             <div className="mt-2 rounded-2xl border border-white/10 bg-white/[0.025] p-2">
