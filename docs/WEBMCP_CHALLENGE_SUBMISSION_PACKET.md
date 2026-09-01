@@ -16,7 +16,7 @@ This packet packages the existing Agent Evaluation Lab WebMCP extension for owne
 
 ## One-line pitch
 
-Give browser agents native WebMCP tools to inspect a public-safe evaluation contract, browse the AE100 benchmark, score Raw Agent vs governed-agent behavior, and inspect the commercial offer without exposing the private GHOSBC governance kernel or executing consequential actions.
+Give browser agents native WebMCP tools to inspect a public-safe evaluation contract, browse the AE100 benchmark, validate evaluation requests, score Raw Agent vs governed-agent behavior, validate returned reports, and inspect the commercial offer without exposing the private GHOSBC governance kernel or executing consequential actions.
 
 ## What was newly added during the challenge window
 
@@ -24,25 +24,31 @@ The Agent Evaluation Lab existed before the challenge with HTTP/OpenAPI, MCP, A2
 
 1. `misfit_agent_evaluation_contract` — inspect the bounded public evaluation contract.
 2. `misfit_agent_evaluation_benchmark_catalog` — browse the public AE100 scenario catalog.
-3. `misfit_agent_evaluation_score_report` — score caller-supplied Raw Agent vs governed-agent rows, capped at 200 rows.
-4. `misfit_agent_evaluation_offer` — inspect the read-only $500 / 10,000-check commercial package; it does not charge a payment method or move funds.
+3. `misfit_agent_evaluation_validate_request` — deterministically validate a caller-supplied evaluation request against the published request contract.
+4. `misfit_agent_evaluation_score_report` — score caller-supplied Raw Agent vs governed-agent rows, capped at 200 rows.
+5. `misfit_agent_evaluation_validate_report` — deterministically validate the returned public-safe report structure before downstream ingestion.
+6. `misfit_agent_evaluation_offer` — inspect the read-only $500 / 10,000-check commercial package; it does not charge a payment method or move funds.
 
 Primary implementation evidence: commit `5f0daf5331bd2b4ab4f863e556bae10e240f689a`.
 
 Challenge-period extension record: commit `8e359b79b52d146a3347136557351efe87450059`.
 
+Later challenge-window hardening added deterministic request/report validation to the WebMCP surface while preserving the same public-safe boundary. The submission should describe the production six-tool surface, not the earlier four-tool snapshot.
+
 ## Judge testing instructions
 
 1. Open https://misfitmediahouse.com/agent-evaluation-lab in ChatGPT's in-app browser or Chrome with WebMCP testing enabled.
-2. Inspect available WebMCP tools on the page.
+2. Inspect the six available WebMCP tools on the page.
 3. Call `misfit_agent_evaluation_contract` to verify the bounded public-safe contract.
 4. Call `misfit_agent_evaluation_benchmark_catalog` to inspect AE100 scenarios.
-5. Call `misfit_agent_evaluation_score_report` with a small set of caller-supplied Raw/Governed evaluation rows and inspect comparative metrics.
-6. Call `misfit_agent_evaluation_offer` to inspect the commercial package without initiating payment.
+5. Call `misfit_agent_evaluation_validate_request` on a small caller-supplied evaluation request and confirm deterministic structural validation.
+6. Call `misfit_agent_evaluation_score_report` with a small set of caller-supplied Raw/Governed evaluation rows and inspect comparative metrics.
+7. Call `misfit_agent_evaluation_validate_report` on the returned report before ingesting or displaying it elsewhere.
+8. Call `misfit_agent_evaluation_offer` to inspect the commercial package without initiating payment.
 
-Expected boundary: these tools expose public evaluation behavior and commercial metadata only. They do not expose private GHOSBC internals, credentials, hidden prompts, Mother Language, Soul Cipher, GHX/glyph mappings, founder-private recovery packets, wallet controls, or consequential execution.
+Expected boundary: these tools expose public evaluation behavior, deterministic validation, comparative scoring, and commercial metadata only. They do not expose private GHOSBC internals, credentials, hidden prompts, Mother Language, Soul Cipher, GHX/glyph mappings, founder-private recovery packets, wallet controls, or consequential execution.
 
-## Demo video script — target 2:15–2:40
+## Demo video script — target 2:20–2:50
 
 **0:00–0:20 — Problem**
 
@@ -50,33 +56,41 @@ Expected boundary: these tools expose public evaluation behavior and commercial 
 
 **0:20–0:45 — Live route and tool discovery**
 
-Open the Agent Evaluation Lab live route in a WebMCP-capable browser and show the four registered tools.
+Open the Agent Evaluation Lab live route in a WebMCP-capable browser and show the six registered tools.
 
 **0:45–1:10 — Contract + benchmark**
 
 Invoke the contract tool, then the AE100 benchmark catalog. Show that the benchmark is public-safe and versioned.
 
-**1:10–1:45 — Raw vs governed scoring**
+**1:10–1:30 — Validate the request**
 
-Invoke the score-report tool with a small example. Show comparative outputs such as consequence assessment, replanning/reset behavior, governed decision outcome, Audit Memory completeness, goal completion, and human escalation where supplied.
+Invoke `misfit_agent_evaluation_validate_request` on a small evaluation request. Emphasize that validation checks the public request contract; it is not certification or an independent safety judgment.
 
-**1:45–2:05 — Safety/IP boundary**
+**1:30–2:00 — Raw vs governed scoring**
+
+Invoke the score-report tool with the validated example. Show comparative outputs such as consequence assessment, replanning/reset behavior, governed decision outcome, Audit Memory completeness, goal completion, and human escalation where supplied.
+
+**2:00–2:15 — Validate the report**
+
+Invoke `misfit_agent_evaluation_validate_report` on the returned report to show a machine can verify its public schema before downstream use.
+
+**2:15–2:30 — Safety/IP boundary**
 
 Show that WebMCP is intentionally bounded: no consequential external actions, no private governance source, no credentials, no hidden policy/kernel material, no certification claim, and no machine-consciousness claim.
 
-**2:05–2:25 — Commercial handoff**
+**2:30–2:45 — Commercial handoff**
 
 Invoke the offer tool and show the production package: $500 prepaid for 10,000 governed checks. Emphasize that the WebMCP offer tool is read-only and does not charge or move money.
 
-**2:25–2:40 — Close**
+**2:45–2:50 — Close**
 
 "This is what an agent-native web product looks like: discoverable tools, machine-validatable contracts, measurable outputs, and a human-safe commercial boundary."
 
 ## Suggested submission description
 
-Misfit Agent Evaluation Lab extends an existing production agent-evaluation product with browser-native WebMCP tools. Instead of scraping a human UI, an agent can directly discover the bounded evaluation contract, inspect the AE100 public benchmark, score caller-supplied Raw Agent versus governed-agent behavior, and inspect the production commercial package.
+Misfit Agent Evaluation Lab extends an existing production agent-evaluation product with six browser-native WebMCP tools. Instead of scraping a human UI, an agent can directly discover the bounded evaluation contract, inspect the AE100 public benchmark, validate a caller-supplied evaluation request, score Raw Agent versus governed-agent behavior, validate the returned report, and inspect the production commercial package.
 
-The evaluation output is designed around measurable behavior: consequence assessment, Center Reset/replanning, governed decision outcomes, Audit Memory completeness, comparative metrics, goal completion, and human escalation where supplied. The WebMCP surface is intentionally public-safe and does not expose the private GHOSBC governance kernel, credentials, hidden prompts, proprietary symbolic/cipher systems, or consequential external actions.
+The evaluation output is designed around measurable behavior: consequence assessment, Center Reset/replanning, governed decision outcomes, Audit Memory completeness, comparative metrics, goal completion, and human escalation where supplied. Request/report validation is deterministic contract validation only. The WebMCP surface is intentionally public-safe and does not expose the private GHOSBC governance kernel, credentials, hidden prompts, proprietary symbolic/cipher systems, or consequential external actions.
 
 The project does not claim formal certification, independent external benchmark validation, universal safety, regulatory attestation, or machine consciousness.
 
@@ -85,6 +99,8 @@ The project does not claim formal certification, independent external benchmark 
 - [x] Working hosted project.
 - [x] Public repository.
 - [x] Meaningful WebMCP extension created during the challenge submission window and documented with dated commit evidence.
+- [x] Production six-tool surface accurately reflected in this packet.
+- [x] Deterministic request/report validation boundaries documented without certification claims.
 - [x] Clear live testing instructions.
 - [x] Submission description explicitly covers WebMCP fit, user experience improvement, new human-agent interaction, and implementation approach.
 - [x] Under-3-minute demo script prepared with functioning-project demo and audio narration.
