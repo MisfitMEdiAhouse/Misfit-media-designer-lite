@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co';
@@ -110,7 +110,6 @@ export default function OwnerCommandCenter() {
   const [messages, setMessages] = useState([]);
   const [mode, setMode] = useState('command');
   const [text, setText] = useState('');
-  const bottomRef = useRef(null);
 
   useEffect(() => {
     document.title = 'Misfit Founder Command — Private';
@@ -154,7 +153,6 @@ export default function OwnerCommandCenter() {
 
   useEffect(() => { if (session) fullLoad(session); else { setDashboard(null); setConversations([]); setMessages([]); } }, [session]);
   useEffect(() => { if (session && conversationId) loadThread(conversationId, session).catch((e)=>setError(e.message)); }, [conversationId]);
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior:'smooth', block:'end' }); }, [messages]);
   useEffect(() => {
     if (!session || !conversationId) return;
     const timer = setInterval(() => { loadThread(conversationId, session).catch(()=>{}); loadDashboard(session).catch(()=>{}); }, 7000);
@@ -223,7 +221,7 @@ export default function OwnerCommandCenter() {
 
           <section className="order-1 flex min-h-[68vh] flex-col overflow-hidden rounded-3xl border border-cyan-400/15 bg-[linear-gradient(180deg,rgba(8,15,25,.96),#000)] lg:order-2">
             <div className="border-b border-white/10 px-4 py-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><div className="font-display text-xl font-semibold">{selected?.metadata?.title || 'Founder Command'}</div><div className="mt-1 text-xs text-slate-500">Durable thread · factory results sync back here</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 font-mono text-[8px] uppercase tracking-[.13em] text-emerald-300">Private GHOSBC protected</div></div></div>
-            <div className="flex-1 space-y-4 overflow-y-auto px-3 py-4 md:px-5">{messages.map((m)=><div key={m.id} className={`flex ${m.role==='user'?'justify-end':'justify-start'}`}><article className={`max-w-[92%] whitespace-pre-wrap rounded-2xl border px-4 py-3 text-sm leading-6 md:max-w-[82%] ${m.role==='user'?'border-cyan-400/25 bg-cyan-400/10 text-cyan-50':'border-white/10 bg-white/[.035] text-slate-300'}`}><div>{m.body}</div><div className="mt-2 font-mono text-[8px] uppercase tracking-[.12em] text-slate-600">{m.role==='user'?'Founder':'Misfit Cloud'} · {fmtTime(m.created_at)}</div></article></div>)}<div ref={bottomRef}/></div>
+            <div className="flex-1 space-y-4 overflow-y-auto px-3 py-4 md:px-5">{messages.map((m)=><div key={m.id} className={`flex ${m.role==='user'?'justify-end':'justify-start'}`}><article className={`max-w-[92%] whitespace-pre-wrap rounded-2xl border px-4 py-3 text-sm leading-6 md:max-w-[82%] ${m.role==='user'?'border-cyan-400/25 bg-cyan-400/10 text-cyan-50':'border-white/10 bg-white/[.035] text-slate-300'}`}><div>{m.body}</div><div className="mt-2 font-mono text-[8px] uppercase tracking-[.12em] text-slate-600">{m.role==='user'?'Founder':'Misfit Cloud'} · {fmtTime(m.created_at)}</div></article></div>)}</div>
             <form onSubmit={send} className="border-t border-white/10 bg-black/80 p-3 md:p-4">
               <div className="mb-3 flex gap-2 overflow-x-auto">{MODES.map(([key,label])=><button type="button" key={key} onClick={()=>setMode(key)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[8px] uppercase tracking-[.12em] ${mode===key?'border-cyan-400/40 bg-cyan-400/10 text-cyan-200':'border-white/10 text-slate-500'}`}>{label}</button>)}</div>
               <textarea value={text} onChange={(e)=>setText(e.target.value)} rows={4} placeholder="Command Misfit…" className="w-full resize-none rounded-2xl border border-white/10 bg-white/[.04] px-4 py-3 text-sm leading-6 outline-none placeholder:text-slate-700 focus:border-cyan-400/40" />
