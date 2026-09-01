@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Clapperboard, Gamepad2, Globe2, Radio, Server, ShieldCheck, Sparkles, Users, Wrench } from 'lucide-react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import GTAGrowthOS from '../components/GTAGrowthOS.jsx';
 
 const SB='https://cibcxqrqiqvzpardbdrw.supabase.co';
 const PK='sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
@@ -42,6 +43,8 @@ export default function GTAHub(){
     </section>
 
     {notice&&<button onClick={()=>setNotice('')} className="mt-4 w-full rounded-2xl border border-cyan-300/20 bg-cyan-300/[.05] p-4 text-left text-sm text-cyan-100">{notice}<span className="float-right">×</span></button>}
+
+    <GTAGrowthOS/>
 
     <section className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       <Rail icon={Server} title="SERVER DISCOVERY" copy="Approved community servers with category, region and join links. Misfit does not operate or endorse a server merely because it is listed."/>
