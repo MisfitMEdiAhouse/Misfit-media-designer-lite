@@ -12,6 +12,12 @@ async function rest(path,opts={}){
   if(!r.ok)throw new Error(data?.message||data?.hint||`Request failed (${r.status})`);
   return data;
 }
+async function catalog(body){
+  const r=await fetch(`${SB}/functions/v1/public-catalog`,{method:'POST',headers:H,body:JSON.stringify(body)});
+  const text=await r.text();let data={};try{data=text?JSON.parse(text):{}}catch{data={}}
+  if(!r.ok)throw new Error(data?.error||`Request failed (${r.status})`);
+  return data;
+}
 
 export default function TraderGTALane(){
   const [tab,setTab]=useState('servers');
@@ -28,7 +34,7 @@ export default function TraderGTALane(){
   useEffect(()=>{load()},[]);
 
   const submit=async(e)=>{e.preventDefault();setBusy(true);setNotice('');try{
-    await rest('gaming_portal_requests',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({request_type:request.request_type,name:request.name.trim(),email:request.email||null,details:{message:request.message,source:'misfit_trader',compliance_attested:true},status:'new'})});
+    await catalog({operation:'submit_gta_request',request_type:request.request_type,name:request.name.trim(),email:request.email||null,message:request.message,source:'misfit_trader'});
     setNotice('Sent to Misfit Cloud from inside Trader.');
     setRequest({request_type:'server_service',name:'',email:'',message:''});
   }catch(e){setNotice(`GTA request: ${e.message}`)}finally{setBusy(false)}};
