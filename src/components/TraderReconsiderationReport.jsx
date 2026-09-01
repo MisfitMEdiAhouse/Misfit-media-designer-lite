@@ -1,0 +1,34 @@
+import { useEffect, useMemo, useState } from 'react';
+import { BrainCircuit, Clock3, RefreshCw, ShieldCheck, TrendingUp } from 'lucide-react';
+
+const RPC='https://cibcxqrqiqvzpardbdrw.supabase.co/rest/v1/rpc/misfit_trader_reconsideration_latest_report';
+const PUBLIC_KEY='sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
+const money=(n)=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(Number(n||0));
+const horizon=(m)=>Number(m)===60?'1H':Number(m)===240?'4H':Number(m)===1440?'24H':Number(m)===10080?'7D':`${m}M`;
+
+export default function TraderReconsiderationReport(){
+  const [report,setReport]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState('');
+  const load=async()=>{setLoading(true);setError('');try{const r=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json',apikey:PUBLIC_KEY},body:'{}',cache:'no-store'});const j=await r.json();if(!r.ok)throw new Error(j?.message||j?.error||'reconsideration report unavailable');setReport(j)}catch(e){setError(e?.message||'reconsideration report unavailable')}finally{setLoading(false)}};
+  useEffect(()=>{load();const t=setInterval(load,60000);return()=>clearInterval(t)},[]);
+  const decisions=report?.decision_counts||{},rows=report?.by_horizon||[],strategies=report?.by_strategy||[];
+  const edge=Number(report?.reconsideration_edge_usd||0),matured=useMemo(()=>Object.values(report?.matured_outcomes||{}).reduce((a,b)=>a+Number(b||0),0),[report]);
+
+  return <section id="reconsideration-report" className="mt-5 overflow-hidden rounded-3xl border border-cyan-300/20 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,.13),transparent_30%),radial-gradient(circle_at_100%_15%,rgba(217,70,239,.10),transparent_30%),rgba(255,255,255,.018)] p-5 md:p-7">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/[.06] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[.18em] text-cyan-200"><BrainCircuit size={14}/> DAILY TRADER RECONSIDERATION REPORT · MISFIT CLOUD</div><h2 className="mt-3 text-3xl font-black sm:text-4xl">RAW TRADES VS <span className="text-fuchsia-300">RECONSIDERED.</span></h2><p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Misfit Cloud scores the observer's counterfactual decisions at +1h, +4h, +24h and +7d. The observer cannot alter the paper trade or move real money. This panel measures whether reconsideration would have helped or hurt.</p></div><button onClick={load} className="inline-flex min-h-11 w-fit items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-4 font-mono text-[10px] text-slate-400"><RefreshCw size={13} className={loading?'animate-spin':''}/>{loading?'REFRESHING…':'REFRESH REPORT'}</button></div>
+    {error&&<div className="mt-4 rounded-xl border border-red-400/20 bg-red-400/10 p-3 text-xs text-red-200">Report: {error}</div>}
+
+    <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
+      <Metric label="Observed trades" value={String(report?.proposal_count??0)}/><Metric label="Matured outcomes" value={String(matured)}/><Metric label="Raw action P&L" value={money(report?.raw_action_pnl_usd)}/><Metric label="Reconsidered P&L" value={money(report?.reconsidered_action_pnl_usd)}/><Metric label="Reconsideration edge" value={money(edge)} cls={edge>0?'text-emerald-300':edge<0?'text-red-300':'text-slate-300'}/><Metric label="Avoided loss" value={money(report?.avoided_loss_usd)} cls="text-emerald-300"/>
+    </div>
+
+    <div className="mt-4 grid gap-4 xl:grid-cols-[1.05fr_.95fr]">
+      <div className="rounded-2xl border border-white/10 bg-black/45 p-4"><div className="flex items-center gap-2 font-mono text-[10px] font-bold text-cyan-200"><Clock3 size={14}/> MATURITY WINDOWS</div><div className="mt-3 grid gap-2 sm:grid-cols-2">{rows.length?rows.map(r=><div key={r.horizon_minutes} className="rounded-xl border border-white/7 bg-white/[.02] p-3"><div className="flex items-center justify-between gap-3"><b className="text-sm text-white">{horizon(r.horizon_minutes)}</b><span className="font-mono text-[8px] text-slate-600">{r.samples} SAMPLES</span></div><div className="mt-3 grid grid-cols-2 gap-2"><Metric label="Raw" value={money(r.raw_pnl_usd)}/><Metric label="Reconsidered" value={money(r.reconsidered_pnl_usd)}/><Metric label="Edge" value={money(r.edge_usd)} cls={Number(r.edge_usd)>=0?'text-emerald-300':'text-red-300'}/><Metric label="Avg adverse" value={`${Number(r.avg_mae_pct||0).toFixed(2)}%`}/></div></div>):<Empty text="Waiting for the first maturity window to close…"/>}</div></div>
+      <div className="rounded-2xl border border-fuchsia-300/15 bg-black/45 p-4"><div className="flex items-center gap-2 font-mono text-[10px] font-bold text-fuchsia-200"><TrendingUp size={14}/> OBSERVER DECISIONS</div><div className="mt-3 grid grid-cols-2 gap-2"><Metric label="Allow" value={String(decisions.ALLOW||0)}/><Metric label="Resize / Replan" value={String(decisions.REPLAN||0)}/><Metric label="Hold" value={String(decisions.HOLD||0)}/><Metric label="Reject" value={String((decisions.REJECT||0)+(decisions.BLOCK||0))}/></div><div className="mt-4 space-y-2">{strategies.slice(0,6).map(s=><div key={s.source_strategy_key} className="rounded-xl border border-white/7 bg-white/[.02] px-3 py-2"><div className="flex items-center justify-between gap-3"><div className="min-w-0"><div className="truncate text-[11px] text-slate-300">{String(s.source_strategy_key||'').replaceAll('_',' ')}</div><div className="font-mono text-[8px] text-slate-700">{s.matured_samples} MATURED</div></div><div className={`font-mono text-[10px] font-bold ${Number(s.edge_usd)>=0?'text-emerald-300':'text-red-300'}`}>{money(s.edge_usd)}</div></div></div>)}</div></div>
+    </div>
+
+    <div className="mt-4 rounded-2xl border border-emerald-300/15 bg-emerald-300/[.025] p-4"><div className="flex items-start gap-3"><ShieldCheck size={16} className="mt-0.5 shrink-0 text-emerald-300"/><div><div className="font-mono text-[10px] font-bold text-emerald-200">MISFIT CLOUD SCHEDULE · NOT A CHATGPT TASK</div><p className="mt-2 text-xs leading-5 text-slate-600">Observer cycles run after the shadow tournament. Outcome scoring refreshes at :12, :27, :42 and :57 each hour and stores the rolling daily report in Supabase. Paper evidence only; no real-money execution authority.</p></div></div></div>
+  </section>
+}
+
+function Metric({label,value,cls=''}){return <div className="min-w-0 rounded-xl border border-white/7 bg-white/[.02] p-2.5"><div className="font-mono text-[8px] uppercase text-slate-700">{label}</div><div className={`mt-1 break-words text-sm font-bold ${cls}`}>{value}</div></div>}
+function Empty({text}){return <div className="rounded-xl border border-dashed border-white/10 p-4 text-xs text-slate-600 sm:col-span-2">{text}</div>}
