@@ -11,11 +11,37 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
 });
 
 const MODES = [
-  ['command', 'Command', 'Send an owner instruction to the existing Agent Factory.'],
+  ['command', 'Command', 'Send an outcome to the existing Agent Factory.'],
   ['research', 'Research', 'Queue bounded zero-cost research with Market Scout.'],
   ['build', 'Build', 'Queue bounded zero-cost build work with Product Builder.'],
   ['note', 'Memory', 'Save durable context without creating a factory job.'],
 ];
+
+const EXAMPLES = {
+  command: [
+    'Run a current Misfit system health check. Report anything broken, blocked, stale, or requiring me.',
+    'Audit Trader end to end. Keep paper trading free. Do not enable real-money execution. Fix only safe reversible issues and report human gates.'
+  ],
+  research: [
+    'Find the best open gaming competition Misfit can enter right now. Verify prize, deadline, AI rules, and eligibility. Do not submit.',
+    'Research the highest-EV GTA, Minecraft, Rust, Roblox, or Fortnite growth opportunity we can pursue with existing Misfit capabilities.'
+  ],
+  build: [
+    'Update GTA so the free founding pilot CTA is obvious on mobile. Preserve existing checkout and security rails. Verify deployment.',
+    'Improve this Founder Command screen for mobile without rebuilding the backend or creating duplicate systems.'
+  ],
+  note: [
+    'Remember: GTA acquisition is free audit → free pilot → $299 managed only after proof of value.',
+    'Remember: chats are operators, Misfit Cloud is canonical runtime state, and GitHub is source/recovery truth.'
+  ],
+};
+
+const PLACEHOLDERS = {
+  command: 'Tell Misfit the outcome you want…',
+  research: 'What should Misfit investigate and verify?…',
+  build: 'What should Misfit change, preserve, and verify?…',
+  note: 'What should Misfit remember durably?…',
+};
 
 const money = (cents = 0) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents || 0) / 100);
 const fmtTime = (value) => {
@@ -187,12 +213,27 @@ export default function OwnerCommandCenter() {
     finally { setSending(false); }
   };
 
+  const cancelJob = async (jobId) => {
+    setError('');
+    try {
+      await api(session, { action:'cancel_job', job_id:jobId });
+      await loadDashboard(session);
+      if (conversationId) await loadThread(conversationId, session);
+    } catch (e) { setError(e.message); }
+  };
+
+  const chooseMode = (nextMode) => {
+    setMode(nextMode);
+    setText('');
+  };
+
   const summary = dashboard?.summary || {};
   const jobs = dashboard?.jobs || [];
   const pendingJobs = jobs.filter((j)=>['queued','running','blocked'].includes(j.status));
-  const gates = (dashboard?.human_gates || []).filter((g)=>!['completed','approved','rejected','canceled'].includes(String(g.status).toLowerCase()));
+  const gates = (dashboard?.human_gates || []).filter((g)=>!['completed','approved','rejected','canceled','killed'].includes(String(g.status).toLowerCase()));
   const selected = conversations.find((c)=>c.id===conversationId);
   const modeHelp = MODES.find((m)=>m[0]===mode)?.[2] || MODES[0][2];
+  const examples = EXAMPLES[mode] || EXAMPLES.command;
 
   if (busy && !session) return <main className="min-h-screen bg-black text-white grid place-items-center">Loading Founder Command…</main>;
   if (!session) return <Login onSession={setSession} />;
@@ -222,15 +263,20 @@ export default function OwnerCommandCenter() {
           <section className="order-1 flex min-h-[68vh] flex-col overflow-hidden rounded-3xl border border-cyan-400/15 bg-[linear-gradient(180deg,rgba(8,15,25,.96),#000)] lg:order-2">
             <div className="border-b border-white/10 px-4 py-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><div className="font-display text-xl font-semibold">{selected?.metadata?.title || 'Founder Command'}</div><div className="mt-1 text-xs text-slate-500">Durable thread · factory results sync back here</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 font-mono text-[8px] uppercase tracking-[.13em] text-emerald-300">Private GHOSBC protected</div></div></div>
             <div className="flex-1 space-y-4 overflow-y-auto px-3 py-4 md:px-5">{messages.map((m)=><div key={m.id} className={`flex ${m.role==='user'?'justify-end':'justify-start'}`}><article className={`max-w-[92%] whitespace-pre-wrap rounded-2xl border px-4 py-3 text-sm leading-6 md:max-w-[82%] ${m.role==='user'?'border-cyan-400/25 bg-cyan-400/10 text-cyan-50':'border-white/10 bg-white/[.035] text-slate-300'}`}><div>{m.body}</div><div className="mt-2 font-mono text-[8px] uppercase tracking-[.12em] text-slate-600">{m.role==='user'?'Founder':'Misfit Cloud'} · {fmtTime(m.created_at)}</div></article></div>)}</div>
-            <form onSubmit={send} className="border-t border-white/10 bg-black/80 p-3 md:p-4">
-              <div className="mb-3 flex gap-2 overflow-x-auto">{MODES.map(([key,label])=><button type="button" key={key} onClick={()=>setMode(key)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[8px] uppercase tracking-[.12em] ${mode===key?'border-cyan-400/40 bg-cyan-400/10 text-cyan-200':'border-white/10 text-slate-500'}`}>{label}</button>)}</div>
-              <textarea value={text} onChange={(e)=>setText(e.target.value)} rows={4} placeholder="Command Misfit…" className="w-full resize-none rounded-2xl border border-white/10 bg-white/[.04] px-4 py-3 text-sm leading-6 outline-none placeholder:text-slate-700 focus:border-cyan-400/40" />
-              <div className="mt-2 flex items-center justify-between gap-3"><div className="text-[10px] leading-4 text-slate-600">{modeHelp} Money movement, payout changes, spend, protected-IP exposure and binding external terms remain human-gated.</div><button disabled={sending || !text.trim()} className="shrink-0 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-black disabled:opacity-40">{sending?'Sending…':'Run'}</button></div>
+            <form onSubmit={send} className="border-t border-white/10 bg-black/90 p-3 md:p-4">
+              <section className="mb-3 rounded-2xl border border-cyan-400/15 bg-cyan-400/[.035] p-3">
+                <div className="font-mono text-[9px] font-bold uppercase tracking-[.14em] text-cyan-300">How to command Misfit</div>
+                <p className="mt-2 text-[11px] leading-5 text-slate-400">Choose a lane, then state the outcome. <b className="text-slate-200">Run may create a real factory job.</b> Greetings or presence checks like “Architect present” stay conversational and do not consume a factory slot.</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">{examples.map((example)=><button key={example} type="button" onClick={()=>setText(example)} className="rounded-xl border border-white/10 bg-black/35 p-3 text-left text-[10px] leading-4 text-slate-400 hover:border-cyan-400/25 hover:text-slate-200">{example}</button>)}</div>
+              </section>
+              <div className="mb-3 flex gap-2 overflow-x-auto">{MODES.map(([key,label])=><button type="button" key={key} onClick={()=>chooseMode(key)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[8px] uppercase tracking-[.12em] ${mode===key?'border-cyan-400/40 bg-cyan-400/10 text-cyan-200':'border-white/10 text-slate-500'}`}>{label}</button>)}</div>
+              <textarea value={text} onChange={(e)=>setText(e.target.value)} rows={4} placeholder={PLACEHOLDERS[mode]} className="w-full resize-none rounded-2xl border border-white/10 bg-white/[.04] px-4 py-3 text-sm leading-6 outline-none placeholder:text-slate-700 focus:border-cyan-400/40" />
+              <div className="mt-2 flex items-center justify-between gap-3"><div className="text-[10px] leading-4 text-slate-600">{modeHelp} Money movement, payout changes, spend, protected-IP exposure and binding external terms remain human-gated.</div><button disabled={sending || !text.trim()} className="shrink-0 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-black disabled:opacity-40">{sending?'Sending…':mode==='note'?'Save':'Run'}</button></div>
             </form>
           </section>
 
           <aside className="order-3 space-y-4">
-            <section className="rounded-3xl border border-white/10 bg-white/[.025] p-4"><div className="font-mono text-[9px] uppercase tracking-[.14em] text-slate-500">Factory now</div><div className="mt-3 space-y-2">{pendingJobs.slice(0,7).map((j)=><div key={j.id} className="rounded-2xl border border-white/10 bg-black/25 p-3"><div className="text-xs font-semibold text-slate-300">{j.job_type}</div><div className="mt-1 flex justify-between gap-2 font-mono text-[8px] uppercase text-slate-600"><span>{j.worker_key}</span><span className={j.status==='running'?'text-emerald-300':j.status==='blocked'?'text-amber-300':'text-cyan-300'}>{j.status}</span></div></div>)}{!pendingJobs.length && <div className="text-xs text-slate-600">No active jobs.</div>}</div></section>
+            <section className="rounded-3xl border border-white/10 bg-white/[.025] p-4"><div className="font-mono text-[9px] uppercase tracking-[.14em] text-slate-500">Factory now</div><div className="mt-3 space-y-2">{pendingJobs.slice(0,7).map((j)=><div key={j.id} className="rounded-2xl border border-white/10 bg-black/25 p-3"><div className="text-xs font-semibold text-slate-300">{j.job_type}</div><div className="mt-1 flex justify-between gap-2 font-mono text-[8px] uppercase text-slate-600"><span>{j.worker_key}</span><span className={j.status==='running'?'text-emerald-300':j.status==='blocked'?'text-amber-300':'text-cyan-300'}>{j.status}</span></div>{['queued','blocked'].includes(j.status)&&<button onClick={()=>cancelJob(j.id)} className="mt-2 rounded-lg border border-rose-400/20 px-2 py-1 font-mono text-[8px] uppercase text-rose-300">Kill job</button>}</div>)}{!pendingJobs.length && <div className="text-xs text-slate-600">No active jobs.</div>}</div></section>
             <section className="rounded-3xl border border-amber-400/15 bg-amber-400/[.025] p-4"><div className="font-mono text-[9px] uppercase tracking-[.14em] text-amber-300">Human gates</div><div className="mt-3 space-y-2">{gates.slice(0,6).map((g)=><div key={g.id} className="rounded-2xl border border-white/10 bg-black/25 p-3"><div className="text-xs font-semibold text-slate-300">{g.title}</div><div className="mt-1 text-[10px] leading-4 text-slate-600">{g.human_action || g.readiness}</div>{g.action_url && <a href={g.action_url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-[10px] text-cyan-300">Open gate →</a>}</div>)}{!gates.length && <div className="text-xs text-slate-600">No pending human gates.</div>}</div></section>
           </aside>
         </section>
