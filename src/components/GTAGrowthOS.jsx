@@ -5,7 +5,6 @@ const SB='https://cibcxqrqiqvzpardbdrw.supabase.co';
 const PK='sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
 const H={apikey:PK,'Content-Type':'application/json'};
 const OFFER_KEY='misfit_gta_growth_launch_299';
-const PAYMENT_LINK='https://buy.stripe.com/6oU6oH0saamG2qecbC8ww0M';
 
 async function request(url,body){
   const r=await fetch(url,{method:'POST',headers:H,body:JSON.stringify(body)});
@@ -14,6 +13,7 @@ async function request(url,body){
   if(!r.ok)throw new Error(data?.message||data?.error||`Request failed (${r.status})`);
   return data;
 }
+const catalog=(body)=>request(`${SB}/functions/v1/public-catalog`,body);
 
 export default function GTAGrowthOS(){
   const [form,setForm]=useState({community_name:'',website:'',email:'',goal:'More players / members'});
@@ -31,13 +31,7 @@ export default function GTAGrowthOS(){
   const logAudit=async(result)=>{
     if(logged)return;
     try{
-      await fetch(`${SB}/rest/v1/gaming_portal_requests`,{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({
-        request_type:'server_service',
-        name:form.community_name.trim()||result.domain||'GTA growth audit',
-        email:form.email.trim()||null,
-        details:{kind:'gta_growth_audit',offer_key:OFFER_KEY,community_url:form.website.trim(),goal:form.goal,score:result.score,grade:result.grade,recommended_offer:result.recommended_offer?.key||null,checked_at:result.checked_at,compliance_attested:true},
-        status:'new'
-      })});
+      await catalog({operation:'log_gta_audit',community_name:form.community_name.trim(),community_url:form.website.trim(),email:form.email.trim(),goal:form.goal,domain:result.domain,score:result.score,grade:result.grade,recommended_offer:result.recommended_offer?.key||null,checked_at:result.checked_at});
       setLogged(true);
     }catch{}
   };
@@ -53,20 +47,9 @@ export default function GTAGrowthOS(){
   const startCheckout=async()=>{
     setBusy('checkout');setNotice('');
     try{
-      const requestId=crypto.randomUUID();
-      const r=await fetch(`${SB}/rest/v1/gaming_portal_requests`,{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({
-        id:requestId,
-        request_type:'server_service',
-        name:form.community_name.trim(),
-        email:form.email.trim().toLowerCase(),
-        details:{kind:'gta_growth_subscription',offer_key:OFFER_KEY,plan_key:'gta_growth_launch',community_url:form.website.trim(),goal:form.goal,billing_status:'checkout_open',payment_link_id:'plink_1UAiQAFpcFPyAHAYQgkYVoGo',compliance_attested:true},
-        status:'new'
-      })});
-      if(!r.ok){const text=await r.text();throw new Error(text||`intake_failed_${r.status}`)}
-      const url=new URL(PAYMENT_LINK);
-      url.searchParams.set('client_reference_id',requestId);
-      url.searchParams.set('prefilled_email',form.email.trim().toLowerCase());
-      window.location.assign(url.toString());
+      const result=await catalog({operation:'create_checkout',product_key:OFFER_KEY,community_name:form.community_name.trim(),community_url:form.website.trim(),email:form.email.trim().toLowerCase(),goal:form.goal});
+      if(!result?.checkout_url)throw new Error('checkout_unavailable');
+      window.location.assign(result.checkout_url);
     }catch(error){setNotice(`CHECKOUT — ${error.message}`);setBusy('')}
   };
 
