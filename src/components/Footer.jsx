@@ -1,12 +1,13 @@
 import TraderGTALane from './TraderGTALane.jsx';
 import TraderNetworkLane from './TraderNetworkLane.jsx';
 import TraderShadowLane from './TraderShadowLane.jsx';
+import TraderReconsiderationReport from './TraderReconsiderationReport.jsx';
 
 export default function Footer() {
   const onTrader = typeof window !== 'undefined' && window.location.pathname === '/signal';
   return (
     <>
-      {onTrader&&<div className="bg-black"><div className="mx-auto max-w-7xl px-4 sm:px-5"><TraderNetworkLane/><TraderShadowLane/><TraderGTALane/></div></div>}
+      {onTrader&&<div className="bg-black"><div className="mx-auto max-w-7xl px-4 sm:px-5"><TraderNetworkLane/><TraderShadowLane/><TraderReconsiderationReport/><TraderGTALane/></div></div>}
       <footer className="border-t border-white/10 bg-black py-10">
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
