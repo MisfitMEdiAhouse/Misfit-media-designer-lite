@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { ScanSearch, Sparkles, TrendingUp } from 'lucide-react';
+import { ScanSearch, TrendingUp } from 'lucide-react';
 
 const SB='https://cibcxqrqiqvzpardbdrw.supabase.co';
 const PK='sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
 const H={apikey:PK,'Content-Type':'application/json'};
 const OFFER_KEY='misfit_gta_growth_launch_299';
+const PAYMENT_LINK='https://buy.stripe.com/6oU6oH0saamG2qecbC8ww0M';
 
 async function request(url,body){
   const r=await fetch(url,{method:'POST',headers:H,body:JSON.stringify(body)});
@@ -52,9 +53,20 @@ export default function GTAGrowthOS(){
   const startCheckout=async()=>{
     setBusy('checkout');setNotice('');
     try{
-      const data=await request(`${SB}/functions/v1/public-catalog`,{operation:'create_checkout',product_key:OFFER_KEY,community_name:form.community_name,community_url:form.website,email:form.email,goal:form.goal});
-      if(!data.checkout_url)throw new Error('checkout_url_missing');
-      window.location.assign(data.checkout_url);
+      const requestId=crypto.randomUUID();
+      const r=await fetch(`${SB}/rest/v1/gaming_portal_requests`,{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({
+        id:requestId,
+        request_type:'server_service',
+        name:form.community_name.trim(),
+        email:form.email.trim().toLowerCase(),
+        details:{kind:'gta_growth_subscription',offer_key:OFFER_KEY,plan_key:'gta_growth_launch',community_url:form.website.trim(),goal:form.goal,billing_status:'checkout_open',payment_link_id:'plink_1UAiQAFpcFPyAHAYQgkYVoGo',compliance_attested:true},
+        status:'new'
+      })});
+      if(!r.ok){const text=await r.text();throw new Error(text||`intake_failed_${r.status}`)}
+      const url=new URL(PAYMENT_LINK);
+      url.searchParams.set('client_reference_id',requestId);
+      url.searchParams.set('prefilled_email',form.email.trim().toLowerCase());
+      window.location.assign(url.toString());
     }catch(error){setNotice(`CHECKOUT — ${error.message}`);setBusy('')}
   };
 
