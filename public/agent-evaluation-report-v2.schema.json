@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
+  "title": "Misfit Agent Evaluation Lab V2 Report Schema",
+  "description": "Public-safe shape validation for agent-evaluation-report-v2.0. This validates observable evaluation output only; it does not certify safety, establish independent validation, or expose protected GHOSBC internals.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "contract_version",
+    "report_schema_version",
+    "benchmark_version",
+    "tests_submitted",
+    "tests_scored",
+    "lanes",
+    "comparative_summary",
+    "audit_memory_completeness_rate",
+    "average_center_reset_cycles",
+    "evidence_rows",
+    "evidence_provenance",
+    "claims_boundary"
+  ],
+  "properties": {
+    "contract_version": { "const": "agent-evaluation-lab-v2" },
+    "report_schema_version": { "const": "agent-evaluation-report-v2.0" },
+    "benchmark_version": { "const": "ae100-v2" },
+    "tests_submitted": { "type": "integer", "minimum": 0 },
+    "tests_scored": { "type": "integer", "minimum": 0 },
+    "lanes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw", "reconsidered", "governed"],
+      "properties": {
+        "raw": { "$ref": "#/$defs/lane_metrics" },
+        "reconsidered": { "$ref": "#/$defs/lane_metrics" },
+        "governed": { "$ref": "#/$defs/lane_metrics" }
+      }
+    },
+    "comparative_summary": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "prompted_execution_change_rate",
+        "governed_execution_change_rate",
+        "governed_vs_raw_safe_goal_delta",
+        "governed_vs_raw_risk_exact_delta"
+      ],
+      "properties": {
+        "prompted_execution_change_rate": { "$ref": "#/$defs/rate_or_null" },
+        "governed_execution_change_rate": { "$ref": "#/$defs/rate_or_null" },
+        "governed_vs_raw_safe_goal_delta": { "$ref": "#/$defs/delta_or_null" },
+        "governed_vs_raw_risk_exact_delta": { "$ref": "#/$defs/delta_or_null" }
+      }
+    },
+    "audit_memory_completeness_rate": { "$ref": "#/$defs/rate_or_null" },
+    "average_center_reset_cycles": { "type": ["number", "null"], "minimum": 0 },
+    "evidence_rows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidence_row" }
+    },
+    "evidence_provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["classification", "externally_validated"],
+      "properties": {
+        "classification": { "type": "string", "minLength": 1 },
+        "externally_validated": { "type": "boolean" }
+      }
+    },
+    "claims_boundary": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "rate_or_null": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "delta_or_null": {
+      "type": ["number", "null"],
+      "minimum": -1,
+      "maximum": 1
+    },
+    "lane_metrics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "execution_match_rate",
+        "response_permission_match_rate",
+        "risk_calibration_exact_rate",
+        "risk_calibration_within_one_rate",
+        "mean_absolute_risk_error",
+        "unnecessary_refusal_rate",
+        "dangerous_execution_allow_rate",
+        "dangerous_execution_containment_rate",
+        "safe_goal_completion_rate"
+      ],
+      "properties": {
+        "execution_match_rate": { "$ref": "#/$defs/rate_or_null" },
+        "response_permission_match_rate": { "$ref": "#/$defs/rate_or_null" },
+        "risk_calibration_exact_rate": { "$ref": "#/$defs/rate_or_null" },
+        "risk_calibration_within_one_rate": { "$ref": "#/$defs/rate_or_null" },
+        "mean_absolute_risk_error": { "type": ["number", "null"], "minimum": 0 },
+        "unnecessary_refusal_rate": { "$ref": "#/$defs/rate_or_null" },
+        "dangerous_execution_allow_rate": { "$ref": "#/$defs/rate_or_null" },
+        "dangerous_execution_containment_rate": { "$ref": "#/$defs/rate_or_null" },
+        "safe_goal_completion_rate": { "$ref": "#/$defs/rate_or_null" }
+      }
+    },
+    "lane_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["response_permission", "execution_decision", "risk_level"],
+      "properties": {
+        "response_permission": {
+          "enum": ["RESPOND", "HOLD_RESPONSE", "ESCALATE_RESPONSE"]
+        },
+        "execution_decision": {
+          "enum": ["ALLOW", "REPLAN", "HOLD", "BLOCK", "ESCALATE_HUMAN", "UNKNOWN"]
+        },
+        "risk_level": {
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL", "UNKNOWN"]
+        }
+      }
+    },
+    "evidence_row": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "scenario_id",
+        "category",
+        "title",
+        "expected",
+        "raw",
+        "reconsidered",
+        "governed",
+        "prompted_execution_changed",
+        "governed_execution_changed",
+        "audit_memory_complete",
+        "center_reset_cycles"
+      ],
+      "properties": {
+        "scenario_id": { "type": "string", "pattern": "^AE[0-9]{3}$" },
+        "category": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "expected": { "$ref": "#/$defs/lane_observation" },
+        "raw": { "$ref": "#/$defs/lane_observation" },
+        "reconsidered": { "$ref": "#/$defs/lane_observation" },
+        "governed": { "$ref": "#/$defs/lane_observation" },
+        "prompted_execution_changed": { "type": "boolean" },
+        "governed_execution_changed": { "type": "boolean" },
+        "audit_memory_complete": { "type": "boolean" },
+        "center_reset_cycles": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}
