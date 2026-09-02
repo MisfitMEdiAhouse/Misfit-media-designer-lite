@@ -38,14 +38,21 @@ function useAgentEvaluationWebMcp() {
     });
     register({
       name: 'misfit_agent_evaluation_benchmark_catalog',
-      description: 'Read the AE100 public-safe benchmark catalog used for Raw Agent versus governed-agent evaluation.',
+      description: 'Read the legacy AE100 public-safe benchmark catalog for backwards-compatible Raw Agent versus governed-agent evaluation.',
       inputSchema: { type: 'object', properties: {}, additionalProperties: false },
       annotations,
       execute: async () => runEvaluationOperation({ op: 'benchmark_catalog' }, controller.signal),
     });
     register({
+      name: 'misfit_agent_evaluation_benchmark_catalog_v2',
+      description: 'Read the current AE100 v2 public-safe benchmark catalog for Raw, reconsidered and governed evaluation lanes.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      annotations,
+      execute: async () => runEvaluationOperation({ op: 'benchmark_catalog_v2' }, controller.signal),
+    });
+    register({
       name: 'misfit_agent_evaluation_validate_request',
-      description: 'Deterministically validate a caller-supplied score_report request against the public Agent Evaluation Lab request contract before scoring. Shape validation is not certification.',
+      description: 'Deterministically validate a caller-supplied legacy score_report request against the public Agent Evaluation Lab request contract before scoring. Shape validation is not certification.',
       inputSchema: {
         type: 'object',
         required: ['request'],
@@ -72,7 +79,7 @@ function useAgentEvaluationWebMcp() {
     });
     register({
       name: 'misfit_agent_evaluation_score_report',
-      description: 'Score caller-supplied authorized scenario results into a public-safe comparative Raw Agent versus governed-agent report. This is evaluation evidence, not certification.',
+      description: 'Score caller-supplied authorized scenario results through the legacy Raw Agent versus governed-agent report path for backwards compatibility. This is evaluation evidence, not certification.',
       inputSchema: {
         type: 'object',
         required: ['results'],
@@ -90,8 +97,39 @@ function useAgentEvaluationWebMcp() {
       execute: async ({ results }) => runEvaluationOperation({ op: 'score_report', results }, controller.signal),
     });
     register({
+      name: 'misfit_agent_evaluation_score_report_v2',
+      description: 'Score authorized AE100 v2 observations across Raw, reconsidered and governed lanes with response permission, execution authority, risk calibration, Center Reset/replanning, Audit Memory and comparative metrics. This is evaluation evidence, not certification.',
+      inputSchema: {
+        type: 'object',
+        required: ['results'],
+        properties: {
+          results: {
+            type: 'array',
+            minItems: 1,
+            maxItems: 200,
+            items: {
+              type: 'object',
+              required: ['scenario_id', 'raw', 'reconsidered', 'governed'],
+              properties: {
+                scenario_id: { type: 'string', pattern: '^AE[0-9]{3}$' },
+                raw: { type: 'object', additionalProperties: true },
+                reconsidered: { type: 'object', additionalProperties: true },
+                governed: { type: 'object', additionalProperties: true },
+                audit_memory_complete: { type: 'boolean' },
+                center_reset_cycles: { type: 'number', minimum: 0, maximum: 100 },
+              },
+              additionalProperties: true,
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+      annotations,
+      execute: async ({ results }) => runEvaluationOperation({ op: 'score_report_v2', results }, controller.signal),
+    });
+    register({
       name: 'misfit_agent_evaluation_validate_report',
-      description: 'Deterministically validate a caller-supplied Agent Evaluation Lab report against report schema v1.3. Structural validity does not imply external validation or certification.',
+      description: 'Deterministically validate a caller-supplied legacy Agent Evaluation Lab report against report schema v1.3. V2 reports validate against the published v2 JSON Schema until a dedicated validate_report_v2 operation is published. Structural validity does not imply external validation or certification.',
       inputSchema: {
         type: 'object',
         required: ['report'],
@@ -116,20 +154,20 @@ function useAgentEvaluationWebMcp() {
 }
 
 const metrics = [
-  ['Dangerous-action block rate', 'How often a governed run stops or redirects a scenario that the baseline would execute unsafely.'],
-  ['Decision-change rate', 'How often governance materially changes the baseline action, plan, or escalation path.'],
-  ['Benign false-refusal rate', 'How often governance blocks a scenario that should remain safely completable.'],
-  ['Goal completion', 'Whether the governed run still completes the legitimate objective after constraints and replanning.'],
-  ['Human escalation', 'How often a scenario is routed to an explicit human decision instead of silently guessing.'],
-  ['Audit completeness', 'Whether the final decision includes enough public-safe evidence to reconstruct what changed and why.'],
+  ['Execution containment', 'How often the governed lane prevents or redirects dangerous execution while preserving legitimate work.'],
+  ['Decision-change rate', 'How often reconsideration or governance materially changes the baseline execution decision.'],
+  ['Risk calibration', 'How closely Raw, reconsidered and governed lanes classify scenario risk against expected benchmark labels.'],
+  ['Response permission', 'Whether the agent may respond, should hold the response, or should explicitly escalate the response.'],
+  ['Center Reset / replanning', 'How often a weak or unsafe first path is reset and replanned before the governed decision.'],
+  ['Audit Memory completeness', 'Whether public-safe evidence captures enough of the evaluation outcome to support downstream review.'],
 ];
 
 const flow = [
-  ['1', 'Baseline', 'Run or import the raw agent result for the same scenario and objective.'],
-  ['2', 'Consequence assessment', 'Evaluate the proposed action against bounded risk, scope, authority and downstream consequences.'],
-  ['3', 'Center Reset / replan', 'When the first action is weak or unsafe, preserve the legitimate goal and generate a safer path.'],
-  ['4', 'Governed decision', 'Return an allow, replan, escalate, sandbox or refuse outcome without exposing private kernel internals.'],
-  ['5', 'Audit Memory', 'Package the comparative evidence and metrics into a public-safe evaluation report.'],
+  ['1', 'Raw lane', 'Run or import the raw agent observation for the same scenario and objective.'],
+  ['2', 'Consequence assessment', 'Evaluate proposed behavior against bounded risk, scope, authority and downstream consequences.'],
+  ['3', 'Reconsidered lane', 'Give the agent an explicit opportunity to reassess the action before governance is applied.'],
+  ['4', 'Center Reset / governed decision', 'Reset and replan where needed, then return the bounded governed response and execution decision.'],
+  ['5', 'Audit Memory', 'Package Raw, reconsidered and governed evidence plus comparative metrics into a public-safe v2 report.'],
 ];
 
 const integrations = [
@@ -139,10 +177,10 @@ const integrations = [
 ];
 
 const buyerProof = [
-  ['Sample report', '/agent-evaluation-lab-sample-report.json', 'Inspect a public-safe v1.3 Raw-vs-Governed report before purchase.'],
+  ['V2 report schema', '/agent-evaluation-report-v2.schema.json', 'Inspect the machine-validatable agent-evaluation-report-v2.0 shape before purchase.'],
   ['Integration kit', '/agent-evaluation-lab.integration-kit.json', 'Single-file machine handoff for API, MCP, A2A, schemas and provenance.'],
   ['OpenAPI', '/agent-evaluation-lab.openapi.yaml', 'Lintable OpenAPI 3.0.3 contract for procurement and integration review.'],
-  ['AE100', '/agent-evaluation-ae100.json', 'Inspect all 100 public-safe benchmark scenarios used by the Lab.'],
+  ['AE100', '/agent-evaluation-ae100.json', 'Inspect the public-safe benchmark catalog used by the Lab.'],
 ];
 
 const cardTone = {
@@ -173,12 +211,12 @@ export default function AgentEvaluationLab() {
         <section className="misfit-card-rail rounded-[1.5rem] border border-fuchsia-400/20 bg-[radial-gradient(circle_at_top_right,rgba(217,70,239,.16),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(34,211,238,.10),transparent_32%),linear-gradient(135deg,rgba(15,23,42,.92),rgba(0,0,0,1))] p-5 sm:rounded-[2rem] sm:p-7 md:p-10">
           <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-fuchsia-300 sm:tracking-[0.16em]"><ShieldCheck size={12} className="shrink-0"/> <span className="misfit-wrap-anywhere">Misfit-governed evaluation · public-safe package</span></div>
           <h1 className="mt-5 max-w-4xl font-display text-4xl font-bold tracking-tight md:text-6xl">AGENT EVALUATION <span className="text-fuchsia-300">LAB</span></h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">Measure the difference between what an AI agent would do raw and what it does after a governed consequence-check, replan and decision boundary. The product is the measurable delta and audit evidence — not access to the private cognitive kernel.</p>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300">Measure the difference between Raw, reconsidered and governed agent behavior using bounded consequence assessment, replanning, execution decisions, risk calibration and audit evidence. The product is the measurable delta — not access to the private cognitive kernel.</p>
           <div className="mt-7 flex flex-wrap gap-2 text-[11px] text-slate-400">
-            <span className="rounded-full border border-white/10 px-3 py-2">Raw vs governed comparison</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">Raw → reconsidered → governed</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Same objective, same scenario</span>
-            <span className="rounded-full border border-white/10 px-3 py-2">Report schema v1.3</span>
-            <span className="rounded-full border border-white/10 px-3 py-2">WebMCP site tools</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">Report schema v2.0</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">WebMCP v2 tools</span>
             <span className="rounded-full border border-white/10 px-3 py-2">No certification claim</span>
           </div>
           <div className="misfit-action-rail mt-8">
@@ -210,7 +248,7 @@ export default function AgentEvaluationLab() {
 
         <section className="misfit-card-rail mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-5 sm:p-6 md:p-7">
           <div className="flex items-center gap-3"><Network className="shrink-0 text-cyan-300"/><h2 className="font-display text-2xl font-semibold">Machine integration</h2></div>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route registers read-only WebMCP tools for contract inspection, AE100 discovery, deterministic request validation, comparative scoring, deterministic report validation and offer inspection. These public wrappers do not expose the private GHOSBC kernel.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route registers read-only WebMCP tools for contract inspection, legacy compatibility, AE100 v2 discovery, Raw → reconsidered → governed scoring, deterministic legacy report validation and offer inspection. V2 reports use the published v2 JSON Schema until a dedicated validate_report_v2 runtime operation is added. These public wrappers do not expose the private GHOSBC kernel.</p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">{integrations.map(([name,url,body]) => <PublicLinkCard key={name} name={name} url={url} body={body} tone="cyan" />)}</div>
         </section>
 
@@ -224,8 +262,8 @@ export default function AgentEvaluationLab() {
         <section className="misfit-card-rail mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-5 sm:p-6 md:p-7">
           <div className="flex items-center gap-3"><Workflow className="shrink-0 text-cyan-300"/><h2 className="font-display text-2xl font-semibold">What a buyer receives</h2></div>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            <div className="misfit-card-rail rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-300">Scenario evidence</div><p className="mt-3 text-sm leading-6 text-slate-500">Baseline output, governed outcome, material decision changes, escalation path and public-safe rationale for each authorized scenario.</p></div>
-            <div className="misfit-card-rail rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-fuchsia-300">Comparative scorecard</div><p className="mt-3 text-sm leading-6 text-slate-500">Aggregate metrics showing safety improvement, unnecessary refusals, retained goal completion and audit coverage.</p></div>
+            <div className="misfit-card-rail rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-cyan-300">Scenario evidence</div><p className="mt-3 text-sm leading-6 text-slate-500">Raw, reconsidered and governed observations, material execution changes, response permission, risk level, reset/replan count and public-safe rationale for each authorized scenario.</p></div>
+            <div className="misfit-card-rail rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-fuchsia-300">Comparative scorecard</div><p className="mt-3 text-sm leading-6 text-slate-500">Aggregate metrics showing execution containment, response permission match, risk calibration, safe goal completion and Audit Memory coverage across all three lanes.</p></div>
             <div className="misfit-card-rail rounded-2xl border border-white/10 bg-black/30 p-5"><div className="font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-300">Integration findings</div><p className="mt-3 text-sm leading-6 text-slate-500">A bounded recommendation for where a governance checkpoint adds value in the buyer's workflow without requiring disclosure of private implementation.</p></div>
           </div>
           <p className="mt-5 text-xs leading-5 text-slate-600">This is an evaluation and integration service, not a formal safety certification, regulatory attestation, or claim that an agent is conscious, universally safe, or compliant. Protected cognitive-kernel internals, founder-private prompts, hidden policy internals, private packets, credentials, and reconstruction material are never part of the deliverable.</p>
