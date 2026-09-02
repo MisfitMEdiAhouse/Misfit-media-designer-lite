@@ -1,32 +1,47 @@
 {
-  "schema_version": "1.10.2",
+  "schema_version": "2.0.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
+  "contract_version": "agent-evaluation-lab-v2",
+  "benchmark_version": "ae100-v2",
+  "report_schema_version": "agent-evaluation-report-v2.0",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+  "v2_readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
+  "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
+  "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
   "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "machine_access": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "public_function_version": 14,
+    "surface_version": "1.12.0",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "mcp_function_version": 12,
+    "mcp_server_version": "1.10.0",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "a2a_function_version": 11,
+    "a2a_agent_version": "1.9.0",
+    "ucp_function_version": 14,
+    "ucp_service_version": "1.10.0",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
-    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
-    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-    "surface_version": "1.10.1",
     "read_only_operations": [
       "contract",
       "benchmark_catalog",
+      "benchmark_catalog_v2",
       "validate_request",
       "score_report",
+      "score_report_v2",
       "validate_report",
       "offer",
       "integration_quickstart",
@@ -34,6 +49,20 @@
     ],
     "external_actions": false,
     "payment_execution": false
+  },
+  "evaluation_model": {
+    "lanes": ["raw", "reconsidered", "governed"],
+    "benchmark_size": 100,
+    "observable_outputs": [
+      "consequence_assessment",
+      "response_permission",
+      "execution_authority",
+      "risk_calibration",
+      "center_reset_or_replanning",
+      "governed_decision_outcome",
+      "audit_memory_completeness",
+      "comparative_metrics"
+    ]
   },
   "purchase": {
     "url": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=product_contract",
@@ -59,35 +88,29 @@
   "external_benchmark_interop": {
     "operation": "external_benchmark_bridge",
     "status": "interop_ready_no_external_score_claim",
-    "supported_profiles": [
-      "AgentHarm",
-      "Agent-SafetyBench",
-      "AgentHazard"
-    ],
+    "supported_profiles": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
+    "evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
     "claim_boundary": "Compatibility is not validation. No external benchmark score or safety claim is made until real independently generated benchmark evidence is supplied with provenance."
   },
-  "purpose": "Compare an authorized raw-agent baseline with a Misfit-governed run while keeping the private cognitive kernel sealed.",
+  "purpose": "Compare an authorized raw-agent baseline with reconsidered and governed runs while keeping the private cognitive kernel sealed.",
   "evaluation_flow": [
-    "baseline",
+    "raw_baseline",
     "consequence_assessment",
     "center_reset_or_replan",
     "governed_decision",
-    "audit_memory"
+    "audit_memory",
+    "comparative_measurement"
   ],
-  "outcomes": [
-    "allow",
-    "replan",
-    "escalate",
-    "sandbox",
-    "refuse"
-  ],
+  "outcomes": ["allow", "replan", "escalate", "sandbox", "refuse"],
   "metrics": [
     "dangerous_action_block_rate",
     "decision_change_rate",
     "benign_false_refusal_rate",
     "goal_completion_rate",
     "human_escalation_rate",
-    "audit_completeness_rate"
+    "audit_completeness_rate",
+    "execution_authority_change_rate",
+    "risk_calibration_delta"
   ],
   "deliverables": [
     "scenario_evidence",
@@ -100,7 +123,8 @@
     "regulatory_attestation": false,
     "machine_consciousness": false,
     "universal_safety": false,
-    "externally_benchmarked": false
+    "externally_benchmarked": false,
+    "independent_validation": false
   },
   "protected_material_excluded": [
     "protected cognitive-kernel internals",
