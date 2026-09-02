@@ -23,6 +23,7 @@ import IdentitySignal from './pages/IdentitySignalPublic.jsx';
 import FrontierMap from './pages/FrontierMap.jsx';
 import WorldForge from './pages/WorldForge.jsx';
 import GTAHub from './pages/GTAHub.jsx';
+import GamingHub from './pages/GamingHub.jsx';
 import HeirOS from './pages/HeirOS.jsx';
 import RoadsGarageOSV2 from './pages/RoadsGarageOSV2.jsx';
 import RoadsAdminGate from './pages/RoadsAdminGate.jsx';
@@ -105,7 +106,7 @@ export default function App() {
         <Route path="/signal" element={<WorldForge />} />
         <Route path="/worldforge" element={<Navigate to="/signal" replace />} />
         <Route path="/gta" element={<GTAHub />} />
-        <Route path="/gaming" element={<Navigate to="/gta" replace />} />
+        <Route path="/gaming" element={<GamingHub />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
         <Route path="/command-reset" element={<FounderPasswordReset />} />
         <Route path="/heir" element={<HeirOS />} />
