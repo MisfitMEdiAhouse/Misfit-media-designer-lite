@@ -6,7 +6,7 @@ import StanMisfitExplorer from './StanMisfitExplorer.jsx';
 const primaryItems = [
   ['/', 'Scanner'],
   ['/signal', 'Trader'],
-  ['/gta', 'GTA'],
+  ['/gaming', 'Gaming'],
   ['/agency', 'Agency'],
   ['/portfolio', 'Portfolio'],
   ['/competitions', 'Competitions'],
@@ -25,7 +25,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
 
-  const active = (href) => href === '/' ? pathname === '/' || pathname === '/scrub' : pathname.startsWith(href);
+  const active = (href) => {
+    if (href === '/') return pathname === '/' || pathname === '/scrub';
+    if (href === '/gaming') return pathname.startsWith('/gaming') || pathname.startsWith('/gta');
+    return pathname.startsWith(href);
+  };
   const exploreActive = pathname === '/explore' || pathname === '/products' || pathname === '/agents' || pathname === '/a2a-agent-audit' || pathname === '/shopify-ai-audit';
   const stanTour = pathname === '/stan-hansen' || pathname === '/egnyte';
 
