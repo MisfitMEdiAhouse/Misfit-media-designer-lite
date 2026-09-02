@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "2.0.1",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -14,7 +14,8 @@
   "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
   "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
   "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-  "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+  "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
+  "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "machine_access": {
@@ -32,7 +33,8 @@
     "ucp_service_version": "1.10.0",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-    "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+    "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
+    "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "read_only_operations": [
@@ -47,6 +49,8 @@
       "integration_quickstart",
       "external_benchmark_bridge"
     ],
+    "validate_report_scope": "legacy_v1_only",
+    "v2_schema_validation": "client-side against agent-evaluation-report-v2.schema.json until a dedicated validate_report_v2 operation is published",
     "external_actions": false,
     "payment_execution": false
   },
@@ -81,8 +85,9 @@
     "kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-    "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-    "purpose": "Return the current API, OpenAPI, MCP, A2A, deterministic request/report validation, buyer proof and purchase sequence without requiring a human explanation.",
+    "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
+    "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A, public report schemas, buyer proof and purchase sequence without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
