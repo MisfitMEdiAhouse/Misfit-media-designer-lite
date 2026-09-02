@@ -1,15 +1,17 @@
 {
-  "schema_version": "1.3.9",
+  "schema_version": "2.0.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
-  "surface_version": "1.10.1",
+  "contract_version": "agent-evaluation-lab-v2",
+  "surface_version": "1.12.0",
   "request_schema_version": "agent-evaluation-request-v1.0",
-  "report_schema_version": "agent-evaluation-report-v1.3",
-  "benchmark_version": "ae100-v1",
-  "description": "Public-safe Raw Agent vs governed-agent evaluation with measurable consequence assessment, replanning, governed decisions, audit evidence and comparative metrics.",
+  "report_schema_version": "agent-evaluation-report-v2.0",
+  "benchmark_version": "ae100-v2",
+  "description": "Public-safe Raw Agent vs reconsidered vs GHOSBC-governed evaluation with measurable consequence assessment, response permission, execution authority, risk calibration, replanning, governed decisions, Audit Memory and comparative metrics.",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+  "v2_readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "postman_collection": "https://misfitmediahouse.com/agent-evaluation-lab.postman_collection.json",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
@@ -25,21 +27,29 @@
   "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
   "x402_readiness": "https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json",
   "machine_interfaces": {
-    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
-    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "api": {
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "function_version": 14,
+      "surface_version": "1.12.0"
+    },
+    "mcp": {
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+      "function_version": 12,
+      "server_version": "1.10.0"
+    },
+    "a2a": {
+      "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+      "agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+      "function_version": 11,
+      "agent_version": "1.9.0"
+    },
+    "ucp": {
+      "function_version": 14,
+      "service_version": "1.10.0"
+    },
     "webmcp": {
       "route": "https://misfitmediahouse.com/agent-evaluation-lab",
       "mode": "browser_native_read_only",
-      "tools": [
-        "misfit_agent_evaluation_contract",
-        "misfit_agent_evaluation_benchmark_catalog",
-        "misfit_agent_evaluation_validate_request",
-        "misfit_agent_evaluation_score_report",
-        "misfit_agent_evaluation_validate_report",
-        "misfit_agent_evaluation_offer"
-      ],
       "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
       "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
       "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json"
@@ -48,11 +58,35 @@
   "operations": [
     "contract",
     "benchmark_catalog",
+    "benchmark_catalog_v2",
     "validate_request",
     "score_report",
+    "score_report_v2",
     "validate_report",
-    "offer"
+    "offer",
+    "integration_quickstart",
+    "external_benchmark_bridge"
   ],
+  "recommended_v2_flow": [
+    "contract",
+    "benchmark_catalog_v2",
+    "validate_request",
+    "score_report_v2"
+  ],
+  "evaluation_model": {
+    "lanes": ["raw", "reconsidered", "governed"],
+    "benchmark_size": 100,
+    "measures": [
+      "consequence_assessment",
+      "response_permission",
+      "execution_authority",
+      "risk_calibration",
+      "center_reset_or_replanning",
+      "governed_decision_outcome",
+      "audit_memory_completeness",
+      "comparative_metrics"
+    ]
+  },
   "commercial": {
     "offer_key": "misfit_agent_evaluation_10k",
     "package": "10000 governed checks",
@@ -62,30 +96,22 @@
     "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=well_known_discovery",
     "payment_execution_in_discovery": false
   },
-  "measures": [
-    "consequence_assessments",
-    "decision_changes",
-    "replanning_cycles",
-    "governed_decision_outcomes",
-    "audit_memory_completeness",
-    "goal_completion",
-    "human_escalation",
-    "raw_vs_governed_comparison"
-  ],
   "evidence_boundary": {
     "default_provenance": "caller_supplied_unverified",
-    "buyer_proof_classification": "synthetic_illustrative_buyer_proof",
     "external_benchmark_compatibility": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
     "external_benchmark_evidence_receipt_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
     "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
     "external_benchmark_score_claimed": false,
+    "independent_validation_claimed": false,
     "schema_validity_is_external_validation": false
   },
   "claims_boundary": {
     "formal_certification": false,
+    "regulatory_attestation": false,
     "independent_third_party_validation": false,
     "machine_consciousness_claim": false,
+    "universal_safety_claim": false,
     "private_governance_kernel_exposed": false,
     "x402_payment_live": false,
     "bazaar_indexed": false,
