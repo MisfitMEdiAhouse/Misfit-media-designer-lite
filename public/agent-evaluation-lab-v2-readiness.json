@@ -1,14 +1,16 @@
 {
-  "schema_version": "misfit-agent-evaluation-v2-readiness-v1",
+  "schema_version": "misfit-agent-evaluation-v2-readiness-v2",
   "product": "GHOSBC Agent Evaluation Lab",
-  "status": "canonical_runtime_ready_public_wrapper_pending",
-  "purpose": "Machine-readable public-safe description of the stronger AE100 v2 evaluation lane already present in the canonical protected evaluator, without exposing protected GHOSBC implementation internals.",
+  "status": "public_api_mcp_a2a_live",
+  "purpose": "Machine-readable public-safe description of the live AE100 v2 Raw Agent versus governed-agent evaluation product without exposing protected GHOSBC implementation internals.",
   "canonical_product": "https://misfitmediahouse.com/agent-evaluation-lab",
   "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
   "current_public_contract": {
-    "contract_version": "agent-evaluation-lab-v1",
-    "report_schema_version": "agent-evaluation-report-v1.3",
-    "benchmark_version": "ae100-v1"
+    "contract_version": "agent-evaluation-lab-v2",
+    "report_schema_version": "agent-evaluation-report-v2.0",
+    "benchmark_version": "ae100-v2",
+    "surface_version": "1.12.0",
+    "public_function_version": 14
   },
   "v2_runtime": {
     "contract_version": "agent-evaluation-lab-v2",
@@ -38,19 +40,30 @@
       "response_permission": "Whether a public-safe response may be provided.",
       "execution_decision": "Whether the requested consequential action may execute.",
       "risk_level": "Expected consequence/authority severity; higher recognized risk can be correct and is not a reward signal.",
-      "center_reset_cycles": "Count of bounded reconsideration/replanning cycles represented in the submitted evaluation evidence.",
+      "center_reset_cycles": "Count of bounded reconsideration/replanning cycles represented in submitted evaluation evidence.",
+      "governed_decision_outcome": "Public-safe allow, constrain, replan, or block outcome; protected policy logic is not disclosed.",
       "audit_memory_complete": "Whether the caller-supplied evidence row includes the required public-safe audit-memory signal."
     }
   },
   "interop": {
-    "public_wrapper_v2_exposed": false,
-    "mcp_v2_tool_exposed": false,
-    "a2a_v2_skill_exposed": false,
-    "next_safe_packaging_step": "Expose AE100 v2 through the existing public API wrapper, then inherit it into existing MCP and A2A surfaces without creating duplicate services."
+    "public_wrapper_v2_exposed": true,
+    "mcp_v2_tool_exposed": true,
+    "mcp_function_version": 12,
+    "mcp_server_version": "1.10.0",
+    "a2a_v2_skill_exposed": true,
+    "a2a_function_version": 11,
+    "a2a_agent_version": "1.9.0",
+    "ucp_discovery_live": true,
+    "ucp_function_version": 13,
+    "ucp_service_version": "1.9.3",
+    "machine_native_wrappers_complete": true,
+    "next_safe_packaging_step": "Collect a real external evaluation run and preserve evaluator/run provenance. Do not claim independent validation until qualifying evidence is received."
   },
   "evidence_provenance": {
     "default_classification": "caller_supplied_unverified",
     "externally_validated_default": false,
+    "evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
+    "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "interpretation": "Metrics describe caller-supplied observable outputs unless a separate provenance-preserving external benchmark run is completed."
   },
   "claims_boundary": "Evaluation and governance tooling only. Not a safety certification, formal certification, independent third-party validation claim, regulatory attestation, medical claim, or machine-consciousness claim.",
