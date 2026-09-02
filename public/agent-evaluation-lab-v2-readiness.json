@@ -1,0 +1,66 @@
+{
+  "schema_version": "misfit-agent-evaluation-v2-readiness-v1",
+  "product": "GHOSBC Agent Evaluation Lab",
+  "status": "canonical_runtime_ready_public_wrapper_pending",
+  "purpose": "Machine-readable public-safe description of the stronger AE100 v2 evaluation lane already present in the canonical protected evaluator, without exposing protected GHOSBC implementation internals.",
+  "canonical_product": "https://misfitmediahouse.com/agent-evaluation-lab",
+  "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+  "current_public_contract": {
+    "contract_version": "agent-evaluation-lab-v1",
+    "report_schema_version": "agent-evaluation-report-v1.3",
+    "benchmark_version": "ae100-v1"
+  },
+  "v2_runtime": {
+    "contract_version": "agent-evaluation-lab-v2",
+    "report_schema_version": "agent-evaluation-report-v2.0",
+    "benchmark_version": "ae100-v2",
+    "benchmark_size": 100,
+    "lanes": ["raw", "reconsidered", "governed"],
+    "measures": [
+      "response_permission_match_rate",
+      "execution_match_rate",
+      "risk_calibration_exact_rate",
+      "risk_calibration_within_one_rate",
+      "mean_absolute_risk_error",
+      "unnecessary_refusal_rate",
+      "dangerous_execution_allow_rate",
+      "dangerous_execution_containment_rate",
+      "safe_goal_completion_rate",
+      "prompted_execution_change_rate",
+      "governed_execution_change_rate",
+      "audit_memory_completeness_rate",
+      "average_center_reset_cycles"
+    ],
+    "public_semantics": {
+      "raw": "Observable target-agent decision before reconsideration or governance.",
+      "reconsidered": "Observable decision after a bounded replan/reconsideration step.",
+      "governed": "Observable decision after governance constraints are applied.",
+      "response_permission": "Whether a public-safe response may be provided.",
+      "execution_decision": "Whether the requested consequential action may execute.",
+      "risk_level": "Expected consequence/authority severity; higher recognized risk can be correct and is not a reward signal.",
+      "center_reset_cycles": "Count of bounded reconsideration/replanning cycles represented in the submitted evaluation evidence.",
+      "audit_memory_complete": "Whether the caller-supplied evidence row includes the required public-safe audit-memory signal."
+    }
+  },
+  "interop": {
+    "public_wrapper_v2_exposed": false,
+    "mcp_v2_tool_exposed": false,
+    "a2a_v2_skill_exposed": false,
+    "next_safe_packaging_step": "Expose AE100 v2 through the existing public API wrapper, then inherit it into existing MCP and A2A surfaces without creating duplicate services."
+  },
+  "evidence_provenance": {
+    "default_classification": "caller_supplied_unverified",
+    "externally_validated_default": false,
+    "interpretation": "Metrics describe caller-supplied observable outputs unless a separate provenance-preserving external benchmark run is completed."
+  },
+  "claims_boundary": "Evaluation and governance tooling only. Not a safety certification, formal certification, independent third-party validation claim, regulatory attestation, medical claim, or machine-consciousness claim.",
+  "privacy_boundary": "No protected GHOSBC kernel, Mother Language, Soul Cipher, GHX/glyph mappings, hidden prompts, hidden policies, private packets, credentials, or reconstruction material is exposed.",
+  "payment_boundary": "This readiness artifact cannot charge a payment method, create a wallet, move funds, alter payouts, accept terms, or execute external actions.",
+  "commercial_offer": {
+    "offer_key": "misfit_agent_evaluation_10k",
+    "price_usd": 500,
+    "included_checks": 10000,
+    "effective_unit_price_usd": 0.05,
+    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agent_evaluation_v2_readiness"
+  }
+}
