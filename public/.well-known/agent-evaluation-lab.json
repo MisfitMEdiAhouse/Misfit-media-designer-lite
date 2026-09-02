@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "2.0.1",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -19,7 +19,8 @@
   "llms_context": "https://misfitmediahouse.com/agent-evaluation-lab.llms.txt",
   "security_brief": "https://misfitmediahouse.com/agent-evaluation-lab.security.json",
   "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-  "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+  "report_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
+  "legacy_v1_report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
   "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
   "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
@@ -30,7 +31,8 @@
     "api": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
       "function_version": 14,
-      "surface_version": "1.12.0"
+      "surface_version": "1.12.0",
+      "validate_report_scope": "legacy_v1_only"
     },
     "mcp": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
@@ -71,7 +73,8 @@
     "contract",
     "benchmark_catalog_v2",
     "validate_request",
-    "score_report_v2"
+    "score_report_v2",
+    "validate output client-side against agent-evaluation-report-v2.schema.json"
   ],
   "evaluation_model": {
     "lanes": ["raw", "reconsidered", "governed"],
