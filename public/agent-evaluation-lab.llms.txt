@@ -2,17 +2,19 @@
 
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
 Status: production
-Surface version: 1.10.1
+Surface version: 1.12.0
+Contract: agent-evaluation-lab-v2
 Request schema: agent-evaluation-request-v1.0
-Report schema: agent-evaluation-report-v1.3
-Benchmark: ae100-v1
+Report schema: agent-evaluation-report-v2.0
+Benchmark: ae100-v2
 
 ## Purpose
-Measure the same agent/objective in Raw Agent and governed-agent modes and return public-safe comparative evidence. The product measures consequence assessments, decision changes, Center Reset/replanning cycles, governed decision outcomes, Audit Memory completeness, goal completion, human escalation, and Raw-vs-Governed comparative metrics.
+Measure the same authorized agent/objective across Raw Agent, reconsidered, and GHOSBC-governed lanes and return public-safe comparative evidence. The product measures consequence assessment, response permission, execution authority, risk calibration, Center Reset/replanning, governed decision outcomes, Audit Memory completeness, goal completion, human escalation, and comparative metrics without exposing protected governance internals.
 
 ## Machine contracts
 Discovery card: https://misfitmediahouse.com/.well-known/agent-evaluation-lab.json
 Product contract: https://misfitmediahouse.com/agent-evaluation-lab.json
+AE100 v2 readiness: https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json
 OpenAPI 3.0.3: https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml
 Integration kit: https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json
 Request JSON Schema: https://misfitmediahouse.com/agent-evaluation-request.schema.json
@@ -27,23 +29,25 @@ External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluatio
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
-Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
-MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
-A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v14 / surface 1.12.0
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v12 / server 1.10.0
+A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v11 / agent 1.9.0
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
-Supported public operations: contract, benchmark_catalog, validate_request, score_report, validate_report, offer.
+Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, validate_request, score_report, score_report_v2, validate_report, offer, integration_quickstart, external_benchmark_bridge.
 
-WebMCP tools: misfit_agent_evaluation_contract, misfit_agent_evaluation_benchmark_catalog, misfit_agent_evaluation_validate_request, misfit_agent_evaluation_score_report, misfit_agent_evaluation_validate_report, misfit_agent_evaluation_offer.
+For the current three-lane evaluation contract, use benchmark_catalog_v2 and score_report_v2. Legacy operations remain compatibility surfaces and must not be interpreted as the current benchmark/report contract.
 
-Recommended flow: discover -> read contract and schemas -> validate_request -> score_report -> validate_report -> purchase higher-volume checks if useful.
+WebMCP tools remain bounded browser-native discovery/evaluation helpers. They cannot execute payments or consequential external actions.
 
-Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and receipt exist.
+Recommended flow: discover -> read v2 contract/readiness -> benchmark_catalog_v2 -> validate_request -> score_report_v2 -> validate_report where compatible -> purchase higher-volume checks if useful.
+
+Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and provenance receipt exist.
 
 ## Commercial handoff
 Offer key: misfit_agent_evaluation_10k
-Package: 10,000 governed checks
+Package: 10,000 governed policy checks
 Price: $500 USD
 Effective unit price: $0.05/check
 Purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=llms_context
