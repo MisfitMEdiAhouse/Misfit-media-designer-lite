@@ -20,6 +20,7 @@ Current public-safe skills:
 - `audit_shopify_agentic_storefront` — audit public Shopify UCP, agents.md and Storefront MCP metadata without mutating the store.
 - `audit_a2a_agent_card` — audit a public A2A Agent Card, declared bindings, skills, security declarations and registry verification without executing the target agent.
 - `governed_agent_action_check` — evaluate bounded structured action metadata and return an advisory public-safe decision/reasons/receipt. It never executes the proposed action or moves money.
+- `evaluate_raw_vs_governed_agent` — route an authorized agent-evaluation objective into the existing Agent Evaluation Lab contract and return public-safe comparative evaluation metadata without exposing private kernel internals.
 
 Private implementation behind these contracts is not an external product surface. Do not infer additional skills or private runtime access.
 
@@ -57,18 +58,23 @@ A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
 The audit inspects public metadata only and does not execute a target agent.
 
 ## Misfit Agent Evaluation Lab
-Purpose: authorized Raw Agent vs governed-agent evaluation with comparative evidence while the private cognitive/governance kernel stays sealed.
+Purpose: authorized Raw Agent → reconsidered → governed-agent evaluation with comparative evidence while the private cognitive/governance kernel stays sealed.
+Contract version: `agent-evaluation-lab-v2`
+Benchmark: `ae100-v2`
+Report schema: `agent-evaluation-report-v2.0`
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine contract: https://misfitmediahouse.com/agent-evaluation-lab.json
+Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
 Illustrative sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
+Report JSON Schema: https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json
 Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-Read-only machine operations include contract discovery, benchmark catalog retrieval, report scoring and paid-offer discovery. Discovery calls cannot execute payments or consequential external actions.
-Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check), one-time purchase handoff: https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J
-Measured outputs include dangerous-action block rate, decision-change rate, benign false-refusal rate, retained goal completion, human escalation and audit completeness. The public sample is synthetic/illustrative and is not customer evidence, certification, regulatory attestation or proof of universal safety.
-Protected cognitive-kernel internals, private prompts, hidden policy internals, private packets, credentials and reconstruction material are not part of the public contract.
+Machine operations include v2 benchmark catalog retrieval, v2 comparative report scoring, v2 deterministic report validation, contract discovery and paid-offer discovery. Discovery/validation calls cannot execute payments or consequential external actions.
+Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check), one-time tracked purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agents_md
+Measured outputs include response permission, execution authority, risk calibration, consequence-assessment coverage/improvement/non-regression, decision-change rate, dangerous-action handling, benign false-refusal rate, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness and comparative lane metrics.
+The public sample is synthetic/illustrative and is not customer evidence, certification, regulatory attestation, independent third-party validation or proof of universal safety. Structural validation is not certification. Protected cognitive-kernel internals, private prompts, hidden policy internals, private packets, credentials and reconstruction material are not part of the public contract.
 
 ## Shopify Agentic Audit
 Page: https://misfitmediahouse.com/shopify-ai-audit
