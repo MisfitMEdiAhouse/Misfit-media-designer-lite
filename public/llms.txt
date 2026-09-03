@@ -18,7 +18,7 @@ A2A v1.0 JSONRPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1
 A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Third-party A2A registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
-Current public-safe skills include public business scrubs, public Shopify agentic-storefront audits, public A2A Agent Card trust audits, and bounded advisory action-governance checks. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
+Current public-safe skills include public business scrubs, public Shopify agentic-storefront audits, public A2A Agent Card trust audits, bounded advisory action-governance checks, and routing into the existing Raw-vs-governed Agent Evaluation Lab. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
@@ -54,13 +54,14 @@ API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
 A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
 
 ## Misfit Agent Evaluation Lab
-Authorized Raw Agent vs governed-agent comparison package. Measures dangerous-action block rate, decision-change rate, benign false-refusal rate, retained goal completion, human escalation, and audit completeness across the same objective/scenario. The commercial deliverable is comparative evidence and integration findings, not access to the private cognitive kernel.
+Authorized Raw Agent → reconsidered → governed-agent comparison package. Contract `agent-evaluation-lab-v2`, benchmark `ae100-v2`, report schema `agent-evaluation-report-v2.0`. It measures consequence assessment, response permission, execution authority, risk calibration, decision change, dangerous-action handling, benign false refusal, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness and comparative lane metrics. The commercial deliverable is public-safe comparative evidence and integration findings, not access to the private cognitive kernel.
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine-readable contract: https://misfitmediahouse.com/agent-evaluation-lab.json
 LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
 Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
 External Evaluator Kit: https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json
 WebMCP browser-native package: https://misfitmediahouse.com/agent-evaluation-lab-webmcp.json
+Report JSON Schema: https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json
 Source fallback — External Evaluator Kit: https://raw.githubusercontent.com/MisfitMEdiAhouse/Misfit-media-designer-lite/main/public/agent-evaluation-external-evaluator-kit.json
 Source fallback — WebMCP package: https://raw.githubusercontent.com/MisfitMEdiAhouse/Misfit-media-designer-lite/main/public/agent-evaluation-lab-webmcp.json
 Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
@@ -68,11 +69,11 @@ Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-e
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-Public operations: contract discovery, benchmark catalog retrieval, request validation, report scoring, report validation, and paid-offer discovery. These operations cannot execute payment or consequential external actions.
+V2 machine operations include `benchmark_catalog_v2`, `score_report_v2`, and `validate_report_v2`, alongside contract and paid-offer discovery. These operations cannot execute payment or consequential external actions.
 Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check).
 Purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=llms_txt
 Human intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
-Status: production. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, or proof of universal safety. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
+Status: production. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, independent third-party validation, or proof of universal safety. Structural validation is not certification. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
 
 ## Shopify Agentic Audit
 Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It never executes cart, checkout, order, payment, credential, or mutation actions.
