@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.1",
+  "schema_version": "2.0.2",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -20,8 +20,8 @@
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "machine_access": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-    "public_function_version": 14,
-    "surface_version": "1.12.0",
+    "public_function_version": 15,
+    "surface_version": "1.13.0",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "mcp_function_version": 12,
     "mcp_server_version": "1.10.0",
@@ -45,12 +45,13 @@
       "score_report",
       "score_report_v2",
       "validate_report",
+      "validate_report_v2",
       "offer",
       "integration_quickstart",
       "external_benchmark_bridge"
     ],
-    "validate_report_scope": "legacy_v1_only",
-    "v2_schema_validation": "client-side against agent-evaluation-report-v2.schema.json until a dedicated validate_report_v2 operation is published",
+    "validate_report_scope": "v1_and_v2",
+    "v2_schema_validation": "Dedicated validate_report_v2 operation is live for deterministic structural validation against agent-evaluation-report-v2.0. Structural validity is not certification or independent external validation.",
     "external_actions": false,
     "payment_execution": false
   },
