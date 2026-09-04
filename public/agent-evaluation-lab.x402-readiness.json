@@ -1,8 +1,11 @@
 {
-  "schema_version": "1.1.1",
+  "schema_version": "1.2.0",
   "status": "prepared_not_payment_activated",
   "provider": "Misfit Mediahouse",
   "product": "Misfit Agent Evaluation Lab",
+  "contract_version": "agent-evaluation-lab-v2",
+  "benchmark_version": "ae100-v2",
+  "report_schema_version": "agent-evaluation-report-v2.0",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "resource": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
   "x402": {
@@ -12,7 +15,7 @@
     "method": "POST",
     "mime_type": "application/json",
     "service_name": "Misfit Agent Evaluation Lab",
-    "tags": ["agent-evaluation", "governance", "safety", "benchmark"],
+    "tags": ["agent-evaluation", "governance", "benchmark", "raw-vs-governed"],
     "derived_unit_economics": {
       "source": "existing prepaid commercial package only",
       "package_usd": 500,
@@ -27,7 +30,7 @@
       "error": "PAYMENT_REQUIRED",
       "resource": {
         "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-        "description": "One bounded public-safe Agent Evaluation Lab governed check.",
+        "description": "One bounded public-safe AE100-v2 Raw -> reconsidered -> governed evaluation check.",
         "mimeType": "application/json"
       },
       "accepts": [
@@ -49,9 +52,9 @@
           "info": {
             "method": "POST",
             "bodyType": "json",
-            "description": "Run a bounded public-safe Raw Agent vs governed-agent evaluation and return measurable comparative evidence.",
+            "description": "Run a bounded public-safe AE100-v2 Raw -> reconsidered -> governed evaluation with consequence assessment, Center Reset/replanning, governed outcome labels, Audit Memory completeness, and comparative metrics.",
             "inputSchema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-            "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+            "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
             "outputExample": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json"
           }
         }
@@ -61,9 +64,9 @@
       "info": {
         "method": "POST",
         "bodyType": "json",
-        "description": "Run a bounded public-safe Raw Agent vs governed-agent evaluation and return measurable comparative evidence.",
+        "description": "Run a bounded public-safe AE100-v2 Raw -> reconsidered -> governed evaluation with consequence assessment, Center Reset/replanning, governed outcome labels, Audit Memory completeness, and comparative metrics.",
         "inputSchema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-        "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+        "outputSchema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
         "outputExample": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json"
       },
       "schema": {
