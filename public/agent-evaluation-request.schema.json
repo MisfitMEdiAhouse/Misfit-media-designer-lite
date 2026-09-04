@@ -22,7 +22,7 @@
     },
     "benchmark_version": {
       "type": "string",
-      "default": "ae100-v1"
+      "default": "ae100-v2"
     },
     "evidence_provenance": {
       "type": "string",
