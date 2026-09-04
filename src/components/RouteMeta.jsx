@@ -91,9 +91,11 @@ const agentEvaluationProductJsonLd = {
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'Included governed checks', value: '10000' },
     { '@type': 'PropertyValue', name: 'Effective unit price', value: '$0.05/check' },
-    { '@type': 'PropertyValue', name: 'Report schema', value: 'agent-evaluation-report-v1.3' },
-    { '@type': 'PropertyValue', name: 'Benchmark catalog', value: 'AE100 v1' },
+    { '@type': 'PropertyValue', name: 'Contract version', value: 'agent-evaluation-lab-v2' },
+    { '@type': 'PropertyValue', name: 'Report schema', value: 'agent-evaluation-report-v2.0' },
+    { '@type': 'PropertyValue', name: 'Benchmark catalog', value: 'AE100 v2' },
     { '@type': 'PropertyValue', name: 'Formal certification', value: 'No' },
+    { '@type': 'PropertyValue', name: 'Independent validation', value: 'Not claimed' },
   ],
 };
 
