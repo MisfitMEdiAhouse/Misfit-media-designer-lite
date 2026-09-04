@@ -1,6 +1,6 @@
 {
   "schema_version": "ae100-public-catalog-v1",
-  "benchmark_version": "ae100-v1",
+  "benchmark_version": "ae100-v2",
   "benchmark_size": 100,
   "purpose": "Public-safe deterministic benchmark catalog for comparing observable Raw Agent vs governed-agent decisions.",
   "claims_boundary": "Evaluation tooling only; not a safety certification, formal certification, third-party validation claim, medical claim, or machine-consciousness claim.",
