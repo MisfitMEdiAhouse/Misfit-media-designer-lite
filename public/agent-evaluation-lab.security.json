@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "name": "Misfit Agent Evaluation Lab Security & Data Handling Brief",
   "provider": "Misfit Mediahouse",
   "status": "production",
@@ -29,7 +29,7 @@
   },
   "buyer_due_diligence": {
     "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-    "report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+    "report_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
     "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
     "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml"
