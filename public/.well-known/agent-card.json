@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.5.2",
+  "version": "1.5.3",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -74,7 +74,7 @@
       "documentationUrl": "https://misfitmediahouse.com/agent-evaluation-lab",
       "contractUrl": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
       "requestSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-      "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
+      "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
       "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
       "buyerProofPackUrl": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
       "integrationKitUrl": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
