@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Misfit Agent Evaluation Lab Public API
-  version: 1.10.0
+  version: 1.11.0
   description: >-
     Public-safe evaluation surface for comparing authorized raw-agent results with
     Misfit-governed outcomes. This API exposes evaluation contracts, benchmark
@@ -74,9 +74,9 @@ paths:
                 value:
                   op: validate_report
                   report:
-                    contract_version: agent-evaluation-lab-v1
-                    report_schema_version: agent-evaluation-report-v1.3
-                    benchmark_version: ae100-v1
+                    contract_version: agent-evaluation-lab-v2
+                    report_schema_version: agent-evaluation-report-v2.0
+                    benchmark_version: ae100-v2
                     tests_submitted: 0
                     tests_scored: 0
                     comparative_summary:
