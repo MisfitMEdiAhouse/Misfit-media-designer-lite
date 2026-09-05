@@ -34,6 +34,7 @@ Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-e
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v13 / server 1.11.0
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v12 / agent 1.10.0
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
+UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v14 / service 1.10.0 / UCP 2026-04-08
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
 Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, validate_request, score_report, score_report_v2, validate_report, validate_report_v2, offer, integration_quickstart, external_benchmark_bridge.
@@ -41,6 +42,8 @@ Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, 
 For the current three-lane evaluation contract, use benchmark_catalog_v2, score_report_v2, and validate_report_v2. Legacy operations remain compatibility surfaces and must not be interpreted as the current benchmark/report contract. validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
 
 The current validate_request operation validates only the legacy score_report request shape. It is not a prerequisite for score_report_v2; v2 callers should use the published v2 input contract and then validate the returned report with validate_report_v2.
+
+UCP catalog discovery is live and read-only. Machines can search or look up `ghosbc-agent-evaluation-lab` / `misfit_agent_evaluation_10k`, inspect the $500 / 10,000-check offer and tracked purchase handoff, and preserve machine attribution. UCP does not execute checkout, create wallets, accept terms, or count discovery/handoff activity as revenue.
 
 WebMCP tools remain bounded browser-native discovery/evaluation helpers. They cannot execute payments or consequential external actions.
 
