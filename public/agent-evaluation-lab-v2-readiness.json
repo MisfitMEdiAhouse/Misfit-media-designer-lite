@@ -9,8 +9,8 @@
     "contract_version": "agent-evaluation-lab-v2",
     "report_schema_version": "agent-evaluation-report-v2.0",
     "benchmark_version": "ae100-v2",
-    "surface_version": "1.12.0",
-    "public_function_version": 14
+    "surface_version": "1.13.0",
+    "public_function_version": 15
   },
   "v2_runtime": {
     "contract_version": "agent-evaluation-lab-v2",
@@ -54,8 +54,8 @@
     "a2a_function_version": 11,
     "a2a_agent_version": "1.9.0",
     "ucp_discovery_live": true,
-    "ucp_function_version": 13,
-    "ucp_service_version": "1.9.3",
+    "ucp_function_version": 14,
+    "ucp_service_version": "1.10.0",
     "machine_native_wrappers_complete": true,
     "next_safe_packaging_step": "Collect a real external evaluation run and preserve evaluator/run provenance. Do not claim independent validation until qualifying evidence is received."
   },
