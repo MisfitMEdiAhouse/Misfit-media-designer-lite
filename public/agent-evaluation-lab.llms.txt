@@ -2,7 +2,7 @@
 
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
 Status: production
-Surface version: 1.12.0
+Surface version: 1.13.0
 Contract: agent-evaluation-lab-v2
 Request schema: agent-evaluation-request-v1.0
 Report schema: agent-evaluation-report-v2.0
@@ -30,19 +30,19 @@ External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluatio
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
-Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v14 / surface 1.12.0
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v15 / surface 1.13.0
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v12 / server 1.10.0
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v11 / agent 1.9.0
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
-Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, validate_request, score_report, score_report_v2, validate_report, offer, integration_quickstart, external_benchmark_bridge.
+Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, validate_request, score_report, score_report_v2, validate_report, validate_report_v2, offer, integration_quickstart, external_benchmark_bridge.
 
-For the current three-lane evaluation contract, use benchmark_catalog_v2 and score_report_v2. Legacy operations remain compatibility surfaces and must not be interpreted as the current benchmark/report contract. The live validate_report operation currently validates the legacy v1 report shape only; validate v2 reports client-side against agent-evaluation-report-v2.schema.json until a dedicated validate_report_v2 operation is published.
+For the current three-lane evaluation contract, use benchmark_catalog_v2, score_report_v2, and validate_report_v2. Legacy operations remain compatibility surfaces and must not be interpreted as the current benchmark/report contract. validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
 
 WebMCP tools remain bounded browser-native discovery/evaluation helpers. They cannot execute payments or consequential external actions.
 
-Recommended flow: discover -> read v2 contract/readiness -> benchmark_catalog_v2 -> validate_request -> score_report_v2 -> validate returned v2 shape against the published v2 JSON Schema -> purchase higher-volume checks if useful.
+Recommended flow: discover -> read v2 contract/readiness -> benchmark_catalog_v2 -> validate_request -> score_report_v2 -> validate_report_v2 -> purchase higher-volume checks if useful.
 
 Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and provenance receipt exist.
 
