@@ -1,8 +1,8 @@
 {
-  "schema_version": "misfit-agent-evaluation-v2-readiness-v2",
+  "schema_version": "misfit-agent-evaluation-v2-readiness-v3",
   "product": "GHOSBC Agent Evaluation Lab",
-  "status": "public_api_mcp_a2a_live",
-  "purpose": "Machine-readable public-safe description of the live AE100 v2 Raw Agent versus governed-agent evaluation product without exposing protected GHOSBC implementation internals.",
+  "status": "degraded_scoring_parity_hold",
+  "purpose": "Machine-readable public-safe runtime truth for the AE100 v2 Raw Agent versus governed-agent evaluation product without exposing protected GHOSBC implementation internals.",
   "canonical_product": "https://misfitmediahouse.com/agent-evaluation-lab",
   "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
   "current_public_contract": {
@@ -12,13 +12,34 @@
     "surface_version": "1.13.0",
     "public_function_version": 15
   },
-  "v2_runtime": {
+  "runtime_truth": {
+    "scoring_live": false,
+    "scoring_status": "PRIVATE_KERNEL_PARITY_HOLD",
+    "canonical_backend_function": "ghosbc-agent-evaluation-lab",
+    "canonical_backend_function_version": 6,
+    "reason": "The canonical evaluation backend is currently a migration-parity shell. Scoring/catalog execution must remain unavailable until bounded public-safe source parity is verified.",
+    "safe_available_capabilities": [
+      "service_discovery",
+      "commercial_offer_discovery",
+      "integration_quickstart",
+      "external_benchmark_interoperability_metadata",
+      "deterministic_validate_report_v2"
+    ],
+    "temporarily_unavailable_capabilities": [
+      "benchmark_catalog",
+      "score_report",
+      "benchmark_catalog_v2",
+      "score_report_v2"
+    ],
+    "repair_boundary": "Restore only from verified public-safe scoring source/parity evidence. Do not reconstruct protected GHOSBC internals from samples, reports, prompts, or private kernel material."
+  },
+  "v2_contract": {
     "contract_version": "agent-evaluation-lab-v2",
     "report_schema_version": "agent-evaluation-report-v2.0",
     "benchmark_version": "ae100-v2",
     "benchmark_size": 100,
     "lanes": ["raw", "reconsidered", "governed"],
-    "measures": [
+    "intended_measures": [
       "response_permission_match_rate",
       "execution_match_rate",
       "risk_calibration_exact_rate",
@@ -46,18 +67,19 @@
     }
   },
   "interop": {
-    "public_wrapper_v2_exposed": true,
-    "mcp_v2_tool_exposed": true,
+    "public_wrapper_reachable": true,
+    "mcp_surface_reachable": true,
     "mcp_function_version": 13,
     "mcp_server_version": "1.11.0",
-    "a2a_v2_skill_exposed": true,
+    "a2a_surface_reachable": true,
     "a2a_function_version": 12,
     "a2a_agent_version": "1.10.0",
     "ucp_discovery_live": true,
     "ucp_function_version": 14,
     "ucp_service_version": "1.10.0",
     "machine_native_wrappers_complete": true,
-    "next_safe_packaging_step": "Collect a real external evaluation run and preserve evaluator/run provenance. Do not claim independent validation until qualifying evidence is received."
+    "warning": "Wrapper reachability does not imply scoring availability while canonical backend parity hold is active.",
+    "next_safe_step": "Restore bounded deterministic AE100 scoring only from verified public-safe source/parity evidence, then smoke-test API -> MCP -> A2A before re-advertising scoring as live."
   },
   "evidence_provenance": {
     "default_classification": "caller_supplied_unverified",
@@ -74,6 +96,7 @@
     "price_usd": 500,
     "included_checks": 10000,
     "effective_unit_price_usd": 0.05,
-    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agent_evaluation_v2_readiness"
+    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agent_evaluation_v2_readiness",
+    "availability_note": "Commercial offer discovery remains published, but scoring fulfillment must not be represented as live until the parity hold is resolved."
   }
 }
