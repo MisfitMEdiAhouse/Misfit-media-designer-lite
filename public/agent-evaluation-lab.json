@@ -1,8 +1,8 @@
 {
-  "schema_version": "2.0.2",
+  "schema_version": "2.0.3",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
-  "status": "production",
+  "status": "degraded_scoring_parity_hold",
   "contract_version": "agent-evaluation-lab-v2",
   "benchmark_version": "ae100-v2",
   "report_schema_version": "agent-evaluation-report-v2.0",
@@ -19,9 +19,10 @@
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "machine_access": {
+    "state": "degraded_scoring_parity_hold",
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-    "public_function_version": 15,
-    "surface_version": "1.13.0",
+    "public_function_version": 16,
+    "surface_version": "1.14.0",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "mcp_function_version": 13,
     "mcp_server_version": "1.11.0",
@@ -37,21 +38,25 @@
     "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
-    "read_only_operations": [
+    "available_operations": [
       "contract",
-      "benchmark_catalog",
-      "benchmark_catalog_v2",
       "validate_request",
-      "score_report",
-      "score_report_v2",
       "validate_report",
       "validate_report_v2",
       "offer",
       "integration_quickstart",
       "external_benchmark_bridge"
     ],
+    "temporarily_unavailable_operations": [
+      "benchmark_catalog",
+      "benchmark_catalog_v2",
+      "score_report",
+      "score_report_v2"
+    ],
+    "hold_code": "SCORING_PARITY_HOLD",
+    "hold_note": "Canonical scoring remains unavailable while bounded public-safe scorer parity is being restored. API scoring calls fail closed; MCP/A2A scoring advertisements must not be interpreted as live scoring capability until their discovery contracts are reconciled.",
     "validate_report_scope": "v1_and_v2",
-    "v2_schema_validation": "Dedicated validate_report_v2 operation is live for deterministic structural validation against agent-evaluation-report-v2.0. Structural validity is not certification or independent external validation.",
+    "v2_schema_validation": "Dedicated validate_report_v2 remains live for deterministic structural validation against agent-evaluation-report-v2.0. Structural validity is not certification or independent external validation.",
     "external_actions": false,
     "payment_execution": false
   },
