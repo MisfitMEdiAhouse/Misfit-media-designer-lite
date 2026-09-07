@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "product": "GHOSBC Agent Evaluation Lab",
+  "positioning": "Machine-readable evaluation product for comparing Raw Agent, reconsidered, and GHOSBC-governed decision behavior without exposing private governance internals.",
+  "challenge_fit": {
+    "channel": "Shared OS Hackathon",
+    "deadline": "2026-09-11",
+    "theme_fit": "An A2A product that can pitch, defend, and sell itself to other agents.",
+    "submission_ready": false,
+    "human_gate_required": true,
+    "human_gate": "Owner must register/accept rules and separately authorize final third-party submission."
+  },
+  "measurable_outputs": [
+    "raw_vs_governed_comparison",
+    "consequence_assessment",
+    "center_reset_replanning",
+    "castle_gate_outcome_label",
+    "audit_memory_completeness",
+    "comparative_metrics"
+  ],
+  "public_safe_surfaces": {
+    "product": "https://misfitmediahouse.com/agent-evaluation-lab",
+    "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+    "readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
+    "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
+    "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public"
+  },
+  "commercial_offer": {
+    "offer_key": "misfit_agent_evaluation_10k",
+    "price_usd": 500,
+    "included_checks": 10000,
+    "purchase_available": false,
+    "reason": "Canonical scoring backend is temporarily fail-closed under scoring parity hold. Offer remains discoverable but cannot be purchased until verified scoring parity is restored."
+  },
+  "runtime_state": {
+    "status": "degraded_scoring_parity_hold",
+    "scoring_live": false,
+    "safe_operations": [
+      "contract",
+      "integration_quickstart",
+      "validate_report_v2",
+      "external_benchmark_bridge",
+      "offer"
+    ],
+    "temporarily_unavailable": [
+      "benchmark_catalog",
+      "benchmark_catalog_v2",
+      "score_report",
+      "score_report_v2"
+    ]
+  },
+  "claim_boundaries": {
+    "formal_certification": false,
+    "safety_certification": false,
+    "independent_validation": false,
+    "machine_consciousness": false,
+    "private_ghosbc_kernel_exposed": false
+  },
+  "machine_pitch": {
+    "problem": "Agent builders need measurable evidence of how governance changes decisions, not vague safety claims.",
+    "solution": "Compare Raw Agent behavior against reconsidered and governed outcomes, preserve consequence reasoning and replanning evidence, produce deterministic public-safe reports, and retain Audit Memory completeness metrics.",
+    "defense": "The product explicitly separates structural validation from external validation, keeps private GHOSBC internals sealed, and fail-closes scoring while parity is unverified.",
+    "buyer_value": "Machine-readable evidence for integration testing, procurement, regression analysis, and governed-agent evaluation with bounded public contracts."
+  }
+}
