@@ -1,8 +1,9 @@
 # Misfit Agent Evaluation Lab — machine integration brief
 
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
-Status: production
-Surface version: 1.13.0
+Status: degraded_scoring_parity_hold
+Scoring live: false
+Surface version: 1.14.0
 Contract: agent-evaluation-lab-v2
 Request schema: agent-evaluation-request-v1.0
 Report schema: agent-evaluation-report-v2.0
@@ -30,24 +31,23 @@ External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluatio
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
-Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v15 / surface 1.13.0
-MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v13 / server 1.11.0
-A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v12 / agent 1.10.0
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v16 / surface 1.14.0
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v14
+A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v14
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v14 / service 1.10.0 / UCP 2026-04-08
+UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v15 / UCP 2026-04-08
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
-Supported public operations: contract, benchmark_catalog, benchmark_catalog_v2, validate_request, score_report, score_report_v2, validate_report, validate_report_v2, offer, integration_quickstart, external_benchmark_bridge.
+Currently available public operations: contract, validate_report, validate_report_v2, offer, integration_quickstart, external_benchmark_bridge.
+Temporarily unavailable while scoring parity is held: benchmark_catalog, benchmark_catalog_v2, score_report, score_report_v2. These operations must not be treated as production-live until the canonical readiness contract restores them.
 
-For the current three-lane evaluation contract, use benchmark_catalog_v2, score_report_v2, and validate_report_v2. Legacy operations remain compatibility surfaces and must not be interpreted as the current benchmark/report contract. validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
+validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
 
-The current validate_request operation validates only the legacy score_report request shape. It is not a prerequisite for score_report_v2; v2 callers should use the published v2 input contract and then validate the returned report with validate_report_v2.
-
-UCP catalog discovery is live and read-only. Machines can search or look up `ghosbc-agent-evaluation-lab` / `misfit_agent_evaluation_10k`, inspect the $500 / 10,000-check offer and tracked purchase handoff, and preserve machine attribution. UCP does not execute checkout, create wallets, accept terms, or count discovery/handoff activity as revenue.
+UCP catalog discovery is live and read-only. Machines may inspect the Evaluation Lab product and its commercial terms, but purchase availability is false while scoring parity is held. UCP does not execute checkout, create wallets, accept terms, or count discovery/handoff activity as revenue.
 
 WebMCP tools remain bounded browser-native discovery/evaluation helpers. They cannot execute payments or consequential external actions.
 
-Recommended v2 flow: discover -> read v2 contract/readiness -> benchmark_catalog_v2 -> score_report_v2 -> validate_report_v2 -> purchase higher-volume checks if useful.
+Recommended current flow: discover -> read v2 contract/readiness -> inspect integration/evidence contracts -> validate compatible reports with validate_report_v2. Do not route paid or autonomous scoring work until scoring_live is restored by the canonical readiness state.
 
 Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and provenance receipt exist.
 
@@ -56,8 +56,8 @@ Offer key: misfit_agent_evaluation_10k
 Package: 10,000 governed policy checks
 Price: $500 USD
 Effective unit price: $0.05/check
-Purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=llms_context
-The handoff records a non-revenue checkout-intent event before redirecting to the existing Stripe Checkout. A handoff open is not counted as a sale or settlement.
+Purchase availability: false while scoring parity hold is active.
+The commercial offer remains discoverable for buyer evaluation, but checkout should not be presented as available until scoring_live is restored. Discovery or handoff activity is not counted as a sale or settlement.
 
 ## Evidence and claims boundary
 Caller-supplied evidence defaults to caller_supplied_unverified. AgentHarm, Agent-SafetyBench, and AgentHazard are interoperability profiles only until an actual provenance-preserving external run exists. No external benchmark score is claimed by default.
