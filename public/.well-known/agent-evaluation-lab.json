@@ -1,82 +1,72 @@
 {
-  "schema_version": "2.0.2",
+  "schema_version": "2.0.3",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
-  "status": "production",
+  "status": "degraded_scoring_parity_hold",
+  "scoring_live": false,
   "contract_version": "agent-evaluation-lab-v2",
-  "surface_version": "1.13.0",
+  "surface_version": "1.14.0",
   "request_schema_version": "agent-evaluation-request-v1.0",
   "report_schema_version": "agent-evaluation-report-v2.0",
   "benchmark_version": "ae100-v2",
-  "description": "Public-safe Raw Agent vs reconsidered vs GHOSBC-governed evaluation with measurable consequence assessment, response permission, execution authority, risk calibration, replanning, governed decisions, Audit Memory and comparative metrics.",
+  "description": "Public-safe Raw Agent vs reconsidered vs GHOSBC-governed evaluation contract with measurable consequence assessment, response permission, execution authority, risk calibration, Center Reset/replanning, governed decision outcome labels, Audit Memory completeness and comparative metrics. Scoring execution is temporarily unavailable while canonical parity is held.",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "v2_readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
-  "postman_collection": "https://misfitmediahouse.com/agent-evaluation-lab.postman_collection.json",
   "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
   "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
   "llms_context": "https://misfitmediahouse.com/agent-evaluation-lab.llms.txt",
   "security_brief": "https://misfitmediahouse.com/agent-evaluation-lab.security.json",
   "request_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
-  "legacy_v1_report_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
   "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
   "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
   "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
-  "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
   "x402_readiness": "https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json",
   "machine_interfaces": {
     "api": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-      "function_version": 15,
-      "surface_version": "1.13.0",
+      "function_version": 16,
+      "surface_version": "1.14.0",
+      "scoring_live": false,
       "validate_report_scope": "v1_and_v2",
       "v2_validate_operation": "validate_report_v2"
     },
     "mcp": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-      "function_version": 12,
-      "server_version": "1.10.0"
+      "function_version": 14,
+      "scoring_live": false
     },
     "a2a": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
       "agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-      "function_version": 11,
-      "agent_version": "1.9.0"
+      "function_version": 14,
+      "scoring_live": false
     },
     "ucp": {
-      "function_version": 14,
-      "service_version": "1.10.0"
+      "function_version": 15,
+      "purchase_available": false
     },
     "webmcp": {
       "route": "https://misfitmediahouse.com/agent-evaluation-lab",
-      "mode": "browser_native_read_only",
-      "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
-      "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
-      "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json"
+      "mode": "browser_native_read_only"
     }
   },
-  "operations": [
+  "available_operations": [
     "contract",
-    "benchmark_catalog",
-    "benchmark_catalog_v2",
-    "validate_request",
-    "score_report",
-    "score_report_v2",
     "validate_report",
     "validate_report_v2",
     "offer",
     "integration_quickstart",
     "external_benchmark_bridge"
   ],
-  "recommended_v2_flow": [
-    "contract",
+  "temporarily_unavailable_operations": [
+    "benchmark_catalog",
     "benchmark_catalog_v2",
-    "validate_request",
-    "score_report_v2",
-    "validate_report_v2"
+    "score_report",
+    "score_report_v2"
   ],
   "validation_boundary": "validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0. Schema validity is not formal certification, safety certification, or independent external validation.",
   "evaluation_model": {
@@ -98,16 +88,13 @@
     "package": "10000 governed checks",
     "price_usd": 500,
     "effective_unit_price_usd": 0.05,
-    "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
-    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=well_known_discovery",
+    "purchase_available": false,
+    "reason": "SCORING_PARITY_HOLD",
     "payment_execution_in_discovery": false
   },
   "evidence_boundary": {
     "default_provenance": "caller_supplied_unverified",
     "external_benchmark_compatibility": ["AgentHarm", "Agent-SafetyBench", "AgentHazard"],
-    "external_benchmark_evidence_receipt_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
-    "external_evaluator_handoff": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
-    "external_benchmark_run_manifest": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-run-manifest.json",
     "external_benchmark_score_claimed": false,
     "independent_validation_claimed": false,
     "schema_validity_is_external_validation": false
