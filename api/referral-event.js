@@ -10,6 +10,23 @@ function supabaseConfig() {
   return { url, serviceKey };
 }
 
+async function evaluationPurchaseState() {
+  const { url, serviceKey } = supabaseConfig();
+  if (!serviceKey) return { available: false, reason: 'canonical_state_unavailable' };
+  const response = await fetch(`${url}/rest/v1/misfit_agent_registry?slug=eq.ghosbc-agent-evaluation-lab&canonical=eq.true&select=capabilities&limit=1`, {
+    headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+    cache: 'no-store',
+  });
+  if (!response.ok) return { available: false, reason: `canonical_state_${response.status}` };
+  const rows = await response.json();
+  const capabilities = Array.isArray(rows?.[0]?.capabilities) ? rows[0].capabilities : [];
+  const state = capabilities.find((item) => item && typeof item === 'object' && !Array.isArray(item) && ('scoring_live' in item || 'purchase_available' in item)) || {};
+  return {
+    available: state.scoring_live === true && state.purchase_available === true,
+    reason: String(state.deployment_state || (state.scoring_live === true ? 'purchase_not_available' : 'SCORING_PARITY_HOLD')),
+  };
+}
+
 async function persistReferral(event) {
   const { url, serviceKey } = supabaseConfig();
   if (!serviceKey) return { persisted: false, reason: 'service_key_unavailable' };
@@ -99,6 +116,20 @@ export default async function handler(req, res) {
   if (req.method === 'GET' && req.query?.machine_offer) {
     if (String(req.query.machine_offer) !== EVALUATION_OFFER_KEY) {
       return res.status(404).json({ ok: false, error: 'Unknown machine offer' });
+    }
+
+    const purchaseState = await evaluationPurchaseState();
+    if (!purchaseState.available) {
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(409).json({
+        ok: false,
+        offer_key: EVALUATION_OFFER_KEY,
+        purchase_available: false,
+        error: 'Agent Evaluation Lab checkout is temporarily unavailable.',
+        reason: purchaseState.reason,
+        scoring_live: false,
+        payment_executed: false,
+      });
     }
 
     try {
