@@ -1,32 +1,52 @@
 {
-  "schema_version": "1.0.2",
+  "schema_version": "1.1.0",
   "name": "Misfit Agent Evaluation Lab WebMCP Extension",
   "provider": "Misfit Mediahouse",
-  "status": "production",
+  "status": "degraded_scoring_parity_hold",
+  "scoring_live": false,
+  "purchase_available": false,
+  "availability_reason": "SCORING_PARITY_HOLD",
   "product": "Misfit Agent Evaluation Lab",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
-  "purpose": "Expose bounded browser-native Agent Evaluation Lab tools to compatible WebMCP clients without exposing the private GHOSBC governance kernel.",
+  "purpose": "Expose bounded browser-native Agent Evaluation Lab discovery and verification tools to compatible WebMCP clients without exposing the private GHOSBC governance kernel or advertising unavailable scoring.",
   "webmcp_tools": [
     {
       "name": "misfit_agent_evaluation_contract",
       "mode": "read_only",
+      "available": true,
       "purpose": "Discover the public evaluation contract."
     },
     {
-      "name": "misfit_agent_evaluation_benchmark_catalog",
+      "name": "misfit_agent_evaluation_integration_quickstart",
       "mode": "read_only",
-      "purpose": "Discover the public AE100 benchmark catalog."
+      "available": true,
+      "purpose": "Discover the bounded integration sequence and public-safe machine surfaces."
     },
     {
-      "name": "misfit_agent_evaluation_score_report",
-      "mode": "bounded_compute",
-      "purpose": "Score caller-supplied Raw Agent vs governed-agent rows, capped at 200 rows."
+      "name": "misfit_agent_evaluation_validate_report_v2",
+      "mode": "deterministic_validation",
+      "available": true,
+      "purpose": "Validate a caller-supplied v2 report shape. Structural validation is not certification or independent validation."
+    },
+    {
+      "name": "misfit_agent_evaluation_external_benchmark_bridge",
+      "mode": "read_only",
+      "available": true,
+      "purpose": "Inspect the public-safe bridge contract for externally run benchmark evidence."
     },
     {
       "name": "misfit_agent_evaluation_offer",
       "mode": "read_only",
-      "purpose": "Inspect the existing commercial offer without executing payment."
+      "available": true,
+      "purpose": "Inspect the existing commercial offer and current availability without executing payment."
     }
+  ],
+  "temporarily_unavailable_tools": [
+    "misfit_agent_evaluation_benchmark_catalog",
+    "misfit_agent_evaluation_benchmark_catalog_v2",
+    "misfit_agent_evaluation_validate_request",
+    "misfit_agent_evaluation_score_report",
+    "misfit_agent_evaluation_score_report_v2"
   ],
   "evaluation_dimensions": [
     "consequence_assessment",
@@ -44,7 +64,9 @@
     "price_usd": 500,
     "included_checks": 10000,
     "effective_unit_price_usd": 0.05,
-    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=webmcp_extension",
+    "purchase_available": false,
+    "purchase_handoff": null,
+    "availability_reason": "SCORING_PARITY_HOLD",
     "payment_execution_by_webmcp": false
   },
   "proof": {
@@ -58,12 +80,6 @@
     "canonical_external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
     "legacy_external_evaluator_alias": "agent-evaluation-lab-external-evaluator-kit.json",
     "legacy_alias_is_canonical": false
-  },
-  "challenge_packaging": {
-    "challenge": "The WebMCP Challenge",
-    "submission_deadline": "2026-09-03T13:00:00-07:00",
-    "submission_status": "not_submitted",
-    "human_gate": "Devpost registration/rules acceptance, demo-video publication, and final submission require owner authorization."
   },
   "claims_boundary": {
     "formal_certification": false,
