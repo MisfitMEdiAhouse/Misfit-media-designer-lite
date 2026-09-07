@@ -1,11 +1,11 @@
 {
-  "schema_version": "2.0.3",
+  "schema_version": "2.0.4",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "degraded_scoring_parity_hold",
   "scoring_live": false,
   "contract_version": "agent-evaluation-lab-v2",
-  "surface_version": "1.14.0",
+  "surface_version": "1.15.1",
   "request_schema_version": "agent-evaluation-request-v1.0",
   "report_schema_version": "agent-evaluation-report-v2.0",
   "benchmark_version": "ae100-v2",
@@ -28,10 +28,10 @@
   "machine_interfaces": {
     "api": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-      "function_version": 16,
-      "surface_version": "1.14.0",
+      "function_version": 18,
+      "surface_version": "1.15.1",
       "scoring_live": false,
-      "validate_report_scope": "v1_and_v2",
+      "validate_report_scope": "v2",
       "v2_validate_operation": "validate_report_v2"
     },
     "mcp": {
@@ -56,11 +56,10 @@
   },
   "available_operations": [
     "contract",
-    "validate_report",
-    "validate_report_v2",
-    "offer",
     "integration_quickstart",
-    "external_benchmark_bridge"
+    "validate_report_v2",
+    "external_benchmark_bridge",
+    "offer"
   ],
   "temporarily_unavailable_operations": [
     "benchmark_catalog",
