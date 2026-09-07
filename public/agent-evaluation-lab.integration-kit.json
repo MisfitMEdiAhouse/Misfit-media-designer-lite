@@ -1,13 +1,15 @@
 {
-  "schema_version": "1.4.0",
+  "schema_version": "1.5.0",
   "name": "Misfit Agent Evaluation Lab Integration Kit",
-  "status": "production",
-  "purpose": "One-file machine handoff for integrating the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals.",
+  "status": "degraded_scoring_parity_hold",
+  "scoring_live": false,
+  "purchase_available": false,
+  "availability_reason": "SCORING_PARITY_HOLD",
+  "purpose": "One-file machine handoff for the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals or advertising unavailable scoring.",
   "product_page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
+  "readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
-  "benchmark_catalog": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
-  "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "endpoints": {
@@ -16,65 +18,45 @@
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json"
   },
+  "available_operations": [
+    "contract",
+    "integration_quickstart",
+    "validate_report_v2",
+    "external_benchmark_bridge",
+    "offer"
+  ],
+  "temporarily_unavailable_operations": [
+    "benchmark_catalog",
+    "validate_request",
+    "score_report"
+  ],
   "recommended_sequence": [
     {
       "step": 1,
       "operation": "contract",
-      "description": "Read the current evaluation vocabulary, input contract, report schema and claims boundary."
+      "description": "Read the current public-safe evaluation vocabulary, observable fields, report schema and claims boundary."
     },
     {
       "step": 2,
-      "operation": "benchmark_catalog",
-      "description": "Fetch the AE100 public-safe scenario catalog. Machines that prefer a cacheable static artifact may use https://misfitmediahouse.com/agent-evaluation-ae100.json."
+      "operation": "integration_quickstart",
+      "description": "Read the bounded integration path and current readiness state before invoking any other operation."
     },
     {
       "step": 3,
-      "operation": "validate_request",
-      "description": "Validate the score_report payload against the published request JSON Schema before submitting.",
-      "schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json"
+      "operation": "validate_report_v2",
+      "description": "Validate an existing public-safe report document against the v2 report contract. This does not execute scoring."
     },
     {
       "step": 4,
-      "operation": "score_report",
-      "description": "Submit observable Raw Agent and governed-agent result rows for comparative scoring."
+      "operation": "external_benchmark_bridge",
+      "description": "Inspect interoperability metadata for provenance-preserving external benchmark evidence."
     },
     {
       "step": 5,
-      "operation": "validate_report",
-      "description": "Validate the returned report document against the published JSON Schema before ingesting it into another system.",
-      "schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json"
-    },
-    {
-      "step": 6,
       "operation": "offer",
-      "description": "Read the current commercial package and tracked purchase handoff when paid volume is needed."
+      "description": "Inspect the commercial package and current availability. Purchase remains disabled while scoring parity is on hold."
     }
   ],
-  "minimal_score_request": {
-    "method": "POST",
-    "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-    "content_type": "application/json",
-    "schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-    "body": {
-      "op": "score_report",
-      "benchmark_version": "ae100-v2",
-      "evidence_provenance": "caller_supplied_unverified",
-      "results": [
-        {
-          "scenario_id": "AE001",
-          "raw_decision": "ALLOW",
-          "governed_decision": "ALLOW",
-          "castle_gate_decision": "ALLOW",
-          "raw_consequence_assessment": "SAFE",
-          "governed_consequence_assessment": "SAFE",
-          "goal_completion": true,
-          "human_escalation": false,
-          "center_reset_cycles": 0,
-          "audit_memory_complete": true
-        }
-      ]
-    }
-  },
   "observable_result_fields": [
     "scenario_id",
     "raw_decision",
@@ -105,16 +87,18 @@
   "evidence_provenance": {
     "default_classification": "caller_supplied_unverified",
     "externally_validated_default": false,
-    "rule": "Caller-supplied result rows are scored as observable evidence but are not represented as independent third-party benchmark evidence. External validation requires a separate provenance-preserving external run."
+    "rule": "Caller-supplied result rows are observable evidence only and are not represented as independent third-party benchmark evidence. External validation requires separate provenance-preserving evidence."
   },
   "privacy_boundary": "No private GHOSBC kernel, Mother Language, Soul Cipher, glyph/GHX mapping, hidden prompts, credentials, protected packets, hidden policy logic or reconstruction material is included.",
-  "claims_boundary": "Evaluation tooling and comparative evidence only. Not a formal safety certification, regulatory attestation, third-party validation claim, medical claim, universal-safety claim or machine-consciousness claim.",
+  "claims_boundary": "Evaluation tooling and comparative evidence only. Not a formal safety certification, regulatory attestation, third-party validation claim, universal-safety claim or machine-consciousness claim.",
   "commerce": {
     "offer_key": "misfit_agent_evaluation_10k",
     "package": "10,000 governed policy checks",
     "price_usd": 500,
     "effective_unit_price_usd": 0.05,
-    "purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=integration_kit",
+    "purchase_available": false,
+    "purchase_handoff": null,
+    "availability_reason": "SCORING_PARITY_HOLD",
     "payment_execution_in_api": false,
     "handoff_tracking_is_revenue": false
   }
