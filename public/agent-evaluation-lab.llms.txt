@@ -3,7 +3,7 @@
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
 Status: degraded_scoring_parity_hold
 Scoring live: false
-Surface version: 1.14.0
+Surface version: 1.15.1
 Contract: agent-evaluation-lab-v2
 Request schema: agent-evaluation-request-v1.0
 Report schema: agent-evaluation-report-v2.0
@@ -31,14 +31,14 @@ External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluatio
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
-Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v16 / surface 1.14.0
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v18 / surface 1.15.1
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v14
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v14
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
 UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v15 / UCP 2026-04-08
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
-Currently available public operations: contract, validate_report, validate_report_v2, offer, integration_quickstart, external_benchmark_bridge.
+Currently available public operations: contract, integration_quickstart, validate_report_v2, external_benchmark_bridge, offer.
 Temporarily unavailable while scoring parity is held: benchmark_catalog, benchmark_catalog_v2, score_report, score_report_v2. These operations must not be treated as production-live until the canonical readiness contract restores them.
 
 validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
@@ -57,7 +57,8 @@ Package: 10,000 governed policy checks
 Price: $500 USD
 Effective unit price: $0.05/check
 Purchase availability: false while scoring parity hold is active.
-The commercial offer remains discoverable for buyer evaluation, but checkout should not be presented as available until scoring_live is restored. Discovery or handoff activity is not counted as a sale or settlement.
+Purchase URL: unavailable while scoring parity hold is active.
+The commercial offer remains discoverable for buyer evaluation, but checkout must not be presented as available until scoring_live is restored. Discovery or handoff activity is not counted as a sale or settlement.
 
 ## Evidence and claims boundary
 Caller-supplied evidence defaults to caller_supplied_unverified. AgentHarm, Agent-SafetyBench, and AgentHazard are interoperability profiles only until an actual provenance-preserving external run exists. No external benchmark score is claimed by default.
