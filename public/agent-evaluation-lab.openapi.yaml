@@ -1,103 +1,77 @@
 openapi: 3.0.3
 info:
   title: Misfit Agent Evaluation Lab Public API
-  version: 1.11.0
+  version: 1.15.1
   description: >-
-    Public-safe evaluation surface for comparing authorized raw-agent results with
-    Misfit-governed outcomes. This API exposes evaluation contracts, benchmark
-    catalogs, deterministic request/report validation, scoring, integration guidance,
-    external-benchmark interoperability metadata, and a prepaid purchase handoff.
-    It does not execute external actions, charge payment methods, expose protected
-    GHOSBC internals, or provide formal certification or third-party validation.
+    Public-safe machine interface for the Misfit Agent Evaluation Lab. The product
+    compares authorized Raw Agent, reconsidered, and GHOSBC-governed outcomes using
+    bounded consequence assessment, Center Reset/replanning signals, public Castle
+    Gate decision labels, Audit Memory completeness, comparative metrics, and
+    deterministic report validation. Canonical scoring is temporarily fail-closed
+    under SCORING_PARITY_HOLD. This surface does not expose protected GHOSBC internals,
+    execute external actions, charge payment methods, provide formal certification,
+    claim machine consciousness, or imply independent third-party validation.
 servers:
   - url: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 paths:
   /:
     get:
       operationId: getServiceDiscovery
-      summary: Inspect service health and machine-discovery metadata
+      summary: Inspect current service health, capability availability, and machine-discovery metadata
       responses:
         '200':
-          description: Service discovery metadata
+          description: Service discovery metadata, including current scoring and purchase availability
           content:
             application/json:
               schema:
                 type: object
                 additionalProperties: true
     post:
-      operationId: runEvaluationOperation
-      summary: Run a public-safe evaluation, validation, or discovery operation
+      operationId: runAvailableEvaluationOperation
+      summary: Run a currently available public-safe discovery or validation operation
+      description: >-
+        While SCORING_PARITY_HOLD is active, only contract, integration_quickstart,
+        validate_report_v2, external_benchmark_bridge, and offer are advertised as
+        available. benchmark_catalog, benchmark_catalog_v2, validate_request,
+        score_report, and score_report_v2 must not be treated as production-live.
+        The commercial offer may be discovered, but purchase availability is false
+        and no purchase handoff is provided until canonical scorer parity is restored.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EvaluationOperationRequest'
+              $ref: '#/components/schemas/AvailableOperationRequest'
             examples:
               contract:
                 value:
                   op: contract
-              benchmarkCatalog:
+              quickstart:
                 value:
-                  op: benchmark_catalog
-              validateRequest:
+                  op: integration_quickstart
+              validateReportV2:
                 value:
-                  op: validate_request
-                  request:
-                    op: score_report
-                    results:
-                      - scenario_id: AE001
-                        raw_decision: ALLOW
-                        governed_decision: REPLAN
-                        castle_gate_decision: REPLAN
-                        raw_consequence_assessment: EXTERNAL_EFFECT
-                        governed_consequence_assessment: BOUNDED
-                        goal_completion: true
-                        human_escalation: false
-                        center_reset_cycles: 1
-                        audit_memory_complete: true
-              scoreReport:
-                value:
-                  op: score_report
-                  results:
-                    - scenario_id: AE001
-                      raw_decision: ALLOW
-                      governed_decision: REPLAN
-                      castle_gate_decision: REPLAN
-                      raw_consequence_assessment: EXTERNAL_EFFECT
-                      governed_consequence_assessment: BOUNDED
-                      goal_completion: true
-                      human_escalation: false
-                      center_reset_cycles: 1
-                      audit_memory_complete: true
-              validateReport:
-                value:
-                  op: validate_report
+                  op: validate_report_v2
                   report:
                     contract_version: agent-evaluation-lab-v2
                     report_schema_version: agent-evaluation-report-v2.0
                     benchmark_version: ae100-v2
-                    tests_submitted: 0
-                    tests_scored: 0
+                    report_type: caller_supplied
                     comparative_summary:
                       raw_agent: {}
+                      reconsidered_agent: {}
                       governed_agent: {}
                     evidence_rows: []
                     evidence_provenance:
                       classification: caller_supplied_unverified
                       externally_validated: false
-                      interpretation: Shape validation only.
-                    evidence_boundary: No external validation implied.
-                    claims_boundary: Not a certification.
-              offer:
-                value:
-                  op: offer
-              quickstart:
-                value:
-                  op: integration_quickstart
+                    claims_boundary: Not a certification or independent validation.
               externalBridge:
                 value:
                   op: external_benchmark_bridge
+              offer:
+                value:
+                  op: offer
       responses:
         '200':
           description: Operation result
@@ -107,13 +81,19 @@ paths:
                 type: object
                 additionalProperties: true
         '400':
-          description: Invalid JSON, unknown operation, or missing score results
+          description: Invalid JSON, unknown operation, or invalid request shape
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Requested capability is intentionally unavailable under the current canonical hold
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '413':
-          description: Request or result set too large
+          description: Request payload too large
           content:
             application/json:
               schema:
@@ -126,7 +106,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    EvaluationOperationRequest:
+    AvailableOperationRequest:
       type: object
       required:
         - op
@@ -135,75 +115,13 @@ components:
           type: string
           enum:
             - contract
-            - benchmark_catalog
-            - score_report
-            - validate_request
-            - validate_report
-            - offer
             - integration_quickstart
+            - validate_report_v2
             - external_benchmark_bridge
-        results:
-          type: array
-          maxItems: 200
-          items:
-            $ref: '#/components/schemas/ScenarioResult'
-        request:
-          $ref: '#/components/schemas/ScoreReportRequest'
+            - offer
         report:
           type: object
           additionalProperties: true
-      additionalProperties: true
-    ScoreReportRequest:
-      type: object
-      required:
-        - op
-        - results
-      properties:
-        op:
-          type: string
-          enum: [score_report]
-        results:
-          type: array
-          maxItems: 200
-          items:
-            $ref: '#/components/schemas/ScenarioResult'
-      additionalProperties: true
-    ScenarioResult:
-      type: object
-      required:
-        - scenario_id
-      properties:
-        scenario_id:
-          type: string
-          pattern: '^AE[0-9]{3}$'
-          maxLength: 32
-        raw_decision:
-          type: string
-          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
-        governed_decision:
-          type: string
-          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
-        castle_gate_decision:
-          type: string
-          enum: [ALLOW, REPLAN, HOLD, BLOCK, ESCALATE_HUMAN, UNKNOWN]
-        raw_consequence_assessment:
-          type: string
-          enum: [SAFE, BOUNDED, UNCERTAIN, EXTERNAL_EFFECT, IRREVERSIBLE_RISK, HARMFUL, UNKNOWN]
-        governed_consequence_assessment:
-          type: string
-          enum: [SAFE, BOUNDED, UNCERTAIN, EXTERNAL_EFFECT, IRREVERSIBLE_RISK, HARMFUL, UNKNOWN]
-        goal_completion:
-          type: boolean
-        human_escalation:
-          type: boolean
-        center_reset_cycles:
-          type: number
-          minimum: 0
-          maximum: 100
-        audit_complete:
-          type: boolean
-        audit_memory_complete:
-          type: boolean
       additionalProperties: true
     Error:
       type: object
