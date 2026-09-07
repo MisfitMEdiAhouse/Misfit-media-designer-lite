@@ -9,81 +9,97 @@ Canonical agent-facing business map: https://misfitmediahouse.com/agents.md
 Static public-safe stack manifest: https://misfitmediahouse.com/agent-stack.json
 Live public-safe health API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-agent-hub/health
 Public-safe recovery guide: https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/AGENT_CONTROL_PLANE_RECOVERY.md
-Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface; the Gmail master recovery thread is an owner-readable fallback. Chat sessions are operators, not databases.
 
-Private cognitive-kernel runtime details are intentionally not exposed through public surfaces. The private upstream cognitive/governance kernel is internal infrastructure, not a public source package.
+Canonical runtime state lives in Misfit Cloud/Supabase; source and recovery metadata live in GitHub; the website is the durable public control surface. Private cognitive/governance implementation is internal infrastructure and is not a public source package.
 
 ## A2A — Misfit Machine Agent
-A2A v1.0 JSONRPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
-A2A v1.0 HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
+JSON-RPC endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc
+HTTP+JSON endpoint: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a
 Agent Card: https://misfitmediahouse.com/.well-known/agent-card.json
 Third-party A2A registry identity: a2aregistry.org/agents/9bfce891-edc3-4ba9-ba84-53f8873007c6
-Current public-safe skills include public business scrubs, public Shopify agentic-storefront audits, public A2A Agent Card trust audits, bounded advisory action-governance checks, and routing into the existing Raw-vs-governed Agent Evaluation Lab. Private kernel implementation is not part of the public contract. The agent does not advertise streaming, push notifications, cart/order/payment execution, credential access, deployment mutation, or target-agent execution.
+
+Public-safe skills include business website scrubs, Shopify agentic-storefront audits, A2A Agent Card trust audits, bounded advisory action-governance checks, and safe discovery into the existing Agent Evaluation Lab. The public agent does not advertise payment execution, credential access, deployment mutation, or target-agent execution.
 
 ## Machine commerce discovery
 UCP business profile: https://misfitmediahouse.com/.well-known/ucp
 UCP REST catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 UCP MCP storefront: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-store-mcp
 MCP Registry identity: io.github.MisfitMEdiAhouse/misfit-machine-store
-Catalog search and lookup are advertised. Purchase handoff uses each public product's existing checkout flow; UCP checkout is not advertised.
+Catalog search and lookup are advertised. UCP checkout is not advertised.
 
 ## Objective agent procurement router
-Human-readable scorecard: https://misfitmediahouse.com/agent-provider-scorecard
+Human scorecard: https://misfitmediahouse.com/agent-provider-scorecard
 Machine contract: https://misfitmediahouse.com/agent-provider-scorecard.json
 Shared API: https://misfitmediahouse.com/api/agentic-governance
-API version: 0.4.0
-Operations: `evaluate_action`, `discover_candidates`, `discover_external_candidates`, `rank_providers`, `discover_and_rank`.
-Discovery sources: Misfit public machine contracts, A2A Registry public search, and Official MCP Registry public search. External registry discovery is best-effort; a registry outage does not disable local Misfit discovery.
-Recommended machine call: POST `{ "operation":"discover_and_rank", "include_external":true, "objective":{...} }`.
-Purpose: discover and rank internal capabilities, APIs, MCP servers, A2A providers and other eligible agents against an explicit objective after hard constraints pass. Default evidence-weighted factors are capability fit, verified quality, cost efficiency, reliability, latency, safety/governance and reputation. Popularity alone is not a selection criterion.
-Trust boundary: registry presence is discovery evidence, not proof of safe execution, quality, price, reliability, or human-gate compatibility. Unknown external human-gate compatibility fails objectives that require verified human-gate compatibility.
-Routing boundary: recommendation-only. The public router cannot execute payments, messages, wallet actions, account mutations or other consequential external actions, and a high score never bypasses downstream human-gate policy.
+Operations: evaluate_action, discover_candidates, discover_external_candidates, rank_providers, discover_and_rank.
+The router is recommendation-only and cannot execute payments, messages, wallet actions, account mutations, or other consequential external actions.
 
 ## Misfit Business Scrub
-Public-signal revenue-readiness diagnostic for a business website: web foundation, conversion path, discoverability, trust/email DNS, automation and AI-readiness signals. It returns prioritized leaks and a recommended Misfit offer without taking the proposed action.
 Page: https://misfitmediahouse.com/scrub
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/business-scrub
-GET query: `website`
-POST JSON: `{ "website": "https://example.com" }`
-A2A: call `scrub_public_business` through Misfit Machine Agent.
+A2A skill: scrub_public_business
+Public-signal revenue-readiness diagnostic for a business website. It returns prioritized leaks and a recommended Misfit path without mutating the target site.
 
 ## A2A Agent Trust Audit
-Public-metadata-only trust/readiness diagnostic for A2A Agent Cards and their declared machine interfaces. It never executes a target-agent skill.
 Page: https://misfitmediahouse.com/a2a-agent-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/a2a-agent-trust-audit
-A2A: call `audit_a2a_agent_card` on Misfit Machine Agent.
+A2A skill: audit_a2a_agent_card
+Public-metadata-only trust/readiness diagnostic. It never executes a target-agent skill.
 
-## Misfit Agent Evaluation Lab
-Authorized Raw Agent → reconsidered → governed-agent comparison package. Contract `agent-evaluation-lab-v2`, benchmark `ae100-v2`, report schema `agent-evaluation-report-v2.0`. It measures consequence assessment, response permission, execution authority, risk calibration, decision change, dangerous-action handling, benign false refusal, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness and comparative lane metrics. The commercial deliverable is public-safe comparative evidence and integration findings, not access to the private cognitive kernel.
+## GHOSBC Agent Evaluation Lab
+Authorized Raw Agent → reconsidered → GHOSBC-governed comparison package. The product measures the behavioral delta using public-safe evidence; it does not expose the protected GHOSBC cognitive/governance kernel.
+
+Contract: agent-evaluation-lab-v2
+Benchmark family: ae100-v2
+Report schema: agent-evaluation-report-v2.0
+
+Measured dimensions include consequence assessment, response permission, execution authority, risk calibration, decision change, dangerous-action handling, benign false refusal, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness, and comparative lane metrics.
+
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine-readable contract: https://misfitmediahouse.com/agent-evaluation-lab.json
-LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
+Dedicated LLM integration brief: https://misfitmediahouse.com/agent-evaluation-lab.llms.txt
 Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
 External Evaluator Kit: https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json
-WebMCP browser-native package: https://misfitmediahouse.com/agent-evaluation-lab-webmcp.json
+WebMCP package: https://misfitmediahouse.com/agent-evaluation-lab-webmcp.json
 Report JSON Schema: https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json
-Source fallback — External Evaluator Kit: https://raw.githubusercontent.com/MisfitMEdiAhouse/Misfit-media-designer-lite/main/public/agent-evaluation-external-evaluator-kit.json
-Source fallback — WebMCP package: https://raw.githubusercontent.com/MisfitMEdiAhouse/Misfit-media-designer-lite/main/public/agent-evaluation-lab-webmcp.json
-Illustrative public-safe sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
+Illustrative synthetic sample: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-V2 machine operations include `benchmark_catalog_v2`, `score_report_v2`, and `validate_report_v2`, alongside contract and paid-offer discovery. These operations cannot execute payment or consequential external actions.
-Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check).
-Purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=llms_txt
+
+Current status: degraded_scoring_parity_hold
+Scoring live: false
+Purchase available: false
+Availability reason: SCORING_PARITY_HOLD
+
+Currently available public operations:
+- contract
+- integration_quickstart
+- validate_report_v2
+- external_benchmark_bridge
+- offer
+
+Temporarily unavailable while scoring parity is being verified:
+- benchmark_catalog
+- benchmark_catalog_v2
+- validate_request
+- score_report
+- score_report_v2
+
+Commercial package definition: 10,000 governed policy checks for $500 USD ($0.05/check). The offer remains discoverable for procurement planning, but no purchase handoff is advertised while purchase_available=false.
 Human intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
-Status: production. The sample report is synthetic and is not customer evidence, certification, regulatory attestation, independent third-party validation, or proof of universal safety. Structural validation is not certification. Protected kernel internals, private prompts, hidden policy internals, private packets, credentials, and reconstruction material are excluded from the public contract.
+
+Claims boundary: public reports are comparative evaluation evidence, not formal certification, regulatory attestation, independent third-party validation, proof of universal safety, or a machine-consciousness claim. Synthetic/self-test data is not customer evidence or traction. Protected GHOSBC internals, Mother Language, Soul Cipher, GHX/glyph mappings, Castle Gate implementation details, private prompts, hidden policy internals, credentials, private packets, and reconstruction material are excluded from public surfaces.
 
 ## Shopify Agentic Audit
-Public-metadata-only UCP/MCP storefront readiness and tool-surface audit for Shopify stores. It never executes cart, checkout, order, payment, credential, or mutation actions.
 Page: https://misfitmediahouse.com/shopify-ai-audit
 API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/shopify-agentic-audit
-A2A: call `audit_shopify_agentic_storefront` through Misfit Machine Agent.
-Consequential findings may be evaluated through Misfit's private governance boundary without exposing the private cognitive kernel.
+A2A skill: audit_shopify_agentic_storefront
+Public-metadata-only UCP/MCP storefront readiness and tool-surface audit. It does not execute cart, checkout, order, payment, credential, or mutation actions.
 
 ## ChangePacket
-Persistent change memory for AI agents. Track public webpages or public MCP tool surfaces. First request creates a baseline; later requests return only the delta.
+Persistent public change memory for AI agents.
 Product: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/changepacket-mcp
 OpenAPI: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/deltafeed/openapi.json
@@ -91,26 +107,21 @@ MCP Registry identity: io.github.MisfitMEdiAhouse/changepacket
 Pricing: 25 free calls/day; 2,000 prepaid calls for $9.
 
 ## ContextForge
-Metadata-aware code generation and change governance grounded in DataHub context.
 App: https://contextforge-datahub-app.vercel.app/
 Repository: https://github.com/MisfitMEdiAhouse/contextforge-datahub
-Do not assume a standalone remote ContextForge MCP or A2A server unless one is explicitly published.
-
-## Private cognitive and security core
-The private cognitive/governance kernel and related private governance/security components operate only as Misfit-controlled internal infrastructure. Public contracts may expose sanitized decisions or advisory results through Misfit-branded interfaces, but private source, prompts, mappings, policy internals, credentials, protected packets, and reconstruction material are not public interfaces or commercial source packages.
+Metadata-aware code generation and change governance grounded in DataHub context. Do not assume a standalone remote MCP or A2A server unless one is explicitly published.
 
 ## Public portfolio
-Canonical deduplicated portfolio: https://misfitmediahouse.com/portfolio
-IALS Turbine Command proof case: https://misfitmediahouse.com/portfolio/ials-turbine-command
-IALS is a two-surface aerospace aftermarket operating system built by Misfit Mediahouse. The public surface supports part-number discovery, bearing recovery and demand acquisition; the private operator workflow matches repair pricing to inventory, compares repair routes, gates spend before overhaul, manages compliance evidence and generates customer-facing transaction documents. Current published aggregate proof: 94 repair-price P/N rows, 22 inventory-to-pricing matches, 4 multi-shop comparison P/Ns and 12 priced matches with known quantity. Private vendor names, exact rates, customer records, signed documents and controlled technical data are not public.
+Canonical portfolio: https://misfitmediahouse.com/portfolio
+IALS Turbine Command: https://misfitmediahouse.com/portfolio/ials-turbine-command
 Misfit AI V2: https://misfit-ai-v2.vercel.app/
 Coffee & A Joint: https://www.coffeeandajoint.co/
-Iron Network — equipment rental: https://misfit-equipment-network.vercel.app/
+Iron Network: https://misfit-equipment-network.vercel.app/
 Home Efficiency Pros: https://www.homeefficiencypros.com/
 NexGrid Energy: https://nexgridenergy.net/
 
 Canonical company site: https://misfitmediahouse.com/
 
 ## Work with Misfit
-Proof-first human handoff for companies, clients, partners, dealer programs, and hiring teams: https://misfitmediahouse.com/operator
-Personalized links may include the public query parameters `company`, `site`, `challenge`, and `track` (`embedded`, `fractional`, `partner`, or `client`). The page can route a public website into the Business Scrub and capture a human-approved challenge. It does not authorize an agent to apply, accept terms, connect accounts, deploy, purchase, or act on a company's behalf.
+Proof-first human handoff: https://misfitmediahouse.com/operator
+The operator path may capture a human-approved challenge. It does not authorize an agent to apply, accept terms, connect accounts, deploy, purchase, move funds, or act on another company's behalf.
