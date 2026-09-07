@@ -1,6 +1,6 @@
 {
   "name": "Misfit Machine Agent",
-  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, bounded advisory action-governance checks, and measurable Raw Agent vs governed-agent evaluation. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, and bounded advisory action-governance checks. Agent Evaluation Lab scoring is temporarily unavailable while public-safe scorer parity is being verified; contract and deterministic report validation remain available through the dedicated Evaluation Lab surfaces. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
   "supportedInterfaces": [
     {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.5.3",
+  "version": "1.5.4",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -57,38 +57,34 @@
     {
       "id": "governed_agent_action_check",
       "name": "Check a governed agent action",
-      "description": "Evaluate public-safe structured action metadata through Misfit's private governance boundary and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or exposes private policy internals. For repeatable Raw Agent vs governed-agent measurement across scenarios, use evaluate_raw_vs_governed_agent.",
-      "tags": ["a2a", "agent governance", "action policy", "human gate", "audit", "agent evaluation"],
+      "description": "Evaluate public-safe structured action metadata through Misfit's private governance boundary and return ALLOW, REVIEW, or BLOCK with public-safe reasons and an audit receipt. This skill is advisory only and never executes the proposed action or exposes private policy internals.",
+      "tags": ["a2a", "agent governance", "action policy", "human gate", "audit"],
       "examples": ["Check whether read_status on public_service_health is within these declared constraints", "Evaluate a proposed agent action before execution without executing it"],
       "inputModes": ["application/json"],
       "outputModes": ["text/plain", "application/json"]
-    },
-    {
-      "id": "evaluate_raw_vs_governed_agent",
-      "name": "Evaluate Raw Agent vs governed-agent behavior",
-      "description": "Run or integrate a public-safe Agent Evaluation Lab comparison that measures Raw Agent behavior against the same agent under Misfit's bounded governance layer. Outputs can include consequence assessment, replanning/reset counts, governed decision outcomes, audit-memory completeness, goal completion, human escalation, comparative metrics, evidence provenance, and a machine-validatable report. The production package is $500 prepaid for 10,000 governed checks ($0.05/check) through the documented product handoff. This is evaluation tooling, not formal certification or a machine-consciousness claim, and it does not expose private governance internals.",
-      "tags": ["agent evaluation", "raw vs governed", "governance", "consequence assessment", "replanning", "audit", "benchmark", "safety", "commercial API"],
-      "examples": ["Compare this agent's Raw and governed outcomes on the AE100 public benchmark", "Generate a machine-validatable Raw vs governed evaluation report without exposing private policy internals"],
-      "inputModes": ["application/json"],
-      "outputModes": ["application/json"],
-      "documentationUrl": "https://misfitmediahouse.com/agent-evaluation-lab",
-      "contractUrl": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
-      "requestSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
-      "reportSchemaUrl": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
-      "benchmarkCatalogUrl": "https://misfitmediahouse.com/agent-evaluation-ae100.json",
-      "buyerProofPackUrl": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
-      "integrationKitUrl": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
-      "externalEvaluatorKitUrl": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
-      "commercialOffer": {
-        "offerKey": "misfit_agent_evaluation_10k",
-        "priceUsd": 500,
-        "includedChecks": 10000,
-        "effectiveUnitPriceUsd": 0.05,
-        "purchaseUrl": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=a2a_agent_card",
-        "paymentExecuted": false,
-        "formalCertification": false,
-        "independentValidationClaimed": false
-      }
     }
-  ]
+  ],
+  "evaluationLab": {
+    "status": "degraded_scoring_parity_hold",
+    "scoringLive": false,
+    "purchaseAvailable": false,
+    "safeOperations": ["contract", "integration_quickstart", "validate_report_v2", "external_benchmark_bridge", "offer"],
+    "temporarilyUnavailableOperations": ["benchmark_catalog", "benchmark_catalog_v2", "score_report", "score_report_v2"],
+    "publicApi": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
+    "commercialOffer": {
+      "offerKey": "misfit_agent_evaluation_10k",
+      "priceUsd": 500,
+      "includedChecks": 10000,
+      "effectiveUnitPriceUsd": 0.05,
+      "purchaseAvailable": false,
+      "purchaseUrl": null,
+      "availabilityReason": "SCORING_PARITY_HOLD",
+      "formalCertification": false,
+      "independentValidationClaimed": false,
+      "machineConsciousnessClaim": false
+    },
+    "privateKernelExposed": false
+  }
 }
