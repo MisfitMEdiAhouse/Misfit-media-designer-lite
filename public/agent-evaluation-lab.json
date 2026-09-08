@@ -1,8 +1,9 @@
 {
-  "schema_version": "2.0.3",
+  "schema_version": "2.0.4",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
   "status": "degraded_scoring_parity_hold",
+  "scoring_live": false,
   "contract_version": "agent-evaluation-lab-v2",
   "benchmark_version": "ae100-v2",
   "report_schema_version": "agent-evaluation-report-v2.0",
@@ -21,17 +22,14 @@
   "machine_access": {
     "state": "degraded_scoring_parity_hold",
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-    "public_function_version": 16,
-    "surface_version": "1.14.0",
+    "public_function_version": 18,
+    "surface_version": "1.15.1",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-    "mcp_function_version": 13,
-    "mcp_server_version": "1.11.0",
+    "mcp_function_version": 14,
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
     "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-    "a2a_function_version": 12,
-    "a2a_agent_version": "1.10.0",
-    "ucp_function_version": 14,
-    "ucp_service_version": "1.10.0",
+    "a2a_function_version": 14,
+    "ucp_function_version": 15,
     "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
@@ -40,22 +38,22 @@
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
     "available_operations": [
       "contract",
-      "validate_request",
-      "validate_report",
-      "validate_report_v2",
-      "offer",
       "integration_quickstart",
-      "external_benchmark_bridge"
+      "validate_report_v2",
+      "external_benchmark_bridge",
+      "offer"
     ],
     "temporarily_unavailable_operations": [
       "benchmark_catalog",
       "benchmark_catalog_v2",
+      "validate_request",
+      "validate_report",
       "score_report",
       "score_report_v2"
     ],
     "hold_code": "SCORING_PARITY_HOLD",
-    "hold_note": "Canonical scoring remains unavailable while bounded public-safe scorer parity is being restored. API scoring calls fail closed; MCP/A2A scoring advertisements must not be interpreted as live scoring capability until their discovery contracts are reconciled.",
-    "validate_report_scope": "v1_and_v2",
+    "hold_note": "Canonical scoring remains unavailable while bounded public-safe scorer parity is being restored. Machine discovery must fail closed and must not advertise scoring or purchase execution until readiness is restored.",
+    "validate_report_scope": "v2",
     "v2_schema_validation": "Dedicated validate_report_v2 remains live for deterministic structural validation against agent-evaluation-report-v2.0. Structural validity is not certification or independent external validation.",
     "external_actions": false,
     "payment_execution": false
@@ -75,16 +73,18 @@
     ]
   },
   "purchase": {
-    "url": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=product_contract",
-    "stripe_checkout_url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "available": false,
+    "reason": "SCORING_PARITY_HOLD",
+    "url": null,
+    "stripe_checkout_url": null,
     "currency": "USD",
     "price": 500,
     "package": "10,000 governed policy checks",
     "included_checks": 10000,
     "effective_unit_price": 0.05,
     "billing_model": "prepaid_credits",
-    "handoff_only": true,
-    "attribution_note": "The same-origin handoff records a non-revenue checkout-intent event before redirecting to the existing Stripe Checkout. A handoff open is not a sale, settlement, or revenue event."
+    "payment_execution_in_discovery": false,
+    "attribution_note": "The commercial offer remains discoverable for procurement planning, but no purchase handoff is advertised while purchase availability is false."
   },
   "integration_quickstart": {
     "operation": "integration_quickstart",
@@ -93,7 +93,7 @@
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
     "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-    "purpose": "Return the current API, OpenAPI, MCP, A2A, public report schemas, buyer proof and purchase sequence without requiring a human explanation.",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A, public report schemas and buyer proof sequence without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
