@@ -1,7 +1,7 @@
 {
-  "schema_version": "misfit-agent-evaluation-v2-readiness-v4",
+  "schema_version": "misfit-agent-evaluation-v2-readiness-v5",
   "product": "GHOSBC Agent Evaluation Lab",
-  "status": "degraded_scoring_parity_hold",
+  "status": "active_bounded_scoring_purchase_hold",
   "purpose": "Machine-readable public-safe runtime truth for the AE100 v2 Raw Agent versus governed-agent evaluation product without exposing protected GHOSBC implementation internals.",
   "canonical_product": "https://misfitmediahouse.com/agent-evaluation-lab",
   "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
@@ -9,29 +9,26 @@
     "contract_version": "agent-evaluation-lab-v2",
     "report_schema_version": "agent-evaluation-report-v2.0",
     "benchmark_version": "ae100-v2",
-    "surface_version": "1.15.1",
-    "public_function_version": 18
+    "surface_version": "1.16.0",
+    "public_function_version": 19
   },
   "runtime_truth": {
-    "scoring_live": false,
-    "scoring_status": "PRIVATE_KERNEL_PARITY_HOLD",
+    "scoring_live": true,
+    "scoring_status": "BOUNDED_PUBLIC_SAFE_SCORING_LIVE",
     "canonical_backend_function": "ghosbc-agent-evaluation-lab",
-    "canonical_backend_function_version": 6,
-    "reason": "The canonical evaluation backend is currently a migration-parity shell. Scoring/catalog execution must remain unavailable until bounded public-safe source parity is verified.",
+    "canonical_backend_function_version": 7,
+    "execution_boundary": "Caller-supplied benchmark scoring only. No external actions, private-kernel reconstruction, hidden-policy disclosure, credential use, or autonomous consequential execution.",
     "safe_available_capabilities": [
       "service_discovery",
-      "commercial_offer_discovery",
+      "benchmark_catalog_v2",
+      "score_report_v2",
+      "deterministic_validate_report_v2",
       "integration_quickstart",
       "external_benchmark_interoperability_metadata",
-      "deterministic_validate_report_v2"
+      "commercial_offer_discovery"
     ],
-    "temporarily_unavailable_capabilities": [
-      "benchmark_catalog",
-      "score_report",
-      "benchmark_catalog_v2",
-      "score_report_v2"
-    ],
-    "repair_boundary": "Restore only from verified public-safe scoring source/parity evidence. Do not reconstruct protected GHOSBC internals from samples, reports, prompts, or private kernel material."
+    "temporarily_unavailable_capabilities": [],
+    "repair_history": "The prior migration-parity scoring hold is resolved by the verified bounded public-safe AE100 v2 scorer in canonical backend function v7. Protected GHOSBC internals were not reconstructed or exposed."
   },
   "v2_contract": {
     "contract_version": "agent-evaluation-lab-v2",
@@ -68,15 +65,18 @@
   },
   "interop": {
     "public_wrapper_reachable": true,
+    "public_function_version": 19,
     "mcp_surface_reachable": true,
-    "mcp_function_version": 14,
+    "mcp_function_version": 16,
+    "mcp_server_version": "1.12.1",
     "a2a_surface_reachable": true,
-    "a2a_function_version": 14,
+    "a2a_function_version": 16,
+    "a2a_agent_version": "1.11.1",
     "ucp_discovery_live": true,
-    "ucp_function_version": 15,
+    "ucp_function_version": 16,
+    "ucp_service_version": "1.11.1",
     "machine_native_wrappers_complete": true,
-    "warning": "Wrapper reachability does not imply scoring availability while canonical backend parity hold is active.",
-    "next_safe_step": "Restore bounded deterministic AE100 scoring only from verified public-safe source/parity evidence, then smoke-test API -> MCP -> A2A before re-advertising scoring as live."
+    "next_safe_step": "Collect provenance-preserving real external benchmark evidence and keep independent-validation claims disabled until that evidence exists."
   },
   "evidence_provenance": {
     "default_classification": "caller_supplied_unverified",
@@ -95,7 +95,7 @@
     "effective_unit_price_usd": 0.05,
     "purchase_available": false,
     "purchase_handoff": null,
-    "availability_reason": "SCORING_PARITY_HOLD",
-    "availability_note": "Commercial offer metadata remains discoverable for procurement planning, but no purchase handoff is advertised while scoring fulfillment is unavailable."
+    "availability_reason": "COMMERCIAL_REVIEW_HOLD",
+    "availability_note": "Commercial offer metadata remains machine-discoverable, but purchase handoff stays suppressed pending commercial review and real external evidence."
   }
 }
