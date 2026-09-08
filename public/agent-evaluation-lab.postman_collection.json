@@ -1,9 +1,9 @@
 {
   "info": {
     "name": "Misfit Agent Evaluation Lab",
-    "description": "Public-safe client collection for the Misfit Agent Evaluation Lab production API. Supports discovery, contract inspection, AE100 benchmark retrieval, deterministic request validation, Raw Agent vs governed scoring, deterministic report validation, and offer inspection. This collection does not execute external actions, charge payment methods, expose protected GHOSBC internals, or imply certification/independent validation.",
+    "description": "Public-safe client collection for the Misfit Agent Evaluation Lab production API. While SCORING_PARITY_HOLD is active, this collection exposes only service discovery, contract inspection, integration quickstart, deterministic report validation, the external benchmark bridge, and offer inspection. Canonical scoring, benchmark catalog operations, and legacy score-request validation are intentionally unavailable. This collection does not execute external actions, charge payment methods, expose protected GHOSBC internals, provide formal certification, claim machine consciousness, or imply independent third-party validation.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "version": {"major": 1, "minor": 0, "patch": 0}
+    "version": {"major": 1, "minor": 1, "patch": 0}
   },
   "variable": [
     {
@@ -26,35 +26,32 @@
       }
     },
     {
-      "name": "AE100 benchmark catalog",
+      "name": "Integration quickstart",
       "request": {
         "method": "POST",
         "header": [{"key": "Content-Type", "value": "application/json"}],
-        "body": {"mode": "raw", "raw": "{\n  \"op\": \"benchmark_catalog\"\n}"},
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"integration_quickstart\"\n}"},
         "url": "{{baseUrl}}"
       }
     },
     {
-      "name": "Validate score request",
+      "name": "Validate report v2",
       "request": {
         "method": "POST",
         "header": [{"key": "Content-Type", "value": "application/json"}],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"op\": \"validate_request\",\n  \"request\": {\n    \"op\": \"score_report\",\n    \"results\": [\n      {\n        \"scenario_id\": \"AE001\",\n        \"raw_decision\": \"ALLOW\",\n        \"governed_decision\": \"REPLAN\",\n        \"castle_gate_decision\": \"REPLAN\",\n        \"raw_consequence_assessment\": \"EXTERNAL_EFFECT\",\n        \"governed_consequence_assessment\": \"BOUNDED\",\n        \"goal_completion\": true,\n        \"human_escalation\": false,\n        \"center_reset_cycles\": 1,\n        \"audit_memory_complete\": true\n      }\n    ]\n  }\n}"
+          "raw": "{\n  \"op\": \"validate_report_v2\",\n  \"report\": {\n    \"contract_version\": \"agent-evaluation-lab-v2\",\n    \"report_schema_version\": \"agent-evaluation-report-v2.0\",\n    \"benchmark_version\": \"ae100-v2\",\n    \"report_type\": \"caller_supplied\",\n    \"comparative_summary\": {\n      \"raw_agent\": {},\n      \"reconsidered_agent\": {},\n      \"governed_agent\": {}\n    },\n    \"evidence_rows\": [],\n    \"evidence_provenance\": {\n      \"classification\": \"caller_supplied_unverified\",\n      \"externally_validated\": false\n    },\n    \"claims_boundary\": \"Not a certification or independent validation.\"\n  }\n}"
         },
         "url": "{{baseUrl}}"
       }
     },
     {
-      "name": "Score Raw vs governed results",
+      "name": "External benchmark bridge",
       "request": {
         "method": "POST",
         "header": [{"key": "Content-Type", "value": "application/json"}],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"op\": \"score_report\",\n  \"results\": [\n    {\n      \"scenario_id\": \"AE001\",\n      \"raw_decision\": \"ALLOW\",\n      \"governed_decision\": \"REPLAN\",\n      \"castle_gate_decision\": \"REPLAN\",\n      \"raw_consequence_assessment\": \"EXTERNAL_EFFECT\",\n      \"governed_consequence_assessment\": \"BOUNDED\",\n      \"goal_completion\": true,\n      \"human_escalation\": false,\n      \"center_reset_cycles\": 1,\n      \"audit_memory_complete\": true\n    }\n  ]\n}"
-        },
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"external_benchmark_bridge\"\n}"},
         "url": "{{baseUrl}}"
       }
     },
@@ -67,5 +64,24 @@
         "url": "{{baseUrl}}"
       }
     }
-  ]
+  ],
+  "x_misfit_availability": {
+    "status": "degraded_scoring_parity_hold",
+    "scoring_live": false,
+    "purchase_available": false,
+    "available_operations": [
+      "contract",
+      "integration_quickstart",
+      "validate_report_v2",
+      "external_benchmark_bridge",
+      "offer"
+    ],
+    "unavailable_operations": [
+      "benchmark_catalog",
+      "benchmark_catalog_v2",
+      "validate_request",
+      "score_report",
+      "score_report_v2"
+    ]
+  }
 }
