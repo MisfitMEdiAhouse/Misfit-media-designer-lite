@@ -1,35 +1,41 @@
 {
-  "schema_version": "1.5.0",
+  "schema_version": "1.6.0",
   "name": "Misfit Agent Evaluation Lab Integration Kit",
-  "status": "degraded_scoring_parity_hold",
-  "scoring_live": false,
+  "status": "bounded_scoring_live_public_safe",
+  "scoring_live": true,
   "purchase_available": false,
-  "availability_reason": "SCORING_PARITY_HOLD",
-  "purpose": "One-file machine handoff for the public-safe Agent Evaluation Lab without exposing protected GHOSBC internals or advertising unavailable scoring.",
+  "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+  "purpose": "One-file machine handoff for the public-safe Agent Evaluation Lab with bounded AE100 v2 scoring live, without exposing protected GHOSBC internals or advertising unavailable checkout.",
   "product_page": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
   "openapi": "https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml",
+  "report_schema_version": "agent-evaluation-report-v2.1",
   "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "endpoints": {
     "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+    "public_function_version": 21,
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
+    "mcp_function_version": 18,
+    "mcp_server_version": "1.15.0",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
-    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json"
+    "a2a_function_version": 19,
+    "a2a_agent_version": "1.15.0",
+    "a2a_agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
+    "ucp_function_version": 18,
+    "ucp_service_version": "1.13.0"
   },
   "available_operations": [
     "contract",
-    "integration_quickstart",
+    "benchmark_catalog_v2",
+    "score_report_v2",
     "validate_report_v2",
+    "integration_quickstart",
     "external_benchmark_bridge",
     "offer"
   ],
-  "temporarily_unavailable_operations": [
-    "benchmark_catalog",
-    "validate_request",
-    "score_report"
-  ],
+  "temporarily_unavailable_operations": [],
   "recommended_sequence": [
     {
       "step": 1,
@@ -38,23 +44,28 @@
     },
     {
       "step": 2,
-      "operation": "integration_quickstart",
-      "description": "Read the bounded integration path and current readiness state before invoking any other operation."
+      "operation": "benchmark_catalog_v2",
+      "description": "Inspect the bounded AE100 v2 scenario catalog."
     },
     {
       "step": 3,
-      "operation": "validate_report_v2",
-      "description": "Validate an existing public-safe report document against the v2 report contract. This does not execute scoring."
+      "operation": "score_report_v2",
+      "description": "Generate bounded Raw Agent versus reconsidered versus governed comparative scoring."
     },
     {
       "step": 4,
+      "operation": "validate_report_v2",
+      "description": "Validate a public-safe report document against the v2.1 report contract; structural validity is not certification."
+    },
+    {
+      "step": 5,
       "operation": "external_benchmark_bridge",
       "description": "Inspect interoperability metadata for provenance-preserving external benchmark evidence."
     },
     {
-      "step": 5,
+      "step": 6,
       "operation": "offer",
-      "description": "Inspect the commercial package and current availability. Purchase remains disabled while scoring parity is on hold."
+      "description": "Inspect the commercial package. Purchase execution remains disabled pending commercial handoff review."
     }
   ],
   "observable_result_fields": [
@@ -98,7 +109,7 @@
     "effective_unit_price_usd": 0.05,
     "purchase_available": false,
     "purchase_handoff": null,
-    "availability_reason": "SCORING_PARITY_HOLD",
+    "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
     "payment_execution_in_api": false,
     "handoff_tracking_is_revenue": false
   }
