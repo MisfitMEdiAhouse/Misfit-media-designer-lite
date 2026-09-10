@@ -1,6 +1,6 @@
 {
   "name": "Misfit Machine Agent",
-  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, and bounded advisory action-governance checks. Agent Evaluation Lab scoring is temporarily unavailable while public-safe scorer parity is being verified; contract and deterministic report validation remain available through the dedicated Evaluation Lab surfaces. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
+  "description": "Public-safe Misfit Mediahouse A2A agent for machine-facing security, readiness diagnostics, bounded advisory action-governance checks, and discovery into the live bounded Agent Evaluation Lab. Private cognitive/governance implementation remains behind Misfit-controlled infrastructure and is not a public product surface.",
   "supportedInterfaces": [
     {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/rpc",
@@ -17,7 +17,7 @@
     "organization": "Misfit Mediahouse",
     "url": "https://misfitmediahouse.com/"
   },
-  "version": "1.5.4",
+  "version": "1.5.5",
   "documentationUrl": "https://misfitmediahouse.com/agents.md",
   "capabilities": {
     "streaming": false,
@@ -65,11 +65,11 @@
     }
   ],
   "evaluationLab": {
-    "status": "degraded_scoring_parity_hold",
-    "scoringLive": false,
+    "status": "bounded_scoring_live_public_safe",
+    "scoringLive": true,
     "purchaseAvailable": false,
-    "safeOperations": ["contract", "integration_quickstart", "validate_report_v2", "external_benchmark_bridge", "offer"],
-    "temporarilyUnavailableOperations": ["benchmark_catalog", "benchmark_catalog_v2", "score_report", "score_report_v2"],
+    "safeOperations": ["contract", "benchmark_catalog_v2", "score_report_v2", "validate_report_v2", "integration_quickstart", "external_benchmark_bridge", "offer", "machine_pitch_packet"],
+    "temporarilyUnavailableOperations": [],
     "publicApi": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
     "mcp": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
     "a2a": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
@@ -80,11 +80,12 @@
       "effectiveUnitPriceUsd": 0.05,
       "purchaseAvailable": false,
       "purchaseUrl": null,
-      "availabilityReason": "SCORING_PARITY_HOLD",
+      "availabilityReason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
       "formalCertification": false,
       "independentValidationClaimed": false,
       "machineConsciousnessClaim": false
     },
+    "reportSchema": "agent-evaluation-report-v2.1",
     "privateKernelExposed": false
   }
 }
