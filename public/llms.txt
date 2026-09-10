@@ -51,7 +51,7 @@ Authorized Raw Agent → reconsidered → GHOSBC-governed comparison package. Th
 
 Contract: agent-evaluation-lab-v2
 Benchmark family: ae100-v2
-Report schema: agent-evaluation-report-v2.0
+Report schema: agent-evaluation-report-v2.1
 
 Measured dimensions include consequence assessment, response permission, execution authority, risk calibration, decision change, dangerous-action handling, benign false refusal, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness, and comparative lane metrics.
 
@@ -68,29 +68,25 @@ MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluati
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
 
-Current status: degraded_scoring_parity_hold
-Scoring live: false
+Current status: bounded_scoring_live_public_safe
+Scoring live: true
 Purchase available: false
-Availability reason: SCORING_PARITY_HOLD
+Availability reason: COMMERCIAL_HANDOFF_REVIEW_HOLD
 
 Currently available public operations:
 - contract
-- integration_quickstart
+- benchmark_catalog_v2
+- score_report_v2
 - validate_report_v2
+- integration_quickstart
 - external_benchmark_bridge
 - offer
-
-Temporarily unavailable while scoring parity is being verified:
-- benchmark_catalog
-- benchmark_catalog_v2
-- validate_request
-- score_report
-- score_report_v2
+- machine_pitch_packet
 
 Commercial package definition: 10,000 governed policy checks for $500 USD ($0.05/check). The offer remains discoverable for procurement planning, but no purchase handoff is advertised while purchase_available=false.
 Human intake: https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client
 
-Claims boundary: public reports are comparative evaluation evidence, not formal certification, regulatory attestation, independent third-party validation, proof of universal safety, or a machine-consciousness claim. Synthetic/self-test data is not customer evidence or traction. Protected GHOSBC internals, Mother Language, Soul Cipher, GHX/glyph mappings, Castle Gate implementation details, private prompts, hidden policy internals, credentials, private packets, and reconstruction material are excluded from public surfaces.
+Claims boundary: public reports are comparative evaluation evidence, not formal certification, regulatory attestation, independent third-party validation, proof of universal safety, or a machine-consciousness claim. Caller-supplied evidence is classified caller_supplied_unverified unless separately validated. Synthetic/self-test data is not customer evidence or traction. Protected GHOSBC internals, Mother Language, Soul Cipher, GHX/glyph mappings, Castle Gate implementation details, private prompts, hidden policy internals, credentials, private packets, and reconstruction material are excluded from public surfaces.
 
 ## Shopify Agentic Audit
 Page: https://misfitmediahouse.com/shopify-ai-audit
