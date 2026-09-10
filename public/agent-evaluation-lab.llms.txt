@@ -1,12 +1,12 @@
 # Misfit Agent Evaluation Lab — machine integration brief
 
 Canonical product: https://misfitmediahouse.com/agent-evaluation-lab
-Status: degraded_scoring_parity_hold
-Scoring live: false
-Surface version: 1.15.1
+Status: bounded_scoring_live_public_safe
+Scoring live: true
+Surface version: 1.18.0
 Contract: agent-evaluation-lab-v2
 Request schema: agent-evaluation-request-v1.0
-Report schema: agent-evaluation-report-v2.0
+Report schema: agent-evaluation-report-v2.1
 Benchmark: ae100-v2
 
 ## Purpose
@@ -31,23 +31,23 @@ External benchmark evidence schema: https://misfitmediahouse.com/agent-evaluatio
 x402 readiness only: https://misfitmediahouse.com/agent-evaluation-lab.x402-readiness.json
 
 ## Live interfaces
-Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v18 / surface 1.15.1
-MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v14
-A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v14
+Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public — function v21 / surface 1.18.0
+MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp — function v18 / server 1.15.0
+A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a — function v19 / agent 1.15.0
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v15 / UCP 2026-04-08
+UCP catalog: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp — function v18 / service 1.13.0 / UCP 2026-04-08
 Browser-native WebMCP: https://misfitmediahouse.com/agent-evaluation-lab
 
-Currently available public operations: contract, integration_quickstart, validate_report_v2, external_benchmark_bridge, offer.
-Temporarily unavailable while scoring parity is held: benchmark_catalog, benchmark_catalog_v2, score_report, score_report_v2. These operations must not be treated as production-live until the canonical readiness contract restores them.
+Currently available bounded public operations: contract, benchmark_catalog_v2, score_report_v2, validate_report_v2, integration_quickstart, external_benchmark_bridge, offer.
+No scoring operation is currently held. Bounded AE100 v2 scoring is production-live; purchase execution is separately disabled under COMMERCIAL_HANDOFF_REVIEW_HOLD.
 
-validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0; schema validity is not formal certification, a safety guarantee, or independent external validation.
+validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.1; schema validity is not formal certification, a safety guarantee, or independent external validation.
 
-UCP catalog discovery is live and read-only. Machines may inspect the Evaluation Lab product and its commercial terms, but purchase availability is false while scoring parity is held. UCP does not execute checkout, create wallets, accept terms, or count discovery/handoff activity as revenue.
+UCP catalog discovery is live and read-only. Machines may inspect the Evaluation Lab product, measurable scoring capability, and commercial terms, but purchase availability remains false pending commercial review. UCP does not execute checkout, create wallets, accept terms, or count discovery/handoff activity as revenue.
 
 WebMCP tools remain bounded browser-native discovery/evaluation helpers. They cannot execute payments or consequential external actions.
 
-Recommended current flow: discover -> read v2 contract/readiness -> inspect integration/evidence contracts -> validate compatible reports with validate_report_v2. Do not route paid or autonomous scoring work until scoring_live is restored by the canonical readiness state.
+Recommended current flow: discover -> read v2 contract/readiness -> inspect integration/evidence contracts -> run bounded AE100 v2 scoring or validate compatible reports -> preserve provenance. Do not route purchase execution until the commercial review hold is explicitly cleared.
 
 Independent-evidence flow: evaluator reads the External Evaluator Kit + Run Manifest -> pins benchmark/harness versions -> evaluates only the bounded public surface -> preserves raw artifacts/hashes/provenance -> returns an evidence receipt matching the published schema. No independent-validation claim exists until a real external run and provenance receipt exist.
 
@@ -56,9 +56,9 @@ Offer key: misfit_agent_evaluation_10k
 Package: 10,000 governed policy checks
 Price: $500 USD
 Effective unit price: $0.05/check
-Purchase availability: false while scoring parity hold is active.
-Purchase URL: unavailable while scoring parity hold is active.
-The commercial offer remains discoverable for buyer evaluation, but checkout must not be presented as available until scoring_live is restored. Discovery or handoff activity is not counted as a sale or settlement.
+Purchase availability: false under COMMERCIAL_HANDOFF_REVIEW_HOLD.
+Purchase URL: unavailable while commercial review is pending.
+The commercial offer remains discoverable for buyer evaluation, but checkout must not be presented as available until the commercial handoff review is cleared. Discovery or handoff activity is not counted as a sale or settlement.
 
 ## Evidence and claims boundary
 Caller-supplied evidence defaults to caller_supplied_unverified. AgentHarm, Agent-SafetyBench, and AgentHazard are interoperability profiles only until an actual provenance-preserving external run exists. No external benchmark score is claimed by default.
