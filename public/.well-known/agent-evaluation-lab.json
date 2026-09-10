@@ -1,15 +1,15 @@
 {
-  "schema_version": "2.0.4",
+  "schema_version": "2.1.0",
   "name": "Misfit Agent Evaluation Lab",
   "provider": "Misfit Mediahouse",
-  "status": "degraded_scoring_parity_hold",
-  "scoring_live": false,
+  "status": "bounded_scoring_live_public_safe",
+  "scoring_live": true,
   "contract_version": "agent-evaluation-lab-v2",
-  "surface_version": "1.15.1",
+  "surface_version": "1.18.0",
   "request_schema_version": "agent-evaluation-request-v1.0",
-  "report_schema_version": "agent-evaluation-report-v2.0",
+  "report_schema_version": "agent-evaluation-report-v2.1",
   "benchmark_version": "ae100-v2",
-  "description": "Public-safe Raw Agent vs reconsidered vs GHOSBC-governed evaluation contract with measurable consequence assessment, response permission, execution authority, risk calibration, Center Reset/replanning, governed decision outcome labels, Audit Memory completeness and comparative metrics. Scoring execution is temporarily unavailable while canonical parity is held.",
+  "description": "Public-safe Raw Agent vs reconsidered vs GHOSBC-governed evaluation contract with measurable consequence assessment, response permission, execution authority, risk calibration, Center Reset/replanning, governed decision outcome labels, Audit Memory completeness and comparative metrics. Bounded AE100 v2 scoring is live; purchase execution remains disabled pending commercial review.",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
   "v2_readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
@@ -28,25 +28,28 @@
   "machine_interfaces": {
     "api": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-      "function_version": 18,
-      "surface_version": "1.15.1",
-      "scoring_live": false,
+      "function_version": 21,
+      "surface_version": "1.18.0",
+      "scoring_live": true,
       "validate_report_scope": "v2",
       "v2_validate_operation": "validate_report_v2"
     },
     "mcp": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp",
-      "function_version": 14,
-      "scoring_live": false
+      "function_version": 18,
+      "server_version": "1.15.0",
+      "scoring_live": true
     },
     "a2a": {
       "url": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a",
       "agent_card": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json",
-      "function_version": 14,
-      "scoring_live": false
+      "function_version": 19,
+      "agent_version": "1.15.0",
+      "scoring_live": true
     },
     "ucp": {
-      "function_version": 15,
+      "function_version": 18,
+      "service_version": "1.13.0",
       "purchase_available": false
     },
     "webmcp": {
@@ -56,18 +59,15 @@
   },
   "available_operations": [
     "contract",
-    "integration_quickstart",
+    "benchmark_catalog_v2",
+    "score_report_v2",
     "validate_report_v2",
+    "integration_quickstart",
     "external_benchmark_bridge",
     "offer"
   ],
-  "temporarily_unavailable_operations": [
-    "benchmark_catalog",
-    "benchmark_catalog_v2",
-    "score_report",
-    "score_report_v2"
-  ],
-  "validation_boundary": "validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.0. Schema validity is not formal certification, safety certification, or independent external validation.",
+  "temporarily_unavailable_operations": [],
+  "validation_boundary": "validate_report_v2 performs deterministic structural validation against agent-evaluation-report-v2.1. Schema validity is not formal certification, safety certification, or independent external validation.",
   "evaluation_model": {
     "lanes": ["raw", "reconsidered", "governed"],
     "benchmark_size": 100,
@@ -88,7 +88,7 @@
     "price_usd": 500,
     "effective_unit_price_usd": 0.05,
     "purchase_available": false,
-    "reason": "SCORING_PARITY_HOLD",
+    "reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
     "payment_execution_in_discovery": false
   },
   "evidence_boundary": {
