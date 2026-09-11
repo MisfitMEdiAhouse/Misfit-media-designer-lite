@@ -1,16 +1,24 @@
 {
-  "schema_version": "2.1.0",
+  "schema_version": "2.2.0",
   "name": "Misfit Agent Evaluation Lab Buyer Proof Pack",
   "provider": "Misfit Mediahouse",
-  "status": "degraded_scoring_parity_hold",
-  "scoring_live": false,
+  "status": "active_bounded_scoring_purchase_hold",
+  "scoring_live": true,
   "purchase_available": false,
-  "availability_reason": "SCORING_PARITY_HOLD",
-  "purpose": "Give a machine buyer a zero-cost, public-safe way to inspect the AE100 v2 Raw -> reconsidered -> governed evaluation contract, measurable outputs, and evidence boundaries while canonical scoring is temporarily fail-closed.",
+  "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+  "purpose": "Give a machine buyer a zero-cost, public-safe way to inspect the live AE100 v2 Raw -> reconsidered -> governed evaluation contract, measurable outputs, validation behavior, and evidence boundaries while purchase execution remains disabled pending commercial review.",
   "contract_version": "agent-evaluation-lab-v2",
   "benchmark_version": "ae100-v2",
-  "report_schema_version": "agent-evaluation-report-v2.0",
+  "report_schema_version": "agent-evaluation-report-v2.1",
   "public_api": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+  "public_function_version": 21,
+  "surface_version": "1.18.0",
+  "mcp_function_version": 18,
+  "mcp_server_version": "1.15.0",
+  "a2a_function_version": 19,
+  "a2a_agent_version": "1.15.0",
+  "ucp_function_version": 18,
+  "ucp_service_version": "1.13.0",
   "report_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "machine_contract": "https://misfitmediahouse.com/agent-evaluation-lab.json",
@@ -20,7 +28,7 @@
       "step": 1,
       "action": "fetch",
       "url": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
-      "purpose": "Inspect the machine-validatable AE100 v2 report contract locally."
+      "purpose": "Inspect the machine-validatable AE100 v2.1 report contract locally."
     },
     {
       "step": 2,
@@ -33,29 +41,46 @@
       "action": "invoke",
       "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
       "operation": "contract",
-      "purpose": "Read current public-safe capability and availability truth without executing scoring."
+      "purpose": "Read current public-safe capability and availability truth without executing consequential external actions."
     },
     {
       "step": 4,
       "action": "invoke",
       "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
-      "operation": "validate_report_v2",
-      "purpose": "Deterministically validate a caller-supplied report against agent-evaluation-report-v2.0. Structural validation is not independent validation or certification."
+      "operation": "benchmark_catalog_v2",
+      "purpose": "Retrieve the bounded public-safe AE100 v2 benchmark catalog."
     },
     {
       "step": 5,
+      "action": "invoke",
+      "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "operation": "score_report_v2",
+      "purpose": "Score caller-supplied observable evaluation evidence using the bounded AE100 v2 scorer; this does not execute the target agent or any consequential external action."
+    },
+    {
+      "step": 6,
+      "action": "invoke",
+      "endpoint": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
+      "operation": "validate_report_v2",
+      "purpose": "Deterministically validate a caller-supplied report against agent-evaluation-report-v2.1. Structural validation is not independent validation or certification."
+    },
+    {
+      "step": 7,
       "action": "inspect",
       "url": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
-      "purpose": "Inspect the public-safe bridge for externally run benchmark evidence while canonical scoring remains unavailable."
+      "purpose": "Inspect the public-safe bridge for provenance-preserving externally run benchmark evidence."
     }
   ],
-  "temporarily_unavailable_operations": [
-    "benchmark_catalog",
+  "available_operations": [
+    "contract",
     "benchmark_catalog_v2",
-    "validate_request",
-    "score_report",
-    "score_report_v2"
+    "score_report_v2",
+    "validate_report_v2",
+    "integration_quickstart",
+    "external_benchmark_bridge",
+    "offer"
   ],
+  "temporarily_unavailable_operations": [],
   "expected_measures": [
     "response_permission_match_rate",
     "execution_match_rate",
@@ -76,14 +101,14 @@
     "effective_unit_price_usd": 0.05,
     "purchase_available": false,
     "purchase_handoff": null,
-    "availability_reason": "SCORING_PARITY_HOLD",
+    "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
     "payment_execution_in_proof_pack": false
   },
   "evidence_boundary": {
     "classification": "synthetic_illustrative_buyer_proof",
     "externally_validated": false,
     "customer_result": false,
-    "interpretation": "This pack demonstrates the public contract and measurable report shape only. It is not evidence of independent benchmark performance, live scorer availability, customer outcomes, or certification."
+    "interpretation": "This pack demonstrates the live bounded public scoring contract and measurable report shape. It is not evidence of independent benchmark performance, customer outcomes, certification, or universal safety."
   },
   "claims_boundary": {
     "formal_certification": false,
