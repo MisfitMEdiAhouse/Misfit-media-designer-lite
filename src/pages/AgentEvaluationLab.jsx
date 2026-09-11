@@ -6,7 +6,6 @@ import Footer from '../components/Footer.jsx';
 const API='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public';
 const MCP='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp';
 const A2A='https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a';
-const BUY='/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agent_evaluation_product_page';
 
 async function runEvaluationOperation(payload, signal) {
   const response = await fetch(API, {
@@ -129,7 +128,7 @@ function useAgentEvaluationWebMcp() {
     });
     register({
       name: 'misfit_agent_evaluation_validate_report',
-      description: 'Deterministically validate a caller-supplied legacy Agent Evaluation Lab report against report schema v1.3. V2 reports validate against the published v2 JSON Schema until a dedicated validate_report_v2 operation is published. Structural validity does not imply external validation or certification.',
+      description: 'Deterministically validate a caller-supplied legacy Agent Evaluation Lab report against the legacy report contract. Structural validity does not imply external validation or certification.',
       inputSchema: {
         type: 'object',
         required: ['report'],
@@ -142,8 +141,22 @@ function useAgentEvaluationWebMcp() {
       execute: async ({ report }) => runEvaluationOperation({ op: 'validate_report', report }, controller.signal),
     });
     register({
+      name: 'misfit_agent_evaluation_validate_report_v2',
+      description: 'Deterministically validate a caller-supplied Agent Evaluation Lab v2.1 report. Structural validity does not imply independent validation or certification.',
+      inputSchema: {
+        type: 'object',
+        required: ['report'],
+        properties: {
+          report: { type: 'object', additionalProperties: true },
+        },
+        additionalProperties: false,
+      },
+      annotations,
+      execute: async ({ report }) => runEvaluationOperation({ op: 'validate_report_v2', report }, controller.signal),
+    });
+    register({
       name: 'misfit_agent_evaluation_offer',
-      description: 'Inspect the current prepaid Agent Evaluation Lab offer and machine handoff. This tool does not charge a payment method or move funds.',
+      description: 'Inspect the current Agent Evaluation Lab commercial metadata and handoff state. This tool does not charge a payment method or move funds.',
       inputSchema: { type: 'object', properties: {}, additionalProperties: false },
       annotations,
       execute: async () => runEvaluationOperation({ op: 'offer' }, controller.signal),
@@ -177,7 +190,7 @@ const integrations = [
 ];
 
 const buyerProof = [
-  ['V2 report schema', '/agent-evaluation-report-v2.schema.json', 'Inspect the machine-validatable agent-evaluation-report-v2.0 shape before purchase.'],
+  ['V2 report schema', '/agent-evaluation-report-v2.schema.json', 'Inspect the machine-validatable agent-evaluation-report-v2.1 shape before integration or commercial handoff.'],
   ['Integration kit', '/agent-evaluation-lab.integration-kit.json', 'Single-file machine handoff for API, MCP, A2A, schemas and provenance.'],
   ['OpenAPI', '/agent-evaluation-lab.openapi.yaml', 'Lintable OpenAPI 3.0.3 contract for procurement and integration review.'],
   ['AE100', '/agent-evaluation-ae100.json', 'Inspect the public-safe benchmark catalog used by the Lab.'],
@@ -215,22 +228,22 @@ export default function AgentEvaluationLab() {
           <div className="mt-7 flex flex-wrap gap-2 text-[11px] text-slate-400">
             <span className="rounded-full border border-white/10 px-3 py-2">Raw → reconsidered → governed</span>
             <span className="rounded-full border border-white/10 px-3 py-2">Same objective, same scenario</span>
-            <span className="rounded-full border border-white/10 px-3 py-2">Report schema v2.0</span>
+            <span className="rounded-full border border-white/10 px-3 py-2">Report schema v2.1</span>
             <span className="rounded-full border border-white/10 px-3 py-2">WebMCP v2 tools</span>
             <span className="rounded-full border border-white/10 px-3 py-2">No certification claim</span>
           </div>
           <div className="misfit-action-rail mt-8">
-            <a href={BUY} className="rounded-2xl bg-fuchsia-300 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-black">Buy 10,000 checks · $500</a>
+            <span className="rounded-2xl border border-amber-300/30 bg-amber-300/10 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-amber-200">Commercial handoff under review</span>
             <a href="/operator?challenge=agent-governance-evaluation&track=client" className="rounded-2xl border border-fuchsia-300/30 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.13em] text-fuchsia-200">Request custom evaluation</a>
             <a href="/a2a-agent-audit" className="rounded-2xl border border-white/10 px-5 py-3 font-mono text-xs uppercase tracking-[0.13em] text-slate-300">Run free metadata audit</a>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-500">Production package: 10,000 governed policy checks at an effective $0.05/check. One-time purchase. Authorized agent workloads only.</p>
+          <p className="mt-3 text-xs leading-5 text-slate-500">Commercial package metadata: 10,000 governed policy checks at an effective $0.05/check. Checkout is currently disabled under commercial review. Authorized agent workloads only.</p>
         </section>
 
         <section className="misfit-card-rail mt-6 rounded-3xl border border-emerald-300/20 bg-emerald-300/[0.035] p-5 sm:p-6 md:p-7">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-300">Buyer proof before purchase</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-300">Integration & buyer proof</div>
           <h2 className="mt-2 font-display text-2xl font-semibold">Inspect the contract, evidence shape and benchmark first.</h2>
-          <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-400">No black-box sales pitch required. Procurement teams and machine clients can inspect the current public-safe artifacts before buying or integrating.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-slate-400">No black-box sales pitch required. Procurement teams and machine clients can inspect the current public-safe artifacts before any commercial handoff or integration.</p>
           <div className="mt-5 grid gap-3 md:grid-cols-2">{buyerProof.map(([name,url,body]) => <PublicLinkCard key={name} name={name} url={url} body={body} tone="emerald" />)}</div>
         </section>
 
@@ -248,7 +261,7 @@ export default function AgentEvaluationLab() {
 
         <section className="misfit-card-rail mt-6 rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-5 sm:p-6 md:p-7">
           <div className="flex items-center gap-3"><Network className="shrink-0 text-cyan-300"/><h2 className="font-display text-2xl font-semibold">Machine integration</h2></div>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route registers read-only WebMCP tools for contract inspection, legacy compatibility, AE100 v2 discovery, Raw → reconsidered → governed scoring, deterministic legacy report validation and offer inspection. V2 reports use the published v2 JSON Schema until a dedicated validate_report_v2 runtime operation is added. These public wrappers do not expose the private GHOSBC kernel.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">Use the same bounded evaluation product through HTTP, MCP or A2A. In compatible agent-enabled browsers, this route registers read-only WebMCP tools for contract inspection, legacy compatibility, AE100 v2 discovery, Raw → reconsidered → governed scoring, deterministic v2.1 report validation and offer-state inspection. These public wrappers do not expose the private GHOSBC kernel.</p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">{integrations.map(([name,url,body]) => <PublicLinkCard key={name} name={name} url={url} body={body} tone="cyan" />)}</div>
         </section>
 
