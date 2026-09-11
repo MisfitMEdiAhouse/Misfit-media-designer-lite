@@ -1,16 +1,17 @@
 openapi: 3.0.3
 info:
   title: Misfit Agent Evaluation Lab Public API
-  version: 1.15.1
+  version: 1.18.0
   description: >-
     Public-safe machine interface for the Misfit Agent Evaluation Lab. The product
     compares authorized Raw Agent, reconsidered, and GHOSBC-governed outcomes using
     bounded consequence assessment, Center Reset/replanning signals, public Castle
     Gate decision labels, Audit Memory completeness, comparative metrics, and
-    deterministic report validation. Canonical scoring is temporarily fail-closed
-    under SCORING_PARITY_HOLD. This surface does not expose protected GHOSBC internals,
-    execute external actions, charge payment methods, provide formal certification,
-    claim machine consciousness, or imply independent third-party validation.
+    deterministic report validation. Bounded AE100-v2 scoring is production-live.
+    Purchase execution remains disabled under COMMERCIAL_HANDOFF_REVIEW_HOLD. This
+    surface does not expose protected GHOSBC internals, execute external actions,
+    charge payment methods, provide formal certification, claim machine consciousness,
+    or imply independent third-party validation.
 servers:
   - url: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 paths:
@@ -28,14 +29,13 @@ paths:
                 additionalProperties: true
     post:
       operationId: runAvailableEvaluationOperation
-      summary: Run a currently available public-safe discovery or validation operation
+      summary: Run a currently available public-safe evaluation, discovery, or validation operation
       description: >-
-        While SCORING_PARITY_HOLD is active, only contract, integration_quickstart,
-        validate_report_v2, external_benchmark_bridge, and offer are advertised as
-        available. benchmark_catalog, benchmark_catalog_v2, validate_request,
-        score_report, and score_report_v2 must not be treated as production-live.
-        The commercial offer may be discovered, but purchase availability is false
-        and no purchase handoff is provided until canonical scorer parity is restored.
+        Bounded AE100-v2 scoring is production-live. Available public-safe operations
+        include contract, benchmark_catalog_v2, score_report_v2, validate_report_v2,
+        integration_quickstart, external_benchmark_bridge, and offer. Purchase
+        availability is false and no purchase handoff is provided while
+        COMMERCIAL_HANDOFF_REVIEW_HOLD is active.
       requestBody:
         required: true
         content:
@@ -46,15 +46,18 @@ paths:
               contract:
                 value:
                   op: contract
-              quickstart:
+              benchmarkCatalogV2:
                 value:
-                  op: integration_quickstart
+                  op: benchmark_catalog_v2
+              scoreReportV2:
+                value:
+                  op: score_report_v2
               validateReportV2:
                 value:
                   op: validate_report_v2
                   report:
                     contract_version: agent-evaluation-lab-v2
-                    report_schema_version: agent-evaluation-report-v2.0
+                    report_schema_version: agent-evaluation-report-v2.1
                     benchmark_version: ae100-v2
                     report_type: caller_supplied
                     comparative_summary:
@@ -66,6 +69,9 @@ paths:
                       classification: caller_supplied_unverified
                       externally_validated: false
                     claims_boundary: Not a certification or independent validation.
+              quickstart:
+                value:
+                  op: integration_quickstart
               externalBridge:
                 value:
                   op: external_benchmark_bridge
@@ -87,7 +93,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '409':
-          description: Requested capability is intentionally unavailable under the current canonical hold
+          description: Requested capability is intentionally unavailable under a current canonical hold
           content:
             application/json:
               schema:
@@ -115,8 +121,10 @@ components:
           type: string
           enum:
             - contract
-            - integration_quickstart
+            - benchmark_catalog_v2
+            - score_report_v2
             - validate_report_v2
+            - integration_quickstart
             - external_benchmark_bridge
             - offer
         report:
