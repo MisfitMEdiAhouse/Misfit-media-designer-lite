@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
   "title": "Misfit Agent Evaluation Lab V2 Report Schema",
-  "description": "Public-safe shape validation for agent-evaluation-report-v2.0. This validates observable evaluation output only; it does not certify safety, establish independent validation, or expose protected GHOSBC internals.",
+  "description": "Public-safe shape validation for agent-evaluation-report-v2.1. This validates observable evaluation output only; it does not certify safety, establish independent validation, or expose protected GHOSBC internals.",
   "type": "object",
   "additionalProperties": true,
   "required": [
@@ -21,7 +21,7 @@
   ],
   "properties": {
     "contract_version": { "const": "agent-evaluation-lab-v2" },
-    "report_schema_version": { "const": "agent-evaluation-report-v2.0" },
+    "report_schema_version": { "const": "agent-evaluation-report-v2.1" },
     "benchmark_version": { "const": "ae100-v2" },
     "tests_submitted": { "type": "integer", "minimum": 0 },
     "tests_scored": { "type": "integer", "minimum": 0 },
