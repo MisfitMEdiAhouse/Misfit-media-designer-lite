@@ -1,14 +1,14 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "name": "Misfit Agent Evaluation Lab WebMCP Extension",
   "provider": "Misfit Mediahouse",
-  "status": "degraded_scoring_parity_hold",
-  "scoring_live": false,
+  "status": "bounded_scoring_live_public_safe",
+  "scoring_live": true,
   "purchase_available": false,
-  "availability_reason": "SCORING_PARITY_HOLD",
+  "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
   "product": "Misfit Agent Evaluation Lab",
   "page": "https://misfitmediahouse.com/agent-evaluation-lab",
-  "purpose": "Expose bounded browser-native Agent Evaluation Lab discovery and verification tools to compatible WebMCP clients without exposing the private GHOSBC governance kernel or advertising unavailable scoring.",
+  "purpose": "Expose bounded browser-native Agent Evaluation Lab discovery, AE100-v2 scoring, and deterministic report verification tools to compatible WebMCP clients without exposing the private GHOSBC governance kernel or advertising unavailable checkout.",
   "webmcp_tools": [
     {
       "name": "misfit_agent_evaluation_contract",
@@ -17,16 +17,28 @@
       "purpose": "Discover the public evaluation contract."
     },
     {
-      "name": "misfit_agent_evaluation_integration_quickstart",
+      "name": "misfit_agent_evaluation_benchmark_catalog_v2",
       "mode": "read_only",
       "available": true,
-      "purpose": "Discover the bounded integration sequence and public-safe machine surfaces."
+      "purpose": "Inspect the bounded AE100 v2 scenario catalog."
+    },
+    {
+      "name": "misfit_agent_evaluation_score_report_v2",
+      "mode": "bounded_deterministic_scoring",
+      "available": true,
+      "purpose": "Score authorized Raw Agent, reconsidered, and governed observable evidence using the public-safe AE100 v2 scorer."
     },
     {
       "name": "misfit_agent_evaluation_validate_report_v2",
       "mode": "deterministic_validation",
       "available": true,
-      "purpose": "Validate a caller-supplied v2 report shape. Structural validation is not certification or independent validation."
+      "purpose": "Validate a caller-supplied v2.1 report shape. Structural validation is not certification or independent validation."
+    },
+    {
+      "name": "misfit_agent_evaluation_integration_quickstart",
+      "mode": "read_only",
+      "available": true,
+      "purpose": "Discover the bounded integration sequence and public-safe machine surfaces."
     },
     {
       "name": "misfit_agent_evaluation_external_benchmark_bridge",
@@ -41,13 +53,7 @@
       "purpose": "Inspect the existing commercial offer and current availability without executing payment."
     }
   ],
-  "temporarily_unavailable_tools": [
-    "misfit_agent_evaluation_benchmark_catalog",
-    "misfit_agent_evaluation_benchmark_catalog_v2",
-    "misfit_agent_evaluation_validate_request",
-    "misfit_agent_evaluation_score_report",
-    "misfit_agent_evaluation_score_report_v2"
-  ],
+  "temporarily_unavailable_tools": [],
   "evaluation_dimensions": [
     "consequence_assessment",
     "center_reset_replanning",
@@ -66,7 +72,7 @@
     "effective_unit_price_usd": 0.05,
     "purchase_available": false,
     "purchase_handoff": null,
-    "availability_reason": "SCORING_PARITY_HOLD",
+    "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
     "payment_execution_by_webmcp": false
   },
   "proof": {
