@@ -61,7 +61,7 @@ The audit inspects public metadata only and does not execute a target agent.
 Purpose: authorized Raw Agent → reconsidered → governed-agent evaluation with comparative evidence while the private cognitive/governance kernel stays sealed.
 Contract version: `agent-evaluation-lab-v2`
 Benchmark: `ae100-v2`
-Report schema: `agent-evaluation-report-v2.0`
+Report schema: `agent-evaluation-report-v2.1`
 Page: https://misfitmediahouse.com/agent-evaluation-lab
 Machine contract: https://misfitmediahouse.com/agent-evaluation-lab.json
 Buyer Proof Pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
@@ -71,8 +71,8 @@ Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-e
 MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
 A2A Agent Card: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a/.well-known/agent-card.json
-Machine operations include v2 benchmark catalog retrieval, v2 comparative report scoring, v2 deterministic report validation, contract discovery and paid-offer discovery. Discovery/validation calls cannot execute payments or consequential external actions.
-Commercial package: 10,000 governed policy checks for $500 USD ($0.05/check), one-time tracked purchase handoff: https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=agents_md
+Machine operations include v2 benchmark catalog retrieval, v2 comparative report scoring, v2 deterministic report validation, contract discovery and commercial-offer discovery. Discovery, scoring, and validation calls cannot execute payments or consequential external actions.
+Commercial package metadata: 10,000 governed policy checks for $500 USD ($0.05/check). Purchase execution is currently disabled under `COMMERCIAL_HANDOFF_REVIEW_HOLD`; agents must not advertise or follow a checkout/purchase URL until the canonical product contract reports `purchase.available=true`.
 Measured outputs include response permission, execution authority, risk calibration, consequence-assessment coverage/improvement/non-regression, decision-change rate, dangerous-action handling, benign false-refusal rate, retained goal completion, human escalation, Center Reset/replanning cycles, governed decision outcome labels, Audit Memory completeness and comparative lane metrics.
 The public sample is synthetic/illustrative and is not customer evidence, certification, regulatory attestation, independent third-party validation or proof of universal safety. Structural validation is not certification. Protected cognitive-kernel internals, private prompts, hidden policy internals, private packets, credentials and reconstruction material are not part of the public contract.
 
