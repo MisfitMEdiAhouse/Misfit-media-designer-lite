@@ -1,11 +1,13 @@
 {
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "status": "prepared_not_payment_activated",
   "provider": "Misfit Mediahouse",
   "product": "Misfit Agent Evaluation Lab",
   "contract_version": "agent-evaluation-lab-v2",
   "benchmark_version": "ae100-v2",
-  "report_schema_version": "agent-evaluation-report-v2.0",
+  "report_schema_version": "agent-evaluation-report-v2.1",
+  "purchase_available": false,
+  "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
   "canonical": "https://misfitmediahouse.com/agent-evaluation-lab",
   "resource": "https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public",
   "x402": {
@@ -17,13 +19,13 @@
     "service_name": "Misfit Agent Evaluation Lab",
     "tags": ["agent-evaluation", "governance", "benchmark", "raw-vs-governed"],
     "derived_unit_economics": {
-      "source": "existing prepaid commercial package only",
+      "source": "existing prepaid commercial package reference only",
       "package_usd": 500,
       "included_checks": 10000,
       "effective_price_per_check_usd": 0.05,
       "usdc_decimals": 6,
       "effective_price_per_check_usdc_atomic": "50000",
-      "note": "This is a derived reference price, not an activated x402 charge or a new commercial promise."
+      "note": "Reference economics only. Purchase execution and x402 charging remain disabled under COMMERCIAL_HANDOFF_REVIEW_HOLD."
     },
     "unsigned_payment_required_template": {
       "x402Version": 2,
@@ -87,15 +89,15 @@
     "existing_offer_key": "misfit_agent_evaluation_10k",
     "existing_prepaid_package_usd": 500,
     "existing_included_checks": 10000,
-    "existing_purchase_handoff": "https://misfitmediahouse.com/api/referral-event?machine_offer=misfit_agent_evaluation_10k&source=x402_readiness",
-    "handoff_behavior": "Records a non-revenue checkout-intent event before redirecting to the existing Stripe Checkout. Opening this handoff is not a sale or settlement."
+    "existing_purchase_handoff": null,
+    "handoff_behavior": "Disabled under COMMERCIAL_HANDOFF_REVIEW_HOLD. This artifact must not initiate Stripe checkout, x402 charging, wallet selection, or settlement."
   },
   "activation_requirements": [
     "Use an owner-approved Base/USDC receive address; do not create or select a wallet autonomously.",
     "Resolve the canonical Base USDC asset address from the approved facilitator/configuration at activation time; do not guess or hard-code it from memory.",
     "Configure the approved x402 facilitator and exact per-call price without changing Stripe payout settings.",
     "Replace only the explicit payTo/asset placeholders in the unsigned template after owner approval.",
-    "Return x402 v2 PaymentRequired metadata with extensions.bazaar on the protected public endpoint.",
+    "Return x402 v2 PaymentRequired metadata with extensions.bazaar on the protected public endpoint only after the commercial hold is explicitly cleared.",
     "Confirm a real external paid settlement before claiming Bazaar or Agentic.Market indexing. Self-tests are never revenue or traction."
   ],
   "claims_boundary": {
