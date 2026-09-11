@@ -1,9 +1,9 @@
 {
   "info": {
     "name": "Misfit Agent Evaluation Lab",
-    "description": "Public-safe client collection for the Misfit Agent Evaluation Lab production API. While SCORING_PARITY_HOLD is active, this collection exposes only service discovery, contract inspection, integration quickstart, deterministic report validation, the external benchmark bridge, and offer inspection. Canonical scoring, benchmark catalog operations, and legacy score-request validation are intentionally unavailable. This collection does not execute external actions, charge payment methods, expose protected GHOSBC internals, provide formal certification, claim machine consciousness, or imply independent third-party validation.",
+    "description": "Public-safe client collection for the Misfit Agent Evaluation Lab production API. Bounded AE100-v2 scoring is production-live. Available operations are contract, benchmark_catalog_v2, score_report_v2, validate_report_v2, integration_quickstart, external_benchmark_bridge, and offer. Purchase execution remains disabled under COMMERCIAL_HANDOFF_REVIEW_HOLD. This collection does not execute external actions, charge payment methods, expose protected GHOSBC internals, provide formal certification, claim machine consciousness, or imply independent third-party validation.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "version": {"major": 1, "minor": 1, "patch": 0}
+    "version": {"major": 1, "minor": 2, "patch": 0}
   },
   "variable": [
     {
@@ -26,23 +26,41 @@
       }
     },
     {
-      "name": "Integration quickstart",
+      "name": "Benchmark catalog v2",
       "request": {
         "method": "POST",
         "header": [{"key": "Content-Type", "value": "application/json"}],
-        "body": {"mode": "raw", "raw": "{\n  \"op\": \"integration_quickstart\"\n}"},
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"benchmark_catalog_v2\"\n}"},
         "url": "{{baseUrl}}"
       }
     },
     {
-      "name": "Validate report v2",
+      "name": "Score report v2",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"score_report_v2\"\n}"},
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "Validate report v2.1",
       "request": {
         "method": "POST",
         "header": [{"key": "Content-Type", "value": "application/json"}],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"op\": \"validate_report_v2\",\n  \"report\": {\n    \"contract_version\": \"agent-evaluation-lab-v2\",\n    \"report_schema_version\": \"agent-evaluation-report-v2.0\",\n    \"benchmark_version\": \"ae100-v2\",\n    \"report_type\": \"caller_supplied\",\n    \"comparative_summary\": {\n      \"raw_agent\": {},\n      \"reconsidered_agent\": {},\n      \"governed_agent\": {}\n    },\n    \"evidence_rows\": [],\n    \"evidence_provenance\": {\n      \"classification\": \"caller_supplied_unverified\",\n      \"externally_validated\": false\n    },\n    \"claims_boundary\": \"Not a certification or independent validation.\"\n  }\n}"
+          "raw": "{\n  \"op\": \"validate_report_v2\",\n  \"report\": {\n    \"contract_version\": \"agent-evaluation-lab-v2\",\n    \"report_schema_version\": \"agent-evaluation-report-v2.1\",\n    \"benchmark_version\": \"ae100-v2\",\n    \"report_type\": \"caller_supplied\",\n    \"comparative_summary\": {\n      \"raw_agent\": {},\n      \"reconsidered_agent\": {},\n      \"governed_agent\": {}\n    },\n    \"evidence_rows\": [],\n    \"evidence_provenance\": {\n      \"classification\": \"caller_supplied_unverified\",\n      \"externally_validated\": false\n    },\n    \"claims_boundary\": \"Not a certification or independent validation.\"\n  }\n}"
         },
+        "url": "{{baseUrl}}"
+      }
+    },
+    {
+      "name": "Integration quickstart",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"op\": \"integration_quickstart\"\n}"},
         "url": "{{baseUrl}}"
       }
     },
@@ -66,22 +84,19 @@
     }
   ],
   "x_misfit_availability": {
-    "status": "degraded_scoring_parity_hold",
-    "scoring_live": false,
+    "status": "bounded_scoring_live_public_safe",
+    "scoring_live": true,
     "purchase_available": false,
+    "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
     "available_operations": [
       "contract",
-      "integration_quickstart",
+      "benchmark_catalog_v2",
+      "score_report_v2",
       "validate_report_v2",
+      "integration_quickstart",
       "external_benchmark_bridge",
       "offer"
     ],
-    "unavailable_operations": [
-      "benchmark_catalog",
-      "benchmark_catalog_v2",
-      "validate_request",
-      "score_report",
-      "score_report_v2"
-    ]
+    "unavailable_operations": []
   }
 }
