@@ -80,19 +80,14 @@ const agentEvaluationProductJsonLd = {
   manufacturer: {
     '@id': 'https://misfitmediahouse.com/#organization',
   },
-  offers: {
-    '@type': 'Offer',
-    url: 'https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J',
-    priceCurrency: 'USD',
-    price: '500.00',
-    availability: 'https://schema.org/InStock',
-    category: 'One-time production package',
-  },
   additionalProperty: [
     { '@type': 'PropertyValue', name: 'Included governed checks', value: '10000' },
+    { '@type': 'PropertyValue', name: 'Reference package price', value: '$500' },
     { '@type': 'PropertyValue', name: 'Effective unit price', value: '$0.05/check' },
+    { '@type': 'PropertyValue', name: 'Purchase availability', value: 'Commercial handoff under review' },
+    { '@type': 'PropertyValue', name: 'Purchase hold code', value: 'COMMERCIAL_HANDOFF_REVIEW_HOLD' },
     { '@type': 'PropertyValue', name: 'Contract version', value: 'agent-evaluation-lab-v2' },
-    { '@type': 'PropertyValue', name: 'Report schema', value: 'agent-evaluation-report-v2.0' },
+    { '@type': 'PropertyValue', name: 'Report schema', value: 'agent-evaluation-report-v2.1' },
     { '@type': 'PropertyValue', name: 'Benchmark catalog', value: 'AE100 v2' },
     { '@type': 'PropertyValue', name: 'Formal certification', value: 'No' },
     { '@type': 'PropertyValue', name: 'Independent validation', value: 'Not claimed' },
