@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
-const evaluationUrl = 'https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J';
+const evaluationUrl = '/agent-evaluation-lab';
 const integrationUrl = 'https://buy.stripe.com/5kQ28r2AigL42qeb7y8ww0K';
 const A2A_ENDPOINT = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-machine-a2a/message:send';
 
@@ -55,7 +55,7 @@ export default function AgenticGovernedFleet() {
         <h1 style={{ fontSize:'clamp(44px,8vw,86px)', lineHeight:.92, margin:0, maxWidth:980 }}>Govern the fleet before the fleet acts.</h1>
         <p style={{ color:'#9fb0bf', fontSize:19, lineHeight:1.65, maxWidth:820, margin:'26px 0 20px' }}>A public-safe governance layer for consequential AI actions. This live proof sends structured action metadata through Misfit Machine Agent's published A2A governance skill and returns ALLOW, REVIEW, or BLOCK before any external action is eligible to execute.</p>
         <div style={{ display:'flex', flexWrap:'wrap', gap:12, marginBottom:38 }}>
-          <a href={evaluationUrl} target="_blank" rel="noreferrer" style={{ textDecoration:'none', background:'#67e8f9', color:'#031019', fontWeight:900, borderRadius:14, padding:'14px 18px' }}>BUY EVALUATION · $500</a>
+          <a href={evaluationUrl} style={{ textDecoration:'none', background:'#67e8f9', color:'#031019', fontWeight:900, borderRadius:14, padding:'14px 18px' }}>EVALUATION LAB · HANDOFF UNDER REVIEW</a>
           <a href={integrationUrl} target="_blank" rel="noreferrer" style={{ textDecoration:'none', border:'1px solid rgba(103,232,249,.35)', color:'#e8fbff', fontWeight:800, borderRadius:14, padding:'14px 18px' }}>DEPLOY INTO MY AGENT · $1,500</a>
         </div>
         <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:14 }}>{Object.values(presets).map((preset)=><button key={preset.label} onClick={()=>{setForm(preset);setResult(null)}} style={{ minHeight:44, padding:'8px 13px', borderRadius:999, border:'1px solid rgba(255,255,255,.12)', background:'rgba(255,255,255,.025)', color:'#b9c8d3', fontWeight:700 }}>{preset.label}</button>)}</div>
@@ -87,7 +87,7 @@ export default function AgenticGovernedFleet() {
         <section style={{ ...panel, marginTop:18 }}>
           <div style={{ color:'#67e8f9', fontSize:12, letterSpacing:'.16em' }}>FROM PUBLIC PROOF TO PRODUCTION OFFER</div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(240px,100%),1fr))', gap:14, marginTop:16 }}>
-            <div><strong style={{ fontSize:22 }}>$500 · Evaluate</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>10,000 governed checks plus comparative evidence and integration findings. Use this to test whether the control layer fits your agent before implementation.</p><a href={evaluationUrl} target="_blank" rel="noreferrer" style={{ color:'#67e8f9', fontWeight:800 }}>Buy evaluation →</a></div>
+            <div><strong style={{ fontSize:22 }}>$500 · Evaluate</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>10,000 governed checks plus comparative evidence and integration findings. Bounded scoring is live; paid handoff remains disabled pending commercial review.</p><a href={evaluationUrl} style={{ color:'#67e8f9', fontWeight:800 }}>Inspect evaluation product →</a></div>
             <div><strong style={{ fontSize:22 }}>$1,500 · Integrate</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>One existing agent workflow gets bounded allow/review/block routing, human-gate hooks, and audit evidence. Private GHOSBC internals stay sealed.</p><a href={integrationUrl} target="_blank" rel="noreferrer" style={{ color:'#67e8f9', fontWeight:800 }}>Buy integration →</a></div>
             <div><strong style={{ fontSize:22 }}>API / MCP / A2A</strong><p style={{ color:'#9fb0bf', lineHeight:1.6 }}>The public-safe governance primitive is available through machine-facing contracts. The browser proof above uses the published A2A skill directly.</p><a href="/agent-evaluation-lab" style={{ color:'#67e8f9', fontWeight:800 }}>Inspect developer contracts →</a></div>
           </div>
