@@ -1,5 +1,5 @@
 {
-  "schema_version": "external-benchmark-run-manifest-v1.0",
+  "schema_version": "external-benchmark-run-manifest-v1.1",
   "name": "Misfit Agent Evaluation Lab External Benchmark Run Manifest",
   "provider": "Misfit Mediahouse",
   "status": "ready_for_independent_run",
@@ -64,7 +64,10 @@
     "offer_key": "misfit_agent_evaluation_10k",
     "package": "10000 governed checks",
     "price_usd": 500,
-    "purchase_handoff": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J",
+    "purchase_available": false,
+    "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+    "purchase_handoff": null,
+    "product_url": "https://misfitmediahouse.com/agent-evaluation-lab",
     "independent_evaluator_payment_included": false
   },
   "privacy_boundary": {
