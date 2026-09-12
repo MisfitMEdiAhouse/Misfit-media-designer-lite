@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "Misfit Governed Agent Fleet",
   "status": "live",
   "public_url": "https://misfitmediahouse.com/agentic-governed-fleet",
@@ -22,10 +22,14 @@
   "offers": [
     {
       "name": "Agent Governance Evaluation",
+      "offer_key": "misfit_agent_evaluation_10k",
       "price_usd": 500,
       "billing_model": "prepaid",
       "included_checks": 10000,
-      "purchase_url": "https://buy.stripe.com/9B6dR90saamGc0Oa3u8ww0J"
+      "purchase_available": false,
+      "availability_reason": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+      "product_url": "https://misfitmediahouse.com/agent-evaluation-lab",
+      "purchase_url": null
     },
     {
       "name": "Governed Agent Fleet Integration",
@@ -48,5 +52,5 @@
     ]
   },
   "competition_origin": "All Things Agentic Hackathon clean-room build",
-  "commercial_status": "live_revenue_enabled"
+  "commercial_status": "integration_live_evaluation_purchase_hold"
 }
