@@ -14,6 +14,9 @@ This public package intentionally exposes only the evaluation contract, adapters
 6. **Comparative Metrics** — compare raw vs reconsidered vs governed behavior with the existing AE100-v2 evaluation/reporting surface.
 7. **Public-safe Report** — produce deterministic evidence suitable for a human reviewer or another machine to inspect.
 
+## Architecture
+The required public-safe architecture diagram is packaged at [`agents-for-humans-architecture.md`](./agents-for-humans-architecture.md). It shows the user/machine interfaces, Strands Agents SDK adapter, Raw Agent baseline, consequence assessment, Center Reset/replanning, sealed GHOSBC governance boundary, public governed-decision outcome, Audit Memory, AE100-v2 comparative metrics, deterministic report validation, and API/MCP/A2A/UCP distribution. Protected GHOSBC internals remain intentionally undisclosed.
+
 ## Human value
 The product is designed for autonomous systems that should run quietly until there is a meaningful decision, exception, or risk to surface. Instead of asking a person to supervise every step, the evaluation layer creates a measurable checkpoint around consequential actions and preserves the evidence needed for later review.
 
@@ -42,6 +45,7 @@ Evaluation/scoring may be live while purchasing remains fail-closed until explic
 - Working public-safe product/demo: existing production Evaluation Lab
 - Public source continuity: this repository/package
 - Strands integration: existing public-safe adapter
+- **Architecture Diagram:** `agents-for-humans-architecture.md`
 - Raw vs reconsidered vs governed comparison: existing evaluation contract
 - Consequence assessment: included
 - Center Reset/replanning: included
