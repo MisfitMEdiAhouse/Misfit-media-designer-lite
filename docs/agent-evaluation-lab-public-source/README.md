@@ -23,11 +23,18 @@ The current public contract is `agent-evaluation-lab-v2`, benchmark `ae100-v2`, 
 - Public API: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-public
 - MCP: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-mcp
 - A2A: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-agent-evaluation-a2a
+- UCP catalog/discovery: https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/misfit-ucp
 - OpenAPI: https://misfitmediahouse.com/agent-evaluation-lab.openapi.yaml
 - Submission/demo pack: https://misfitmediahouse.com/agent-evaluation-lab-submission-pack.md
 - Hackathon deck: https://misfitmediahouse.com/agent-evaluation-lab-hackathon-deck.md
 - Sample report: https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json
 - Buyer proof pack: https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json
+
+## Machine-native distribution
+
+The Evaluation Lab is currently packaged for bounded public discovery and scoring through HTTP, MCP, A2A, and UCP. UCP exposes the Evaluation Lab as a machine-readable catalog product with its measurable outputs, public integration surfaces, benchmark/report versions, claims/privacy boundaries, and a fail-closed commercial state. UCP discovery telemetry pseudonymizes the `UCP-Agent` header and marks obvious test/health/probe traffic synthetic so it is not counted as real traction.
+
+Purchase execution remains disabled until the explicit commercial handoff review is cleared; discovery does not create a checkout, wallet, settlement, entitlement, or revenue event.
 
 ## Commercial state
 
@@ -41,10 +48,11 @@ The protected GHOSBC cognitive kernel is deliberately excluded. This repository 
 
 ## Source snapshots
 
-The sibling files are source snapshots of the currently deployed public API, MCP, and A2A wrappers. They demonstrate protocol bindings and bounded orchestration only. The canonical protected evaluation backend is not published here.
+The sibling files are source snapshots of the currently deployed public API, MCP, A2A, and UCP wrappers. They demonstrate protocol bindings, public catalog/discovery, and bounded orchestration only. The canonical protected evaluation backend is not published here.
 
 - `public-api.ts` — public-safe HTTP contract and deterministic report validation / bounded scorer forwarding
 - `mcp.ts` — read-only MCP tool binding
 - `a2a.ts` — A2A Agent Card + bounded message binding
+- `ucp.ts` — UCP catalog/discovery binding, fail-closed commercial offer, privacy-preserving discovery telemetry
 
 These snapshots are packaging of the existing live system, not a duplicate implementation.
