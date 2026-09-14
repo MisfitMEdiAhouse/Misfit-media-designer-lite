@@ -11,6 +11,7 @@
   "intake": "https://misfitmediahouse.com/operator?challenge=agent-governance-evaluation&track=client",
   "sample_report": "https://misfitmediahouse.com/agent-evaluation-lab-sample-report.json",
   "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+  "commercial_handoff": "https://misfitmediahouse.com/agent-evaluation-lab-commercial-handoff.json",
   "v2_readiness": "https://misfitmediahouse.com/agent-evaluation-lab-v2-readiness.json",
   "external_evaluator_kit": "https://misfitmediahouse.com/agent-evaluation-external-evaluator-kit.json",
   "external_benchmark_evidence_schema": "https://misfitmediahouse.com/agent-evaluation-external-benchmark-evidence.schema.json",
@@ -39,6 +40,7 @@
     "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
     "integration_kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+    "commercial_handoff": "https://misfitmediahouse.com/agent-evaluation-lab-commercial-handoff.json",
     "available_operations": [
       "contract",
       "benchmark_catalog_v2",
@@ -88,10 +90,11 @@
     "operation": "integration_quickstart",
     "kit": "https://misfitmediahouse.com/agent-evaluation-lab.integration-kit.json",
     "buyer_proof_pack": "https://misfitmediahouse.com/agent-evaluation-lab-proof-pack.json",
+    "commercial_handoff": "https://misfitmediahouse.com/agent-evaluation-lab-commercial-handoff.json",
     "request_json_schema": "https://misfitmediahouse.com/agent-evaluation-request.schema.json",
     "report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report-v2.schema.json",
     "legacy_v1_report_json_schema": "https://misfitmediahouse.com/agent-evaluation-report.schema.json",
-    "purpose": "Return the current API, OpenAPI, MCP, A2A, public report schemas and buyer proof sequence without requiring a human explanation.",
+    "purpose": "Return the current API, OpenAPI, MCP, A2A, public report schemas, buyer proof sequence, and fail-closed procurement handoff without requiring a human explanation.",
     "execution_boundary": "Read-only discovery and evaluation guidance; cannot charge a payment method, mutate an account, execute external tools or expose protected GHOSBC internals."
   },
   "external_benchmark_interop": {
