@@ -5,6 +5,11 @@ GHOSBC Agent Evaluation Lab is a bounded agent-evaluation product from Misfit Me
 
 This public package intentionally exposes only the evaluation contract, adapters, benchmark/report surfaces, and integration continuity needed to inspect or demo the product. The protected GHOSBC governance kernel, Mother Language, Soul Cipher, GHX/glyph semantics, and private Castle Gate implementation remain private.
 
+## Recommended track: Professional Agents
+The strongest submission fit is **Professional Agents**: the Evaluation Lab is designed to improve judgment-heavy professional work around building, operating, procuring, and reviewing autonomous agents. It reduces the need for constant manual supervision by making consequential behavior changes measurable and auditable.
+
+The contest-specific judge/evidence mapping is packaged at [`agents-for-humans-judge-scorecard.md`](./agents-for-humans-judge-scorecard.md). It maps the existing product to Technological Implementation, Design, Potential Impact, Creativity & Originality, and Presentation without creating a duplicate system or expanding claims.
+
 ## Submission-period / pre-existing-work disclosure
 The public Agent Evaluation Lab product surface was created during the Agents for Humans submission period. Repository history shows the public evaluation-lab packaging commit on August 24, 2026, after the August 10, 2026 submission window opened.
 
@@ -47,6 +52,8 @@ This product does **not** claim formal certification, independent validation, ma
 Evaluation/scoring may be live while purchasing remains fail-closed until explicitly authorized. Synthetic and self-test activity must never be represented as revenue, customers, or external traction.
 
 ## Submission checklist
+- Recommended track: **Professional Agents**
+- Judge/evidence scorecard: `agents-for-humans-judge-scorecard.md`
 - Working public-safe product/demo: existing production Evaluation Lab
 - Public source continuity: this repository/package
 - Pre-existing-work disclosure: included; protected GHOSBC kernel disclosed as pre-existing proprietary dependency
