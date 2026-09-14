@@ -1,0 +1,67 @@
+{
+  "product": "Misfit Agent Evaluation Lab",
+  "submission": "Agents for Humans Hackathon 2026",
+  "verified_at": "2026-09-14T16:03:00Z",
+  "deadline": "2026-09-14T17:00:00-07:00",
+  "public_safe_only": true,
+  "private_ghosbc_kernel_exposed": false,
+  "requirements": {
+    "public_repo": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/tree/main/docs/agent-evaluation-lab-public-source"
+    },
+    "readme": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/README.md"
+    },
+    "architecture_diagram": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/agents-for-humans-architecture.md"
+    },
+    "strands_agents_sdk": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/tree/main/docs/agent-evaluation-lab-public-source/strands-adapter"
+    },
+    "live_demo": {
+      "status": "ready",
+      "url": "https://misfitmediahouse.com/agent-evaluation-lab"
+    },
+    "demo_runbook": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/agents-for-humans-demo-runbook.md"
+    },
+    "demo_video": {
+      "status": "human_gate",
+      "requirement": "Public YouTube or Vimeo video, maximum 5 minutes"
+    },
+    "aws_builder_id": {
+      "status": "human_gate",
+      "requirement": "AWS Builder ID required for submission"
+    },
+    "aws_account": {
+      "status": "human_gate",
+      "requirement": "AWS account required to participate/use Strands Agents"
+    },
+    "open_source_license": {
+      "status": "human_gate",
+      "requirement": "MIT or Apache license must be present and visible in the repository About section",
+      "automation_boundary": "No license was selected or granted autonomously because that changes public IP licensing rights."
+    },
+    "devpost_registration_and_rules": {
+      "status": "human_gate",
+      "requirement": "Registration and final submission require owner action; submission constitutes agreement to official rules."
+    }
+  },
+  "claims_boundary": [
+    "Evaluation product only",
+    "No formal safety certification",
+    "No regulatory attestation",
+    "No machine-consciousness claims",
+    "No private GHOSBC, Mother Language, Soul Cipher, GHX, glyph, Castle Gate internals, credentials, or reconstruction material"
+  ],
+  "commercial_state": {
+    "scoring": "live",
+    "purchase_execution": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+    "verified_collected_revenue_cents": 0
+  }
+}
