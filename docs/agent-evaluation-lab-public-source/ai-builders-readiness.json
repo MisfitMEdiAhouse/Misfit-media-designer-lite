@@ -1,0 +1,67 @@
+{
+  "product": "GHOSBC Agent Evaluation Lab",
+  "submission": "AI Builders Hackathon 2026",
+  "verified_at": "2026-09-14T21:31:00Z",
+  "deadline": "2026-09-15T23:00:00-04:00",
+  "public_safe_only": true,
+  "private_ghosbc_kernel_exposed": false,
+  "official": {
+    "overview": "https://ai-builders-hackathon-2026.devpost.com/",
+    "rules": "https://ai-builders-hackathon-2026.devpost.com/rules",
+    "submission": "https://devpost.com/submit-to/30452-ai-builders-hackathon/manage/submissions",
+    "cash_prize_pool_usd": 33900
+  },
+  "requirements": {
+    "project_title_and_description": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/ai-builders-submission-2026.md"
+    },
+    "public_source_repository": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/tree/main/docs/agent-evaluation-lab-public-source"
+    },
+    "problem_solution_technology_documentation": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/README.md"
+    },
+    "working_demo": {
+      "status": "ready",
+      "url": "https://misfitmediahouse.com/agent-evaluation-lab"
+    },
+    "demo_script": {
+      "status": "ready",
+      "url": "https://github.com/MisfitMEdiAhouse/Misfit-media-designer-lite/blob/main/docs/agent-evaluation-lab-public-source/agents-for-humans-demo-runbook.md"
+    },
+    "demo_video": {
+      "status": "human_gate",
+      "requirement": "Publish a 3–5 minute demo video for the Devpost submission."
+    },
+    "team_member_details": {
+      "status": "human_gate",
+      "requirement": "Enter participant/team details in Devpost."
+    },
+    "devpost_registration_and_rules": {
+      "status": "human_gate",
+      "requirement": "Register/review/accept the hackathon rules and complete final submission."
+    }
+  },
+  "judging_alignment": {
+    "innovation_and_originality": "Raw vs reconsidered vs governed comparison makes governance impact directly inspectable.",
+    "technical_implementation": "One bounded evaluation capability with deterministic evidence schemas and HTTP/MCP/A2A/UCP adapters.",
+    "real_world_impact": "Measures whether governance changes consequential agent decisions and preserves the evidence for review.",
+    "user_experience_and_design": "Concise comparative human report plus structured machine-readable surfaces.",
+    "scalability_and_feasibility": "Protocol adapters reuse one canonical capability rather than duplicating products."
+  },
+  "claims_boundary": [
+    "Evaluation product only",
+    "No formal safety certification",
+    "No regulatory attestation",
+    "No machine-consciousness or sentience claims",
+    "No private GHOSBC, Mother Language, Soul Cipher, GHX, glyph, Castle Gate implementation internals, credentials, or reconstruction material"
+  ],
+  "commercial_state": {
+    "scoring": "live",
+    "purchase_execution": "COMMERCIAL_HANDOFF_REVIEW_HOLD",
+    "verified_collected_revenue_cents": 0
+  }
+}
