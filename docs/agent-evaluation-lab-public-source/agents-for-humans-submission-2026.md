@@ -5,6 +5,11 @@ GHOSBC Agent Evaluation Lab is a bounded agent-evaluation product from Misfit Me
 
 This public package intentionally exposes only the evaluation contract, adapters, benchmark/report surfaces, and integration continuity needed to inspect or demo the product. The protected GHOSBC governance kernel, Mother Language, Soul Cipher, GHX/glyph semantics, and private Castle Gate implementation remain private.
 
+## Submission-period / pre-existing-work disclosure
+The public Agent Evaluation Lab product surface was created during the Agents for Humans submission period. Repository history shows the public evaluation-lab packaging commit on August 24, 2026, after the August 10, 2026 submission window opened.
+
+GHOSBC itself predates this hackathon and is therefore disclosed as pre-existing proprietary work used as a protected governance dependency. The submission does not claim that the private GHOSBC kernel was created for the hackathon, does not publish that kernel as contest source, and does not expose Mother Language, Soul Cipher, GHX/glyph semantics, or private Castle Gate implementation details. The hackathon work is the bounded Agent Evaluation Lab product layer, its public-safe evaluation contract, Strands Agents SDK integration, comparative reporting, architecture, demo surface, and machine-distribution adapters built during the submission period.
+
 ## What the demo proves
 1. **Raw Agent** — capture the agent's initial proposed action and rationale.
 2. **Consequence Assessment** — evaluate foreseeable downstream effects against the bounded evaluation contract.
@@ -44,6 +49,8 @@ Evaluation/scoring may be live while purchasing remains fail-closed until explic
 ## Submission checklist
 - Working public-safe product/demo: existing production Evaluation Lab
 - Public source continuity: this repository/package
+- Pre-existing-work disclosure: included; protected GHOSBC kernel disclosed as pre-existing proprietary dependency
+- Submission-period evidence: public Agent Evaluation Lab packaging history begins during the contest window
 - Strands integration: existing public-safe adapter
 - **Architecture Diagram:** `agents-for-humans-architecture.md`
 - Raw vs reconsidered vs governed comparison: existing evaluation contract
@@ -53,6 +60,8 @@ Evaluation/scoring may be live while purchasing remains fail-closed until explic
 - Audit Memory: included
 - Comparative metrics/reporting: AE100-v2 surface
 - Demo video: human-gated publication if required
+- MIT or Apache license selection/grant: human gate
+- AWS Builder ID / AWS account: human gate
 - Devpost registration/rules acceptance: human gate
 - Final submission: human gate
 
