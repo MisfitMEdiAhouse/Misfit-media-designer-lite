@@ -274,34 +274,40 @@ begin
   into v_cron_failures,v_cron_failure_jobs
   from (
     select j.jobname,d.status,d.start_time,d.return_message
-    from cron.job_run_details d
-    join cron.job j on j.jobid=d.jobid
-    where d.start_time > v_now - interval '2 hours'
-      and d.status not in ('succeeded','running')
+    from cron.job j
+    join lateral (
+      select d.status,d.start_time,d.return_message
+      from cron.job_run_details d
+      where d.jobid=j.jobid
+      order by d.start_time desc
+      limit 1
+    ) d on true
+    where d.status not in ('succeeded','running')
       and (
         j.jobname like 'misfit-trader-%'
         or j.jobname in (
           'misfit-agent-scheduler-v1',
           'misfit-surface-security-watch',
-          'misfit-signal-feed-refresh'
+          'misfit-signal-feed-refresh',
+          'misfit-sentinel-core-watch-v1'
         )
       )
     order by d.start_time desc
-    limit 25
   ) x;
 
   perform ghosbc_private.sentinel_set_watch_v1(
     v_org,
     'core_cron_failures_v1',
-    v_cron_failures >= 2,
-    case when v_cron_failures >= 5 then 'high' else 'medium' end,
+    v_cron_failures > 0,
+    case when v_cron_failures >= 3 then 'high' else 'medium' end,
     'runtime_reliability',
-    'Repeated core Misfit cron failures detected',
+    'One or more core Misfit cron jobs currently have a failed latest run',
     jsonb_build_object(
-      'failure_count_last_2h',v_cron_failures,
-      'failures',v_cron_failure_jobs
+      'currently_failed_job_count',v_cron_failures,
+      'failures',v_cron_failure_jobs,
+      'rule','latest-run status only; recovered historical failures do not remain open'
     ),
-    'Inspect cron.job_run_details for repeated failures and repair the affected core job before promoting dependent runtime claims.',
+    'Inspect the currently failed job and restore a successful run. Recovered historical incidents remain in cron.job_run_details but do not hold Sentinel open.',
     false
   );
 
@@ -412,7 +418,7 @@ begin
       'trader_runtime_stale',v_trader_stale,
       'live_money_fail_closed_violation',v_live_unsafe,
       'position_errors_last_2h',v_recent_position_errors,
-      'core_cron_failures_last_2h',v_cron_failures,
+      'core_cron_current_failures',v_cron_failures,
       'privileged_control_rpc_exposures',to_jsonb(v_control_rpc_exposure),
       'credential_hygiene_issue',v_dispatch_credential_literal,
       'surface_security_watch',v_surface,
@@ -430,7 +436,7 @@ begin
     'ok',not v_trader_stale
       and not v_live_unsafe
       and v_recent_position_errors=0
-      and v_cron_failures<2
+      and v_cron_failures=0
       and cardinality(v_control_rpc_exposure)=0
       and not v_dispatch_credential_literal,
     'checked_at',v_now,
@@ -438,7 +444,7 @@ begin
     'trader_runtime_stale',v_trader_stale,
     'live_money_fail_closed_violation',v_live_unsafe,
     'position_errors_last_2h',v_recent_position_errors,
-    'core_cron_failures_last_2h',v_cron_failures,
+    'core_cron_current_failures',v_cron_failures,
     'privileged_control_rpc_exposures',to_jsonb(v_control_rpc_exposure),
     'public_reporting_rpc_review',to_jsonb(v_public_reporting_rpc_exposure),
     'credential_hygiene_issue',v_dispatch_credential_literal,
