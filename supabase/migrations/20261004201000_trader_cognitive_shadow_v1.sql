@@ -600,3 +600,433 @@ values(
   now()
 )
 on conflict(note_key) do update set note=excluded.note,updated_at=excluded.updated_at;
+
+
+-- 2026-10-05 Cognitive shadow hardening / matched legacy comparison
+-- Observation-only utilities. No broker execution, trade mutation, or money movement.
+
+CREATE OR REPLACE FUNCTION ghosbc_private.enqueue_trader_cognitive_legacy_overlap_v1(p_limit integer DEFAULT 20)
+ RETURNS TABLE(source_trade_id uuid, request_id bigint)
+ LANGUAGE plpgsql
+ SET search_path TO ''
+AS $function$
+declare
+  t record;
+  v_internal_key text;
+  v_request_id bigint;
+  v_confidence numeric;
+  v_observation_id uuid;
+  v_run_id text;
+begin
+  select decrypted_secret into v_internal_key
+  from vault.decrypted_secrets
+  where name='GHOSBC_COGNITIVE_V1_INTERNAL_KEY'
+  limit 1;
+
+  if v_internal_key is null or length(v_internal_key) < 32 then
+    raise exception 'GHOSBC_COGNITIVE_V1_INTERNAL_KEY unavailable';
+  end if;
+
+  for t in
+    with legacy_trades as (
+      select distinct lro.source_trade_id as legacy_trade_id
+      from public.misfit_trader_reconsideration_outcomes lro
+    )
+    select st.*
+    from public.misfit_trader_shadow_trades st
+    join legacy_trades l on l.legacy_trade_id=st.id
+    where not exists (
+      select 1
+      from ghosbc_private.trader_cognitive_shadow_observations o
+      where o.source_trade_id=st.id
+    )
+    order by st.created_at asc
+    limit greatest(1,least(coalesce(p_limit,20),25))
+  loop
+    v_confidence := greatest(0::numeric,least(1::numeric,abs(coalesce(t.signal_strength,0))));
+    v_run_id := 'trader_cognitive_overlap_' || replace(t.id::text,'-','');
+
+    insert into ghosbc_private.trader_cognitive_shadow_observations(
+      source_trade_id,source_trade_created_at,source_strategy_key,symbol,
+      raw_side,raw_target_pct,raw_signal_strength,raw_rationale,
+      raw_notional_usd,raw_entry_price,evidence_confidence,status
+    ) values (
+      t.id,t.created_at,t.strategy_key,t.symbol,
+      t.side,t.target_pct,t.signal_strength,t.rationale,
+      t.notional_usd,t.price_usd,v_confidence,'queued'
+    )
+    returning id into v_observation_id;
+
+    select net.http_post(
+      url := 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-process-signal',
+      headers := jsonb_build_object(
+        'Content-Type','application/json',
+        'x-ghosbc-internal-key',v_internal_key
+      ),
+      body := jsonb_build_object(
+        'mode','cognitive_v1',
+        'run_id',v_run_id,
+        'engine_id','misfit_trader_cognitive_shadow_v1',
+        'objective','Evaluate this historical paper-trade proposal as a counterfactual governance decision for direct comparison against the legacy reconsideration layer. Do not place, submit, modify, cancel, or execute any real-money or paper trade.',
+        'situation',format(
+          'Historical strategy %s generated a %s %s paper trade with target allocation %s and signal strength %s. This replay is observation-only and exists solely to compare governance decisions on the same source trade.',
+          t.strategy_key,
+          upper(t.side),
+          upper(t.symbol),
+          coalesce(t.target_pct::text,'unknown'),
+          coalesce(t.signal_strength::text,'unknown')
+        ),
+        'channel','internal',
+        'candidate_plans',jsonb_build_array(
+          jsonb_build_object(
+            'plan_id','paper_trade_candidate',
+            'action',format(
+              'Paper-only historical counterfactual candidate: %s %s with target allocation %s. Analyze only; do not place a live trade and do not mutate any paper portfolio.',
+              upper(t.side),
+              upper(t.symbol),
+              coalesce(t.target_pct::text,'unknown')
+            ),
+            'rationale',coalesce(t.rationale,'No rationale supplied.'),
+            'expected_outcome','Return a governance decision for observation only. No order submission or portfolio mutation.'
+          )
+        ),
+        'context',jsonb_build_object(
+          'product_lane','misfit_trader_cognitive_shadow_v1',
+          'comparison_lane','legacy_reconsideration_overlap_v1',
+          'evidence_confidence',v_confidence,
+          'authorization_granted',false,
+          'human_review_available',true,
+          'critical_domain',true,
+          'max_cycles',3
+        )
+      ),
+      timeout_milliseconds := 15000
+    ) into v_request_id;
+
+    update ghosbc_private.trader_cognitive_shadow_observations
+    set request_id=v_request_id
+    where id=v_observation_id;
+
+    source_trade_id := t.id;
+    request_id := v_request_id;
+    return next;
+  end loop;
+end
+$function$
+
+
+CREATE OR REPLACE FUNCTION ghosbc_private.retry_trader_cognitive_shadow_errors_v1(p_limit integer DEFAULT 8)
+ RETURNS TABLE(observation_id uuid, request_id bigint)
+ LANGUAGE plpgsql
+ SET search_path TO ''
+AS $function$
+declare
+  o record;
+  v_internal_key text;
+  v_request_id bigint;
+  v_run_id text;
+begin
+  select decrypted_secret into v_internal_key
+  from vault.decrypted_secrets
+  where name='GHOSBC_COGNITIVE_V1_INTERNAL_KEY'
+  limit 1;
+
+  if v_internal_key is null or length(v_internal_key) < 32 then
+    raise exception 'GHOSBC_COGNITIVE_V1_INTERNAL_KEY unavailable';
+  end if;
+
+  for o in
+    select *
+    from ghosbc_private.trader_cognitive_shadow_observations
+    where status='error'
+    order by requested_at asc
+    limit greatest(1,least(coalesce(p_limit,8),10))
+  loop
+    v_run_id := 'trader_cognitive_retry_' || replace(o.source_trade_id::text,'-','');
+
+    select net.http_post(
+      url := 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/ghosbc-process-signal',
+      headers := jsonb_build_object(
+        'Content-Type','application/json',
+        'x-ghosbc-internal-key',v_internal_key
+      ),
+      body := jsonb_build_object(
+        'mode','cognitive_v1',
+        'run_id',v_run_id,
+        'engine_id','misfit_trader_cognitive_shadow_v1',
+        'objective','Evaluate this paper-only trade proposal as a counterfactual governance decision. Do not place, submit, modify, cancel, or execute any real-money or paper trade.',
+        'situation',format(
+          'Strategy %s generated a %s %s paper trade with target allocation %s and signal strength %s. This is observation-only evidence collection.',
+          o.source_strategy_key,
+          upper(o.raw_side),
+          upper(o.symbol),
+          coalesce(o.raw_target_pct::text,'unknown'),
+          coalesce(o.raw_signal_strength::text,'unknown')
+        ),
+        'channel','internal',
+        'candidate_plans',jsonb_build_array(
+          jsonb_build_object(
+            'plan_id','paper_trade_candidate',
+            'action',format(
+              'Paper-only counterfactual candidate: %s %s with target allocation %s. Analyze only; do not place a live trade and do not mutate the paper portfolio.',
+              upper(o.raw_side),
+              upper(o.symbol),
+              coalesce(o.raw_target_pct::text,'unknown')
+            ),
+            'rationale',coalesce(o.raw_rationale,'No rationale supplied.'),
+            'expected_outcome','Return a governance decision for observation only. No order submission or portfolio mutation.'
+          )
+        ),
+        'context',jsonb_build_object(
+          'product_lane','misfit_trader_cognitive_shadow_v1',
+          'comparison_lane','legacy_reconsideration_overlap_v1_retry',
+          'evidence_confidence',o.evidence_confidence,
+          'authorization_granted',false,
+          'human_review_available',true,
+          'critical_domain',true,
+          'max_cycles',3
+        )
+      ),
+      timeout_milliseconds := 15000
+    ) into v_request_id;
+
+    update ghosbc_private.trader_cognitive_shadow_observations
+    set request_id=v_request_id,
+        status='queued',
+        response_status=null,
+        response=null,
+        error=null,
+        requested_at=now(),
+        processed_at=null
+    where id=o.id;
+
+    observation_id := o.id;
+    request_id := v_request_id;
+    return next;
+  end loop;
+end
+$function$
+
+
+CREATE OR REPLACE FUNCTION ghosbc_private.run_trader_cognitive_shadow_watch_v1()
+ RETURNS jsonb
+ LANGUAGE plpgsql
+ SET search_path TO ''
+AS $function$
+declare
+  v_org uuid;
+  v_now timestamptz := now();
+  v_latest_requested timestamptz;
+  v_latest_processed timestamptz;
+  v_latest_source_trade timestamptz;
+  v_eligible_unobserved_recent integer := 0;
+  v_queued_old integer := 0;
+  v_errors_2h integer := 0;
+  v_complete integer := 0;
+  v_outcomes integer := 0;
+  v_active_crons integer := 0;
+  v_legacy_observer_active boolean := false;
+  v_problem boolean := false;
+begin
+  select id into v_org
+  from public.organizations
+  where slug='misfit-mediahouse'
+  limit 1;
+
+  select
+    max(requested_at),
+    max(processed_at),
+    count(*) filter (where status='queued' and requested_at < v_now-interval '15 minutes')::int,
+    count(*) filter (where status='error' and requested_at > v_now-interval '2 hours')::int,
+    count(*) filter (where status='complete')::int
+  into v_latest_requested,v_latest_processed,v_queued_old,v_errors_2h,v_complete
+  from ghosbc_private.trader_cognitive_shadow_observations;
+
+  select
+    max(st.created_at),
+    count(*) filter (
+      where st.created_at >= v_now-interval '2 hours'
+        and not exists (
+          select 1
+          from ghosbc_private.trader_cognitive_shadow_observations o
+          where o.source_trade_id=st.id
+        )
+    )::int
+  into v_latest_source_trade,v_eligible_unobserved_recent
+  from public.misfit_trader_shadow_trades st;
+
+  select count(*)::int into v_outcomes
+  from ghosbc_private.trader_cognitive_shadow_outcomes;
+
+  select count(*)::int into v_active_crons
+  from cron.job
+  where active
+    and jobname in (
+      'misfit-trader-cognitive-shadow-enqueue',
+      'misfit-trader-cognitive-shadow-harvest',
+      'misfit-trader-cognitive-shadow-outcomes'
+    );
+
+  select exists(
+    select 1 from cron.job
+    where active and jobname='misfit-trader-reconsideration-observer'
+  ) into v_legacy_observer_active;
+
+  v_problem :=
+    v_active_crons <> 3
+    or v_legacy_observer_active
+    or v_queued_old > 0
+    or v_errors_2h > 0
+    or (
+      v_eligible_unobserved_recent > 0
+      and (
+        v_latest_requested is null
+        or v_now-v_latest_requested > interval '45 minutes'
+      )
+    );
+
+  perform ghosbc_private.sentinel_set_watch_v1(
+    v_org,
+    'trader_cognitive_shadow_runtime_v1',
+    v_problem,
+    case when v_errors_2h >= 3 or v_active_crons < 2 then 'high' else 'medium' end,
+    'trader_cognitive_shadow',
+    'Misfit Trader Cognitive V1 shadow observer requires attention',
+    jsonb_build_object(
+      'latest_source_trade',v_latest_source_trade,
+      'eligible_unobserved_recent',v_eligible_unobserved_recent,
+      'latest_requested',v_latest_requested,
+      'latest_processed',v_latest_processed,
+      'queued_older_than_15m',v_queued_old,
+      'errors_last_2h',v_errors_2h,
+      'complete_observations',v_complete,
+      'scored_outcomes',v_outcomes,
+      'active_cognitive_crons',v_active_crons,
+      'legacy_observer_active',v_legacy_observer_active,
+      'observation_only',true,
+      'trade_mutation_allowed',false,
+      'money_moved',false
+    ),
+    'Keep the lane observation-only. Restore all three Cognitive shadow cron jobs, clear queued/error observations, and keep the retired legacy observer disabled.',
+    false
+  );
+
+  return jsonb_build_object(
+    'ok',not v_problem,
+    'checked_at',v_now,
+    'latest_source_trade',v_latest_source_trade,
+    'eligible_unobserved_recent',v_eligible_unobserved_recent,
+    'latest_requested',v_latest_requested,
+    'latest_processed',v_latest_processed,
+    'queued_older_than_15m',v_queued_old,
+    'errors_last_2h',v_errors_2h,
+    'complete_observations',v_complete,
+    'scored_outcomes',v_outcomes,
+    'active_cognitive_crons',v_active_crons,
+    'legacy_observer_active',v_legacy_observer_active,
+    'observation_only',true,
+    'trade_mutation_allowed',false,
+    'money_moved',false
+  );
+end
+$function$
+
+
+CREATE OR REPLACE FUNCTION ghosbc_private.trader_cognitive_vs_legacy_report_v1()
+ RETURNS jsonb
+ LANGUAGE sql
+ SET search_path TO ''
+AS $function$
+with joined as (
+  select
+    c.source_trade_id,
+    c.source_strategy_key,
+    c.symbol,
+    c.horizon_minutes,
+    c.raw_action_pnl_usd as raw_pnl,
+    c.cognitive_action_pnl_usd as cognitive_pnl,
+    c.cognitive_edge_usd as cognitive_edge,
+    l.governed_action_pnl_usd as legacy_pnl,
+    l.reconsideration_edge_usd as legacy_edge,
+    o.cognitive_final_decision
+  from ghosbc_private.trader_cognitive_shadow_outcomes c
+  join public.misfit_trader_reconsideration_outcomes l
+    on l.source_trade_id=c.source_trade_id
+   and l.horizon_minutes=c.horizon_minutes
+  join ghosbc_private.trader_cognitive_shadow_observations o
+    on o.id=c.observation_id
+),
+overall as (
+  select
+    count(*)::int as samples,
+    count(distinct source_trade_id)::int as trades,
+    round(sum(raw_pnl),4) as raw_pnl,
+    round(sum(legacy_pnl),4) as legacy_pnl,
+    round(sum(cognitive_pnl),4) as cognitive_pnl,
+    round(sum(legacy_edge),4) as legacy_edge,
+    round(sum(cognitive_edge),4) as cognitive_edge,
+    round(sum(cognitive_pnl-legacy_pnl),4) as cognitive_vs_legacy_delta
+  from joined
+),
+by_strategy as (
+  select coalesce(jsonb_agg(to_jsonb(x) order by x.source_strategy_key),'[]'::jsonb) rows
+  from (
+    select
+      source_strategy_key,
+      count(*)::int as samples,
+      round(sum(raw_pnl),4) as raw_pnl,
+      round(sum(legacy_pnl),4) as legacy_pnl,
+      round(sum(cognitive_pnl),4) as cognitive_pnl,
+      round(sum(legacy_edge),4) as legacy_edge,
+      round(sum(cognitive_edge),4) as cognitive_edge,
+      round(sum(cognitive_pnl-legacy_pnl),4) as cognitive_vs_legacy_delta
+    from joined
+    group by source_strategy_key
+  ) x
+),
+by_horizon as (
+  select coalesce(jsonb_agg(to_jsonb(x) order by x.horizon_minutes),'[]'::jsonb) rows
+  from (
+    select
+      horizon_minutes,
+      count(*)::int as samples,
+      round(sum(raw_pnl),4) as raw_pnl,
+      round(sum(legacy_pnl),4) as legacy_pnl,
+      round(sum(cognitive_pnl),4) as cognitive_pnl,
+      round(sum(legacy_edge),4) as legacy_edge,
+      round(sum(cognitive_edge),4) as cognitive_edge,
+      round(sum(cognitive_pnl-legacy_pnl),4) as cognitive_vs_legacy_delta
+    from joined
+    group by horizon_minutes
+  ) x
+),
+decisions as (
+  select coalesce(jsonb_object_agg(cognitive_final_decision,cnt),'{}'::jsonb) rows
+  from (
+    select cognitive_final_decision,count(*)::int cnt
+    from (
+      select distinct source_trade_id,cognitive_final_decision from joined
+    ) d
+    group by cognitive_final_decision
+  ) x
+)
+select jsonb_build_object(
+  'status','LIVE_OBSERVATION_ONLY',
+  'schema_version','1.0.0',
+  'claims_boundary','Matched historical paper-trade comparison only. This measures governance outcomes on identical source trades/horizons; it is not evidence of live-trading profitability.',
+  'overall',to_jsonb(overall),
+  'by_strategy',by_strategy.rows,
+  'by_horizon',by_horizon.rows,
+  'cognitive_trade_decisions',decisions.rows,
+  'money_moved',false,
+  'trade_mutation_allowed',false,
+  'generated_at',now()
+)
+from overall,by_strategy,by_horizon,decisions;
+$function$
+
+
+revoke execute on function ghosbc_private.run_trader_cognitive_shadow_watch_v1() from public, anon, authenticated;
+revoke execute on function ghosbc_private.enqueue_trader_cognitive_legacy_overlap_v1(integer) from public, anon, authenticated;
+revoke execute on function ghosbc_private.retry_trader_cognitive_shadow_errors_v1(integer) from public, anon, authenticated;
+revoke execute on function ghosbc_private.trader_cognitive_vs_legacy_report_v1() from public, anon, authenticated;
