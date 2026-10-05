@@ -121,3 +121,10 @@ $$;
 
 revoke execute on function public.dispatch_supported_factory_jobs()
 from public, anon, authenticated;
+
+
+-- 2026-10-05: the public UI calls only misfit_trader_shadow_public()
+-- and misfit_trader_reconsideration_latest_report(). shadow_metrics() is an
+-- internal helper and does not need direct client execution.
+revoke execute on function public.misfit_trader_shadow_metrics()
+from public, anon, authenticated;
