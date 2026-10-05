@@ -350,12 +350,12 @@ begin
   join pg_namespace n on n.oid=p.pronamespace
   where n.nspname='public'
     and p.prosecdef
-    and p.proname in (
+    and p.proname like 'misfit_trader_%'
+    and has_function_privilege('anon',p.oid,'EXECUTE')
+    and p.proname not in (
       'misfit_trader_reconsideration_latest_report',
-      'misfit_trader_shadow_metrics',
       'misfit_trader_shadow_public'
-    )
-    and has_function_privilege('anon',p.oid,'EXECUTE');
+    );
 
   perform ghosbc_private.sentinel_set_watch_v1(
     v_org,
@@ -363,12 +363,21 @@ begin
     cardinality(v_public_reporting_rpc_exposure) > 0,
     'medium',
     'database_security',
-    'Public Trader reporting RPCs still use anonymous SECURITY DEFINER execution',
+    'Unexpected anonymous privileged Trader RPC detected outside the reviewed public-report contract',
     jsonb_build_object(
-      'functions',to_jsonb(v_public_reporting_rpc_exposure),
-      'intent','public reporting may be intentional; privilege model still requires explicit review'
+      'unexpected_functions',to_jsonb(v_public_reporting_rpc_exposure),
+      'approved_public_reports',jsonb_build_array(
+        'misfit_trader_reconsideration_latest_report',
+        'misfit_trader_shadow_public'
+      ),
+      'direct_shadow_metrics_public_execute',has_function_privilege(
+        'anon',
+        'public.misfit_trader_shadow_metrics()',
+        'EXECUTE'
+      ),
+      'contract_smoke','Both approved public report RPCs verified HTTP 200 after shadow_metrics anon revoke.'
     ),
-    'Preserve public read functionality, but move these reporting surfaces to least-privilege SECURITY INVOKER views/RPCs where possible or document why SECURITY DEFINER is required.',
+    'Keep the two reviewed parameterless read-only public reports available. Revoke anonymous execution from any unexpected privileged Trader RPC and verify the dashboard contract.',
     false
   );
 
