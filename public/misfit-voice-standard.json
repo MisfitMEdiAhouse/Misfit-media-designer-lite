@@ -1,0 +1,23 @@
+{
+  "version": "3.0.0",
+  "status": "active_owner_approved",
+  "canonical_name": "Misfit Voice",
+  "benchmark": "Stan Hansen / Egnyte Tour Guide",
+  "provider": "AI Voice Generator",
+  "voice_id": "fancy",
+  "presentation": "Female · Fancy",
+  "playback_rate": 1,
+  "pitch_processing": false,
+  "browser_tts_fallback": false,
+  "brand_pronunciation": {
+    "GHOSBC OS": "Ghost BC OS"
+  },
+  "usage": [
+    "public demos",
+    "product tours",
+    "sales guidance",
+    "Misfit Trader narration"
+  ],
+  "owner": "Misfit Mediahouse",
+  "canon_effect": "voice_brand_standard_only"
+}

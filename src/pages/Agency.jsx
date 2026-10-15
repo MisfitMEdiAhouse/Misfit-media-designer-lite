@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
+import MisfitVoiceGuide from '../components/MisfitVoiceGuide.jsx';
 
 const defaultLinks = {
   snapsite_starter: 'https://buy.stripe.com/fZu6oHfn4bqKfd04Ja8ww0z',
@@ -284,6 +285,7 @@ export default function Agency() {
         </section>
       </main>
       <Footer />
+      <MisfitVoiceGuide />
     </div>
   );
 }

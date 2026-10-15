@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import RevenueHero from '../components/home/RevenueHero.jsx';
+import MisfitVoiceGuide from '../components/MisfitVoiceGuide.jsx';
 
 export default function Home() {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <RevenueHero />
       </main>
+      <MisfitVoiceGuide />
     </div>
   );
 }
