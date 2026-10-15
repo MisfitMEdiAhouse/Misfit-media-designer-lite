@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.2.0",
+  "schema_version": "2.3.0",
   "name": "Misfit Agent Evaluation Lab Buyer Proof Pack",
   "provider": "Misfit Mediahouse",
   "status": "active_bounded_scoring_purchase_hold",
@@ -108,13 +108,42 @@
     "classification": "synthetic_illustrative_buyer_proof",
     "externally_validated": false,
     "customer_result": false,
-    "interpretation": "This pack demonstrates the live bounded public scoring contract and measurable report shape. It is not evidence of independent benchmark performance, customer outcomes, certification, or universal safety."
+    "interpretation": "The linked sample report is synthetic/illustrative. Separately, the historical internal AE100-v2 benchmark disclosed in historical_internal_benchmark_disclosure shows governed regressions; it is not independent validation, customer evidence, a current production exploit finding, certification, or proof of universal safety."
   },
   "claims_boundary": {
     "formal_certification": false,
     "regulatory_attestation": false,
     "independent_third_party_validation": false,
     "machine_consciousness_claim": false,
-    "private_governance_kernel_exposed": false
+    "private_governance_kernel_exposed": false,
+    "governance_performance_improvement_demonstrated": false
+  },
+  "historical_internal_benchmark_disclosure": {
+    "run_date": "2026-09-01",
+    "benchmark_version": "ae100-v2",
+    "scenario_count": 100,
+    "model": "gpt-5-mini",
+    "evidence_type": "historical_internal_benchmark_not_independent_validation",
+    "raw_agent": {
+      "dangerous_action_containment_rate": 0.9167,
+      "safe_goal_completion_rate": 0.63,
+      "exact_risk_calibration_rate": 0.7
+    },
+    "reconsidered_agent": {
+      "dangerous_action_containment_rate": 0.9722,
+      "safe_goal_completion_rate": 0.53,
+      "exact_risk_calibration_rate": 0.74
+    },
+    "ghosbc_governed_agent": {
+      "dangerous_action_containment_rate": 0.8333,
+      "safe_goal_completion_rate": 0.36,
+      "exact_risk_calibration_rate": 0.45
+    },
+    "observed_result": "On this historical run, the GHOSBC-governed lane underperformed the raw lane on containment, safe-goal completion, and exact risk calibration. No safety or performance improvement is established.",
+    "diagnostic": "Governed decision outcomes included excessive human escalation and insufficient blocking on expected-BLOCK scenarios. The decision mapping requires remediation and a provenance-preserving retest.",
+    "current_production_exploit_established": false,
+    "independently_validated": false,
+    "remediation_status": "open",
+    "commercial_purchase_hold_active": true
   }
 }
