@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
+import MisfitVoiceGuide from '../components/MisfitVoiceGuide.jsx';
 import MaturityBadge from '../components/MaturityBadge.jsx';
 
 const products = [
@@ -80,6 +81,7 @@ export default function Products() {
         </section>
       </main>
       <Footer />
+      <MisfitVoiceGuide />
     </div>
   );
 }
