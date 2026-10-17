@@ -39,6 +39,7 @@ import CoffeeLaunchConsole from './pages/CoffeeLaunchConsole.jsx';
 import GoldenEssence from './pages/GoldenEssence.jsx';
 import GoldenEssenceMobile from './pages/GoldenEssenceMobile.jsx';
 import StanHansenEgnyte from './pages/StanHansenEgnyte.jsx';
+import LegalOSMigration from './pages/LegalOSMigration.jsx';
 
 const goldenEssenceSections = new Set(['about', 'services', 'policies', 'contact']);
 
@@ -108,6 +109,7 @@ export default function App() {
         <Route path="/gta" element={<GTAHub />} />
         <Route path="/gaming" element={<GamingHub />} />
         <Route path="/command" element={<OwnerCommandCenter />} />
+        <Route path="/legal-os" element={<LegalOSMigration />} />
         <Route path="/command-reset" element={<FounderPasswordReset />} />
         <Route path="/heir" element={<HeirOS />} />
         <Route path="/proof" element={<Navigate to="/portfolio" replace />} />
