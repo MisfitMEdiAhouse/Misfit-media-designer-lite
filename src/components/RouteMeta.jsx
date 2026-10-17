@@ -33,7 +33,7 @@ const publicMeta = {
   '/coffee/admin': ['/coffee/admin', 'Private owner launch console for Coffee & A Joint revenue, fulfillment, launch-proof, and product-quality gates.'],
 };
 
-const privatePaths = new Set(['/command', '/heir', '/roads/admin', '/coffee/admin', '/stan-hansen']);
+const privatePaths = new Set(['/command', '/legal-os', '/heir', '/roads/admin', '/coffee/admin', '/stan-hansen']);
 
 const publicTitles = {
   '/': 'Misfit Mediahouse | Shopify Store Health Scanner',
@@ -64,6 +64,7 @@ const publicTitles = {
   '/rig-radar': 'Misfit Rig Radar',
   '/tyler-ward': 'Tyler Ward Construction',
   '/coffee/admin': 'Coffee & A Joint Launch Console — Private',
+  '/legal-os': 'Misfit Justice OS — Private Migration',
 };
 
 const agentEvaluationProductJsonLd = {
