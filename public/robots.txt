@@ -5,6 +5,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
@@ -14,6 +15,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
@@ -23,6 +25,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
@@ -32,6 +35,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
@@ -41,6 +45,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
@@ -50,6 +55,7 @@ Allow: /.well-known/agent-card.json
 Allow: /agents.md
 Allow: /llms.txt
 Disallow: /command
+Disallow: /legal-os
 Disallow: /heir
 Disallow: /roads/admin
 
