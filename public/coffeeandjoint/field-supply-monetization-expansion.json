@@ -1,0 +1,38 @@
+{
+  "version": "2026-08-22",
+  "partners": [
+    {
+      "partner_id": "VEVOR-AFFILIATE",
+      "name": "VEVOR Affiliate Program",
+      "type": "affiliate",
+      "status": "human_gate_apply",
+      "public_terms": "Official affiliate signup is available. Awin's current US listing shows a 30-day attribution period and tiered baseline commission of 2%-10% depending on traffic source.",
+      "commission": "2_TO_10_PERCENT_TIERED",
+      "attribution": "30_DAYS",
+      "fulfillment": "retailer_direct",
+      "program_url": "https://affiliate-program.vevor.com/account/register",
+      "best_for": ["shop equipment", "pumps", "mixers", "tanks", "material handling", "tools", "small machinery"],
+      "priority": 89,
+      "human_gate": "Affiliate application plus identity/tax/payout onboarding."
+    },
+    {
+      "partner_id": "ZORO-AFFILIATE-CANDIDATE",
+      "name": "Zoro",
+      "type": "affiliate_candidate",
+      "status": "verify_network_before_apply",
+      "public_terms": "Zoro is a major industrial/MRO supplier. Current third-party affiliate-network listings show US availability and a 30-day cookie; exact commission must be verified inside the network before activation.",
+      "commission": "VERIFY_IN_NETWORK",
+      "attribution": "30_DAYS_REPORTED",
+      "fulfillment": "retailer_direct",
+      "program_url": "https://www.zoro.com/",
+      "best_for": ["industrial supplies", "PPE", "pumps", "filters", "test instruments", "storage", "MRO parts"],
+      "priority": 84,
+      "human_gate": "Affiliate-network application only after current terms are verified."
+    }
+  ],
+  "route_additions": {
+    "shop_tools_ppe_storage": ["VEVOR-AFFILIATE", "ZORO-AFFILIATE-CANDIDATE"],
+    "hemp_lime_build": ["VEVOR-AFFILIATE"],
+    "farm_ranch_supplies": ["VEVOR-AFFILIATE"]
+  }
+}
