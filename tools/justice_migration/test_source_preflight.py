@@ -32,7 +32,7 @@ class SourcePreflightTests(unittest.TestCase):
         data = self.root / "exports"
         data.mkdir()
         (data / "Cases.csv").write_text(
-            "id,client_name\\n1," + secret + "\\n2,Fictional\\n",
+            "id,client_name\n1," + secret + "\n2,Fictional\n",
             encoding="utf-8",
         )
         result = inventory(source, data, app_id="UNVERIFIED-EXAMPLE")
