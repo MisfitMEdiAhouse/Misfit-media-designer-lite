@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import AttorneyPortalPreview from '../components/legal/AttorneyPortalPreview.jsx';
 
 const SUPABASE_URL = 'https://cibcxqrqiqvzpardbdrw.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_X-bcgz-3xMIgNZ4rYmAjZA_QNUb69hU';
@@ -235,6 +236,8 @@ export default function LegalOSMigration() {
             ))}
           </div>
         </section>
+
+        <AttorneyPortalPreview />
 
         <section className="mt-6 rounded-[2rem] border border-cyan-300/15 bg-cyan-300/[.03] p-6 md:p-7">
           <div className="font-mono text-[9px] uppercase tracking-[.16em] text-cyan-200">Next migration gate</div>
