@@ -25,7 +25,7 @@ export default function GTAGrowthOS(){
 
   useEffect(()=>{
     const q=new URLSearchParams(window.location.search);
-    if(q.get('checkout')==='success')setNotice('PAYMENT RECEIVED · Misfit Cloud is provisioning your managed GTA Growth OS onboarding now.');
+    if(q.get('checkout')==='success')setNotice('Stripe checkout returned. Payment and provisioning are confirmed only after signed Stripe events are processed; check your receipt or contact Misfit if you need help.');
     if(q.get('checkout')==='cancelled')setNotice('Checkout cancelled. Your audit and free-pilot option stay here; no subscription was created.');
   },[]);
 
