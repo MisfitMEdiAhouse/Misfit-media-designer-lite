@@ -73,19 +73,17 @@ export default function GTAPlayerLaunch() {
           method: 'POST',
           headers: { 'content-type': 'application/json', apikey: PK },
           body: JSON.stringify({
-            operation: 'submit_gta_request',
-            request_type: 'partnership',
-            name: details.handle || 'GTA community member',
+            operation: 'join_gta_vi_interest',
+            display_name: details.handle || 'GTA community member',
             email: details.email,
-            source: 'gta_launch_optin',
-            message: [
-              'FREE GTA COMMUNITY OPT-IN',
-              'Interest: ' + details.role,
-              'Platform: ' + details.platform,
-              'Adult 18+: confirmed',
-              'Explicit email marketing opt-in: yes',
-              'Form version: ' + FORM_VERSION,
-            ].join(' | '),
+            interest: details.role === 'Player' ? 'player' : details.role === 'Creator / streamer' ? 'creator' : 'community',
+            platform: details.platform,
+            over_18: adult,
+            marketing_consent: consent,
+            utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+            utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+            utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+            referral: new URLSearchParams(window.location.search).get('ref') || '',
           }),
           signal: ctl.signal,
         });
@@ -93,11 +91,11 @@ export default function GTAPlayerLaunch() {
         clearTimeout(deadline);
       }
       const json = await response.json().catch(() => ({}));
-      if (!response.ok || json?.ok !== true || json?.status !== 'received') {
+      if (!response.ok || json?.ok !== true || json?.status !== 'interest_received') {
         throw new Error('intake_unavailable');
       }
       setState('saved');
-      setMessage('Your request was received by Misfit. You can request email removal at any time.');
+      setMessage('Your interest request was saved in Misfit Cloud. Email verification and marketing broadcasts are not enabled yet; you can request removal at any time.');
     } catch {
       setState('email');
       setMessage('The online signup could not be saved. Open your email app below and press Send to complete the request manually.');
@@ -162,7 +160,7 @@ export default function GTAPlayerLaunch() {
           {message && <p role="status" aria-live="polite" className={`rounded-xl border px-3 py-3 text-xs leading-6 ${state === 'saved' ? 'border-emerald-300/25 bg-emerald-300/[.06] text-emerald-200' : 'border-amber-300/25 bg-amber-300/[.06] text-amber-200'}`}>{message}</p>}
           {state === 'email' && <a href={mailLink} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-amber-300/40 bg-amber-300/10 px-3 text-center text-sm font-bold text-amber-200"><Mail size={17}/> Open email app to send request</a>}
           <p className="text-[11px] leading-5 text-slate-500">
-            A request is only confirmed when the site reports it was saved. If you use the email alternative, you must press Send in your own mail app. No game credentials or payment information requested.
+            An interest request is saved only when the site confirms storage; email marketing requires later verification. If you use the email alternative, you must press Send in your own mail app. No game credentials or payment information requested.
           </p>
         </form>
         <div className="flex flex-col gap-3">
