@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Mail, ShieldCheck, Users } from 'lucide-react';
 
-const API = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/gta-vi-fan-interest';
+const API = 'https://cibcxqrqiqvzpardbdrw.supabase.co/functions/v1/public-catalog';
 
 export default function GTAVIFanJoin() {
   const [form, setForm] = useState({ display_name: '', email: '', interest: 'player', over_18: false, marketing_consent: false, website: '' });
@@ -20,6 +20,7 @@ export default function GTAVIFanJoin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
+          operation: 'join_gta_vi_interest',
           utm_source: params.get('utm_source') || '',
           utm_medium: params.get('utm_medium') || '',
           utm_campaign: params.get('utm_campaign') || '',
